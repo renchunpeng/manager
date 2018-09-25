@@ -25,7 +25,7 @@ import com.hsnn.medstgmini.util.Pagination;
 
 /**
  * @category 常量类
- * @author 单大伟
+ * @author 单大伟123
  * @date 2015-06-10
  */
 public class AuthFilter implements Filter {
