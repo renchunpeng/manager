@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+
+	<description>dict library</description>
+	<display-name>dict</display-name>
+	<tlib-version>1.0</tlib-version>
+	<short-name>dict</short-name>
+	<uri>http://www.medstgmini.com/dict</uri>
+
+	<tag>  
+       <name>Foreach</name>  
+    <tag-class>com.hsnn.medstgmini.tag.DictTag</tag-class>  
+    <body-content>scriptless</body-content>   
+    <attribute>  
+            <name>var</name>  
+            <required>true</required>  
+            <rtexprvalue>true</rtexprvalue>  
+    </attribute>  
+    <attribute>  
+            <name>items</name>  
+            <required>true</required>  
+            <rtexprvalue>true</rtexprvalue>  
+    </attribute>  
+   </tag>  
+   
+   <function>
+		<name>type</name>
+		<function-class>com.hsnn.medstgmini.util.dict.CacheDict</function-class>
+		<function-signature>java.util.List getSdtDictsByType(java.lang.String)</function-signature>
+		<example>${dict:type('type')}</example>
+   </function>
+   
+   <function>
+		<name>getTypeWithKey</name>
+		<function-class>com.hsnn.medstgmini.util.dict.CacheDict</function-class>
+		<function-signature>java.lang.String getSdtDictsByTypeWithKey(java.lang.String,java.lang.String)</function-signature>
+		<example>${dict:getTypeWithKey('type','key')}</example>
+  </function>
+   
+   <function>
+		<name>getDictJSON</name>
+		<function-class>com.hsnn.medstgmini.util.dict.CacheDict</function-class>
+		<function-signature>java.lang.String getDictJSON(java.lang.String)</function-signature>
+		<example>${dict:getDictJSON('type')}</example>
+  </function>
+
+</taglib>

@@ -1,0 +1,1747 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdGoodsDao">
+    <resultMap type="com.hsnn.medstgmini.base.std.model.StdGoods" id="BaseResultMap">
+        <result property="goodsId" column="goods_id" javaType="Integer"/>
+        <result property="productId" column="product_id" javaType="Integer"/>
+        <result property="goodsName" column="goods_name" javaType="String"/>
+        <result property="materialName" column="material_name" javaType="String"/>
+        <result property="materialRemark" column="material_remark" javaType="String"/>
+        <result property="unit" column="unit" javaType="String"/>
+        <result property="minUnit" column="min_unit" javaType="String"/>
+        <result property="approvalCode" column="approval_code" javaType="String"/>
+        <result property="approvalCodeBegintime" column="approval_code_begintime" javaType="Date"/>
+        <result property="approvalCodeEndtime" column="approval_code_endtime" javaType="Date"/>
+        <result property="regcode" column="regcode" javaType="String"/>
+        <result property="regcodeBeginTime" column="regcode_begin_time" javaType="Date"/>
+        <result property="regcodeEndTime" column="regcode_end_time" javaType="Date"/>
+        <result property="surveyReportYear" column="survey_report_year" javaType="String"/>
+        <result property="drugStandardCode" column="drug_standard_code" javaType="String"/>
+        <result property="executeStandardType" column="execute_standard_type" javaType="Integer"/>
+        <result property="executeStandardCode" column="execute_standard_code" javaType="String"/>
+        <result property="trialStandardEndtime" column="trial_standard_endtime" javaType="Date"/>
+        <result property="issubmitPositiveCertificate" column="issubmit_positive_certificate" javaType="Integer"/>
+        <result property="chineseMedicineLevelday" column="chinese_medicine_levelday" javaType="String"/>
+        <result property="isHasSodium" column="is_has_sodium" javaType="Integer"/>
+        <result property="electronicPack" column="electronic_pack" javaType="Integer"/>
+        <result property="maximumRetailPrice" column="maximum_retail_price" javaType="BigDecimal"/>
+        <result property="priceBasis" column="price_basis" javaType="String"/>
+        <result property="middlePack" column="middle_pack" javaType="Integer"/>
+        <result property="maxPack" column="max_pack" javaType="Integer"/>
+        <result property="companyIdSc" column="company_id_sc" javaType="String"/>
+        <result property="companyNameSc" column="company_name_sc" javaType="String"/>
+        <result property="archiveNumber" column="archive_number" javaType="String"/>
+        <result property="isSplitCompany" column="is_split_company" javaType="Integer"/>
+        <result property="splitCompanyId" column="split_company_id" javaType="String"/>
+        <result property="splitCompanyName" column="split_company_name" javaType="String"/>
+        <result property="isImportCompany" column="is_import_company" javaType="Integer"/>
+        <result property="importCompanyid" column="import_companyid" javaType="String"/>
+        <result property="importCompanyName" column="import_company_name" javaType="String"/>
+        <result property="importEndDate" column="import_end_date" javaType="Date"/>
+        <result property="isTrustCompany" column="is_trust_company" javaType="Integer"/>
+        <result property="trustCompanyId" column="trust_company_id" javaType="String"/>
+        <result property="trustCompanyName" column="trust_company_name" javaType="String"/>
+        <result property="companyNameTb" column="company_name_tb" javaType="String"/>
+        <result property="trustEndDate" column="trust_end_date" javaType="Date"/>
+        <result property="qualificationStatus" column="qualification_status" javaType="Integer"/>
+        <result property="qualificationNopassReason" column="qualification_nopass_reason" javaType="String"/>
+        <result property="inputRemarks" column="input_remarks" javaType="String"/>
+        <result property="initializationState" column="initialization_state" javaType="Integer"/>
+        <result property="clearStatus" column="clear_status" javaType="Integer"/>
+        <result property="gmpCode" column="gmp_code" javaType="String"/>
+        <result property="gmpName" column="gmp_name" javaType="String"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="reauditUserId" column="reaudit_user_id" javaType="String"/>
+        <result property="reauditUserName" column="reaudit_user_name" javaType="String"/>
+        <result property="reauditAddTime" column="reaudit_add_time" javaType="Date"/>
+        <result property="reauditRemark" column="reaudit_remark" javaType="String"/>
+        <result property="auditUserId" column="audit_user_id" javaType="String"/>
+        <result property="auditUserName" column="audit_user_name" javaType="String"/>
+        <result property="auditAddTime" column="audit_add_time" javaType="Date"/>
+        <result property="auditRemark" column="audit_remark" javaType="String"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="maintenanceState" column="maintenance_state" javaType="Integer"/>
+        <result property="component" column="component" javaType="String"/>
+        <result property="drugClassification" column="drug_classification" javaType="String"/>
+        <result property="drugCategory" column="drug_category" javaType="String"/>
+        <result property="isBaseDrug" column="IS_BASE_DRUG" javaType="Integer"/>
+        <result property="ggypId" column="ggyp_id" javaType="String"/>
+        <result property="productName" column="PRODUCT_NAME" javaType="String"/>
+        <result property="outlook" column="OUTLOOK" javaType="String"/>
+        <result property="medicinemodel" column="MEDICINEMODEL" javaType="String"/>
+        <result property="ngoodsId" column="ngoods_id" javaType="String"/>
+        <result property="factor" column="factor" javaType="String"/>
+
+    </resultMap>
+
+    <sql id="full-columns">
+        t.goods_id,
+        t.product_id,
+        t.goods_name,
+        t.material_name,
+        t.material_remark,
+        t.unit,
+        t.min_unit,
+        t.approval_code,
+        t.approval_code_begintime,
+        t.approval_code_endtime,
+        t.regcode,
+        t.regcode_begin_time,
+        t.regcode_end_time,
+        t.survey_report_year,
+        t.drug_standard_code,
+        t.execute_standard_type,
+        t.execute_standard_code,
+        t.trial_standard_endtime,
+        t.issubmit_positive_certificate,
+        t.chinese_medicine_levelday,
+        t.is_has_sodium,
+        t.electronic_pack,
+        t.maximum_retail_price,
+        t.price_basis,
+        t.middle_pack,
+        t.max_pack,
+        t.company_id_sc,
+        t.company_name_sc,
+        t.archive_number,
+        t.is_split_company,
+        t.split_company_id,
+        t.split_company_name,
+        t.is_import_company,
+        t.import_companyid,
+        t.import_company_name,
+        t.import_end_date,
+        t.is_trust_company,
+        t.trust_company_id,
+        t.trust_company_name,
+        t.trust_end_date,
+        t.maintenance_state,
+        t.qualification_status,
+        t.qualification_nopass_reason,
+        t.input_remarks,
+        t.initialization_state,
+        t.clear_status,
+        t.gmp_code,
+        t.is_using,
+        t.reaudit_user_id,
+        t.reaudit_user_name,
+        t.reaudit_add_time,
+        t.reaudit_remark,
+        t.audit_user_id,
+        t.audit_user_name,
+        t.audit_add_time,
+        t.audit_remark,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.drug_classification,
+        t.component,
+        t.drug_category,
+        t.factor,
+        t.price_unit,
+        t.product_name,
+        t.medicinemodel,
+        t.outlook,
+        t.is_base_drug,
+        t.ggyp_id,
+        t.ngoods_id
+	</sql>
+
+
+    <select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_goods where goods_id =  #{value}
+	</select>
+
+    <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="full-columns"/>
+        ,p.product_name,p.medicinemodel,p.outlook,p.factor,p.level_day,p.remark, p.component,p.drug_classification,
+        p.drug_category,g.certificate_number gmp_name
+        FROM std_goods t
+        LEFT JOIN std_product p ON t.product_id = p.product_id AND p.status = 2 AND p.is_using = 1<!-- 审核通过，有效 -->
+        left join std_gmpgsp g on t.gmp_code = g.id and g.type = 0 and g.isusing = 1 and g.status = 2
+        WHERE t.goods_id = #{value}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+		SELECT * from std_goods 
+	</select>
+
+
+    <insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdGoods">
+		INSERT INTO std_goods(
+	            product_id ,
+	            goods_name ,
+	            material_name ,
+	            material_remark ,
+	            unit ,
+	            min_unit ,
+	            approval_code ,
+	            approval_code_begintime ,
+	            approval_code_endtime ,
+	            regcode ,
+	            regcode_begin_time ,
+	            regcode_end_time ,
+	            survey_report_year ,
+	            drug_standard_code ,
+	            execute_standard_type ,
+	            execute_standard_code ,
+	            trial_standard_endtime ,
+	            issubmit_positive_certificate ,
+	            chinese_medicine_levelday ,
+	            is_has_sodium ,
+	            electronic_pack ,
+	            maximum_retail_price ,
+	            price_basis ,
+	            middle_pack ,
+	            max_pack ,
+	            company_id_sc ,
+	            company_name_sc ,
+	            archive_number ,
+	            is_split_company ,
+	            split_company_id ,
+	            split_company_name ,
+	            is_import_company ,
+	            import_companyid ,
+	            import_company_name ,
+	            import_end_date ,
+	            is_trust_company ,
+	            trust_company_id ,
+	            trust_company_name ,
+	            trust_end_date ,
+	            qualification_status ,
+	            qualification_nopass_reason ,
+	            input_remarks ,
+	            initialization_state ,
+	            clear_status ,
+	            gmp_code,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time,
+	            component,
+		        drug_classification,
+		        drug_category
+	    ) 
+		VALUES (
+	        	#{productId},
+	        	#{goodsName},
+	        	#{materialName},
+	        	#{materialRemark},
+	        	#{unit},
+	        	#{minUnit},
+	        	#{approvalCode},
+	        	#{approvalCodeBegintime},
+	        	#{approvalCodeEndtime},
+	        	#{regcode},
+	        	#{regcodeBeginTime},
+	        	#{regcodeEndTime},
+	        	#{surveyReportYear},
+	        	#{drugStandardCode},
+	        	#{executeStandardType},
+	        	#{executeStandardCode},
+	        	#{trialStandardEndtime},
+	        	#{issubmitPositiveCertificate},
+	        	#{chineseMedicineLevelday},
+	        	#{isHasSodium},
+	        	#{electronicPack},
+	        	#{maximumRetailPrice},
+	        	#{priceBasis},
+	        	#{middlePack},
+	        	#{maxPack},
+	        	#{companyIdSc},
+	        	#{companyNameSc},
+	        	#{archiveNumber},
+	        	#{isSplitCompany},
+	        	#{splitCompanyId},
+	        	#{splitCompanyName},
+	        	#{isImportCompany},
+	        	#{importCompanyid},
+	        	#{importCompanyName},
+	        	#{importEndDate},
+	        	#{isTrustCompany},
+	        	#{trustCompanyId},
+	        	#{trustCompanyName},
+	        	#{trustEndDate},
+	        	#{qualificationStatus},
+	        	#{qualificationNopassReason},
+	        	#{inputRemarks},
+	        	#{initializationState},
+	        	#{clearStatus},
+	        	#{gmpCode},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime},
+	        	#{component},
+		        #{drugClassification},
+		        #{drugCategory}
+		)
+	</insert>
+
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="goodsId"
+            parameterType="com.hsnn.medstgmini.base.std.model.StdGoods">
+        <!--<selectKey resultType="java.lang.Integer" keyProperty="goodsId" order="BEFORE">-->
+            <!--SELECT STDGOODSSEQ.nextval from dual-->
+        <!--</selectKey>-->
+        INSERT INTO std_goods(
+        <!--goods_id,-->
+        product_id ,
+        goods_name ,
+        material_name ,
+        material_remark ,
+        unit ,
+        min_unit ,
+        approval_code ,
+        approval_code_begintime ,
+        approval_code_endtime ,
+        regcode ,
+        regcode_begin_time ,
+        regcode_end_time ,
+        survey_report_year ,
+        drug_standard_code ,
+        execute_standard_type ,
+        execute_standard_code ,
+        trial_standard_endtime ,
+        issubmit_positive_certificate ,
+        chinese_medicine_levelday ,
+        is_has_sodium ,
+        electronic_pack ,
+        maximum_retail_price ,
+        price_basis ,
+        middle_pack ,
+        max_pack ,
+        company_id_sc ,
+        company_name_sc ,
+        archive_number ,
+        is_split_company ,
+        split_company_id ,
+        split_company_name ,
+        is_import_company ,
+        import_companyid ,
+        import_company_name ,
+        import_end_date ,
+        is_trust_company ,
+        trust_company_id ,
+        trust_company_name ,
+        trust_end_date ,
+        maintenance_state ,
+        qualification_status ,
+        qualification_nopass_reason ,
+        input_remarks ,
+        initialization_state ,
+        clear_status ,
+        gmp_code,
+        is_using ,
+        reaudit_user_id ,
+        reaudit_user_name ,
+        reaudit_add_time ,
+        reaudit_remark ,
+        audit_user_id ,
+        audit_user_name ,
+        audit_add_time ,
+        audit_remark ,
+        add_user_id ,
+        add_user_name ,
+        add_time ,
+        last_update_user_id ,
+        last_update_user_name ,
+        last_update_time,
+        component,
+        drug_classification,
+        drug_category ,
+        PRODUCT_NAME,
+        OUTLOOK,
+        MEDICINEMODEL,
+        factor,
+        ngoods_id
+
+
+        )
+        VALUES (
+        <!--#{goodsId},-->
+        #{productId},
+        #{goodsName},
+        #{materialName},
+        #{materialRemark},
+        #{unit},
+        #{minUnit},
+        #{approvalCode},
+        #{approvalCodeBegintime},
+        #{approvalCodeEndtime},
+        #{regcode},
+        #{regcodeBeginTime},
+        #{regcodeEndTime},
+        #{surveyReportYear},
+        #{drugStandardCode},
+        #{executeStandardType},
+        #{executeStandardCode},
+        #{trialStandardEndtime},
+        #{issubmitPositiveCertificate},
+        #{chineseMedicineLevelday},
+        #{isHasSodium},
+        #{electronicPack},
+        #{maximumRetailPrice},
+        #{priceBasis},
+        #{middlePack},
+        #{maxPack},
+        #{companyIdSc},
+        #{companyNameSc},
+        #{archiveNumber},
+        #{isSplitCompany},
+        #{splitCompanyId},
+        #{splitCompanyName},
+        #{isImportCompany},
+        #{importCompanyid},
+        #{importCompanyName},
+        #{importEndDate},
+        #{isTrustCompany},
+        #{trustCompanyId},
+        #{trustCompanyName},
+        #{trustEndDate},
+        #{maintenanceState},
+        #{qualificationStatus},
+        #{qualificationNopassReason},
+        #{inputRemarks},
+        #{initializationState},
+        #{clearStatus},
+        #{gmpCode},
+        #{isUsing},
+        #{reauditUserId},
+        #{reauditUserName},
+        #{reauditAddTime},
+        #{reauditRemark},
+        #{auditUserId},
+        #{auditUserName},
+        #{auditAddTime},
+        #{auditRemark},
+        #{addUserId},
+        #{addUserName},
+        SYSDATE,
+        #{lastUpdateUserId},
+        #{lastUpdateUserName},
+        #{lastUpdateTime},
+        #{component},
+        #{drugClassification},
+        #{drugCategory},
+        #{productName},
+        #{outlook},
+        #{medicinemodel},
+        #{factor},
+        (select a.ndict_id
+        from std_dict a
+        where a.dictionary_value =#{productName} and a.type='通用名')||
+        (select a.ndict_id
+        from std_dict a
+        where a.dictionary_value = #{medicinemodel} and a.type='剂型')||
+        (select a.ndict_id
+        from std_dict a
+        where a.dictionary_value = #{outlook}and a.type='规格')||
+        replace(lpad( #{factor},4),' ','0')||
+        (select a.ndict_id
+        from std_dict a
+        where a.dictionary_value = #{materialName} and a.type='包装材质')||
+        (select a.ndict_id
+        from std_dict a
+        where a.dictionary_value = #{unit} and a.type='包装单位')||
+        (
+        select substr(t.company_account_code,-4) from STD_COMPANY t where t.company_name=#{companyNameSc}
+        )
+        )
+    </insert>
+
+    <update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdGoods">
+        UPDATE std_goods
+        <set>
+            <if test="@OGNL@isNotEmpty(productId)">
+                product_id = #{productId},
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsName)">
+                goods_name = #{goodsName},
+            </if>
+            <if test="@OGNL@isNotEmpty(materialName)">
+                material_name = #{materialName},
+            </if>
+            <if test="@OGNL@isNotEmpty(materialRemark)">
+                material_remark = #{materialRemark},
+            </if>
+            <if test="@OGNL@isNotEmpty(unit)">
+                unit = #{unit},
+            </if>
+            <if test="@OGNL@isNotEmpty(minUnit)">
+                min_unit = #{minUnit},
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCode)">
+                approval_code = #{approvalCode},
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCodeBegintime)">
+                approval_code_begintime = #{approvalCodeBegintime},
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCodeEndtime)">
+                approval_code_endtime = #{approvalCodeEndtime},
+            </if>
+            <if test="@OGNL@isNotEmpty(regcode)">
+                regcode = #{regcode},
+            </if>
+            <if test="@OGNL@isNotEmpty(regcodeBeginTime)">
+                regcode_begin_time = #{regcodeBeginTime},
+            </if>
+            <if test="@OGNL@isNotEmpty(regcodeEndTime)">
+                regcode_end_time = #{regcodeEndTime},
+            </if>
+            <if test="@OGNL@isNotEmpty(surveyReportYear)">
+                survey_report_year = #{surveyReportYear},
+            </if>
+            <if test="@OGNL@isNotEmpty(drugStandardCode)">
+                drug_standard_code = #{drugStandardCode},
+            </if>
+            <if test="@OGNL@isNotEmpty(executeStandardType)">
+                execute_standard_type = #{executeStandardType},
+            </if>
+            <if test="@OGNL@isNotEmpty(executeStandardCode)">
+                execute_standard_code = #{executeStandardCode},
+            </if>
+            <if test="@OGNL@isNotEmpty(trialStandardEndtime)">
+                trial_standard_endtime = #{trialStandardEndtime},
+            </if>
+            <if test="@OGNL@isNotEmpty(issubmitPositiveCertificate)">
+                issubmit_positive_certificate = #{issubmitPositiveCertificate},
+            </if>
+            <if test="@OGNL@isNotEmpty(chineseMedicineLevelday)">
+                chinese_medicine_levelday = #{chineseMedicineLevelday},
+            </if>
+            <if test="@OGNL@isNotEmpty(isHasSodium)">
+                is_has_sodium = #{isHasSodium},
+            </if>
+            <if test="@OGNL@isNotEmpty(electronicPack)">
+                electronic_pack = #{electronicPack},
+            </if>
+            <if test="@OGNL@isNotEmpty(maximumRetailPrice)">
+                maximum_retail_price = #{maximumRetailPrice},
+            </if>
+            <if test="@OGNL@isNotEmpty(priceBasis)">
+                price_basis = #{priceBasis},
+            </if>
+            <if test="@OGNL@isNotEmpty(middlePack)">
+                middle_pack = #{middlePack},
+            </if>
+            <if test="@OGNL@isNotEmpty(maxPack)">
+                max_pack = #{maxPack},
+            </if>
+            <if test="@OGNL@isNotEmpty(companyIdSc)">
+                company_id_sc = #{companyIdSc},
+            </if>
+            <if test="@OGNL@isNotEmpty(companyNameSc)">
+                company_name_sc = #{companyNameSc},
+            </if>
+            <if test="@OGNL@isNotEmpty(archiveNumber)">
+                archive_number = #{archiveNumber},
+            </if>
+            <if test="@OGNL@isNotEmpty(isSplitCompany)">
+                is_split_company = #{isSplitCompany},
+            </if>
+            <if test="@OGNL@isNotEmpty(splitCompanyId)">
+                split_company_id = #{splitCompanyId},
+            </if>
+            <if test="@OGNL@isNotEmpty(splitCompanyName)">
+                split_company_name = #{splitCompanyName},
+            </if>
+            <if test="@OGNL@isNotEmpty(isImportCompany)">
+                is_import_company = #{isImportCompany},
+            </if>
+            <if test="@OGNL@isNotEmpty(importCompanyid)">
+                import_companyid = #{importCompanyid},
+            </if>
+            <if test="@OGNL@isNotEmpty(importCompanyName)">
+                import_company_name = #{importCompanyName},
+            </if>
+            <if test="@OGNL@isNotEmpty(importEndDate)">
+                import_end_date = #{importEndDate},
+            </if>
+            <if test="@OGNL@isNotEmpty(isTrustCompany)">
+                is_trust_company = #{isTrustCompany},
+            </if>
+            <if test="@OGNL@isNotEmpty(trustCompanyId)">
+                trust_company_id = #{trustCompanyId},
+            </if>
+            <if test="@OGNL@isNotEmpty(trustCompanyName)">
+                trust_company_name = #{trustCompanyName},
+            </if>
+            <if test="@OGNL@isNotEmpty(trustEndDate)">
+                trust_end_date = #{trustEndDate},
+            </if>
+            <if test="@OGNL@isNotEmpty(maintenanceState)">
+                maintenance_state = #{maintenanceState},
+            </if>
+            <if test="@OGNL@isNotEmpty(qualificationStatus)">
+                qualification_status = #{qualificationStatus},
+            </if>
+            <if test="@OGNL@isNotEmpty(qualificationNopassReason)">
+                qualification_nopass_reason = #{qualificationNopassReason},
+            </if>
+            <if test="@OGNL@isNotEmpty(inputRemarks)">
+                input_remarks = #{inputRemarks},
+            </if>
+            <if test="@OGNL@isNotEmpty(initializationState)">
+                initialization_state = #{initializationState},
+            </if>
+            <if test="@OGNL@isNotEmpty(clearStatus)">
+                clear_status = #{clearStatus},
+            </if>
+            <if test="@OGNL@isNotEmpty(gmpCode)">
+                gmp_code = #{gmpCode},
+            </if>
+            <if test="@OGNL@isNotEmpty(isUsing)">
+                is_using = #{isUsing},
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditUserId)">
+                reaudit_user_id = #{reauditUserId},
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditUserName)">
+                reaudit_user_name = #{reauditUserName},
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditAddTime)">
+                reaudit_add_time = SYSDATE,
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditRemark)">
+                reaudit_remark = #{reauditRemark},
+            </if>
+            <if test="@OGNL@isNotEmpty(auditUserId)">
+                audit_user_id = #{auditUserId},
+            </if>
+            <if test="@OGNL@isNotEmpty(auditUserName)">
+                audit_user_name = #{auditUserName},
+            </if>
+            <if test="@OGNL@isNotEmpty(auditAddTime)">
+                audit_add_time = SYSDATE,
+            </if>
+            <if test="@OGNL@isNotEmpty(auditRemark)">
+                audit_remark = #{auditRemark},
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserId)">
+                add_user_id = #{addUserId},
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserName)">
+                add_user_name = #{addUserName},
+            </if>
+            <if test="@OGNL@isNotEmpty(addTime)">
+                add_time = SYSDATE,
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+                last_update_user_id = #{lastUpdateUserId},
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+                last_update_user_name = #{lastUpdateUserName},
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+                last_update_time = SYSDATE,
+            </if>
+            <if test="component != null">
+                component=#{component},
+            </if>
+            <if test="drugClassification != null">
+                drug_classification=#{drugClassification},
+            </if>
+            <if test="drugCategory != null">
+                drug_category=#{drugCategory},
+            </if>
+            <if test="@OGNL@isNotEmpty(ggypId)">
+                ggyp_Id = #{ggypId},
+            </if>
+        </set>
+        WHERE goods_id = #{goodsId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_goods WHERE  goods_id =  #{value}
+	</delete>
+
+    <select id="getScreen" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="full-columns"/>
+        ,p.product_name,p.medicinemodel,p.outlook,p.factor,p.level_day,p.remark
+        FROM std_goods t
+        LEFT JOIN std_product p ON t.product_id = p.product_id AND t.is_using = 1
+        <where>
+            AND p.product_name = #{productName}
+            AND p.outlook = #{outlook}
+            AND p.factor = #{factor}
+            AND p.medicinemodel = #{medicinemodel}
+            <!-- AND t.material_remark = #{materialRemark} -->
+            AND t.unit = #{unit}
+            AND t.material_name = #{materialName}
+            AND t.company_id_sc = #{companyIdSc}
+        </where>
+    </select>
+
+
+    <select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="full-columns"/>
+        FROM std_goods t
+        <where>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND t.product_name LIKE '%'||#{productName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                AND t.outlook like '%'||#{outlook}||'%'
+            </if>
+            <if test="isOutdate">
+                AND (add_months(t.approval_code_endtime,#{addMonth}) &lt; SYSDATE    <!-- 批准文号过期 -->
+                OR add_months(t.regcode_end_time, #{addMonth}) &lt; SYSDATE    <!-- 注册证日期过期 -->
+                OR add_months(t.import_end_date, #{addMonth} ) &lt; SYSDATE    <!-- 代理产品且代理有效期过期 -->
+                OR add_months(t.trust_end_date, #{addMonth} ) &lt; SYSDATE    <!-- 委托加工产品且委托截至日期过期-->
+                )
+                <if test="addMonth==-3">
+                    and (t.approval_code_endtime &gt; SYSDATE or t.approval_code_endtime is null)
+                    and (t.regcode_end_time &gt; SYSDATE or t.regcode_end_time is null)
+                    and (t.import_end_date &gt; SYSDATE or t.import_end_date is null)
+                    and (t.trust_end_date &gt; SYSDATE or t.trust_end_date is null)
+                </if>
+            </if>
+            <if test="@OGNL@isNotEmpty(factor)">
+                AND t.factor = #{factor}
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsId)">
+                AND t.goods_id = #{goodsId}
+            </if>
+            <if test="@OGNL@isNotEmpty(productId)">
+                AND t.product_id = #{productId}
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsName)">
+                AND t.goods_name like '%'||#{goodsName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(materialName)">
+                AND t.material_name like '%'||#{materialName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(materialRemark)">
+                AND t.material_remark = #{materialRemark}
+            </if>
+            <if test="@OGNL@isNotEmpty(unit)">
+                AND t.unit = #{unit}
+            </if>
+            <if test="@OGNL@isNotEmpty(minUnit)">
+                AND t.min_unit = #{minUnit}
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCode)">
+                AND t.approval_code = #{approvalCode}
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCodeBegintime)">
+                AND t.approval_code_begintime = #{approvalCodeBegintime}
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCodeEndtime)">
+                AND t.approval_code_endtime = #{approvalCodeEndtime}
+            </if>
+            <if test="@OGNL@isNotEmpty(regcode)">
+                AND t.regcode = #{regcode}
+                <!-- AND t.regcode like '%'||#{regcode}||'%' -->
+            </if>
+            <if test="@OGNL@isNotEmpty(regcodeBeginTime)">
+                AND t.regcode_begin_time = #{regcodeBeginTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(regcodeEndTime)">
+                AND t.regcode_end_time = #{regcodeEndTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(surveyReportYear)">
+                AND t.survey_report_year = #{surveyReportYear}
+            </if>
+            <if test="@OGNL@isNotEmpty(drugStandardCode)">
+                AND t.drug_standard_code = #{drugStandardCode}
+            </if>
+            <if test="@OGNL@isNotEmpty(executeStandardType)">
+                AND t.execute_standard_type = #{executeStandardType}
+            </if>
+            <if test="@OGNL@isNotEmpty(executeStandardCode)">
+                AND t.execute_standard_code = #{executeStandardCode}
+            </if>
+            <if test="@OGNL@isNotEmpty(trialStandardEndtime)">
+                AND t.trial_standard_endtime = #{trialStandardEndtime}
+            </if>
+            <if test="@OGNL@isNotEmpty(issubmitPositiveCertificate)">
+                AND t.issubmit_positive_certificate = #{issubmitPositiveCertificate}
+            </if>
+            <if test="@OGNL@isNotEmpty(chineseMedicineLevelday)">
+                AND t.chinese_medicine_levelday = #{chineseMedicineLevelday}
+            </if>
+            <if test="@OGNL@isNotEmpty(isHasSodium)">
+                AND t.is_has_sodium = #{isHasSodium}
+            </if>
+            <if test="@OGNL@isNotEmpty(electronicPack)">
+                AND t.electronic_pack = #{electronicPack}
+            </if>
+            <if test="@OGNL@isNotEmpty(maximumRetailPrice)">
+                AND t.maximum_retail_price = #{maximumRetailPrice}
+            </if>
+            <if test="@OGNL@isNotEmpty(priceBasis)">
+                AND t.price_basis = #{priceBasis}
+            </if>
+            <if test="@OGNL@isNotEmpty(middlePack)">
+                AND t.middle_pack = #{middlePack}
+            </if>
+            <if test="@OGNL@isNotEmpty(maxPack)">
+                AND t.max_pack = #{maxPack}
+            </if>
+            <if test="@OGNL@isNotEmpty(companyIdSc)">
+                AND t.company_id_sc = #{companyIdSc}
+            </if>
+            <if test="@OGNL@isNotEmpty(companyNameSc)">
+                AND t.company_name_sc LIKE '%'||#{companyNameSc}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(archiveNumber)">
+                AND t.archive_number LIKE '%'||#{archiveNumber}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(isSplitCompany)">
+                AND t.is_split_company = #{isSplitCompany}
+            </if>
+            <if test="@OGNL@isNotEmpty(splitCompanyId)">
+                AND t.split_company_id = #{splitCompanyId}
+            </if>
+            <if test="@OGNL@isNotEmpty(splitCompanyName)">
+                AND t.split_company_name = #{splitCompanyName}
+            </if>
+            <if test="@OGNL@isNotEmpty(isImportCompany)">
+                AND t.is_import_company = #{isImportCompany}
+            </if>
+            <if test="@OGNL@isNotEmpty(importCompanyid)">
+                AND t.import_companyid = #{importCompanyid}
+            </if>
+            <if test="@OGNL@isNotEmpty(importCompanyName)">
+                AND t.import_company_name like '%'||#{importCompanyName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(importEndDate)">
+                AND t.import_end_date = #{importEndDate}
+            </if>
+            <if test="@OGNL@isNotEmpty(isTrustCompany)">
+                AND t.is_trust_company = #{isTrustCompany}
+            </if>
+            <if test="@OGNL@isNotEmpty(trustCompanyId)">
+                AND t.trust_company_id = #{trustCompanyId}
+            </if>
+            <if test="@OGNL@isNotEmpty(trustCompanyName)">
+                AND t.trust_company_name like '%'||#{trustCompanyName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(trustEndDate)">
+                AND t.trust_end_date = #{trustEndDate}
+            </if>
+            <if test="@OGNL@isNotEmpty(qualificationStatus)">
+                AND t.qualification_status = #{qualificationStatus}
+            </if>
+            <if test="@OGNL@isNotEmpty(qualificationNopassReason)">
+                AND t.qualification_nopass_reason = #{qualificationNopassReason}
+            </if>
+            <if test="@OGNL@isNotEmpty(inputRemarks)">
+                AND t.input_remarks = #{inputRemarks}
+            </if>
+            <if test="@OGNL@isNotEmpty(initializationState2)">
+                AND t.initialization_state = #{initializationState2}
+            </if>
+            <if test="@OGNL@isNotEmpty(initializationState)">
+                AND t.initialization_state IN
+                <foreach collection="initializationState" item="state" open="(" separator="," close=")">
+                    #{state}
+                </foreach>
+            </if>
+            <if test="@OGNL@isNotEmpty(clearStatus)">
+                AND t.clear_status = #{clearStatus}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearStatus2)">
+                AND t.clear_status IN
+                <foreach collection="clearStatus2" item="state" open="(" separator="," close=")">
+                    #{state}
+                </foreach>
+            </if>
+            <if test="@OGNL@isNotEmpty(gmpCode)">
+                AND t.gmp_code =#{gmpCode}
+            </if>
+            <if test="@OGNL@isNotEmpty(isUsing)">
+                AND t.is_using = #{isUsing}
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditUserId)">
+                AND t.reaudit_user_id = #{reauditUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditUserName)">
+                AND t.reaudit_user_name like '%'||#{reauditUserName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditAddTime)">
+                AND t.reaudit_add_time = #{reauditAddTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditRemark)">
+                AND t.reaudit_remark = #{reauditRemark}
+            </if>
+            <if test="@OGNL@isNotEmpty(auditUserId)">
+                AND t.audit_user_id = #{auditUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(auditUserName)">
+                AND t.audit_user_name like '%'||#{auditUserName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(auditAddTime)">
+                AND t.audit_add_time = #{auditAddTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(auditRemark)">
+                AND t.audit_remark = #{auditRemark}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserId)">
+                AND t.add_user_id = #{addUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserName)">
+                AND t.add_user_name like '%'||#{addUserName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(addTime)">
+                AND t.add_time = #{addTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+                AND t.last_update_user_id = #{lastUpdateUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+                AND t.last_update_user_name = #{lastUpdateUserName}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+                AND t.last_update_time = #{lastUpdateTime}
+            </if>
+            <!-- 企业端判断产品哪些企业可以看到 -->
+            <if test="@OGNL@isNotEmpty(loginOrgId)">
+                AND (t.company_id_sc = #{loginOrgId} or t.import_companyid=#{loginOrgId})
+            </if>
+        </where>
+        order by t.goods_id desc
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO std_goods (
+        product_id ,
+        goods_name ,
+        material_name ,
+        material_remark ,
+        unit ,
+        min_unit ,
+        approval_code ,
+        approval_code_begintime ,
+        approval_code_endtime ,
+        regcode ,
+        regcode_begin_time ,
+        regcode_end_time ,
+        survey_report_year ,
+        drug_standard_code ,
+        execute_standard_type ,
+        execute_standard_code ,
+        trial_standard_endtime ,
+        issubmit_positive_certificate ,
+        chinese_medicine_levelday ,
+        is_has_sodium ,
+        electronic_pack ,
+        maximum_retail_price ,
+        price_basis ,
+        middle_pack ,
+        max_pack ,
+        company_id_sc ,
+        company_name_sc ,
+        archive_number ,
+        is_split_company ,
+        split_company_id ,
+        split_company_name ,
+        is_import_company ,
+        import_companyid ,
+        import_company_name ,
+        import_end_date ,
+        is_trust_company ,
+        trust_company_id ,
+        trust_company_name ,
+        trust_end_date ,
+        maintenance_state ,
+        qualification_status ,
+        qualification_nopass_reason ,
+        input_remarks ,
+        initialization_state ,
+        clear_status ,
+        gmp_code,
+        is_using ,
+        reaudit_user_id ,
+        reaudit_user_name ,
+        reaudit_add_time ,
+        reaudit_remark ,
+        audit_user_id ,
+        audit_user_name ,
+        audit_add_time ,
+        audit_remark ,
+        add_user_id ,
+        add_user_name ,
+        add_time ,
+        last_update_user_id ,
+        last_update_user_name ,
+        last_update_time
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.productId},
+            #{item.goodsName},
+            #{item.materialName},
+            #{item.materialRemark},
+            #{item.unit},
+            #{item.minUnit},
+            #{item.approvalCode},
+            #{item.approvalCodeBegintime},
+            #{item.approvalCodeEndtime},
+            #{item.regcode},
+            #{item.regcodeBeginTime},
+            #{item.regcodeEndTime},
+            #{item.surveyReportYear},
+            #{item.drugStandardCode},
+            #{item.executeStandardType},
+            #{item.executeStandardCode},
+            #{item.trialStandardEndtime},
+            #{item.issubmitPositiveCertificate},
+            #{item.chineseMedicineLevelday},
+            #{item.isHasSodium},
+            #{item.electronicPack},
+            #{item.maximumRetailPrice},
+            #{item.priceBasis},
+            #{item.middlePack},
+            #{item.maxPack},
+            #{item.companyIdSc},
+            #{item.companyNameSc},
+            #{item.archiveNumber},
+            #{item.isSplitCompany},
+            #{item.splitCompanyId},
+            #{item.splitCompanyName},
+            #{item.isImportCompany},
+            #{item.importCompanyid},
+            #{item.importCompanyName},
+            #{item.importEndDate},
+            #{item.isTrustCompany},
+            #{item.trustCompanyId},
+            #{item.trustCompanyName},
+            #{item.trustEndDate},
+            #{item.maintenanceState},
+            #{item.qualificationStatus},
+            #{item.qualificationNopassReason},
+            #{item.inputRemarks},
+            #{item.initializationState},
+            #{item.clearStatus},
+            #{item.gmpCode},
+            #{item.isUsing},
+            #{item.reauditUserId},
+            #{item.reauditUserName},
+            #{item.reauditAddTime},
+            #{item.reauditRemark},
+            #{item.auditUserId},
+            #{item.auditUserName},
+            #{item.auditAddTime},
+            #{item.auditRemark},
+            #{item.addUserId},
+            #{item.addUserName},
+            #{item.addTime},
+            #{item.lastUpdateUserId},
+            #{item.lastUpdateUserName},
+            #{item.lastUpdateTime}
+            )
+        </foreach>
+    </insert>
+
+    <!-- 批量修改数据 -->
+    <update id="batchUpdate">
+        UPDATE std_goods
+        <set>
+            <if test="@OGNL@isNotEmpty(stdGoods.productId)">
+                product_id = #{stdGoods.productId,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.goodsName)">
+                goods_name = #{stdGoods.goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.materialName)">
+                material_name = #{stdGoods.materialName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.materialRemark)">
+                material_remark = #{stdGoods.materialRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.unit)">
+                unit = #{stdGoods.unit,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.minUnit)">
+                min_unit = #{stdGoods.minUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.approvalCode)">
+                approval_code = #{stdGoods.approvalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.approvalCodeBegintime)">
+                approval_code_begintime = #{stdGoods.approvalCodeBegintime,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.approvalCodeEndtime)">
+                approval_code_endtime = #{stdGoods.approvalCodeEndtime,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.regcode)">
+                regcode = #{stdGoods.regcode,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.productId)">
+                regcode_begin_time = #{stdGoods.regcodeBeginTime,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.regcodeEndTime)">
+                regcode_end_time = #{stdGoods.regcodeEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.surveyReportYear)">
+                survey_report_year = #{stdGoods.surveyReportYear,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.drugStandardCode)">
+                drug_standard_code = #{stdGoods.drugStandardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.executeStandardType)">
+                execute_standard_type = #{stdGoods.executeStandardType,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.executeStandardCode)">
+                execute_standard_code = #{stdGoods.executeStandardCode,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.trialStandardEndtime)">
+                trial_standard_endtime = #{stdGoods.trialStandardEndtime,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.issubmitPositiveCertificate)">
+                issubmit_positive_certificate = #{stdGoods.issubmitPositiveCertificate,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.chineseMedicineLevelday)">
+                chinese_medicine_levelday = #{stdGoods.chineseMedicineLevelday,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.isHasSodium)">
+                is_has_sodium = #{stdGoods.isHasSodium,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.electronicPack)">
+                electronic_pack = #{stdGoods.electronicPack,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.maximumRetailPrice)">
+                maximum_retail_price = #{stdGoods.maximumRetailPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.priceBasis)">
+                price_basis = #{stdGoods.priceBasis,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.middlePack)">
+                middle_pack = #{stdGoods.middlePack,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.maxPack)">
+                max_pack = #{stdGoods.maxPack,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.companyIdSc)">
+                company_id_sc = #{stdGoods.companyIdSc,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.companyNameSc)">
+                company_name_sc = #{stdGoods.companyNameSc,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.archiveNumber)">
+                archive_number = #{stdGoods.archiveNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.isSplitCompany)">
+                is_split_company = #{stdGoods.isSplitCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.splitCompanyId)">
+                split_company_id = #{stdGoods.splitCompanyId,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.initializationState)">
+                initialization_state = #{stdGoods.initializationState,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.clearStatus)">
+                clear_status = #{stdGoods.clearStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.gmpCode)">
+                gmp_code = #{stdGoods.gmpCode,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.isUsing)">
+                is_using = #{stdGoods.isUsing,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.reauditUserId)">
+                reaudit_user_id = #{stdGoods.reauditUserId},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.reauditUserName)">
+                reaudit_user_name = #{stdGoods.reauditUserName},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.reauditAddTime)">
+                reaudit_add_time = #{stdGoods.reauditAddTime},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.reauditRemark)">
+                reaudit_remark = #{stdGoods.reauditRemark},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.auditUserId)">
+                audit_user_id = #{stdGoods.auditUserId},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.auditUserName)">
+                audit_user_name = #{stdGoods.auditUserName},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.auditAddTime)">
+                audit_add_time = #{stdGoods.auditAddTime},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.auditRemark)">
+                audit_remark = #{stdGoods.auditRemark},
+            </if>
+
+            <if test="@OGNL@isNotEmpty(stdGoods.addUserId)">
+                add_user_id = #{stdGoods.addUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.addUserName)">
+                add_user_name = #{stdGoods.addUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.addTime)">
+                add_time = #{stdGoods.addTime,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.lastUpdateUserId)">
+                last_update_user_id = #{stdGoods.lastUpdateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.lastUpdateUserName)">
+                last_update_user_name = #{stdGoods.lastUpdateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.inputRemarks)">
+                input_remarks = CONCAT(input_remarks,#{stdGoods.inputRemarks}),
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.component)">
+                component=#{stdGoods.component,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.drugClassification)">
+                drug_classification=#{stdGoods.drugClassification,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(stdGoods.drugCategory)">
+                drug_category=#{stdGoods.drugCategory,jdbcType=VARCHAR},
+            </if>
+            last_update_time = SYSDATE
+        </set>
+        where goods_id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="getGoodsAuditInfo" parameterType="map" resultType="hashmap">
+		select a.goods_id "goodsId",a.archive_number "archiveNumber",b.product_name "productName",a.goods_name "goodsName",
+		b.medicinemodel "medicinemodel",b.outlook "outlook",b.factor "factor",b.level_day "levelDay",b.remark "remark",
+		a.material_name "materialName",a.import_end_date "importEndDate",
+		a.unit "unit",a.min_unit "minUnit",a.approval_code "approvalCode",a.approval_code_begintime "approvalCodeBegintime",
+		a.approval_code_endtime "approvalCodeEndtime",a.regcode "regcode",a.regcode_begin_time "regcodeBeginTime",
+		a.regcode_end_time "regcodeEndTime",a.survey_report_year "surveyReportYear",a.drug_standard_code "drugStandardCode",
+		a.execute_standard_type "executeStandardType",a.execute_standard_code "executeStandardCode",
+		a.trial_standard_endtime "trialStandardEndtime",a.issubmit_positive_certificate "issubmitPositiveCertificate",
+		a.chinese_medicine_levelday "chineseMedicineLevelday",a.is_has_sodium "isHasSodium",a.electronic_pack "electronicPack",
+		a.maximum_retail_price "maximumRetailPrice",a.price_basis "priceBasis",a.middle_pack "middlePack",a.max_pack "maxPack",
+		a.is_split_company "isSplitCompany",a.is_import_company "isImportCompany",a.import_company_name importCompanyName,
+		a.is_trust_company "isTrustCompany",a.trust_company_name "trustCompanyName",a.trust_end_date "trustEndDate",
+		a.company_name_sc "companyNameSc",a.input_remarks "inputRemarks",a.qualification_status "qualificationStatus",
+		a.qualification_nopass_reason "qualificationNopassReason",a.gmp_code "gmpCode",g.certificate_number "gmpName",
+		a.reaudit_user_id "reauditUserId",
+        a.reaudit_user_name "reauditUserName",
+        a.reaudit_add_time "reauditAddTime",
+        a.reaudit_remark "reauditRemark",
+        a.audit_user_id "auditUserId",
+        a.audit_user_name "auditUserName",
+        a.audit_add_time "auditAddTime",
+        a.audit_remark "auditRemark",
+        a.split_company_name "splitCompanyName",
+        a.material_remark "materialRemark"
+		from std_goods a left join std_product b on b.product_id = a.product_id 
+		left join std_gmpgsp g on a.gmp_code = g.id and g.type = 0 and g.isusing = 1 and g.status = 2
+		where goods_id = #{goodsId}
+	</select>
+    <update id="updateAudit" parameterType="map">
+        <!-- 只有审核通过时:改澄清状态为,可澄清状态!!(复核不须要改澄清状态!) -->
+        update std_goods set initialization_state = #{initializationState},
+        <if test="@OGNL@isNotEmpty(isAudit) and isAudit =='auditPass'">clear_status = #{clearStatus},</if>
+        <if test="@OGNL@isNotEmpty(reauditUserId)">
+            reaudit_user_id = #{reauditUserId},
+        </if>
+        <if test="@OGNL@isNotEmpty(reauditUserName)">
+            reaudit_user_name = #{reauditUserName},
+        </if>
+        <if test="@OGNL@isNotEmpty(reauditAddTime)">
+            reaudit_add_time = #{reauditAddTime},
+        </if>
+        <if test="@OGNL@isNotEmpty(reauditRemark)">
+            reaudit_remark = #{reauditRemark},
+        </if>
+        <if test="@OGNL@isNotEmpty(auditUserId)">
+            audit_user_id = #{auditUserId},
+        </if>
+        <if test="@OGNL@isNotEmpty(auditUserName)">
+            audit_user_name = #{auditUserName},
+        </if>
+        <if test="@OGNL@isNotEmpty(auditAddTime)">
+            audit_add_time = #{auditAddTime},
+        </if>
+        <if test="@OGNL@isNotEmpty(auditRemark)">
+            audit_remark = #{auditRemark},
+        </if>
+        last_update_user_id = #{updUserId} ,last_update_user_name = #{updUserName},last_update_time = SYSDATE
+        where goods_id = #{goodsId}
+    </update>
+
+    <!--(药品 :通用名、剂型、规格、转换比[药品id])(产品:商品名、单位、包装材质、生产企业[企业id])>>>-->
+    <select id="checkRepeat" parameterType="com.hsnn.medstgmini.base.std.model.StdGoods" resultMap="BaseResultMap">
+        SELECT
+        <include refid="full-columns"/>
+        FROM std_goods t
+        <where>
+            <!-- t.is_using=1 -->
+            t.product_id = #{productId} AND t.company_id_sc = #{companyIdSc}
+            AND t.material_name = #{materialName} AND t.unit = #{unit}
+            <if test="@OGNL@isNotEmpty(goodsId)"><!-- 如果是编辑的话、应该把当前的数据排除在外才对.. -->
+                AND t.goods_id != #{goodsId}
+            </if>
+            <!-- <if test="@OGNL@isNotEmpty(productId)">
+                AND t.product_id = #{productId}
+            </if>
+            <if test="@OGNL@isNotEmpty(companyIdSc)">
+                AND t.company_id_sc = #{companyIdSc}
+            </if>
+            <if test="@OGNL@isNotEmpty(archiveNumber)">
+                AND t.archive_number = #{archiveNumber}
+            </if>
+            <if test="@OGNL@isNotEmpty(materialName)">
+                AND t.material_name = #{materialName}
+            </if>
+            <if test="@OGNL@isNotEmpty(unit)">
+                AND t.unit = #{unit}
+            </if> -->
+        </where>
+    </select>
+
+    <!-- 根据提供的产品编号和字段修改具体的值 -->
+    <update id="updateColumnById" parameterType="map">
+		update std_goods set ${clearColumn} = #{uValue} where goods_id = #{goodsId}
+	</update>
+
+
+    <select id="queryAllForJG" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        goods_id,
+        t.product_id,
+        archive_Number,
+        product_name,
+        goods_name,
+        medicinemodel,
+        outlook,
+        factor,
+        unit,
+        material_name,
+        company_name_sc,
+        split_company_name,
+        import_company_name,
+        trust_company_name,
+        CASE
+        WHEN is_split_company = 1 THEN
+        split_company_name
+        WHEN is_import_company = 1 THEN
+        import_company_name
+        ELSE
+        company_name_sc
+        END company_name_tb,
+        middle_pack,
+        max_pack,
+        approval_code,
+        regcode,
+        t.is_using
+        FROM
+        std_goods t
+        INNER JOIN std_product b ON t.product_id = b.product_id
+        <where>
+            AND initialization_state = 4
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND (b.product_name LIKE '%'||#{productName}||'%'
+                OR b.product_spel_name LIKE '%'||#{productName}||'%'
+                OR b.product_wb_name LIKE '%'||#{productName}||'%'
+                )
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodelOrSpelLike)">
+                AND (b.medicinemodel like '%'||#{medicinemodelOrSpelLike}||'%'
+                OR b.medicinemodel_spel like '%'||#{medicinemodelOrSpelLike}||'%')
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                AND b.outlook like '%'||#{outlook}||'%'
+            </if>
+            <if test="isOutdate">
+                AND (DATE_ADD(t.approval_code_endtime,INTERVAL #{addMonth} MONTH) &lt; SYSDATE    <!-- 批准文号过期 -->
+                OR DATE_ADD(t.regcode_end_time,INTERVAL #{addMonth} MONTH) &lt; SYSDATE    <!-- 注册证日期过期 -->
+                OR DATE_ADD(t.import_end_date,INTERVAL #{addMonth} MONTH) &lt; SYSDATE    <!-- 代理产品且代理有效期过期 -->
+                OR DATE_ADD(t.trust_end_date,INTERVAL #{addMonth} MONTH) &lt; SYSDATE    <!-- 委托加工产品且委托截至日期过期-->
+                )
+                <if test="addMonth==-3">
+                    and (t.approval_code_endtime &gt; SYSDATE or t.approval_code_endtime is null)
+                    and (t.regcode_end_time &gt; SYSDATE or t.regcode_end_time is null)
+                    and (t.import_end_date &gt; SYSDATE or t.import_end_date is null)
+                    and (t.trust_end_date &gt; SYSDATE or t.trust_end_date is null)
+                </if>
+            </if>
+            <if test="@OGNL@isNotEmpty(factor)">
+                AND b.factor = #{factor}
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsId)">
+                AND t.goods_id = #{goodsId}
+            </if>
+            <if test="@OGNL@isNotEmpty(productId)">
+                AND t.product_id = #{productId}
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsName)">
+                AND t.goods_name like '%'||#{goodsName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(materialName)">
+                AND t.material_name like '%'||#{materialName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(materialRemark)">
+                AND t.material_remark = #{materialRemark}
+            </if>
+            <if test="@OGNL@isNotEmpty(unit)">
+                AND t.unit = #{unit}
+            </if>
+            <if test="@OGNL@isNotEmpty(minUnit)">
+                AND t.min_unit = #{minUnit}
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCode)">
+                AND t.approval_code = #{approvalCode}
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCodeBegintime)">
+                AND t.approval_code_begintime = #{approvalCodeBegintime}
+            </if>
+            <if test="@OGNL@isNotEmpty(approvalCodeEndtime)">
+                AND t.approval_code_endtime = #{approvalCodeEndtime}
+            </if>
+            <if test="@OGNL@isNotEmpty(regcode)">
+                AND t.regcode = #{regcode}
+                <!-- AND t.regcode like '%'||#{regcode}||'%' -->
+            </if>
+            <if test="@OGNL@isNotEmpty(regcodeBeginTime)">
+                AND t.regcode_begin_time = #{regcodeBeginTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(regcodeEndTime)">
+                AND t.regcode_end_time = #{regcodeEndTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(surveyReportYear)">
+                AND t.survey_report_year = #{surveyReportYear}
+            </if>
+            <if test="@OGNL@isNotEmpty(drugStandardCode)">
+                AND t.drug_standard_code = #{drugStandardCode}
+            </if>
+            <if test="@OGNL@isNotEmpty(executeStandardType)">
+                AND t.execute_standard_type = #{executeStandardType}
+            </if>
+            <if test="@OGNL@isNotEmpty(executeStandardCode)">
+                AND t.execute_standard_code = #{executeStandardCode}
+            </if>
+            <if test="@OGNL@isNotEmpty(trialStandardEndtime)">
+                AND t.trial_standard_endtime = #{trialStandardEndtime}
+            </if>
+            <if test="@OGNL@isNotEmpty(issubmitPositiveCertificate)">
+                AND t.issubmit_positive_certificate = #{issubmitPositiveCertificate}
+            </if>
+            <if test="@OGNL@isNotEmpty(chineseMedicineLevelday)">
+                AND t.chinese_medicine_levelday = #{chineseMedicineLevelday}
+            </if>
+            <if test="@OGNL@isNotEmpty(isHasSodium)">
+                AND t.is_has_sodium = #{isHasSodium}
+            </if>
+            <if test="@OGNL@isNotEmpty(electronicPack)">
+                AND t.electronic_pack = #{electronicPack}
+            </if>
+            <if test="@OGNL@isNotEmpty(maximumRetailPrice)">
+                AND t.maximum_retail_price = #{maximumRetailPrice}
+            </if>
+            <if test="@OGNL@isNotEmpty(priceBasis)">
+                AND t.price_basis = #{priceBasis}
+            </if>
+            <if test="@OGNL@isNotEmpty(middlePack)">
+                AND t.middle_pack = #{middlePack}
+            </if>
+            <if test="@OGNL@isNotEmpty(maxPack)">
+                AND t.max_pack = #{maxPack}
+            </if>
+            <if test="@OGNL@isNotEmpty(pack)">
+                AND (t.middle_pack = #{pack} or t.max_pack = #{pack})
+            </if>
+            <if test="@OGNL@isNotEmpty(companyName)">
+                AND (t.company_name_sc like '%'||#{companyName}||'%' or t.split_company_name like
+                '%'||#{companyName}||'%' or t.import_company_name like '%'||#{companyName}||'%' or t.trust_company_name
+                like '%'||#{companyName}||'%' )
+            </if>
+            <if test="@OGNL@isNotEmpty(companyIdSc)">
+                AND t.company_id_sc = #{companyIdSc}
+            </if>
+            <if test="@OGNL@isNotEmpty(companyNameSc)">
+                AND t.company_name_sc LIKE '%'||#{companyNameSc}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(archiveNumber)">
+                AND t.archive_number LIKE '%'||#{archiveNumber}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(isSplitCompany)">
+                AND t.is_split_company = #{isSplitCompany}
+            </if>
+            <if test="@OGNL@isNotEmpty(splitCompanyId)">
+                AND t.split_company_id = #{splitCompanyId}
+            </if>
+            <if test="@OGNL@isNotEmpty(splitCompanyName)">
+                AND t.split_company_name = #{splitCompanyName}
+            </if>
+            <if test="@OGNL@isNotEmpty(isImportCompany)">
+                AND t.is_import_company = #{isImportCompany}
+            </if>
+            <if test="@OGNL@isNotEmpty(importCompanyid)">
+                AND t.import_companyid = #{importCompanyid}
+            </if>
+            <if test="@OGNL@isNotEmpty(importCompanyName)">
+                AND t.import_company_name like '%'||#{importCompanyName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(importEndDate)">
+                AND t.import_end_date = #{importEndDate}
+            </if>
+            <if test="@OGNL@isNotEmpty(isTrustCompany)">
+                AND t.is_trust_company = #{isTrustCompany}
+            </if>
+            <if test="@OGNL@isNotEmpty(trustCompanyId)">
+                AND t.trust_company_id = #{trustCompanyId}
+            </if>
+            <if test="@OGNL@isNotEmpty(trustCompanyName)">
+                AND t.trust_company_name like '%'||#{trustCompanyName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(trustEndDate)">
+                AND t.trust_end_date = #{trustEndDate}
+            </if>
+            <if test="@OGNL@isNotEmpty(qualificationStatus)">
+                AND t.qualification_status = #{qualificationStatus}
+            </if>
+            <if test="@OGNL@isNotEmpty(qualificationNopassReason)">
+                AND t.qualification_nopass_reason = #{qualificationNopassReason}
+            </if>
+            <if test="@OGNL@isNotEmpty(inputRemarks)">
+                AND t.input_remarks = #{inputRemarks}
+            </if>
+            <if test="@OGNL@isNotEmpty(initializationState2)">
+                AND t.initialization_state = #{initializationState2}
+            </if>
+            <if test="@OGNL@isNotEmpty(initializationState)">
+                AND t.initialization_state IN
+                <foreach collection="initializationState" item="state" open="(" separator="," close=")">
+                    #{state}
+                </foreach>
+            </if>
+            <if test="@OGNL@isNotEmpty(clearStatus)">
+                AND t.clear_status = #{clearStatus}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearStatus2)">
+                AND t.clear_status IN
+                <foreach collection="clearStatus2" item="state" open="(" separator="," close=")">
+                    #{state}
+                </foreach>
+            </if>
+            <if test="@OGNL@isNotEmpty(gmpCode)">
+                AND t.gmp_code =#{gmpCode}
+            </if>
+            <if test="@OGNL@isNotEmpty(isUsing)">
+                AND t.is_using = #{isUsing}
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditUserId)">
+                AND t.reaudit_user_id = #{reauditUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditUserName)">
+                AND t.reaudit_user_name like '%'||#{reauditUserName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditAddTime)">
+                AND t.reaudit_add_time = #{reauditAddTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(reauditRemark)">
+                AND t.reaudit_remark = #{reauditRemark}
+            </if>
+            <if test="@OGNL@isNotEmpty(auditUserId)">
+                AND t.audit_user_id = #{auditUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(auditUserName)">
+                AND t.audit_user_name like '%'||#{auditUserName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(auditAddTime)">
+                AND t.audit_add_time = #{auditAddTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(auditRemark)">
+                AND t.audit_remark = #{auditRemark}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserId)">
+                AND t.add_user_id = #{addUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserName)">
+                AND t.add_user_name like '%'||#{addUserName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(addTime)">
+                AND t.add_time = #{addTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+                AND t.last_update_user_id = #{lastUpdateUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+                AND t.last_update_user_name = #{lastUpdateUserName}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+                AND t.last_update_time = #{lastUpdateTime}
+            </if>
+            <!-- 企业端判断产品哪些企业可以看到 -->
+            <if test="@OGNL@isNotEmpty(loginOrgId)">
+                AND ((t.is_split_company = 1 and t.split_company_id = #{loginOrgId}) or (t.is_import_company = 1 and
+                t.is_split_company = 0 and t.import_companyid = #{loginOrgId}) or (t.is_import_company = 0 and
+                t.is_split_company = 0 and t.company_id_sc = #{loginOrgId}))
+            </if>
+        </where>
+        order by t.add_time desc
+    </select>
+
+    <select id="getGoodsList" parameterType="map" resultMap="BaseResultMap">
+        SELECT<include refid="full-columns"/>,
+        p.product_name,
+        p.medicinemodel,
+        p.outlook
+        FROM std_goods t
+        LEFT JOIN std_product p ON t.product_id= p.product_id
+        WHERE t.product_id = #{productId}
+        AND t.goods_id
+        NOT IN (
+        SELECT g.goods_id FROM std_goods_app g
+        WHERE g.proj_code = #{projCode} AND g.comp_code = #{compCode})
+        AND T.COMPANY_ID_SC = #{compCode}
+    </select>
+
+    <select id="queryExist" parameterType="map" resultMap="BaseResultMap">
+        SELECT<include refid="full-columns"/>,s.product_name,s.medicinemodel,s.outlook,s.product_attr,s.remark
+        ,s.product_spel_name,s.product_wb_name
+        FROM std_goods t LEFT JOIN std_product s ON t.product_id = s.product_id
+        <where>
+            t.goods_id not in(select p.goods_id from std_goods_app p where p.product_id=#{productId} and
+            p.comp_code=#{compCode} and p.proj_code=#{projCode}) and t.product_id=#{productId} and
+            t.company_id_sc=#{compCode}
+        </where>
+    </select>
+
+    <select id="getByGoodsId" parameterType="java.lang.Integer" resultType="map">
+		SELECT * from std_goods where goods_id =  #{goodsId}
+	</select>
+
+    <!-- 新增功能实现时获取自增的postId -->
+    <select id="returnLastId" resultType="java.lang.Integer">
+            SELECT STDGOODSSEQ.nextval from dual
+    </select>
+    <select id="ModifyGoodsCompany" parameterType="map" statementType="CALLABLE" resultType="java.util.Map">
+	    <![CDATA[
+
+
+
+
+
+      	CALL usp_update_goods_company(
+      	#{goodsid,mode=IN,jdbcType=VARCHAR},
+      	#{companyIdsc,mode=IN,jdbcType=VARCHAR},
+      	#{companyIdtb,mode=IN,jdbcType=VARCHAR},
+      	#{userid,mode=IN,jdbcType=VARCHAR},
+      	#{out_flag,mode=OUT,jdbcType=VARCHAR}
+      	)
+
+
+
+
+
+        ]]>
+	</select>
+
+    <select id="stdGoodsNoUsing" parameterType="java.lang.String" statementType="CALLABLE">
+		call stdgoodsEnable(#{goods,mode=IN,jdbcType=VARCHAR})
+	</select>
+
+    <select id="baseGoodsNoUsing" parameterType="java.lang.String" statementType="CALLABLE">
+		call basegoodsenable(#{goods,mode=IN,jdbcType=VARCHAR})
+	</select>
+
+    <select id="getGoodsForCompApply" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="full-columns"/>
+        from std_goods t where
+        exists (
+        select 1 from drugpur_comp_apply a where proj_code = #{projCode} and comp_id = #{comp_id} and
+        t.goods_name = a.goods_name
+        ) and
+        not exists(
+        select 1 from STD_GOODS_APP s where proj_code = #{projCode} and comp_code = #{comp_id} and
+        t.goods_id = s.goods_id
+        )
+        AND t.goods_name=#{goodsName}
+        AND t.COMPANY_ID_SC=#{companyIdSc}
+    </select>
+    <select id="getGoodsCf" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="full-columns"/>
+        from   std_goods t left join
+        STD_GOODS_APP s
+        on   t.goods_id = s.goods_id
+        where
+       s.add_User_Id=#{addUserId}
+        and s.status=0
+        <if test="@OGNL@isNotEmpty(goodsName)">
+            AND t.goods_name like '%'||#{goodsName} ||'%'
+        </if>
+    </select>
+
+    <select id="getDataById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT <include refid="full-columns"/>
+        FROM std_goods t WHERE t.goods_id = #{goodsId}
+    </select>
+
+    <select id="updateCompTb" parameterType="java.util.Map" statementType="CALLABLE" >
+        call StdGoods_UpdateCompanyTb(#{goodsId,mode=IN,jdbcType=INTEGER},#{companyId,mode=IN,jdbcType=VARCHAR},#{companyName,mode=IN,jdbcType=VARCHAR})
+    </select>
+
+    <select id="getAllStdGoodsData" parameterType="map" resultMap="BaseResultMap">
+        SELECT <include refid="full-columns"/>
+        FROM std_goods t
+        <where>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND t.product_name LIKE '%'||#{productName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsId)">
+                AND t.goods_id LIKE '%'||#{goodsId}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodelOrSpelLike)">
+                AND t.medicinemodel like '%'||#{medicinemodelOrSpelLike}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(companyNameSc)">
+                AND t.company_name_sc LIKE '%'||#{companyNameSc}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(importCompanyName)">
+                AND t.import_Company_Name LIKE '%'||#{importCompanyName}||'%'
+            </if>
+            <if test="@OGNL@isNotEmpty(isUsing)">
+                AND t.is_using = #{isUsing}
+            </if>
+            <if test="@OGNL@isNotEmpty(initializationState)">
+                AND t.initialization_state = #{initializationState}
+            </if>
+        </where>
+    </select>
+    <update id="BacthIsUsingUpdate">
+        update std_goods
+        set is_using = #{isUsing}
+
+        <where>
+            goods_id in
+            <foreach collection="insertMap" item="item" index="index" open="(" separator="," close=")">
+                #{item.goodsId}
+            </foreach>
+        </where>
+    </update>
+	<select id="updateCompSc" parameterType="java.util.Map" statementType="CALLABLE" >
+        call StdGoods_UpdateCompanySc(#{goodsId,mode=IN,jdbcType=INTEGER},#{companyIdSc,mode=IN,jdbcType=VARCHAR},#{companyNameSc,mode=IN,jdbcType=VARCHAR})
+    </select>
+    
+    <select id="updateCompTbAndSc" parameterType="java.util.Map" statementType="CALLABLE" >
+        call StdGoods_UpdateCompanyTbAndSc(#{goodsId,mode=IN,jdbcType=INTEGER},#{companyId,mode=IN,jdbcType=VARCHAR},#{companyName,mode=IN,jdbcType=VARCHAR})
+    </select>
+
+    <select id="stdGoodsListNoUsing" parameterType="java.lang.String" statementType="CALLABLE">
+        call goodsenable(#{goodsId,mode=IN,jdbcType=VARCHAR})
+    </select>
+
+</mapper>

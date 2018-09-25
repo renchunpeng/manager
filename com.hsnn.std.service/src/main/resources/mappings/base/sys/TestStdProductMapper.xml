@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.TestStdProductDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.TestStdProduct" id="BaseResultMap">
+        <result property="productId" column="product_id" javaType="Integer"/>
+        <result property="productName" column="product_name" javaType="String"/>
+        <result property="status" column="status" javaType="Integer"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.product_id,
+        t.product_name,
+        t.status,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from test_std_product where product_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from test_std_product where product_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from test_std_product 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.TestStdProduct">
+		INSERT INTO test_std_product(
+	            product_name ,
+	            status ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time 
+	    ) 
+		VALUES (
+	        	#{productName},
+	        	#{status},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.sys.model.TestStdProduct">
+		<selectKey resultType="java.lang.Integer" keyProperty="productId" order="BEFORE">
+			SELECT TESTSTDPRODUCTSEQ.nextval from dual
+        </selectKey>
+		INSERT INTO test_std_product(
+				product_id,
+	            product_name ,
+	            status ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time 
+		) 
+		VALUES (
+	        	#{productId},
+	        	#{productName},
+	        	#{status},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	now()
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.TestStdProduct">
+		UPDATE test_std_product  
+		<set>
+	        	product_name = #{productName},
+	        	status = #{status},
+	        	is_using = #{isUsing},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+        </set>
+		WHERE  product_id =  #{productId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM test_std_product WHERE  product_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM test_std_product t
+		<where>
+			<if test="@OGNL@isNotEmpty(productId)">
+	            AND t.product_id = #{productId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+	            AND t.product_name = #{productName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(status)">
+	            AND t.status = #{status}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO test_std_product (
+            product_name ,
+            status ,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.productName},
+        	#{item.status},
+        	#{item.isUsing},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime}
+        )
+        </foreach>
+	</insert>
+</mapper>

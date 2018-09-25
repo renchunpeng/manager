@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysResourceDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysResource" id="BaseResultMap">
+        <result property="resourceId" column="resource_id" javaType="Integer"/>
+        <result property="parentResourceId" column="parent_resource_id" javaType="Integer"/>
+        <result property="resourceName" column="resource_name" javaType="String"/>
+        <result property="resourceStyle" column="resource_style" javaType="String"/>
+        <result property="resourceUrl" column="resource_url" javaType="String"/>
+        <result property="resourceType" column="resource_type" javaType="Integer"/>
+        <result property="icon" column="icon" javaType="String"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="sort" column="sort" javaType="Integer"/>
+        <result property="type" column="type" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="menuName" column="menu_name" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+		t.menu_name,
+        t.resource_id,
+        t.parent_resource_id,
+        t.resource_name,
+        t.resource_style,
+        t.resource_url,
+        t.resource_type,
+        t.icon,
+        t.is_using,
+        t.sort,
+        t.type,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_resource where resource_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_resource where resource_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from sys_resource 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysResource">
+		INSERT INTO sys_resource(
+	            parent_resource_id ,
+	            resource_name ,
+	            resource_style ,
+	            resource_url ,
+	            icon ,
+	            is_using ,
+	            sort ,
+	            type ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{parentResourceId},
+	        	#{resourceName},
+	        	#{resourceStyle},
+	        	#{resourceUrl},
+	        	#{icon},
+	        	#{isUsing},
+	        	#{sort},
+	        	#{type},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="resourceId" parameterType="com.hsnn.medstgmini.base.sys.model.SysResource">
+		<!--<selectKey resultType="java.lang.Integer" keyProperty="resourceId" order="BEFORE">-->
+			<!--SELECT SYSRESOURCESEQ.nextval from dual-->
+        <!--</selectKey>-->
+	INSERT INTO sys_resource(
+				<!-- resource_Id,-->
+				menu_name,
+	            parent_resource_id ,
+	            resource_name ,
+	            resource_style ,
+	            resource_url ,
+	            resource_type ,
+	            icon ,
+	            is_using ,
+	            sort ,
+	            type ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+				<!-- #{resourceId},-->
+				#{menuName},
+	        	#{parentResourceId},
+	        	#{resourceName},
+	        	#{resourceStyle},
+	        	#{resourceUrl},
+	        	#{resourceType},
+	        	#{icon},
+	        	#{isUsing},
+	        	#{sort},
+	        	#{type},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysResource">
+		UPDATE sys_resource  
+		  <set >
+	  <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentResourceId != null" >
+        parent_resource_id = #{parentResourceId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null" >
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceStyle != null" >
+        resource_style = #{resourceStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null" >
+        resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        resource_type = #{resourceType,jdbcType=TINYINT},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="isUsing != null" >
+        is_using = #{isUsing,jdbcType=TINYINT},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="addUserId != null" >
+        add_user_id = #{addUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="addUserName != null" >
+        add_user_name = #{addUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUserId != null" >
+        last_update_user_id = #{lastUpdateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateUserName != null" >
+        last_update_user_name = #{lastUpdateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_resource WHERE  resource_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_resource t
+		<where>
+			<if test="@OGNL@isNotEmpty(resourceId)">
+	            AND t.resource_id = #{resourceId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(parentResourceId)">
+	            AND t.parent_resource_id = #{parentResourceId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(resourceName)">
+	            AND t.resource_name = #{resourceName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(resourceStyle)">
+	            AND t.resource_style = #{resourceStyle}
+	        </if>
+			<if test="@OGNL@isNotEmpty(resourceUrl)">
+	            AND t.resource_url = #{resourceUrl}
+	        </if>
+			<if test="@OGNL@isNotEmpty(resourceType)">
+				AND t.resource_Type = #{resourceType}
+			</if>
+			<if test="@OGNL@isNotEmpty(icon)">
+	            AND t.icon = #{icon}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sort)">
+	            AND t.sort = #{sort}
+	        </if>
+			<if test="@OGNL@isNotEmpty(type)">
+	            AND t.type = #{type}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn) ">
+        ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_resource (
+        	resource_id,
+            parent_resource_id ,
+            resource_name ,
+            resource_style ,
+            resource_url ,
+            icon ,
+            is_using ,
+            sort ,
+            type ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        )select SYSRESOURCESEQ.nextval,p.* from (
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select 
+        	#{item.parentResourceId},
+        	#{item.resourceName},
+        	#{item.resourceStyle},
+        	#{item.resourceUrl},
+        	#{item.icon},
+        	#{item.isUsing},
+        	#{item.sort},
+        	#{item.type},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	now(),
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        from dual
+        </foreach> ) p
+	</insert>
+
+	<select id="getresourceId" parameterType="java.lang.String" resultType="int">
+		select resource_id from sys_resource where resource_url=#{resourceUrl}
+
+	</select>
+
+	<insert id="saveresource" useGeneratedKeys="true" keyProperty="resourceId" parameterType="com.hsnn.medstgmini.base.sys.model.SysResource">
+		<!--<selectKey resultType="INTEGER" order="BEFORE" keyProperty="resourceId">-->
+			<!--SELECT SYSRESOURCESEQ.NEXTVAL as resourceId from DUAL-->
+		<!--</selectKey>-->
+		INSERT INTO sys_resource(
+		<!-- resource_id,-->
+		parent_resource_id ,
+		resource_name ,
+		menu_name,
+		resource_url ,
+		resource_type ,
+		icon ,
+		is_using ,
+		sort ,
+		type ,
+		add_time
+		)
+		VALUES (
+		<!-- #{resourceId},-->
+		#{parentResourceId},
+		#{resourceName},
+		#{menuName},
+		#{resourceUrl},
+		#{resourceType},
+		#{icon},
+		#{isUsing},
+		#{sort},
+		#{type},
+		#{addTime}
+		)
+	</insert>
+
+
+	<!-- 查询用户权限资源 -->
+	<select id="getResourceListByUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT a.* FROM sys_resource a JOIN sys_user_resource b ON a.resource_id = b.resource_id 
+		WHERE b.user_id = #{value} AND a.is_using = 1 AND b.is_using = 1 order by sort asc
+	</select>
+	
+	
+	
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysResource" id="BaseResultMapWithForm">
+          <result property="resourceId" column="resource_id" javaType="Integer"/>
+        <result property="parentResourceId" column="parent_resource_id" javaType="Integer"/>
+        <result property="resourceName" column="resource_name" javaType="String"/>
+        <result property="resourceStyle" column="resource_style" javaType="String"/>
+        <result property="resourceUrl" column="resource_url" javaType="String"/>
+        <result property="resourceType" column="resource_type" javaType="Integer"/>
+        <result property="icon" column="icon" javaType="String"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="sort" column="sort" javaType="Integer"/>
+        <result property="type" column="type" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="checked" column="checked" javaType="Integer"/>
+        <result property="menuName" column="menu_name" javaType="String"/>
+	</resultMap>
+	
+	<select id="getPrivilegeList" parameterType="java.lang.String" resultMap="BaseResultMapWithForm">
+	SELECT <include refid="full-columns" /> , 
+	CASE
+	WHEN srr.role_id IS NULL THEN
+		0
+	ELSE
+		1
+	END checked
+	FROM sys_resource t
+	LEFT JOIN sys_role_resource srr ON t.resource_id = srr.resource_id
+	AND srr.role_id = #{roleId}
+	ORDER BY t.sort ASC
+	</select>
+	<!-- <select id="returnLastId" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+    </select> -->
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysRole" id="SysRoleBaseResultMap">
+        <result property="roleId" column="role_id" javaType="Integer"/>
+        <result property="roleName" column="role_name" javaType="String"/>
+        <result property="roleType" column="role_type" javaType="Integer"/>
+        <result property="belongOrg" column="belong_org" javaType="String"/>
+        <result property="belongDepartmentId" column="belong_department_id" javaType="Integer"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="belongPostId" column="belong_post_id" javaType="Integer"/>
+	</resultMap>
+	
+	<select id="getMainRoleList"  resultMap="SysRoleBaseResultMap">
+		SELECT * FROM sys_role 
+	</select>
+	
+	<select id="getPrivilegeLists" parameterType="java.lang.String" resultType="hashmap">
+	SELECT distinct a.resource_id id,a.parent_resource_id pid,a. menu_name menuName,a.resource_name resourceName,
+		a.resource_url resourceUrl,a.icon icon,a.resource_type type,
+	CASE
+	WHEN srr.role_id IS NULL THEN
+		0
+	ELSE
+		1
+	END checked
+	FROM sys_resource a
+	LEFT JOIN sys_role_resource srr ON a.resource_id = srr.resource_id
+	AND srr.role_id = #{roleId}
+	and a.is_using = 1
+	ORDER BY a.sort ASC
+	</select>
+	
+	<delete id="deleteRoleResource">
+		DELETE FROM sys_role_resource WHERE  role_id =#{roleId}
+		and resource_id in 
+		<foreach collection="dels" item="item" index="index" separator="," open="(" close=")">
+        #{item}
+        </foreach>
+	</delete>
+	<delete id="deleteUserResource">
+		DELETE FROM sys_user_resource WHERE  user_id in (select user_id from sys_user where role_id = #{roleId})
+		and resource_id in 
+		<foreach collection="dels" item="item" index="index" separator="," open="(" close=")">
+        #{item}
+        </foreach>
+	</delete>
+	
+	<insert id="addRoleResource" parameterType="java.util.List" >
+        INSERT INTO sys_role_resource (role_id ,resource_id ,is_using ,add_user_id ,add_user_name ,add_time ,last_update_user_id ,last_update_user_name ,last_update_time )
+         VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (#{item.roleId}, #{item.resourceId}, #{item.isUsing}, #{item.addUserId}, #{item.addUserName}, #{item.addTime}, #{item.lastUpdateUserId}, #{item.lastUpdateUserName}, #{item.lastUpdateTime})
+        </foreach>
+	</insert>
+		
+	<insert id="addUserResource" parameterType="java.util.List" >
+        INSERT INTO sys_user_resource (
+            user_id ,
+            resource_id ,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.userId},
+        	#{item.resourceId},
+        	#{item.isUsing},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+	<select id="getSysUserByRoleId" parameterType="String" resultType="String">
+		SELECT user_id FROM sys_user a WHERE a.role_id = #{roleId} and rownum=1
+	</select>
+	
+	<!-- 根据角色ID查询用户权限资源 -->
+	<select id="getResourceListByRoleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select a.* From sys_resource a JOIN sys_role_resource b on a.resource_id = b.resource_id where b.role_id = #{value}   
+and a.is_using = 1 and b.is_using = 1
+	</select>
+	
+	<select id="getDeptSelectResource" resultMap="BaseResultMap">
+		SELECT a.* from sys_resource a join sys_role_resource b on b.resource_id = a.resource_id
+        where b.belong_org = #{orgId} and b.belong_post_id is null and b.belong_department_id = #{deptId}
+        and a.is_using = 1
+	</select>
+</mapper>

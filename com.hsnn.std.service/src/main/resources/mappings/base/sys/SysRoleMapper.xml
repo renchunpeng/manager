@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysRoleDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysRole" id="BaseResultMap">
+        <result property="roleId" column="role_id" javaType="Integer"/>
+        <result property="roleName" column="role_name" javaType="String"/>
+        <result property="roleType" column="role_type" javaType="Integer"/>
+        <result property="belongOrg" column="belong_org" javaType="String"/>
+        <result property="belongDepartmentId" column="belong_department_id" javaType="Integer"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="belongPostId" column="belong_post_id" javaType="Integer"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.role_id,
+        t.role_name,
+        t.role_type,
+        t.belong_org,
+        t.belong_department_id,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_role where role_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_role where role_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from sys_role 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysRole">
+		INSERT INTO sys_role(
+	            role_name ,
+	            role_type ,
+	            belong_org ,
+	            belong_department_id ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{roleName},
+	        	#{roleType},
+	        	#{belongOrg},
+	        	#{belongDepartmentId},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="roleId" parameterType="com.hsnn.medstgmini.base.sys.model.SysRole">
+		<!--<selectKey resultType="java.lang.Integer" keyProperty="roleId" order="BEFORE">-->
+			<!--SELECT SYSROLESEQ.nextval from dual-->
+        <!--</selectKey>-->
+		INSERT INTO sys_role(
+				<!--role_id,-->
+	            role_name ,
+	            role_type ,
+	            belong_org ,
+	            belong_department_id ,
+	            belong_post_id,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+				<!-- #{roleId},-->
+	        	#{roleName},
+	        	#{roleType},
+	        	#{belongOrg},
+	        	#{belongDepartmentId},
+	        	#{belongPostId},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	now(),
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+
+	</insert>
+	
+	<!-- 新增岗位权限保存 -->
+	<insert id="savePostResource" useGeneratedKeys="true" keyProperty="roleId"  parameterType="com.hsnn.medstgmini.base.sys.model.SysRole">
+		<!--<selectKey resultType="java.lang.Integer" keyProperty="roleId" order="BEFORE">-->
+			<!--SELECT SYSROLESEQ.nextval from dual-->
+        <!--</selectKey>-->
+        INSERT INTO sys_role(
+        		<!-- role_id,-->
+                role_name ,
+                role_type ,
+                belong_org ,
+                belong_department_id ,
+                belong_post_id,
+                is_using ,
+                add_user_id ,
+                add_user_name ,
+                add_time ,
+                last_update_user_id ,
+                last_update_user_name ,
+                last_update_time 
+        ) 
+        VALUES (
+        		<!-- #{roleId},-->
+                #{roleName},
+                #{roleType},
+                #{belongOrg},
+                #{belongDepartmentId},
+                #{belongPostId},
+                #{isUsing},
+                #{addUserId},
+                #{addUserName},
+                #{addTime},
+                #{lastUpdateUserId},
+                #{lastUpdateUserName},
+                #{lastUpdateTime}
+        )
+    </insert>
+	
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysRole">
+		UPDATE sys_role  
+		<set>
+	        	role_name = #{roleName},
+	        	role_type = #{roleType},
+	        	belong_org = #{belongOrg},
+	        	belong_department_id = #{belongDepartmentId},
+	        	is_using = #{isUsing},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = #{lastUpdateTime},
+        </set>
+		WHERE  role_id =  #{roleId}
+	</update>
+	
+	<update id="updateRole" parameterType="com.hsnn.medstgmini.base.sys.model.SysRole">
+		UPDATE sys_role  
+		<set>
+			<if test="@OGNL@isNotEmpty(roleName)">
+	            role_name = #{roleName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(roleType)">
+	            role_type = #{roleType},
+	        </if>
+			<if test="@OGNL@isNotEmpty(belongOrg)">
+	            belong_org = #{belongOrg},
+	        </if>
+			<if test="@OGNL@isNotEmpty(belongDepartmentId)">
+	            belong_department_id = #{belongDepartmentId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            is_using = #{isUsing},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            add_user_id = #{addUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            add_user_name = #{addUserName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            add_time = #{addTime},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            last_update_user_id = #{lastUpdateUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            last_update_user_name = #{lastUpdateUserName},
+	        </if>
+	            last_update_time = now()
+        </set>
+		WHERE  role_id =  #{roleId}
+	</update>
+	
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_role WHERE  role_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_role t
+		<where>
+			<if test="@OGNL@isNotEmpty(roleId)">
+	            AND t.role_id = #{roleId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(roleName)">
+	            AND t.role_name = #{roleName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(roleType)">
+	            AND t.role_type = #{roleType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(belongOrg)">
+	            AND t.belong_org = #{belongOrg}
+	        </if>
+			<if test="@OGNL@isNotEmpty(belongDepartmentId)">
+	            AND t.belong_department_id = #{belongDepartmentId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(belongPostId)">
+	            AND t.belong_post_id = #{belongPostId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn) ">
+        ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_role (
+        	role_id,
+            role_name ,
+            role_type ,
+            belong_org ,
+            belong_department_id ,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) select SYSROLESEQ.nextval,p.* from (
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select 
+        	#{item.roleName},
+        	#{item.roleType},
+        	#{item.belongOrg},
+        	#{item.belongDepartmentId},
+        	#{item.isUsing},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	now(),
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime} 
+        from dual
+        </foreach> ) p
+	</insert>
+	
+	<select id="getRoleById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_role t
+	<where>
+		AND t.role_id = #{roleId}
+	</where>
+	</select>
+	<select id="getOrgHospDataById" parameterType="java.lang.String" resultType="java.util.HashMap">
+	SELECT 
+	h.hospital_name "org_name",
+	h.hospital_address "org_address",
+	a.area_fullname "org_area_name"
+	FROM std_hospital h
+	left join std_area a on h.area_id = a.area_id
+	<where>
+	AND h.hospital_id = #{orgId}
+	</where>
+	</select>
+	
+	<select id="getOrgCompDataById" parameterType="java.lang.String" resultType="java.util.HashMap">
+	SELECT 
+	c.company_name "org_name",
+	c.address "org_address",
+	a.area_fullname "org_area_name"
+	FROM std_company c
+	left join std_area a on c.area_id = a.area_id
+	<where>
+	AND c.company_id = #{orgId}
+	</where>
+	</select>
+	
+	
+	<update id="updateByIds">
+		UPDATE sys_role
+		<set>
+			<if test="@OGNL@isNotEmpty(model.isUsing)">
+	            is_using = #{model.isUsing},
+	        </if>
+			<if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+	            last_update_user_id = #{model.lastUpdateUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+	            last_update_user_name = #{model.lastUpdateUserName},
+	        </if>
+	            last_update_time = now()
+        </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(ids)">
+				id in 
+	            <foreach collection="ids" item="item" separator="," open="(" close=")">
+	            	 #{item}
+	            </foreach>
+			</if>
+			<if test="@OGNL@isEmpty(ids)">
+				AND 1=2
+			</if>
+		</where>
+	</update>
+	
+	<insert id="addSysRole"   useGeneratedKeys="true" keyProperty="roleId" parameterType="com.hsnn.medstgmini.base.sys.model.SysRole">
+		<!--<selectKey resultType="Integer"  keyProperty="roleId" order="BEFORE">-->
+			<!--select SYSROLESEQ.nextval as role_id from dual-->
+	   <!--</selectKey>-->
+		INSERT INTO sys_role(
+				<!--role_id,-->
+	            role_name ,
+	            role_type ,
+	            belong_org ,<!-- 
+	            belong_department_id ,
+	            belong_post_id, -->
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+				<!--#{roleId},-->
+	        	#{roleName},
+	        	#{roleType},
+	        	#{belongOrg},<!-- 
+	        	#{belongDepartmentId},
+	        	#{belongPostId}, -->
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+</mapper>

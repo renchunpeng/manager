@@ -1,0 +1,1879 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdCompanyDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdCompany" id="BaseResultMap">
+        <result property="companyId" column="company_id" javaType="String"/>
+        <result property="companyAccountCode" column="company_account_code" javaType="String"/>
+        <result property="companyName" column="company_name" javaType="String"/>
+        <result property="compSpelCode" column="comp_spel_code" javaType="String"/>
+        <result property="companySimpleName" column="company_simple_name" javaType="String"/>
+        <result property="companySimpleNameSpell" column="company_simple_name_spell" javaType="String"/>
+        <result property="lastYearIncome" column="last_year_income" javaType="BigDecimal"/>
+        <result property="companyContactTel" column="company_contact_tel" javaType="String"/>
+        <result property="companyContactFax" column="company_contact_fax" javaType="String"/>
+        <result property="zipCode" column="zip_code" javaType="Integer"/>
+        <result property="email" column="email" javaType="String"/>
+        <result property="filingNumber" column="filing_number" javaType="String"/>
+        <result property="companyTypeSystem" column="company_type_system" javaType="Integer"/>
+        <result property="companyType" column="company_type" javaType="Integer"/>
+        <result property="onceCompanyName" column="once_company_name" javaType="String"/>
+        <result property="areaName" column="area_name" javaType="String"/>
+        <result property="areaId" column="area_id" javaType="Integer"/>
+        <result property="address" column="address" javaType="String"/>
+        <result property="registeredCapital" column="registered_capital" javaType="Long"/>
+        <result property="legalName" column="legal_name" javaType="String"/>
+        <result property="legalNumber" column="legal_number" javaType="String"/>
+        <result property="legalScanAttachId" column="legal_scan_attach_id" javaType="String"/>
+        <result property="legalCellphone" column="legal_cellphone" javaType="String"/>
+        <result property="legalPhone" column="legal_phone" javaType="String"/>
+        <result property="companyRegistType" column="company_regist_type" javaType="String"/>
+        <result property="isGroupCompany" column="is_group_company" javaType="Integer"/>
+        <result property="groupCompanyName" column="group_company_name" javaType="String"/>
+        <result property="isLawerCompany" column="is_lawer_company" javaType="Integer"/>
+        <result property="lawerCompoanyName" column="lawer_compoany_name" javaType="String"/>
+        <result property="organizationCode" column="organization_code" javaType="String"/>
+        <result property="taxRegistrationNumber" column="tax_registration_number" javaType="String"/>
+        <result property="businessLicense" column="business_license" javaType="String"/>
+        <result property="businessLicenseBeginDate" column="business_license_begin_date" javaType="Date"/>
+        <result property="businessLicenseEndDate" column="business_license_end_date" javaType="Date"/>
+        <result property="annualInspection" column="annual_inspection" javaType="String"/>
+        <result property="authorizedPerson" column="authorized_person" javaType="String"/>
+        <result property="authorizedPersonFax" column="authorized_person_fax" javaType="String"/>
+        <result property="authorizedPersonIdcard" column="authorized_person_idcard" javaType="String"/>
+        <result property="authorizedPersonTel" column="authorized_person_tel" javaType="String"/>
+        <result property="productionPermissionCode" column="production_permission_code" javaType="String"/>
+        <result property="productionPermissionRegistAddress" column="product_permission_reg_addr" javaType="String"/>
+        <result property="productionPermissionLawer" column="production_permission_lawer" javaType="String"/>
+        <result property="productionPermissionEndDate" column="production_permission_end_date" javaType="Date"/>
+        <result property="productionPermissionProductAddress" column="product_permission_pro_addr" javaType="String"/>
+        <result property="productionPermissionProductRange" column="product_permission_pro_range" javaType="String"/>
+        <result property="productionPermissionClassificationCodes" column="product_permission_sort_code" javaType="String"/>
+      	<result property="representativeName" column="REPRESENTATIVE_NAME" javaType="String"/>
+        <result property="representativeIdNumber" column="REPRESENTATIVE_ID_NUMBER" javaType="String"/>
+        <result property="representativePhone" column="REPRESENTATIVE_PHONE" javaType="String"/>
+      <!--   <result property="gmpCode" column="gmp_code" javaType="String"/> -->
+        <result property="businessPermissionCode" column="business_permission_code" javaType="String"/>
+        <result property="businessPermissionRegistAddress" column="business_permission_reg_addr" javaType="String"/>
+        <result property="businessPermissionLawer" column="business_permission_lawer" javaType="String"/>
+        <result property="businessPermissionEndDate" column="business_permission_end_date" javaType="Date"/>
+        <result property="businessPermissionWarehouseAddress" column="business_permission_ware_addr" javaType="String"/>
+        <result property="businessPermissionRange" column="business_permission_range" javaType="String"/>
+        <result property="gspCode" column="gsp_code" javaType="String"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="maintenanceState" column="maintenance_state" javaType="Integer"/>
+        <result property="qualificationStatus" column="qualification_status" javaType="Integer"/>
+        <result property="qualificationStatusNopassReason" column="qualification_nopass_reason" javaType="String"/>
+        <result property="inputRemarks" column="input_remarks" javaType="String"/>
+        <result property="initializationState" column="initialization_state" javaType="Integer"/>
+        <result property="clearStatus" column="clear_status" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="reauditUserId" column="reaudit_user_id" javaType="String"/>
+        <result property="reauditUserName" column="reaudit_user_name" javaType="String"/>
+        <result property="reauditAddTime" column="reaudit_add_time" javaType="Date"/>
+        <result property="reauditRemark" column="reaudit_remark" javaType="String"/>
+        <result property="auditUserId" column="audit_user_id" javaType="String"/>
+        <result property="auditUserName" column="audit_user_name" javaType="String"/>
+        <result property="auditAddTime" column="audit_add_time" javaType="Date"/>
+        <result property="auditRemark" column="audit_remark" javaType="String"/>     
+         <result property="userName" column="user_name" javaType="String"/>
+        <!--新增字段  -->
+      <result property="bankBasicAccount" column="bank_basic_account" javaType="String"/>
+         <result property="bankBasicName" column="bank_basic_name" javaType="String"/>
+         <result property="bankAuditState" column="bank_audit_state" javaType="Integer"/>
+         <result property="bankAuditUserId" column="bank_audit_user_id" javaType="String"/>
+         <result property="bankAuditUserName" column="bank_audit_user_name" javaType="String"/>
+         <result property="bankAuditTime" column="bank_audit_time" javaType="Date"/>
+         <result property="bankName" column="bank_name" javaType="String"/> 
+         <result property="bankSubmitTime" column="bank_submit_time" javaType="Date"/>  
+         <result property="bankAuditSecondState" column="bank_audit_second_state" javaType="Integer"/> 
+         <result property="bankAuditSecondUserId" column="bank_audit_second_user_id" javaType="String"/> 
+         <result property="bankAuditSecondUserName" column="bank_audit_second_user_name" javaType="String"/> 
+         <result property="bankAuditSecondTime" column="bank_audit_second_time" javaType="Date"/>
+         <result property="isDispermission" column="is_dispermission" javaType="Integer"/> 
+         <result property="changeRemark" column="change_remark" javaType="String"/>     
+         <result property="name" column="name" javaType="String"/>     
+         <result property="userId" column="user_id" javaType="String"/>     
+         <result property="goodsName" column="GOODS_NAME" javaType="String"/>     
+         <result property="procurecatalogId" column="procurecatalog_id" javaType="String"/>     
+         <result property="weiyueNum" column="weiyue_num" javaType="Integer"/>     
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.company_id,
+        t.company_account_code,
+        t.company_name,
+        t.comp_spel_code,
+        t.company_simple_name,
+        t.company_simple_name_spell,
+        t.last_year_income,
+        t.company_contact_tel,
+        t.company_contact_fax,
+        t.zip_code,
+        t.email,
+        t.filing_number,
+        t.company_type_system,
+        t.company_type,
+        t.once_company_name,
+        t.area_name,
+        t.area_id,
+        t.address,
+        t.registered_capital,
+        t.legal_name,
+        t.legal_number,
+        t.legal_scan_attach_id,
+        t.legal_cellphone,
+        t.legal_phone,
+        t.company_regist_type,
+        t.is_group_company,
+        t.group_company_name,
+        t.is_lawer_company,
+        t.lawer_compoany_name,
+        t.organization_code,
+        t.tax_registration_number,
+        t.business_license,
+        t.business_license_begin_date,
+        t.business_license_end_date,
+        t.annual_inspection,
+        t.authorized_person,
+        t.authorized_person_fax,
+        t.authorized_person_idcard,
+        t.authorized_person_tel,
+        t.production_permission_code,
+        t.product_permission_reg_addr,
+        t.production_permission_lawer,
+        t.production_permission_end_date,
+        t.product_permission_pro_addr,
+        t.product_permission_pro_range,
+        t.product_permission_sort_code,
+        t.business_permission_code,
+        t.business_permission_reg_addr,
+        t.business_permission_lawer,
+        t.business_permission_end_date,
+        t.business_permission_ware_addr,
+        t.business_permission_range,
+        t.gsp_code,
+        t.is_using,
+        t.maintenance_state,
+        t.qualification_status,
+        t.qualification_nopass_reason,
+        t.input_remarks,
+        t.initialization_state,
+        t.representative_name,
+        t.representative_id_number,
+        t.representative_phone,
+        t.clear_status,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.reaudit_user_id,
+        t.reaudit_user_name,
+        t.reaudit_add_time,
+        t.reaudit_remark,
+        t.audit_user_id,
+        t.audit_user_name,
+        t.audit_add_time,
+        t.audit_remark,
+        t.bank_basic_account,<!-- 新增字段  -->
+        t.bank_basic_name,
+        t.bank_audit_state,
+        t.bank_audit_user_id,
+        t.bank_audit_user_name,
+        t.bank_audit_time,
+        t.bank_name,
+        t.bank_submit_time,
+        t.bank_audit_second_state,
+        t.bank_audit_second_user_id,
+        t.bank_audit_second_user_name,
+        t.bank_audit_second_time,
+        t.is_dispermission,
+        t.change_remark
+        </sql>
+
+	<select id="getExceptionCompanyList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_company t
+		WHERE COMPANY_ID NOT IN (
+		(SELECT COMPANY_ID FROM STD_COMP_APP t WHERE ce_audit_status not in (1,2,3,4) AND proj_code = #{projCode})
+		UNION
+		(SELECT COMPANY_ID FROM BID_EXCEPTION_COMP WHERE status = 0 and proj_code =#{projCode} and type = 0)
+		)
+		<if test="@OGNL@isNotEmpty(companyName)">
+			AND (
+			<foreach collection="companyName" item="item" index="index"  separator="OR">
+				t.COMPANY_NAME LIKE '%'||#{item}||'%'
+			</foreach>
+			)
+		</if>
+		<if test="@OGNL@isNotEmpty(companyId)">
+			AND (
+			<foreach collection="companyId" item="item" index="index"  separator="OR">
+				t.COMPANY_ID = #{item}
+			</foreach>
+			)
+		</if>
+	</select>
+	<select id="load" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from std_company where company_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from std_company where company_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from std_company 
+	</select>
+
+	<select id="getExceptionDrugsList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_company t
+		WHERE company_account_code NOT IN (
+		(SELECT COMP_CODE FROM STD_GOODS_APP WHERE ce_audit_status  not in (1,2,3,4) AND proj_code = #{projCode})
+		UNION
+		(SELECT COMPANY_ID FROM BID_EXCEPTION_COMP WHERE status = 0 and proj_code =#{projCode} and type = 1)
+		)
+
+		<if test="@OGNL@isNotEmpty(companyName)">
+			AND (
+			<foreach collection="companyName" item="item" index="index"  separator="OR">
+				t.COMPANY_NAME LIKE '%'||#{item}||'%'
+			</foreach>
+			)
+		</if>
+		<if test="@OGNL@isNotEmpty(companyId)">
+			AND (
+			<foreach collection="companyId" item="item" index="index"  separator="OR">
+				t.COMPANY_ID = #{item}
+			</foreach>
+			)
+		</if>
+	</select>
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany">
+		INSERT INTO std_company(
+	            company_account_code ,
+	            company_name ,
+	            comp_spel_code ,
+	            company_simple_name ,
+	            company_simple_name_spell ,
+	            last_year_income ,
+	            company_contact_tel ,
+	            company_contact_fax ,
+	            zip_code ,
+	            email ,
+	            filing_number ,
+	            company_type_system ,
+	            company_type ,
+	            once_company_name ,
+	            area_name ,
+	            area_id ,
+	            address ,
+	            registered_capital ,
+	            legal_name ,
+	            legal_number ,
+	            legal_scan_attach_id ,
+	            legal_cellphone ,
+	            legal_phone ,
+	            company_regist_type ,
+	            is_group_company ,
+	            group_company_name ,
+	            is_lawer_company ,
+	            lawer_compoany_name ,
+	            organization_code ,
+	            tax_registration_number ,
+	            business_license ,
+	            business_license_begin_date ,
+	            business_license_end_date ,
+	            annual_inspection ,
+	            authorized_person ,
+	            authorized_person_fax ,
+	            authorized_person_idcard ,
+	            authorized_person_tel ,
+	            production_permission_code ,
+	            product_permission_reg_addr ,
+	            production_permission_lawer ,
+	            production_permission_end_date ,
+	            product_permission_pro_addr ,
+	            product_permission_pro_range ,
+	            product_permission_sort_code ,
+	            business_permission_code ,
+	            business_permission_reg_addr ,
+	            business_permission_lawer ,
+	            business_permission_end_date ,
+	            business_permission_ware_addr ,
+	            business_permission_range ,
+	            gsp_code ,
+	            is_using ,
+	            maintenance_state ,
+	            qualification_status ,
+	            qualification_nopass_reason ,
+	            input_remarks ,
+	            initialization_state ,
+	            clear_status ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time ,
+	            reaudit_user_id ,
+	            reaudit_user_name ,
+	            reaudit_add_time ,
+	            reaudit_remark ,
+	            audit_user_id ,
+	            audit_user_name ,
+	            audit_add_time ,
+	            audit_remark 
+		)
+		VALUES (
+	        	#{companyAccountCode},
+	        	#{companyName},
+	        	#{compSpelCode},
+	        	#{companySimpleName},
+	        	#{companySimpleNameSpell},
+	        	#{lastYearIncome},
+	        	#{companyContactTel},
+	        	#{companyContactFax},
+	        	#{zipCode},
+	        	#{email},
+	        	#{filingNumber},
+	        	#{companyTypeSystem},
+	        	#{companyType},
+	        	#{onceCompanyName},
+	        	get_full_name(#{areaId}),
+	        	#{areaId},
+	        	#{address},
+	        	#{registeredCapital},
+	        	#{legalName},
+	        	#{legalNumber},
+	        	#{legalScanAttachId},
+	        	#{legalCellphone},
+	        	#{legalPhone},
+	        	#{companyRegistType},
+	        	#{isGroupCompany},
+	        	#{groupCompanyName},
+	        	#{isLawerCompany},
+	        	#{lawerCompoanyName},
+	        	#{organizationCode},
+	        	#{taxRegistrationNumber},
+	        	#{businessLicense},
+	        	#{businessLicenseBeginDate},
+	        	#{businessLicenseEndDate},
+	        	#{annualInspection},
+	        	#{authorizedPerson},
+	        	#{authorizedPersonFax},
+	        	#{authorizedPersonIdcard},
+	        	#{authorizedPersonTel},
+	        	#{productionPermissionCode},
+	        	#{productionPermissionRegistAddress},
+	        	#{productionPermissionLawer},
+	        	#{productionPermissionEndDate},
+	        	#{productionPermissionProductAddress},
+	        	#{productionPermissionProductRange},
+	        	#{productionPermissionClassificationCodes},
+	        	#{businessPermissionCode},
+	        	#{businessPermissionRegistAddress},
+	        	#{businessPermissionLawer},
+	        	#{businessPermissionEndDate},
+	        	#{businessPermissionWarehouseAddress},
+	        	#{businessPermissionRange},
+	        	#{gspCode},
+	        	#{isUsing},
+	        	#{qualificationStatus},
+	        	#{qualificationStatusNopassReason},
+	        	#{inputRemarks},
+	        	#{initializationState},
+	        	#{clearStatus},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany">
+		INSERT INTO std_company(
+		        company_id,
+	            company_account_code ,
+	            company_name ,
+	            comp_spel_code ,
+	            company_simple_name ,
+	            company_simple_name_spell ,
+	            last_year_income ,
+	            company_contact_tel ,
+	            company_contact_fax ,
+	            zip_code ,
+	            email ,
+	            filing_number ,
+	            company_type_system ,
+	            company_type ,
+	            once_company_name ,
+	            area_name ,
+	            area_id ,
+	            address ,
+	            registered_capital ,
+	            legal_name ,
+	            legal_number ,
+	            legal_scan_attach_id ,
+	            legal_cellphone ,
+	            legal_phone ,
+	            company_regist_type ,
+	            is_group_company ,
+	            group_company_name ,
+	            is_lawer_company ,
+	            lawer_compoany_name ,
+	            organization_code ,
+	            tax_registration_number ,
+	            business_license ,
+	            business_license_begin_date ,
+	            business_license_end_date ,
+	            annual_inspection ,
+	            authorized_person ,
+	            authorized_person_fax ,
+	            authorized_person_idcard ,
+	            authorized_person_tel ,
+	            production_permission_code ,
+	            product_permission_reg_addr ,
+	            production_permission_lawer ,
+	            production_permission_end_date ,
+	            product_permission_pro_addr ,
+	            product_permission_pro_range ,
+	            product_permission_sort_code ,
+	            business_permission_code ,
+	            business_permission_reg_addr ,
+	            business_permission_lawer ,
+	            business_permission_end_date ,
+	            business_permission_ware_addr ,
+	            business_permission_range ,
+	            gsp_code ,
+	            is_using ,
+	            qualification_status ,
+	            qualification_nopass_reason ,
+	            input_remarks ,
+	            initialization_state ,
+	            representative_name ,
+	            representative_id_number ,
+	            representative_phone ,
+	            clear_status ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time,
+	            bank_basic_account,<!--新增字段  -->
+                bank_basic_name,
+                bank_audit_user_id
+     
+		) 
+		VALUES (
+		        #{companyId},
+	        	#{companyAccountCode},
+	        	#{companyName},
+	        	pinyin(#{companyName}),
+	        	#{companySimpleName},
+	        	pinyin(#{companySimpleName}),
+	        	#{lastYearIncome},
+	        	#{companyContactTel},
+	        	#{companyContactFax},
+	        	#{zipCode},
+	        	#{email},
+	        	#{filingNumber},
+	        	#{companyTypeSystem},
+	        	#{companyType},
+	        	#{onceCompanyName},
+	        	<if test="areaId==0">
+	            #{areaName},
+	        	</if>
+	        	<if test="areaId!=0">
+	            get_full_name(#{areaId}),
+	        	</if>
+	        	#{areaId},
+	        	#{address},
+	        	#{registeredCapital},
+	        	#{legalName},
+	        	#{legalNumber},
+	        	#{legalScanAttachId},
+	        	#{legalCellphone},
+	        	#{legalPhone},
+	        	#{companyRegistType},
+	        	#{isGroupCompany},
+	        	#{groupCompanyName},
+	        	#{isLawerCompany},
+	        	#{lawerCompoanyName},
+	        	#{organizationCode},
+	        	#{taxRegistrationNumber},
+	        	#{businessLicense},
+	        	#{businessLicenseBeginDate},
+	        	#{businessLicenseEndDate},
+	        	#{annualInspection},
+	        	#{authorizedPerson},
+	        	#{authorizedPersonFax},
+	        	#{authorizedPersonIdcard},
+	        	#{authorizedPersonTel},
+	        	#{productionPermissionCode},
+	        	#{productionPermissionRegistAddress},
+	        	#{productionPermissionLawer},
+	        	#{productionPermissionEndDate},
+	        	#{productionPermissionProductAddress},
+	        	#{productionPermissionProductRange},
+	        	#{productionPermissionClassificationCodes},
+	        	#{businessPermissionCode},
+	        	#{businessPermissionRegistAddress},
+	        	#{businessPermissionLawer},
+	        	#{businessPermissionEndDate},
+	        	#{businessPermissionWarehouseAddress},
+	        	#{businessPermissionRange},
+	        	#{gspCode},
+	        	#{isUsing},
+	        	#{qualificationStatus},
+	        	#{qualificationStatusNopassReason},
+	        	#{inputRemarks},
+	        	#{initializationState},
+	        	#{representativeName},
+	        	#{representativeIdNumber},
+	        	#{representativePhone},
+	        	#{clearStatus},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE,
+	        	#{bankBasicAccount},<!--新增字段  --> 
+	        	#{bankBasicName},
+	        	#{bankAuditUserId}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany">
+		UPDATE std_company  
+		<set>
+	        	company_account_code = #{companyAccountCode},
+	        	company_name = #{companyName},
+	        	comp_spel_code = #{compSpelCode},
+	        	company_simple_name = #{companySimpleName},
+	        	company_simple_name_spell = #{companySimpleNameSpell},
+	        	last_year_income = #{lastYearIncome},
+	        	company_contact_tel = #{companyContactTel},
+	        	company_contact_fax = #{companyContactFax},
+	        	zip_code = #{zipCode},
+	        	email = #{email},
+	        	filing_number = #{filingNumber},
+	        	company_type_system = #{companyTypeSystem},
+	        	company_type = #{companyType},
+	        	once_company_name = #{onceCompanyName},
+	        	area_name = get_full_name(#{areaId}),
+	        	area_id = #{areaId},
+	        	address = #{address},
+	        	registered_capital = #{registeredCapital},
+	        	legal_name = #{legalName},
+	        	legal_number = #{legalNumber},
+	        	legal_scan_attach_id = #{legalScanAttachId},
+	        	legal_cellphone = #{legalCellphone},
+	        	legal_phone = #{legalPhone},
+	        	company_regist_type = #{companyRegistType},
+	        	is_group_company = #{isGroupCompany},
+	        	group_company_name = #{groupCompanyName},
+	        	is_lawer_company = #{isLawerCompany},
+	        	lawer_compoany_name = #{lawerCompoanyName},
+	        	organization_code = #{organizationCode},
+	        	tax_registration_number = #{taxRegistrationNumber},
+	        	business_license = #{businessLicense},
+	        	business_license_begin_date = #{businessLicenseBeginDate},
+	        	business_license_end_date = #{businessLicenseEndDate},
+	        	annual_inspection = #{annualInspection},
+	        	authorized_person = #{authorizedPerson},
+	        	authorized_person_fax = #{authorizedPersonFax},
+	        	authorized_person_idcard = #{authorizedPersonIdcard},
+	        	authorized_person_tel = #{authorizedPersonTel},
+	        	production_permission_code = #{productionPermissionCode},
+	        	product_permission_reg_addr = #{productionPermissionRegistAddress},
+	        	production_permission_lawer = #{productionPermissionLawer},
+	        	production_permission_end_date = #{productionPermissionEndDate},
+	        	product_permission_pro_addr = #{productionPermissionProductAddress},
+	        	product_permission_pro_range = #{productionPermissionProductRange},
+	        	product_permission_sort_code = #{productionPermissionClassificationCodes},
+	        	business_permission_code = #{businessPermissionCode},
+	        	business_permission_reg_addr = #{businessPermissionRegistAddress},
+	        	business_permission_lawer = #{businessPermissionLawer},
+	        	business_permission_end_date = #{businessPermissionEndDate},
+	        	business_permission_ware_addr = #{businessPermissionWarehouseAddress},
+	        	business_permission_range = #{businessPermissionRange},
+	        	gsp_code = #{gspCode},
+	        	is_using = #{isUsing},
+			    maintenance_state = #{maintenanceState},
+	        	qualification_status = #{qualificationStatus},
+	        	qualification_nopass_reason = #{qualificationStatusNopassReason},
+	        	input_remarks = #{inputRemarks},
+	        	initialization_state = #{initializationState},
+	        	clear_status = #{clearStatus},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = #{lastUpdateTime},
+				reaudit_user_id = #{reauditUserId},
+				reaudit_user_name = #{reauditUserName},
+				reaudit_add_time = #{reauditAddTime},
+				reaudit_remark = #{reauditRemark},
+				audit_user_id = #{auditUserId},
+				audit_user_name = #{auditUserName},
+				audit_add_time = #{auditAddTime},
+				audit_remark = #{auditRemark}
+        </set>
+		WHERE  company_id =  #{companyId}
+	</update>
+	<update id="updateStdCompany" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany">
+		UPDATE std_company t 
+		<set>
+	        <if test="@OGNL@isNotEmpty(companyAccountCode)">
+	            t.company_account_code = #{companyAccountCode},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            t.company_name = #{companyName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            t.comp_spel_code = pinyin(#{companyName}),
+	        </if>
+			<if test="@OGNL@isNotEmpty(companySimpleName)">
+	            t.company_simple_name = #{companySimpleName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companySimpleName)">
+	            t.company_simple_name_spell = pinyin(#{companySimpleName}),
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastYearIncome)">
+	            t.last_year_income = #{lastYearIncome},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyContactTel)">
+	            t.company_contact_tel = #{companyContactTel},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyContactFax)">
+	            t.company_contact_fax = #{companyContactFax},
+	        </if>
+			<if test="@OGNL@isNotEmpty(zipCode)">
+	            t.zip_code = #{zipCode},
+	        </if>
+			<if test="@OGNL@isNotEmpty(email)">
+	            t.email = #{email},
+	        </if>
+			<if test="@OGNL@isNotEmpty(filingNumber)">
+	            t.filing_number = #{filingNumber},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyTypeSystem)">
+	            t.company_type_system = #{companyTypeSystem},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyType)">
+	            t.company_type = #{companyType},
+	        </if>
+			<if test="@OGNL@isNotEmpty(onceCompanyName)">
+	            t.once_company_name = #{onceCompanyName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(areaId)">
+				t.area_name = get_full_name(#{areaId}),
+	            t.area_id = #{areaId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(address)">
+	            t.address = #{address},
+	        </if>
+			<if test="@OGNL@isNotEmpty(registeredCapital)">
+	            t.registered_capital = #{registeredCapital},
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalName)">
+	            t.legal_name = #{legalName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalNumber)">
+	            t.legal_number = #{legalNumber},
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalScanAttachId)">
+	            t.legal_scan_attach_id = #{legalScanAttachId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalCellphone)">
+	            t.legal_cellphone = #{legalCellphone},
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalPhone)">
+	            t.legal_phone = #{legalPhone},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyRegistType)">
+	            t.company_regist_type = #{companyRegistType},
+	        </if>
+			<if test="@OGNL@isNotEmpty(isGroupCompany)">
+	            t.is_group_company = #{isGroupCompany},
+	        </if>
+			<if test="@OGNL@isNotEmpty(groupCompanyName)">
+	            t.group_company_name = #{groupCompanyName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(isLawerCompany)">
+	            t.is_lawer_company = #{isLawerCompany},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lawerCompoanyName)">
+	            t.lawer_compoany_name = #{lawerCompoanyName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(organizationCode)">
+	            t.organization_code = #{organizationCode},
+	        </if>
+			<if test="@OGNL@isNotEmpty(taxRegistrationNumber)">
+	            t.tax_registration_number = #{taxRegistrationNumber},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessLicense)">
+	            t.business_license = #{businessLicense},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessLicenseBeginDate)">
+	            t.business_license_begin_date = #{businessLicenseBeginDate},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessLicenseEndDate)">
+	            t.business_license_end_date = #{businessLicenseEndDate},
+	        </if>
+			<if test="@OGNL@isNotEmpty(annualInspection)">
+	            t.annual_inspection = #{annualInspection},
+	        </if>
+			<if test="@OGNL@isNotEmpty(authorizedPerson)">
+	            t.authorized_person = #{authorizedPerson},
+	        </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonFax)">
+	            t.authorized_person_fax = #{authorizedPersonFax},
+	        </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonIdcard)">
+	            t.authorized_person_idcard = #{authorizedPersonIdcard},
+	        </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonTel)">
+	            t.authorized_person_tel = #{authorizedPersonTel},
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionCode)">
+	            t.production_permission_code = #{productionPermissionCode},
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionRegistAddress)">
+	            t.product_permission_reg_addr = #{productionPermissionRegistAddress},
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionLawer)">
+	            t.production_permission_lawer = #{productionPermissionLawer},
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionEndDate)">
+	            t.production_permission_end_date = #{productionPermissionEndDate},
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionProductAddress)">
+	            t.product_permission_pro_addr = #{productionPermissionProductAddress},
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionProductRange)">
+	            t.product_permission_pro_range = #{productionPermissionProductRange},
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionClassificationCodes)">
+	            t.product_permission_sort_code = #{productionPermissionClassificationCodes},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionCode)">
+	            t.business_permission_code = #{businessPermissionCode},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionRegistAddress)">
+	            t.business_permission_reg_addr = #{businessPermissionRegistAddress},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionLawer)">
+	            t.business_permission_lawer = #{businessPermissionLawer},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionEndDate)">
+	            t.business_permission_end_date = #{businessPermissionEndDate},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionWarehouseAddress)">
+	            t.business_permission_ware_addr = #{businessPermissionWarehouseAddress},
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionRange)">
+	            t.business_permission_range = #{businessPermissionRange},
+	        </if>
+			<if test="@OGNL@isNotEmpty(gspCode)">
+	            t.gsp_code = #{gspCode},
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            t.is_using = #{isUsing},
+	        </if>
+			<if test="@OGNL@isNotEmpty(qualificationStatus)">
+	            t.qualification_status = #{qualificationStatus},
+	        </if>
+			<if test="@OGNL@isNotEmpty(qualificationStatusNopassReason)">
+	            t.qualification_nopass_reason = #{qualificationStatusNopassReason},
+	        </if>
+			<if test="@OGNL@isNotEmpty(inputRemarks)">
+	            t.input_remarks = CONCAT(t.input_remarks,#{inputRemarks}),
+	        </if>
+			<if test="@OGNL@isNotEmpty(initializationState)">
+	            t.initialization_state = #{initializationState},
+	        </if>
+			<if test="@OGNL@isNotEmpty(clearStatus)">
+	            t.clear_status = #{clearStatus},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            t.add_user_id = #{addUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            t.add_user_name = #{addUserName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            t.add_time = #{addTime},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            t.last_update_user_id = #{lastUpdateUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            t.last_update_user_name = #{lastUpdateUserName},
+	        </if>
+	    	<if test="@OGNL@isNotEmpty(reauditUserId)">
+				t.reaudit_user_id = #{reauditUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(reauditUserName)">
+				t.reaudit_user_name = #{reauditUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(reauditAddTime)">
+			    t.reaudit_add_time = #{reauditAddTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(reauditRemark)">
+				t.reaudit_remark = #{reauditRemark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditUserId)">
+				t.audit_user_id = #{auditUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditUserName)">
+				t.audit_user_name = #{auditUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditAddTime)">
+			     t.audit_add_time = #{auditAddTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditRemark)">
+				 t.audit_remark = #{auditRemark},
+			</if>
+			<if test="@OGNL@isNotEmpty(maintenanceState)">
+				 t.maintenance_state = #{maintenanceState},
+			</if>
+			<if test="@OGNL@isNotEmpty(bankBasicAccount)">
+				  t.bank_basic_account=#{bankBasicAccount},
+			</if>
+			<if test="@OGNL@isNotEmpty(bankBasicName)">
+				 t.bank_basic_name = #{bankBasicName},
+			</if>
+			    t.last_update_time = SYSDATE
+        </set>
+		WHERE  t.company_id =  #{companyId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM std_company WHERE  company_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /><!-- ,u.user_Name -->
+	    FROM std_company t <!-- left join sys_user u 
+	    on u.user_id = t.company_account_code and u.user_type in(1,2,3) -->
+		<where>
+		  <if test="@OGNL@isNotEmpty(month)">
+	           AND (
+		            DATE_FORMAT(t.last_update_time,'%Y-%m') = #{month}
+	             )
+	        </if>
+			<!-- 查询医院还未添加备案药品的配送企业  queryOther随意传参-->
+		    <if test="@OGNL@isNotEmpty(queryOther)">
+		    	 t.company_id NOT IN 
+		    	 (SELECT dfacc.company_id_ps FROM drugpur_filing_apply_company dfacc WHERE dfacc.hospital_id=#{hospitalId} AND dfacc.hospital_department_id=#{hospitalDepartmentId})
+		    </if>
+			<if test="@OGNL@isNotEmpty(conditionName)">
+				AND (t.company_name LIKE '%'||#{conditionName}||'%'
+				or t.comp_spel_code LIKE '%'||#{conditionName}||'%'
+				or t.company_simple_name LIKE  '%'||#{conditionName}||'%'
+				or t.company_simple_name_spell LIKE  '%'||#{conditionName}||'%'
+				)
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyId)">
+	            AND t.company_id = #{companyId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(companyIds)">
+	            AND t.company_id in
+	            <foreach collection="companyIds" item="item" index="index" separator="," open="(" close=")">
+					#{item}
+				</foreach>
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyAccountCode)">
+	            AND t.company_account_code = #{companyAccountCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            AND (t.company_name Like '%'||#{companyName}||'%'
+	            or t.comp_spel_code Like '%'||#{companyName}||'%'
+	            ) 
+	        </if>
+			<if test="@OGNL@isNotEmpty(compSpelCode)">
+	            AND t.comp_spel_code = #{compSpelCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companySimpleName)">
+	            AND t.company_simple_name = #{companySimpleName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companySimpleNameSpell)">
+	            AND t.company_simple_name_spell = #{companySimpleNameSpell}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastYearIncome)">
+	            AND t.last_year_income = #{lastYearIncome}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyContactTel)">
+	            AND t.company_contact_tel = #{companyContactTel}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyContactFax)">
+	            AND t.company_contact_fax = #{companyContactFax}
+	        </if>
+			<if test="@OGNL@isNotEmpty(zipCode)">
+	            AND t.zip_code = #{zipCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(email)">
+	            AND t.email = #{email}
+	        </if>
+			<if test="@OGNL@isNotEmpty(filingNumber)">
+	            AND t.filing_number LIKE '%'||#{filingNumber}||'%'
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyTypeSystem)">
+	            AND t.company_type_system = #{companyTypeSystem}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyType)">
+	            AND t.company_type = #{companyType}
+	        </if>
+	        <!-- 查询部分机构 -->
+	        <if test="@OGNL@isNotEmpty(companyTypes)">
+	            AND t.company_type in
+	            <foreach collection="companyTypes" item="item" index="index" open="(" separator="," close=")">
+          	 		#{item}
+       		    </foreach>
+	        </if>
+			<if test="@OGNL@isNotEmpty(onceCompanyName)">
+	            AND t.once_company_name = #{onceCompanyName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(areaName)">
+	            AND t.area_name = #{areaName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(areaId)">
+	            AND t.area_id = #{areaId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(address)">
+	            AND t.address = #{address}
+	        </if>
+			<if test="@OGNL@isNotEmpty(registeredCapital)">
+	            AND t.registered_capital = #{registeredCapital}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalName)">
+	            AND t.legal_name = #{legalName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalNumber)">
+	            AND t.legal_number = #{legalNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalScanAttachId)">
+	            AND t.legal_scan_attach_id = #{legalScanAttachId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalCellphone)">
+	            AND t.legal_cellphone = #{legalCellphone}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalPhone)">
+	            AND t.legal_phone = #{legalPhone}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyRegistType)">
+	            AND t.company_regist_type = #{companyRegistType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isGroupCompany)">
+	            AND t.is_group_company = #{isGroupCompany}
+	        </if>
+			<if test="@OGNL@isNotEmpty(groupCompanyName)">
+	            AND t.group_company_name = #{groupCompanyName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isLawerCompany)">
+	            AND t.is_lawer_company = #{isLawerCompany}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lawerCompoanyName)">
+	            AND t.lawer_compoany_name = #{lawerCompoanyName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(organizationCode)">
+	            AND t.organization_code = #{organizationCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(taxRegistrationNumber)">
+	            AND t.tax_registration_number = #{taxRegistrationNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessLicense)">
+	            AND t.business_license = #{businessLicense}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessLicenseBeginDate)">
+	            AND t.business_license_begin_date = #{businessLicenseBeginDate}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessLicenseEndDate)">
+	            AND t.business_license_end_date = #{businessLicenseEndDate}
+	        </if>
+			<if test="@OGNL@isNotEmpty(annualInspection)">
+	            AND t.annual_inspection = #{annualInspection}
+	        </if>
+			<if test="@OGNL@isNotEmpty(authorizedPerson)">
+	            AND t.authorized_person = #{authorizedPerson}
+	        </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonFax)">
+	            AND t.authorized_person_fax = #{authorizedPersonFax}
+	        </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonIdcard)">
+	            AND t.authorized_person_idcard = #{authorizedPersonIdcard}
+	        </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonTel)">
+	            AND t.authorized_person_tel = #{authorizedPersonTel}
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionCode)">
+	            AND t.production_permission_code = #{productionPermissionCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionRegistAddress)">
+	            AND t.product_permission_reg_addr = #{productionPermissionRegistAddress}
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionLawer)">
+	            AND t.production_permission_lawer = #{productionPermissionLawer}
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionEndDate)">
+	            AND t.production_permission_end_date = #{productionPermissionEndDate}
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionProductAddress)">
+	            AND t.product_permission_pro_addr = #{productionPermissionProductAddress}
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionProductRange)">
+	            AND t.product_permission_pro_range = #{productionPermissionProductRange}
+	        </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionClassificationCodes)">
+	            AND t.product_permission_sort_code = #{productionPermissionClassificationCodes}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionCode)">
+	            AND t.business_permission_code = #{businessPermissionCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionRegistAddress)">
+	            AND t.business_permission_reg_addr = #{businessPermissionRegistAddress}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionLawer)">
+	            AND t.business_permission_lawer = #{businessPermissionLawer}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionEndDate)">
+	            AND t.business_permission_end_date = #{businessPermissionEndDate}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionWarehouseAddress)">
+	            AND t.business_permission_ware_addr = #{businessPermissionWarehouseAddress}
+	        </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionRange)">
+	            AND t.business_permission_range = #{businessPermissionRange}
+	        </if>
+			<if test="@OGNL@isNotEmpty(gspCode)">
+	            AND t.gsp_code = #{gspCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(qualificationStatus)">
+	            AND t.qualification_status = #{qualificationStatus}
+	        </if>
+			<if test="@OGNL@isNotEmpty(qualificationStatusNopassReason)">
+	            AND t.qualification_nopass_reason = #{qualificationStatusNopassReason}
+	        </if>
+			<if test="@OGNL@isNotEmpty(inputRemarks)">
+	            AND t.input_remarks = #{inputRemarks}
+	        </if>
+			<if test="@OGNL@isNotEmpty(initializationState)">
+	            AND t.initialization_state = #{initializationState}
+	        </if>
+	        <!-- -->
+	        <if test="@OGNL@isNotEmpty(initState)">
+	            AND t.initialization_state in
+				<foreach item="item" index="index" collection="initState" open="(" separator="," close=")">  
+				  #{item}  
+				</foreach> 
+	        </if>
+			<if test="@OGNL@isNotEmpty(clearStatus)">
+	            AND t.clear_status = #{clearStatus}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(clearStatus2)">
+	            AND t.clear_status IN 
+			    <foreach collection="clearStatus2" item="state" open="(" separator="," close=")">
+			       	#{state}
+				</foreach>
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name like '%'||#{addUserName}||'%'
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        
+	        <if test="@OGNL@isNotEmpty(reauditUserName)">
+				AND t.reaudit_user_name like '%'||#{reauditUserName}||'%'
+			</if>
+			<if test="@OGNL@isNotEmpty(auditUserName)">
+				AND t.audit_user_name like '%'||#{auditUserName}||'%'
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.is_using = #{isUsing}
+			</if>
+			<if test="@OGNL@isNotEmpty(initializationState)">
+				AND t.initialization_state = #{initializationState}
+			</if>
+	        <if test="@OGNL@isNotEmpty(isDispermission)">
+	       		AND t.is_dispermission = #{isDispermission}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(qualificationWarn)">
+	        	and (t.production_permission_end_date &lt;= add_months(SYSDATE,6)
+	        	    or t.business_license_end_date &lt;= add_months(SYSDATE,6))
+	        </if>
+	        <!-- 乙类大型设备中心新增采购项目选择代理机构用 -->
+			<if test="@OGNL@isNotEmpty(newCompanyIds)">
+				AND t.company_id in (<foreach collection="newCompanyIds" item="companyId" index="index" separator=",">#{companyId}</foreach>)
+			</if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn) ">
+        ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+	</select>
+
+	<select id="getCompanyAccountCode"  parameterType="java.lang.String" resultMap="BaseResultMap" >
+		SELECT t.company_type
+		FROM std_company t
+		where t.company_Account_Code = #{companyAccountCode}
+
+	</select>
+
+	<select id="getCompanyId"  parameterType="java.lang.String" resultMap="BaseResultMap" >
+		SELECT t.company_type
+		FROM std_company t
+		where t.company_id = #{companyId}
+
+	</select>
+
+	<select id="updateNextFlow" parameterType="map" resultMap="BaseResultMap">
+		update STD_COMP_APP set FLOW_ID=#{flowId},FLOW_NAME=#{flowName},CE_AUDIT_STATUS=#{ceAuditStatus},FLOW_HADLE_STATUS=#{flowHadleStatus},LAST_FLOW_HADLE_ID=#{lastFlowHadleId},PROJ_FLAG=#{projflag}
+		where proj_code =#{projCode}
+		And last_flow_id =(select flow_id from bid_project_flow where proj_id=#{projCode} And flow_index=#{flowIndex})
+		And (last_flow_hadle_name = 2
+		<if test="@OGNL@isNotEmpty(lastFlowHadleName)">
+			OR last_flow_hadle_name= #{lastFlowHadleName}
+		</if>
+		)
+
+	</select>
+
+	<select id="queryOverAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+				<include refid="full-columns" />
+		  FROM
+		std_company t
+			LEFT JOIN std_gmpgsp g ON t.gsp_code = g.id
+			AND (g.valid_end  &lt;  to_char(SYSDATE,'yyyy-MM-dd'))
+			where 
+			t.is_using = 1 and (
+			t.business_permission_end_date   &lt;   to_char(SYSDATE,'yyyy-MM-dd') or
+			t.production_permission_end_date  &lt;  to_char(SYSDATE,'yyyy-MM-dd') or
+			t.business_license_end_date &lt;  to_char(SYSDATE,'yyyy-MM-dd'))
+			<if test="@OGNL@isNotEmpty(conditionName)">
+				AND (t.company_name LIKE '%'||#{conditionName}||'%'
+				or t.comp_spel_code LIKE '%'||#{conditionName}||'%'
+				or t.company_simple_name LIKE '%'||#{conditionName}||'%'
+				or t.company_simple_name_spell LIKE '%'||#{conditionName}||'%'
+				)
+	        </if>
+	        <if test="@OGNL@isNotEmpty(companyTypeSystem)">
+	            AND t.company_type_system = #{companyTypeSystem}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyType)">
+	            AND t.company_type = #{companyType}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(filingNumber)">
+	            AND t.filing_number LIKE '%'||#{filingNumber}||'%'
+	        </if>
+	        <if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name like '%'||#{addUserName}||'%'
+	        </if>
+	        <if test="@OGNL@isNotEmpty(reauditUserName)">
+				AND t.reaudit_user_name like '%'||#{reauditUserName}||'%'
+			</if>
+			<if test="@OGNL@isNotEmpty(auditUserName)">
+				AND t.audit_user_name like '%'||#{auditUserName}||'%'
+			</if>
+	 </select>
+	
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_company (
+            company_account_code ,
+            company_name ,
+            comp_spel_code ,
+            company_simple_name ,
+            company_simple_name_spell ,
+            last_year_income ,
+            company_contact_tel ,
+            company_contact_fax ,
+            zip_code ,
+            email ,
+            filing_number ,
+            company_type_system ,
+            company_type ,
+            once_company_name ,
+            area_name ,
+            area_id ,
+            address ,
+            registered_capital ,
+            legal_name ,
+            legal_number ,
+            legal_scan_attach_id ,
+            legal_cellphone ,
+            legal_phone ,
+            company_regist_type ,
+            is_group_company ,
+            group_company_name ,
+            is_lawer_company ,
+            lawer_compoany_name ,
+            organization_code ,
+            tax_registration_number ,
+            business_license ,
+            business_license_begin_date ,
+            business_license_end_date ,
+            annual_inspection ,
+            authorized_person ,
+            authorized_person_fax ,
+            authorized_person_idcard ,
+            authorized_person_tel ,
+            production_permission_code ,
+            product_permission_reg_addr ,
+            production_permission_lawer ,
+            production_permission_end_date ,
+            product_permission_pro_addr ,
+            product_permission_pro_range ,
+            product_permission_sort_code ,
+            business_permission_code ,
+            business_permission_reg_addr ,
+            business_permission_lawer ,
+            business_permission_end_date ,
+            business_permission_ware_addr ,
+            business_permission_range ,
+            gsp_code ,
+            is_using ,
+            qualification_status ,
+            qualification_nopass_reason ,
+            input_remarks ,
+            initialization_state ,
+            clear_status ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.companyAccountCode},
+        	#{item.companyName},
+        	#{item.compSpelCode},
+        	#{item.companySimpleName},
+        	#{item.companySimpleNameSpell},
+        	#{item.lastYearIncome},
+        	#{item.companyContactTel},
+        	#{item.companyContactFax},
+        	#{item.zipCode},
+        	#{item.email},
+        	#{item.filingNumber},
+        	#{item.companyTypeSystem},
+        	#{item.companyType},
+        	#{item.onceCompanyName},
+        	get_full_name(#{item.areaId}),
+        	#{item.areaId},
+        	#{item.address},
+        	#{item.registeredCapital},
+        	#{item.legalName},
+        	#{item.legalNumber},
+        	#{item.legalScanAttachId},
+        	#{item.legalCellphone},
+        	#{item.legalPhone},
+        	#{item.companyRegistType},
+        	#{item.isGroupCompany},
+        	#{item.groupCompanyName},
+        	#{item.isLawerCompany},
+        	#{item.lawerCompoanyName},
+        	#{item.organizationCode},
+        	#{item.taxRegistrationNumber},
+        	#{item.businessLicense},
+        	#{item.businessLicenseBeginDate},
+        	#{item.businessLicenseEndDate},
+        	#{item.annualInspection},
+        	#{item.authorizedPerson},
+        	#{item.authorizedPersonFax},
+        	#{item.authorizedPersonIdcard},
+        	#{item.authorizedPersonTel},
+        	#{item.productionPermissionCode},
+        	#{item.productionPermissionRegistAddress},
+        	#{item.productionPermissionLawer},
+        	#{item.productionPermissionEndDate},
+        	#{item.productionPermissionProductAddress},
+        	#{item.productionPermissionProductRange},
+        	#{item.productionPermissionClassificationCodes},
+        	#{item.businessPermissionCode},
+        	#{item.businessPermissionRegistAddress},
+        	#{item.businessPermissionLawer},
+        	#{item.businessPermissionEndDate},
+        	#{item.businessPermissionWarehouseAddress},
+        	#{item.businessPermissionRange},
+        	#{item.gspCode},
+        	#{item.isUsing},
+        	#{item.qualificationStatus},
+        	#{item.qualificationStatusNopassReason},
+        	#{item.inputRemarks},
+        	#{item.initializationState},
+        	#{item.clearStatus},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	SYSDATE
+        )
+        </foreach>
+	</insert>
+	
+	
+	<!-- 根据提供的企业编号和字段修改具体的值 -->
+	<update id="updateColumnById" parameterType="map">
+		update std_company set ${clearColumn} = #{uValue} where company_id = #{companyId}
+	</update>
+	
+	<!-- 验证企业是否存在 -->
+	<select id="getReviewCompNmae" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_company t
+      <where>
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            AND t.company_name = #{companyName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+		</where>
+    </select>
+    
+	<select id="queryAllByIds"  resultMap="BaseResultMap">
+		SELECT * from std_company where company_id in
+		<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+          	 		#{item}
+       	 </foreach>
+	</select>
+
+	
+	
+	<update id="updateByParams">
+		UPDATE std_company  
+		<set>
+			<if test="@OGNL@isNotEmpty(model.companyId)">
+				company_id = #{model.companyId},
+			</if>		   
+	            <if test="@OGNL@isNotEmpty(model.bankBasicAccount)">
+				  bank_basic_account=#{model.bankBasicAccount},
+			    </if>
+			    <if test="@OGNL@isNotEmpty(model.bankBasicName)">
+				 bank_basic_name = #{model.bankBasicName},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.isDispermission)">
+				is_dispermission = #{model.isDispermission},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.changeRemark)">
+				change_remark = #{model.changeRemark},
+			</if>					
+			
+        </set>
+        <where>
+        	<if test="@OGNL@isNotEmpty(params.companyId)">
+				AND company_id = #{params.companyId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(params.bankBasicAccount)">
+				AND bank_basic_account = #{params.bankBasicAccount}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(params.bankBasicName)">
+				AND bank_basic_name = #{params.bankBasicName}
+		    </if>		   
+        </where>		
+	</update>
+	
+	<update id="updateComp" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany">
+	UPDATE 
+			std_company  
+		SET 
+		<if test="bankAuditState==1">
+				  bank_submit_time = SYSDATE,
+			    </if>
+			bank_audit_state = #{bankAuditState},
+			bank_audit_second_state = #{bankAuditSecondState},
+			bank_basic_account=#{bankBasicAccount},
+			bank_basic_name = #{bankBasicName},
+			bank_name = #{bankName},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE			
+		WHERE
+			company_id = #{companyId}
+	</update>
+
+	
+	
+	
+	<select id="getAccountReleaseList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_company t
+		<where>
+	            t.company_account_code = ''
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            AND (t.company_name Like '%'||#{companyName}||'%'
+	            or t.comp_spel_code Like '%'||#{companyName}||'%'
+	            ) 
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyTypeSystem)">
+	            AND t.company_type_system = #{companyTypeSystem}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyType)">
+	            AND t.company_type = #{companyType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(initializationState)">
+	            AND t.initialization_state = #{initializationState}
+	        </if>
+	        
+		</where>
+	</select>
+	
+	<insert id="addCompAccount" parameterType="map">
+		INSERT INTO sys_user (
+	user_id,
+	org_id,
+	role_id,
+	user_name,
+	user_password,
+	acct_expired,
+	password_expired,
+	is_using,
+	user_type,
+	locked,
+	NAME,
+	acct_type,
+	email
+) 
+SELECT
+	UUID() user_id,
+	company_id org_id,
+	CASE company_type
+WHEN 0 THEN
+	7
+WHEN 2 THEN
+	8
+WHEN 3 THEN
+	9
+END AS role_id,
+ company_account_code user_name,
+ #{password} AS user_password,
+ SYSDATE acct_expired,
+ SYSDATE password_expired,
+ is_using locked,
+ CASE company_type
+WHEN 0 THEN
+	1
+WHEN 2 THEN
+	2
+WHEN 3 THEN
+	3
+END AS user_type,
+ 0,
+ company_name NAME,
+ 0 acct_type,
+ email email
+FROM
+	std_company
+WHERE
+	company_id = #{companyId}
+
+	</insert>
+<select id="getCompPaymentList" parameterType="map" resultMap="BaseResultMap">
+	SELECT <include refid="full-columns" />
+	FROM std_company t
+	<where>
+	<if test="@OGNL@isNotEmpty(bankAuditStates)">
+	 	 And t.bank_audit_state in
+		<foreach collection="bankAuditStates" item="item" index="index" open="(" separator="," close=")">
+          	 		#{item}
+       	 </foreach>
+      </if>	
+      <if test="@OGNL@isNotEmpty(bankAuditSecondStates)">
+	 	 And t.bank_audit_second_state in
+		<foreach collection="bankAuditSecondStates" item="item" index="index" open="(" separator="," close=")">
+          	 		#{item}
+       	 </foreach>
+      </if> 	 
+	<if test="@OGNL@isNotEmpty(companyName)">
+	    AND t.company_name like '%'||#{companyName}||'%'
+	</if>	
+	</where>
+	</select>
+	<update id="auditPass" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany" >
+		UPDATE std_company
+		SET 
+			bank_audit_state = #{bankAuditState},
+			bank_audit_user_id = #{bankAuditUserId},
+			bank_audit_user_name = #{bankAuditUserName},
+			bank_audit_time = SYSDATE,
+			bank_audit_second_state = #{bankAuditSecondState},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE			
+		WHERE
+			company_id = #{companyId}
+	</update>
+	
+	<update id="auditNoPass" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany" >
+		UPDATE std_company
+		SET 
+			bank_audit_state = #{bankAuditState},
+			bank_audit_user_id = #{bankAuditUserId},
+			bank_audit_user_name = #{bankAuditUserName},
+			bank_audit_time = SYSDATE,
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE			
+		WHERE
+			company_id = #{companyId}
+	</update>
+	
+	<update id="payInfoSecondAudit" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany" >
+		UPDATE std_company
+		SET 
+			bank_audit_second_state = #{bankAuditSecondState},
+			bank_audit_second_user_id = #{bankAuditSecondUserId},
+			bank_audit_second_user_name = #{bankAuditSecondUserName},
+			bank_audit_second_time = SYSDATE,
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE			
+		WHERE
+			company_id = #{companyId}
+	</update>
+	
+	<!-- 获取配送企业信息 -->
+	<select id="getCompanyData" parameterType="map" resultType="hashmap">
+		SELECT t.company_id AS "companyId",
+	t.company_name AS "companyName" from std_company t where t.is_dispermission = 1
+		<if test="@OGNL@isNotEmpty(companyName)">
+			AND t.company_name like '%'||#{companyName}||'%'
+		</if>
+	</select>
+	<select id="callUnIsDispermission" parameterType="java.lang.String" resultType="Integer" >
+			CALL unIsDispermission(#{companyId},@flag);
+			select @flag;
+	</select>
+	<select id="callIsDispermission" parameterType="java.lang.String" resultType="Integer" >
+			CALL isDispermission(#{companyId},@flag);
+			select @flag;
+	</select>
+	<!-- 获取资质预警和企业总数量  -->
+	<select id="getWarnCount"  resultType="Integer">
+		select count(1) from std_company  where production_permission_end_date &lt;= add_months(SYSDATE,6)
+	        	    or business_license_end_date  &lt;= add_months(SYSDATE,6)
+	union all select count(1) from std_company
+	</select>
+	
+	<select id="getgspWarnData" parameterType="map" resultType="hashmap">
+		select a.company_name "companyName",a.gsp_code "gspCode",b.certificate_number "certificateNumber",
+		b.address "address",b.comm_range "commRange",b.valid_start "validStart",b.valid_end "validEnd"
+		from std_company a join std_gmpgsp b on b.id = a.gsp_code
+		where b.type = #{type} and b.valid_end &lt;= add_months(SYSDATE,6)
+	        	    <if test="@OGNL@isNotEmpty(companyName)">
+			AND a.company_name = #{companyName}
+		</if>
+		 <if test="@OGNL@isNotEmpty(gspCode)">
+			AND a.gsp_code = #{gspCode}
+		</if>
+	</select>
+	
+	
+	<!-- 获取gmp/gsp预警数量和总数量  -->
+	<select id="getgspWarnCount"  parameterType="map" resultType="Integer" >
+		select count(1) from std_company a join std_gmpgsp b on b.id = a.gsp_code where b.type = #{type} and 
+	        	   b.valid_end  &lt;= add_months(SYSDATE,6)
+	union all (select count(1) from std_company a join std_gmpgsp b on b.id = a.gsp_code where b.type = #{type})
+	</select>
+	
+	<!-- 生产企业、代理商 -->
+    <select id="getCompName" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_company t
+      <where>
+			<if test="@OGNL@isNotEmpty(companyType)">
+	            AND t.company_type = #{companyType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(companyName)">
+	            AND t.company_name like '%'||#{companyName}||'%'
+	        </if>
+		</where>
+    </select>
+
+	<select id="findByCompanyAccountCode" parameterType="java.lang.String" resultType="map">
+		SELECT <include refid="full-columns" /> from std_company t where t.company_Account_code =  #{companyAccountCode}
+	</select>
+
+    <select id="findById" parameterType="java.lang.String" resultType="map">
+		SELECT <include refid="full-columns" /> from std_company t where t.company_id =  #{companyId}
+	</select>
+	
+	   <!-- 根据企业名称验证企业是否存在 -->
+	<select id="getCompanyName" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		SELECT count(1)
+	    FROM std_company t
+      <where>
+			<if test="_parameter!=null and _parameter!='' ">
+	            t.company_name = #{_parameter,jdbcType=VARCHAR}
+	        </if>
+		</where>
+    </select>
+	<select id="getBusinessLicense" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		SELECT count(1)
+		FROM std_company t
+		where t.Business_License=#{businessLicense}
+	</select>
+
+    <insert id="insertQy" parameterType="com.hsnn.medstgmini.base.std.model.StdCompany">
+	 	INSERT INTO std_company(
+	 		company_id,
+	 		company_account_code ,
+	 		add_user_id,
+	 		add_user_name,
+	 		company_name ,
+	 		company_type,
+	 		qualification_status,
+	 		is_using,
+	 		initialization_state,
+	 		representative_name,
+	 		representative_id_number,
+	 		representative_phone,
+	 		area_id,
+	 		area_name,
+	 		email,
+	 		BUSINESS_LICENSE
+	 	)
+	 	VALUES (
+		        #{companyId},
+	        	#{companyAccountCode},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{companyName},
+	        	#{companyType},
+	        	1,
+	        	1,
+	        	4,
+	        	#{representativeName},
+	        	#{representativeIdNumber},
+	        	#{representativePhone},
+	        	#{areaId},
+	        	(SELECT area_name from std_area where area_Id=#{areaId}),
+	        		        	#{email},
+	        		        	#{businessLicense}
+		)
+	 </insert>
+	 
+	 <select id="getQySelectList"  parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" />
+	    FROM std_company t
+	    where t.initialization_state in (1)<!-- (2, 4) -->
+	    and not exists (SELECT * FROM sys_user a where a.org_id = t.company_id ) 
+		 <!-- from std_company t where t.company_id not in(select a.org_id from sys_user a where a.user_type=#{userType})  -->
+		 <if test="@OGNL@isNotEmpty(companyName)">
+	            AND (t.company_name Like '%'||#{companyName}||'%' 
+	            or t.comp_spel_code Like '%'||#{companyName}||'%'
+	            ) 
+        </if>
+        <if test="@OGNL@isNotEmpty(companyType)">
+            AND t.company_type = #{companyType}
+        </if>
+        
+	</select>
+	
+	<select id="getQySendSelectList"  parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" />
+	    FROM std_company t
+	    where t.initialization_state in (1)<!-- (2, 4) -->
+	    and exists (SELECT * FROM sys_user a where a.org_id = t.company_id ) 
+		<if test="@OGNL@isNotEmpty(companyName)">
+	            AND (t.company_name Like CONCAT(CONCAT('%',#{companyName}), '%')
+	            or t.comp_spel_code Like CONCAT(CONCAT('%',#{companyName}), '%')
+	            ) 
+        </if>
+        <if test="@OGNL@isNotEmpty(companyType)">
+            AND t.company_type = #{companyType}
+        </if>
+	</select>
+	
+	<select id="getSelectCompany" resultMap="BaseResultMap" parameterType="map">
+		select
+			*
+		from std_company
+		where company_id in 
+		  <foreach item="item" index="index" collection="companyIds" open="("  separator="," close=")">  
+            #{item}  
+        </foreach>  
+	</select>
+	
+	<select id="queryStdCompInfoByCompId" parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM std_company t where t.company_id=#{id}
+	</select>
+	
+	<update id="updateCompId"  parameterType="java.lang.String" >
+		update std_company set
+	          company_id = #{zhuSequence},
+	          company_account_code = #{zhuSequence}
+		 where company_id = #{id}
+	</update>
+	
+	<update id="updateAccountCode">
+		UPDATE std_company  
+		<set>
+			company_account_code = #{accountCode},
+        </set>
+		WHERE  company_id =  #{companyId}
+	</update>
+	
+	<select id="getCompanyAddData" parameterType="map" resultMap="BaseResultMap">
+		 select *
+		   from std_company t
+		  where t.company_id not in
+		        (select distribute_company_id
+	                from drugpur_Distribute_Relation d
+	               where d.distribute_scope = #{distributeScope}
+	                 and d.goods_id = #{goodsId}
+	                 and d.city_id = #{cityId}
+		                 )
+		<if test="@OGNL@isNotEmpty(companyName)">
+			and t.company_name like CONCAT(CONCAT('%',#{companyName}), '%')
+		</if>
+		    and t.company_type = 2
+	</select>
+	
+	<select id="getCompList" parameterType="map" resultMap="BaseResultMap">
+		select t.* from std_company t
+		<where>
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            AND t.company_name like CONCAT(CONCAT('%',#{companyName}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(companyIds)">
+	            AND t.company_id not in
+	            <foreach collection="companyIds" item="item" index="index" separator="," open="(" close=")">
+					#{item}
+				</foreach>
+	        </if>
+		</where>
+	</select>
+	
+	<select id="getCompSendMsg" parameterType="map" resultMap="BaseResultMap">
+		select distinct b.procurecatalog_id,
+			   c.GOODS_NAME,	
+			   c.WEIYUE_NUM,
+       		   d.company_id,
+       		   d.company_name,
+      		   d.company_contact_tel,
+      		   e.user_id,
+    		   e.name
+ 		from base_order a,
+        	 base_order_detail b,
+        	 drugpur_procurecatalog c,
+        	 std_company d,
+        	 sys_user e
+ 		where to_number(b.order_status) >= 7
+   		and a.order_id = b.order_id
+   		and b.procurecatalog_id = c.procurecatalog_id
+   		and c.company_id_sc = d.company_id
+   		and d.company_id = e.org_id
+   		and e.department_id is null
+   		and e.post_id is null
+   		and to_char(a.submit_time, 'yyyy-MM-dd') between
+        to_char(add_months(sysdate, -1), 'yyyy-MM') || '-24' and
+        to_char(sysdate, 'yyyy-MM') || '-25'
+
+	</select>
+
+	<select id="getCompanyTb" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_company t 
+		<where>
+			t.COMPANY_TYPE in(1,3,20)
+			<if test="@OGNL@isNotEmpty(companyName)">
+				AND t.company_name like CONCAT(CONCAT('%',#{companyName}), '%')
+			</if>
+		</where>
+	</select>
+
+
+	<!--获取所有配送企业-->
+	<select id="getCompanyLists" parameterType="map" resultMap="BaseResultMap">
+		select * from std_company
+		<where>
+			company_type = '2'
+			<if test="@OGNL@isNotEmpty(companyIds)">
+				and company_id not in
+				<foreach item="item" index="index" collection="companyIds" open="("  separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	
+	<select id="getCompanyList" parameterType="map" resultMap="BaseResultMap">
+		select company_id,company_name from std_company
+		 where company_id not in(select company_id from base_company_account)
+		<if test="@OGNL@isNotEmpty(companyName)">
+			AND company_name like CONCAT(CONCAT('%',#{companyName}), '%')
+		</if>
+	</select>
+
+	<select id="getStdCompList" parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" /> from std_company t
+		where t.company_type !=2
+		<if test="@OGNL@isNotEmpty(companyName)">
+			AND t.company_name like CONCAT(CONCAT('%',#{companyName}), '%')
+		</if>
+		<if test="@OGNL@isNotEmpty(companyAccountCode)">
+			AND t.company_Account_Code like CONCAT(CONCAT('%',#{companyAccountCode}), '%')
+		</if>
+	</select>
+	<select id="updateCompType" parameterType="java.lang.String" statementType="CALLABLE">
+		call bid_company_changeType(#{compCode,mode=IN,jdbcType=VARCHAR})
+	</select>
+	<select id="updateCompName" parameterType="map" statementType="CALLABLE">
+		call bid_company_changeName(#{companyId,mode=IN,jdbcType=VARCHAR},#{companyName,mode=IN,jdbcType=VARCHAR},#{companyAccountCode,mode=IN,jdbcType=VARCHAR})
+	</select>
+
+	<select id="getCompanyInfo" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_company t
+	</select>
+
+	<select id="getCompTbList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_company t
+		<where>
+			t.company_type in (1,3,20)
+			<if test="@OGNL@isNotEmpty(companyName)">
+				AND t.company_name like CONCAT(CONCAT('%',#{companyName}), '%')
+			</if>
+		</where>
+	</select>
+
+</mapper>

@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdPayContractDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdPayContract" id="BaseResultMap">
+        <result property="orgId" column="org_id" javaType="String"/>
+        <result property="orgName" column="org_name" javaType="String"/>
+        <result property="orgType" column="org_type" javaType="Integer"/>
+        <result property="gatherTag" column="gather_tag" javaType="Integer"/>
+        <result property="bankBasicAccount" column="bank_basic_account" javaType="String"/>
+        <result property="bankBasicName" column="bank_basic_name" javaType="String"/>
+        <result property="bankBasicBankname" column="bank_basic_bankname" javaType="String"/>
+        <result property="bankLoanAccount" column="bank_loan_account" javaType="String"/>
+        <result property="bankLoanName" column="bank_loan_name" javaType="String"/>
+        <result property="bankLoanBankname" column="bank_loan_bankname" javaType="String"/>
+        <result property="bankSubmitState" column="bank_submit_state" javaType="Integer"/>
+        <result property="bankSubmitUserId" column="bank_submit_user_id" javaType="String"/>
+        <result property="bankSubmitUserName" column="bank_submit_user_name" javaType="String"/>
+        <result property="bankSubmitTime" column="bank_submit_time" javaType="Date"/>
+        <result property="bankAuditFirstState" column="bank_audit_first_state" javaType="Integer"/>
+        <result property="bankAuditFirstUserId" column="bank_audit_first_user_id" javaType="String"/>
+        <result property="bankAuditFirstUserName" column="bank_audit_first_user_name" javaType="String"/>
+        <result property="bankAuditFirstTime" column="bank_audit_first_time" javaType="Date"/>
+        <result property="bankAuditSecondState" column="bank_audit_second_state" javaType="Integer"/>
+        <result property="bankAuditSecondUserId" column="bank_audit_second_user_id" javaType="String"/>
+        <result property="bankAuditSecondUserName" column="bank_audit_second_user_name" javaType="String"/>
+        <result property="bankAuditSecondTime" column="bank_audit_second_time" javaType="Date"/>
+        <result property="financeContactPerson" column="finance_contact_person" javaType="String"/>
+        <result property="bankBasicAccountAudit" column="bank_basic_account_audit" javaType="String"/>
+        <result property="bankBasicNameAudit" column="bank_basic_name_audit" javaType="String"/>
+        <result property="bankBasicBanknameAudit" column="bank_basic_bankname_audit" javaType="String"/>
+        <result property="bankLoanAccountAudit" column="bank_loan_account_audit" javaType="String"/>
+        <result property="bankLoanNameAudit" column="bank_loan_name_audit" javaType="String"/>
+        <result property="bankLoanBanknameAudit" column="bank_loan_bankname_audit" javaType="String"/>
+        <result property="gatherTagAudit" column="gather_tag_audit" javaType="Integer"/>
+        <result property="financeContactPersonAudit" column="finance_contact_person_audit" javaType="String"/>
+        <result property="financeContactTelAudit" column="finance_contact_tel_audit" javaType="String"/>
+        <result property="isNeedSync" column="is_need_sync" javaType="Integer"/>
+        <result property="isBalance" column="is_balance" javaType="Integer"/>
+        <result property="financeContactTel" column="finance_contact_tel" javaType="String"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="agreeTime" column="agree_time" javaType="Date"/>
+        <result property="agreeUserId" column="agree_user_id" javaType="String"/>
+        <result property="agreeUserName" column="agree_user_name" javaType="String"/>
+        <result property="ip4" column="ip4" javaType="String"/>
+        <result property="isSignYht" column="is_sign_yht" javaType="Integer"/>
+        <result property="hospPayMode" column="hosp_pay_mode" javaType="Integer"/>
+        <association property="stdCompany" javaType="com.hsnn.medstgmini.base.std.model.StdCompany" resultMap="com.hsnn.medstgmini.base.std.dao.StdCompanyDao.BaseResultMap"/>
+        <association property="stdHospital" javaType="com.hsnn.medstgmini.base.std.model.StdHospital" resultMap="com.hsnn.medstgmini.base.std.dao.StdHospitalDao.BaseResultMap"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.org_id,
+        t.org_name,
+        t.org_type,
+        t.gather_tag,
+        t.bank_basic_account,
+        t.bank_basic_name,
+        t.bank_basic_bankname,
+        t.bank_loan_account,
+        t.bank_loan_name,
+        t.bank_loan_bankname,
+        t.bank_submit_state,
+        t.bank_submit_user_id,
+        t.bank_submit_user_name,
+        t.bank_submit_time,
+        t.bank_audit_first_state,
+        t.bank_audit_first_user_id,
+        t.bank_audit_first_user_name,
+        t.bank_audit_first_time,
+        t.bank_audit_second_state,
+        t.bank_audit_second_user_id,
+        t.bank_audit_second_user_name,
+        t.bank_audit_second_time,
+        t.finance_contact_person,
+        t.bank_basic_account_audit,
+        t.bank_basic_name_audit,
+        t.bank_basic_bankname_audit,
+        t.bank_loan_account_audit,
+        t.bank_loan_name_audit,
+        t.bank_loan_bankname_audit,
+        t.gather_tag_audit,
+        t.finance_contact_person_audit,
+        t.finance_contact_tel_audit,
+        t.is_need_sync,
+        t.is_balance,
+        t.finance_contact_tel,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.agree_time,
+        t.agree_user_id,
+        t.agree_user_name,
+        t.ip4,
+        t.is_sign_yht,
+        t.hosp_pay_mode 
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+	    FROM std_pay_contract t
+		WHERE t.org_id =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdPayContract">
+		INSERT INTO std_pay_contract(
+				org_id,
+	            org_name ,
+	            org_type ,
+	            gather_tag ,
+	            bank_basic_account ,
+	            bank_basic_name ,
+	            bank_basic_bankname ,
+	            bank_loan_account ,
+	            bank_loan_name ,
+	            bank_loan_bankname ,
+	            bank_submit_state ,
+	            bank_submit_user_id ,
+	            bank_submit_user_name ,
+	            bank_submit_time ,
+	            bank_audit_first_state ,
+	            bank_audit_first_user_id ,
+	            bank_audit_first_user_name ,
+	            bank_audit_first_time ,
+	            bank_audit_second_state ,
+	            bank_audit_second_user_id ,
+	            bank_audit_second_user_name ,
+	            bank_audit_second_time ,
+	            finance_contact_person ,
+	            bank_basic_account_audit ,
+	            bank_basic_name_audit ,
+	            bank_basic_bankname_audit ,
+	            bank_loan_account_audit ,
+	            bank_loan_name_audit ,
+	            bank_loan_bankname_audit ,
+	            gather_tag_audit ,
+	            finance_contact_person_audit,
+	            finance_contact_tel_audit,
+	            is_need_sync ,
+	            is_balance ,
+	            finance_contact_tel ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time ,
+	            agree_time ,
+	            agree_user_id ,
+	            agree_user_name ,
+	            ip4,hosp_pay_mode 
+		)
+		VALUES (
+				#{orgId},
+	        	#{orgName},
+	        	#{orgType},
+	        	#{gatherTag},
+	        	#{bankBasicAccount},
+	        	#{bankBasicName},
+	        	#{bankBasicBankname},
+	        	#{bankLoanAccount},
+	        	#{bankLoanName},
+	        	#{bankLoanBankname},
+	        	#{bankSubmitState},
+	        	<if test="bankSubmitState==1">
+	        		#{bankSubmitUserId},
+	        		#{bankSubmitUserName},
+	        		SYSDATE,
+	        	</if>
+	        	<if test="bankSubmitState!=1">
+	        		null,
+	        		null,
+	        		null,
+	        	</if>
+	        	#{bankAuditFirstState},
+	        	#{bankAuditFirstUserId},
+	        	#{bankAuditFirstUserName},
+	        	#{bankAuditFirstTime},
+	        	#{bankAuditSecondState},
+	        	#{bankAuditSecondUserId},
+	        	#{bankAuditSecondUserName},
+	        	#{bankAuditSecondTime},
+	        	#{financeContactPerson},
+	        	#{bankBasicAccountAudit},
+	        	#{bankBasicNameAudit},
+	        	#{bankBasicBanknameAudit},
+	        	#{bankLoanAccountAudit},
+	        	#{bankLoanNameAudit},
+	        	#{bankLoanBanknameAudit},
+	        	#{gatherTagAudit},
+	        	#{financeContactPersonAudit},
+	        	#{financeContactTelAudit},
+	        	#{isNeedSync},
+	        	#{isBalance},
+	        	#{financeContactTel},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE,
+	        	SYSDATE,
+	        	#{agreeUserId},
+	        	#{agreeUserName},
+	        	#{ip4},
+	        	#{hospPayMode} 
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdPayContract">
+		UPDATE std_pay_contract  
+		<set>
+			org_name = #{orgName},
+			org_type = #{orgType},
+			gather_tag = #{gatherTag},
+			bank_basic_account = #{bankBasicAccount},
+			bank_basic_name = #{bankBasicName},
+			bank_basic_bankname = #{bankBasicBankname},
+			bank_loan_account = #{bankLoanAccount},
+			bank_loan_name = #{bankLoanName},
+			bank_loan_bankname = #{bankLoanBankname},
+			bank_submit_state = #{bankSubmitState},
+			<if test="bankSubmitState==1 and bankAuditFirstState==1 and bankAuditSecondState==0">
+				bank_submit_user_id = #{bankSubmitUserId},
+				bank_submit_user_name = #{bankSubmitUserName},
+				bank_submit_time = SYSDATE,
+			</if>
+			bank_audit_first_state = #{bankAuditFirstState},
+			bank_audit_first_user_id = #{bankAuditFirstUserId},
+			bank_audit_first_user_name = #{bankAuditFirstUserName},
+			bank_audit_first_time = #{bankAuditFirstTime},
+			bank_audit_second_state = #{bankAuditSecondState},
+			bank_audit_second_user_id = #{bankAuditSecondUserId},
+			bank_audit_second_user_name = #{bankAuditSecondUserName},
+			bank_audit_second_time = #{bankAuditSecondTime},
+			finance_contact_person = #{financeContactPerson},
+			bank_basic_account_audit = #{bankBasicAccountAudit},
+			bank_basic_name_audit = #{bankBasicNameAudit},
+			bank_basic_bankname_audit = #{bankBasicBanknameAudit},
+			bank_loan_account_audit = #{bankLoanAccountAudit},
+			bank_loan_name_audit = #{bankLoanNameAudit},
+			bank_loan_bankname_audit = #{bankLoanBanknameAudit},
+			gather_tag_audit = #{gatherTagAudit},
+			finance_contact_person_audit = #{financeContactPersonAudit},
+			finance_contact_tel_audit = #{financeContactTelAudit},
+			is_need_sync = #{isNeedSync},
+			is_balance = #{isBalance},
+			finance_contact_tel = #{financeContactTel},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE,
+			agree_time = SYSDATE,
+			agree_user_id = #{agreeUserId},
+			agree_user_name = #{agreeUserName},
+			ip4 = #{ip4},
+			hosp_pay_mode = #{hospPayMode},
+        </set>
+		WHERE  org_id =  #{orgId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.StdPayContract">
+		UPDATE std_pay_contract  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(orgName)">
+				org_name = #{orgName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orgType)">
+				org_type = #{orgType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(gatherTag)">
+				gather_tag = #{gatherTag},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicAccount)">
+				bank_basic_account = #{bankBasicAccount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicName)">
+				bank_basic_name = #{bankBasicName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicBankname)">
+				bank_basic_bankname = #{bankBasicBankname},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankLoanAccount)">
+				bank_loan_account = #{bankLoanAccount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankLoanName)">
+				bank_loan_name = #{bankLoanName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankLoanBankname)">
+				bank_loan_bankname = #{bankLoanBankname},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankSubmitState)">
+				bank_submit_state = #{bankSubmitState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankSubmitUserId)">
+				bank_submit_user_id = #{bankSubmitUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankSubmitUserName)">
+				bank_submit_user_name = #{bankSubmitUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankSubmitTime)">
+				bank_submit_time = #{bankSubmitTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditFirstState)">
+				bank_audit_first_state = #{bankAuditFirstState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditFirstUserId)">
+				bank_audit_first_user_id = #{bankAuditFirstUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditFirstUserName)">
+				bank_audit_first_user_name = #{bankAuditFirstUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditFirstTime)">
+				bank_audit_first_time = SYSDATE,
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditSecondState)">
+				bank_audit_second_state = #{bankAuditSecondState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditSecondUserId)">
+				bank_audit_second_user_id = #{bankAuditSecondUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditSecondUserName)">
+				bank_audit_second_user_name = #{bankAuditSecondUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditSecondTime)">
+				bank_audit_second_time = SYSDATE,
+			</if>
+	    	<if test="@OGNL@isNotEmpty(financeContactPerson)">
+				finance_contact_person = #{financeContactPerson},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicAccountAudit)">
+				bank_basic_account_audit = #{bankBasicAccountAudit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicNameAudit)">
+				bank_basic_name_audit = #{bankBasicNameAudit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicBanknameAudit)">
+				bank_basic_bankname_audit = #{bankBasicBanknameAudit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankLoanAccountAudit)">
+				bank_loan_account_audit = #{bankLoanAccountAudit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankLoanNameAudit)">
+				bank_loan_name_audit = #{bankLoanNameAudit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankLoanBanknameAudit)">
+				bank_loan_bankname_audit = #{bankLoanBanknameAudit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(gatherTagAudit)">
+				gather_tag_audit = #{gatherTagAudit},
+			</if>
+			<if test="@OGNL@isNotEmpty(financeContactPersonAudit)">
+				finance_contact_person_audit = #{financeContactPersonAudit},
+			</if>
+			<if test="@OGNL@isNotEmpty(financeContactTelAudit)">
+				finance_contact_tel_audit = #{financeContactTelAudit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isNeedSync)">
+				is_need_sync = #{isNeedSync},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isBalance)">
+				is_balance = #{isBalance},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(financeContactTel)">
+				finance_contact_tel = #{financeContactTel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				add_user_id = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				add_user_name = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				add_time = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				last_update_user_id = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				last_update_user_name = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				last_update_time = SYSDATE,
+			</if>
+	    	<if test="@OGNL@isNotEmpty(agreeTime)">
+				agree_time = #{agreeTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(agreeUserId)">
+				agree_user_id = #{agreeUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(agreeUserName)">
+				agree_user_name = #{agreeUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(ip4)">
+				ip4 = #{ip4},
+			</if>
+        </set>
+		WHERE  org_id =  #{orgId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM std_pay_contract WHERE  org_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		<if test="@OGNL@isNotEmpty(isHospital)">
+				,a.user_name
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isCompany)">
+				,b.company_account_code,b.filing_number
+		    </if>
+	    FROM std_pay_contract t
+	    	<if test="@OGNL@isNotEmpty(isHospital)">
+				join std_hospital a on a.hospital_id = t.org_id 
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isCompany)">
+				join std_company b on b.company_id = t.org_id 
+		    </if>
+		<where>
+			<if test="@OGNL@isNotEmpty(userName)">
+				<if test="@OGNL@isNotEmpty(isCompany)">
+					AND b.company_account_code = #{userName}
+		    	</if>
+		    	<if test="@OGNL@isNotEmpty(isHospital)">
+					AND a.user_name = #{userName}
+		    	</if>
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND t.org_name like '%'||#{orgName}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgType)">
+				AND t.org_type = #{orgType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(gatherTag)">
+				AND t.gather_tag = #{gatherTag}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicAccount)">
+				AND t.bank_basic_account = #{bankBasicAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicName)">
+				AND t.bank_basic_name = #{bankBasicName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicBankname)">
+				AND t.bank_basic_bankname = #{bankBasicBankname}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanAccount)">
+				AND t.bank_loan_account = #{bankLoanAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanName)">
+				AND t.bank_loan_name = #{bankLoanName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanBankname)">
+				AND t.bank_loan_bankname = #{bankLoanBankname}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankSubmitState)">
+				AND t.bank_submit_state = #{bankSubmitState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankSubmitUserId)">
+				AND t.bank_submit_user_id = #{bankSubmitUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankSubmitUserName)">
+				AND t.bank_submit_user_name = #{bankSubmitUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankSubmitTime)">
+				AND t.bank_submit_time like '%'||#{bankSubmitTime}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditFirstState)">
+				AND t.bank_audit_first_state = #{bankAuditFirstState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditFirstUserId)">
+				AND t.bank_audit_first_user_id = #{bankAuditFirstUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditFirstUserName)">
+				AND t.bank_audit_first_user_name = #{bankAuditFirstUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditFirstTime)">
+				AND t.bank_audit_first_time like '%'||#{bankAuditFirstTime}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditSecondState)">
+				AND t.bank_audit_second_state = #{bankAuditSecondState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditSecondUserId)">
+				AND t.bank_audit_second_user_id = #{bankAuditSecondUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditSecondUserName)">
+				AND t.bank_audit_second_user_name = #{bankAuditSecondUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditSecondTime)">
+				AND t.bank_audit_second_time like '%'||#{bankAuditSecondTime}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(financeContactPerson)">
+				AND t.finance_contact_person = #{financeContactPerson}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicAccountAudit)">
+				AND t.bank_basic_account_audit = #{bankBasicAccountAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicNameAudit)">
+				AND t.bank_basic_name_audit = #{bankBasicNameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicBanknameAudit)">
+				AND t.bank_basic_bankname_audit = #{bankBasicBanknameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanAccountAudit)">
+				AND t.bank_loan_account_audit = #{bankLoanAccountAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanNameAudit)">
+				AND t.bank_loan_name_audit = #{bankLoanNameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanBanknameAudit)">
+				AND t.bank_loan_bankname_audit = #{bankLoanBanknameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(gatherTagAudit)">
+				AND t.gather_tag_audit = #{gatherTagAudit}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(financeContactPersonAudit)">
+				AND t.finance_contact_person_audit = #{financeContactPersonAudit}
+			</if>
+			<if test="@OGNL@isNotEmpty(financeContactTelAudit)">
+				AND t.finance_contact_tel_audit = #{financeContactTelAudit}
+			</if>
+			<if test="@OGNL@isNotEmpty(isNeedSync)">
+				AND t.is_need_sync = #{isNeedSync}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBalance)">
+				AND t.is_balance = #{isBalance}
+		    </if>
+			<if test="@OGNL@isNotEmpty(financeContactTel)">
+				AND t.finance_contact_tel = #{financeContactTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(agreeTime)">
+				AND t.agree_time = #{agreeTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(agreeUserId)">
+				AND t.agree_user_id = #{agreeUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(agreeUserName)">
+				AND t.agree_user_name = #{agreeUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(ip4)">
+				AND t.ip4 = #{ip4}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(bankAuditFirstStates)">
+	 			And t.bank_audit_first_state in
+				<foreach collection="bankAuditFirstStates" item="item" index="index" open="(" separator="," close=")">
+	          	 		#{item}
+	       	 	</foreach>
+      		</if>	
+	      <if test="@OGNL@isNotEmpty(bankAuditSecondStates)">
+		 			And t.bank_audit_second_state in
+				<foreach collection="bankAuditSecondStates" item="item" index="index" open="(" separator="," close=")">
+	          	 		#{item}
+	       	 	</foreach>
+	      </if>	
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_pay_contract (
+            org_name ,
+            org_type ,
+            gather_tag ,
+            bank_basic_account ,
+            bank_basic_name ,
+            bank_basic_bankname ,
+            bank_loan_account ,
+            bank_loan_name ,
+            bank_loan_bankname ,
+            bank_submit_state ,
+            bank_submit_user_id ,
+            bank_submit_user_name ,
+            bank_submit_time ,
+            bank_audit_first_state ,
+            bank_audit_first_user_id ,
+            bank_audit_first_user_name ,
+            bank_audit_first_time ,
+            bank_audit_second_state ,
+            bank_audit_second_user_id ,
+            bank_audit_second_user_name ,
+            bank_audit_second_time ,
+            finance_contact_person ,
+            bank_basic_account_audit ,
+            bank_basic_name_audit ,
+            bank_basic_bankname_audit ,
+            bank_loan_account_audit ,
+            bank_loan_name_audit ,
+            bank_loan_bankname_audit ,
+            gather_tag_audit ,
+            finance_contact_person_audit,
+            finance_contact_tel_audit,
+            is_need_sync ,
+            is_balance ,
+            finance_contact_tel ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time ,
+            agree_time ,
+            agree_user_id ,
+            agree_user_name ,
+            ip4 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.orgName},
+        	#{item.orgType},
+        	#{item.gatherTag},
+        	#{item.bankBasicAccount},
+        	#{item.bankBasicName},
+        	#{item.bankBasicBankname},
+        	#{item.bankLoanAccount},
+        	#{item.bankLoanName},
+        	#{item.bankLoanBankname},
+        	#{item.bankSubmitState},
+        	#{item.bankSubmitUserId},
+        	#{item.bankSubmitUserName},
+        	#{item.bankSubmitTime},
+        	#{item.bankAuditFirstState},
+        	#{item.bankAuditFirstUserId},
+        	#{item.bankAuditFirstUserName},
+        	#{item.bankAuditFirstTime},
+        	#{item.bankAuditSecondState},
+        	#{item.bankAuditSecondUserId},
+        	#{item.bankAuditSecondUserName},
+        	#{item.bankAuditSecondTime},
+        	#{item.financeContactPerson},
+        	#{item.bankBasicAccountAudit},
+        	#{item.bankBasicNameAudit},
+        	#{item.bankBasicBanknameAudit},
+        	#{item.bankLoanAccountAudit},
+        	#{item.bankLoanNameAudit},
+        	#{item.bankLoanBanknameAudit},
+        	#{item.gatherTagAudit},
+        	#{financeContactPersonAudit},
+        	#{financeContactTelAudit},
+        	#{item.isNeedSync},
+        	#{item.isBalance},
+        	#{item.financeContactTel},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime},
+        	#{item.agreeTime},
+        	#{item.agreeUserId},
+        	#{item.agreeUserName},
+        	#{item.ip4}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM std_pay_contract t
+		<where>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND t.org_name = #{orgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgType)">
+				AND t.org_type = #{orgType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(gatherTag)">
+				AND t.gather_tag = #{gatherTag}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicAccount)">
+				AND t.bank_basic_account = #{bankBasicAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicName)">
+				AND t.bank_basic_name = #{bankBasicName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicBankname)">
+				AND t.bank_basic_bankname = #{bankBasicBankname}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanAccount)">
+				AND t.bank_loan_account = #{bankLoanAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanName)">
+				AND t.bank_loan_name = #{bankLoanName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanBankname)">
+				AND t.bank_loan_bankname = #{bankLoanBankname}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankSubmitState)">
+				AND t.bank_submit_state = #{bankSubmitState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankSubmitUserId)">
+				AND t.bank_submit_user_id = #{bankSubmitUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankSubmitUserName)">
+				AND t.bank_submit_user_name = #{bankSubmitUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankSubmitTime)">
+				AND t.bank_submit_time = #{bankSubmitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditFirstState)">
+				AND t.bank_audit_first_state = #{bankAuditFirstState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditFirstUserId)">
+				AND t.bank_audit_first_user_id = #{bankAuditFirstUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditFirstUserName)">
+				AND t.bank_audit_first_user_name = #{bankAuditFirstUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditFirstTime)">
+				AND t.bank_audit_first_time = #{bankAuditFirstTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditSecondState)">
+				AND t.bank_audit_second_state = #{bankAuditSecondState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditSecondUserId)">
+				AND t.bank_audit_second_user_id = #{bankAuditSecondUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditSecondUserName)">
+				AND t.bank_audit_second_user_name = #{bankAuditSecondUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditSecondTime)">
+				AND t.bank_audit_second_time = #{bankAuditSecondTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(financeContactPerson)">
+				AND t.finance_contact_person = #{financeContactPerson}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicAccountAudit)">
+				AND t.bank_basic_account_audit = #{bankBasicAccountAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicNameAudit)">
+				AND t.bank_basic_name_audit = #{bankBasicNameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicBanknameAudit)">
+				AND t.bank_basic_bankname_audit = #{bankBasicBanknameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanAccountAudit)">
+				AND t.bank_loan_account_audit = #{bankLoanAccountAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanNameAudit)">
+				AND t.bank_loan_name_audit = #{bankLoanNameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankLoanBanknameAudit)">
+				AND t.bank_loan_bankname_audit = #{bankLoanBanknameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(gatherTagAudit)">
+				AND t.gather_tag_audit = #{gatherTagAudit}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(financeContactPersonAudit)">
+				AND t.finance_contact_person_audit = #{financeContactPersonAudit}
+			</if>
+			<if test="@OGNL@isNotEmpty(financeContactTelAudit)">
+				AND t.finance_contact_tel_audit = #{financeContactTelAudit}
+			</if>
+			<if test="@OGNL@isNotEmpty(isNeedSync)">
+				AND t.is_need_sync = #{isNeedSync}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBalance)">
+				AND t.is_balance = #{isBalance}
+		    </if>
+			<if test="@OGNL@isNotEmpty(financeContactTel)">
+				AND t.finance_contact_tel = #{financeContactTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(agreeTime)">
+				AND t.agree_time = #{agreeTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(agreeUserId)">
+				AND t.agree_user_id = #{agreeUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(agreeUserName)">
+				AND t.agree_user_name = #{agreeUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(ip4)">
+				AND t.ip4 = #{ip4}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE std_pay_contract  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.orgName)">
+				org_name = #{model.orgName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orgType)">
+				org_type = #{model.orgType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.gatherTag)">
+				gather_tag = #{model.gatherTag},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankBasicAccount)">
+				bank_basic_account = #{model.bankBasicAccount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankBasicName)">
+				bank_basic_name = #{model.bankBasicName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankBasicBankname)">
+				bank_basic_bankname = #{model.bankBasicBankname},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankLoanAccount)">
+				bank_loan_account = #{model.bankLoanAccount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankLoanName)">
+				bank_loan_name = #{model.bankLoanName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankLoanBankname)">
+				bank_loan_bankname = #{model.bankLoanBankname},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankSubmitState)">
+				bank_submit_state = #{model.bankSubmitState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankSubmitUserId)">
+				bank_submit_user_id = #{model.bankSubmitUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankSubmitUserName)">
+				bank_submit_user_name = #{model.bankSubmitUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankSubmitTime)">
+				bank_submit_time = #{model.bankSubmitTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditFirstState)">
+				bank_audit_first_state = #{model.bankAuditFirstState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditFirstUserId)">
+				bank_audit_first_user_id = #{model.bankAuditFirstUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditFirstUserName)">
+				bank_audit_first_user_name = #{model.bankAuditFirstUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditFirstTime)">
+				bank_audit_first_time = #{model.bankAuditFirstTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditSecondState)">
+				bank_audit_second_state = #{model.bankAuditSecondState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditSecondUserId)">
+				bank_audit_second_user_id = #{model.bankAuditSecondUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditSecondUserName)">
+				bank_audit_second_user_name = #{model.bankAuditSecondUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditSecondTime)">
+				bank_audit_second_time = #{model.bankAuditSecondTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.financeContactPerson)">
+				finance_contact_person = #{model.financeContactPerson},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankBasicAccountAudit)">
+				bank_basic_account_audit = #{model.bankBasicAccountAudit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankBasicNameAudit)">
+				bank_basic_name_audit = #{model.bankBasicNameAudit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankBasicBanknameAudit)">
+				bank_basic_bankname_audit = #{model.bankBasicBanknameAudit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankLoanAccountAudit)">
+				bank_loan_account_audit = #{model.bankLoanAccountAudit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankLoanNameAudit)">
+				bank_loan_name_audit = #{model.bankLoanNameAudit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankLoanBanknameAudit)">
+				bank_loan_bankname_audit = #{model.bankLoanBanknameAudit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.gatherTagAudit)">
+				gather_tag_audit = #{model.gatherTagAudit},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.financeContactPersonAudit)">
+				finance_contact_person_audit = #{model.financeContactPersonAudit}
+			</if>
+			<if test="@OGNL@isNotEmpty(model.financeContactTelAudit)">
+				finance_contact_tel_audit = #{model.financeContactTelAudit}
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isNeedSync)">
+				is_need_sync = #{model.isNeedSync},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isBalance)">
+				is_balance = #{model.isBalance},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.financeContactTel)">
+				finance_contact_tel = #{model.financeContactTel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				add_user_id = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				add_user_name = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				add_time = #{model.addTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				last_update_user_id = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				last_update_user_name = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				last_update_time = #{model.lastUpdateTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.agreeTime)">
+				agree_time = #{model.agreeTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.agreeUserId)">
+				agree_user_id = #{model.agreeUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.agreeUserName)">
+				agree_user_name = #{model.agreeUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.ip4)">
+				ip4 = #{model.ip4},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.orgId)">
+				AND t.org_id = #{params.orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orgName)">
+				AND t.org_name = #{params.orgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orgType)">
+				AND t.org_type = #{params.orgType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.gatherTag)">
+				AND t.gather_tag = #{params.gatherTag}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankBasicAccount)">
+				AND t.bank_basic_account = #{params.bankBasicAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankBasicName)">
+				AND t.bank_basic_name = #{params.bankBasicName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankBasicBankname)">
+				AND t.bank_basic_bankname = #{params.bankBasicBankname}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankLoanAccount)">
+				AND t.bank_loan_account = #{params.bankLoanAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankLoanName)">
+				AND t.bank_loan_name = #{params.bankLoanName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankLoanBankname)">
+				AND t.bank_loan_bankname = #{params.bankLoanBankname}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankSubmitState)">
+				AND t.bank_submit_state = #{params.bankSubmitState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankSubmitUserId)">
+				AND t.bank_submit_user_id = #{params.bankSubmitUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankSubmitUserName)">
+				AND t.bank_submit_user_name = #{params.bankSubmitUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankSubmitTime)">
+				AND t.bank_submit_time = #{params.bankSubmitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditFirstState)">
+				AND t.bank_audit_first_state = #{params.bankAuditFirstState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditFirstUserId)">
+				AND t.bank_audit_first_user_id = #{params.bankAuditFirstUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditFirstUserName)">
+				AND t.bank_audit_first_user_name = #{params.bankAuditFirstUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditFirstTime)">
+				AND t.bank_audit_first_time = #{params.bankAuditFirstTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditSecondState)">
+				AND t.bank_audit_second_state = #{params.bankAuditSecondState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditSecondUserId)">
+				AND t.bank_audit_second_user_id = #{params.bankAuditSecondUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditSecondUserName)">
+				AND t.bank_audit_second_user_name = #{params.bankAuditSecondUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditSecondTime)">
+				AND t.bank_audit_second_time = #{params.bankAuditSecondTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.financeContactPerson)">
+				AND t.finance_contact_person = #{params.financeContactPerson}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankBasicAccountAudit)">
+				AND t.bank_basic_account_audit = #{params.bankBasicAccountAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankBasicNameAudit)">
+				AND t.bank_basic_name_audit = #{params.bankBasicNameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankBasicBanknameAudit)">
+				AND t.bank_basic_bankname_audit = #{params.bankBasicBanknameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankLoanAccountAudit)">
+				AND t.bank_loan_account_audit = #{params.bankLoanAccountAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankLoanNameAudit)">
+				AND t.bank_loan_name_audit = #{params.bankLoanNameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankLoanBanknameAudit)">
+				AND t.bank_loan_bankname_audit = #{params.bankLoanBanknameAudit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.gatherTagAudit)">
+				AND t.gather_tag_audit = #{params.gatherTagAudit}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(params.financeContactPersonAudit)">
+				AND t.finance_contact_person_audit = #{params.financeContactPersonAudit}
+			</if>
+			<if test="@OGNL@isNotEmpty(params.financeContactTelAudit)">
+				AND t.finance_contact_tel_audit = #{params.financeContactTelAudit}
+			</if>
+			<if test="@OGNL@isNotEmpty(params.isNeedSync)">
+				AND t.is_need_sync = #{params.isNeedSync}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isBalance)">
+				AND t.is_balance = #{params.isBalance}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.financeContactTel)">
+				AND t.finance_contact_tel = #{params.financeContactTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.add_user_id = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.add_user_name = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.add_time = #{params.addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.last_update_user_id = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.last_update_user_name = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.last_update_time = #{params.lastUpdateTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.agreeTime)">
+				AND t.agree_time = #{params.agreeTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.agreeUserId)">
+				AND t.agree_user_id = #{params.agreeUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.agreeUserName)">
+				AND t.agree_user_name = #{params.agreeUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.ip4)">
+				AND t.ip4 = #{params.ip4}
+		    </if>
+		</where>
+	</update>
+	
+	<select id="getInfoById" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		<if test="@OGNL@isNotEmpty(isHospital)">
+				,a.user_name
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isCompany)">
+				,b.company_account_code,b.filing_number
+		    </if>
+	    FROM std_pay_contract t
+	    	<if test="@OGNL@isNotEmpty(isHospital)">
+				join std_hospital a on a.hospital_id = t.org_id 
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isCompany)">
+				join std_company b on b.company_id = t.org_id 
+		    </if>
+		WHERE t.org_id =  #{orgId}
+	</select>
+	<update id="updateIsSignYht" parameterType="map">
+		update std_pay_contract set is_sign_yht = #{isSignYht},
+		last_update_user_id = #{userId},last_update_user_name = #{userName},last_update_time = SYSDATE
+		where org_id = #{orgId} and is_sign_yht != #{isSignYht}
+	</update>
+	
+	
+	<!-- 查询所有的支付医院信息 -->
+	<select id="getPayHospList" parameterType="map" resultType="hashmap">
+		SELECT
+			t.org_name as "orgName",
+			t.org_id as "orgId",
+			t.is_sign_yht as "isSignYht",
+			t.sign_update_user_id as "signUpdateUserId",
+			t.sign_update_user_name as "signUpdateUserName",
+			t.sign_update_time as "signUpdateTime",
+			t.is_balance as "isBalance",
+			t.balance_update_user_id as "balanceUpdateUserId",
+			t.balance_update_user_name as "balanceUpdateUserName",
+			t.balance_update_time as "balanceUpdateTime" 
+		FROM
+			std_pay_contract t
+		WHERE
+			t.org_type IN(4, 7) 
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND t.org_name like '%'||#{orgName}||'%'
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isSignYht)">
+				AND t.is_sign_yht = #{isSignYht}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isBalance)">
+				AND t.is_balance = #{isBalance}
+		    </if>
+	</select>
+	
+	<update id="updateHospPayModeByOrgId" parameterType="map">
+		update std_pay_contract t 
+		<set>
+			<if test="@OGNL@isNotEmpty(isSignYht)">
+				t.is_sign_yht = #{isSignYht},
+				t.sign_update_user_id = #{userId},
+				t.sign_update_user_name = #{userName},
+				t.sign_update_time = SYSDATE,
+			</if>
+			<if test="@OGNL@isNotEmpty(isBalance)">
+				t.is_balance = #{isBalance},
+				t.balance_update_user_id = #{userId},
+				t.balance_update_user_name = #{userName},
+				t.balance_update_time = SYSDATE,
+			</if>
+		</set>
+		where t.org_id = #{orgId}
+	</update>
+</mapper>

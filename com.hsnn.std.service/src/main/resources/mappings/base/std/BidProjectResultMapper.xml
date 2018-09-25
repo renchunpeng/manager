@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.BidProjectResultDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.BidProjectResult" id="BaseResultMap">
+        <result property="projCode" column="PROJ_CODE" javaType="String"/>
+        <result property="name" column="NAME" javaType="String"/>
+        <result property="projIntro" column="PROJ_INTRO" javaType="String"/>
+        <result property="starttime" column="STARTTIME" javaType="Date"/>
+        <result property="endtime" column="ENDTIME" javaType="Date"/>
+        <result property="projCat" column="PROJ_CAT" javaType="String"/>
+        <result property="drugcatalogCode" column="DRUGCATALOG_CODE" javaType="String"/>
+        <result property="drugcatalogName" column="DRUGCATALOG_NAME" javaType="String"/>
+        <result property="remark" column="REMARK" javaType="String"/>
+        <result property="status" column="STATUS" javaType="Integer"/>
+        <result property="createDatetime" column="CREATE_DATETIME" javaType="Date"/>
+        <result property="createUser" column="CREATE_USER" javaType="String"/>
+        <result property="updDatetime" column="UPD_DATETIME" javaType="Date"/>
+        <result property="updUser" column="UPD_USER" javaType="String"/>
+        <result property="zbUrl" column="ZB_URL" javaType="String"/>
+        <result property="pubStatus" column="PUB_STATUS" javaType="Integer"/>
+        <result property="projSource" column="PROJ_SOURCE" javaType="String"/>
+		<result property="sxChose" column="sx_chose" javaType="String"/>
+		<result property="jcChose" column="jc_chose" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.PROJ_CODE,
+        t.NAME,
+        t.PROJ_INTRO,
+        t.STARTTIME,
+        t.ENDTIME,
+        t.PROJ_CAT,
+        t.DRUGCATALOG_CODE,
+        t.DRUGCATALOG_NAME,
+        t.REMARK,
+        t.STATUS,
+        t.CREATE_DATETIME,
+        t.CREATE_USER,
+        t.UPD_DATETIME,
+        t.UPD_USER,
+        t.ZB_URL,
+        t.PUB_STATUS,
+        t.PROJ_SOURCE,
+        t.sx_chose,
+        t.jc_chose
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM BID_PROJECT_RESULT t
+		WHERE t.PROJ_CODE =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.BidProjectResult">
+		INSERT INTO BID_PROJECT_RESULT(
+				PROJ_CODE ,
+	            NAME ,
+	            PROJ_INTRO ,
+	            STARTTIME ,
+	            ENDTIME ,
+	            PROJ_CAT ,
+	            DRUGCATALOG_CODE ,
+	            DRUGCATALOG_NAME ,
+	            REMARK ,
+	            STATUS ,
+	            CREATE_DATETIME ,
+	            CREATE_USER ,
+	            UPD_DATETIME ,
+	            UPD_USER ,
+	            ZB_URL ,
+	            PUB_STATUS ,
+	            PROJ_SOURCE,
+	            sx_chose,
+                jc_chose
+
+		)
+		VALUES (
+				#{projCode},
+	        	#{name},
+	        	#{projIntro},
+	        	#{starttime},
+	        	#{endtime},
+	        	#{projCat},
+	        	#{drugcatalogCode},
+	        	#{drugcatalogName},
+	        	#{remark},
+	        	#{status},
+	        	#{createDatetime},
+	        	#{createUser},
+	        	#{updDatetime},
+	        	#{updUser},
+	        	#{zbUrl},
+	        	#{pubStatus},
+	        	#{projSource},
+	        	#{sxChose},
+	        	#{jcChose}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.BidProjectResult">
+		UPDATE BID_PROJECT_RESULT  
+		<set>
+			NAME = #{name},
+			PROJ_INTRO = #{projIntro},
+			STARTTIME = #{starttime},
+			ENDTIME = #{endtime},
+			PROJ_CAT = #{projCat},
+			DRUGCATALOG_CODE = #{drugcatalogCode},
+			DRUGCATALOG_NAME = #{drugcatalogName},
+			REMARK = #{remark},
+			STATUS = #{status},
+			CREATE_DATETIME = #{createDatetime},
+			CREATE_USER = #{createUser},
+			UPD_DATETIME = #{updDatetime},
+			UPD_USER = #{updUser},
+			ZB_URL = #{zbUrl},
+			PUB_STATUS = #{pubStatus},
+			PROJ_SOURCE = #{projSource},
+        </set>
+		WHERE  PROJ_CODE =  #{projCode}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.BidProjectResult">
+		UPDATE BID_PROJECT_RESULT  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(name)">
+				NAME = #{name},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(projIntro)">
+				PROJ_INTRO = #{projIntro},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(starttime)">
+				STARTTIME = #{starttime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(endtime)">
+				ENDTIME = #{endtime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(projCat)">
+				PROJ_CAT = #{projCat},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(drugcatalogCode)">
+				DRUGCATALOG_CODE = #{drugcatalogCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(drugcatalogName)">
+				DRUGCATALOG_NAME = #{drugcatalogName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(remark)">
+				REMARK = #{remark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(status)">
+				STATUS = #{status},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(createDatetime)">
+				CREATE_DATETIME = #{createDatetime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(createUser)">
+				CREATE_USER = #{createUser},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(updDatetime)">
+				UPD_DATETIME = #{updDatetime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(updUser)">
+				UPD_USER = #{updUser},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(zbUrl)">
+				ZB_URL = #{zbUrl},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(pubStatus)">
+				PUB_STATUS = #{pubStatus},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(projSource)">
+				PROJ_SOURCE = #{projSource},
+			</if>
+        </set>
+		WHERE  PROJ_CODE =  #{projCode}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM BID_PROJECT_RESULT WHERE  PROJ_CODE =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM BID_PROJECT_RESULT t
+		<where>
+			<if test="@OGNL@isNotEmpty(projCode)">
+				AND t.PROJ_CODE LIKE CONCAT(CONCAT('%',#{projCode}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND t.NAME LIKE CONCAT(CONCAT('%',#{name}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(projIntro)">
+				AND t.PROJ_INTRO = #{projIntro}
+		    </if>
+			<if test="@OGNL@isNotEmpty(starttime)">
+				AND t.STARTTIME = #{starttime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(endtime)">
+				AND t.ENDTIME = #{endtime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(projCat)">
+				AND t.PROJ_CAT = #{projCat}
+		    </if>
+			<if test="@OGNL@isNotEmpty(drugcatalogCode)">
+				AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(drugcatalogName)">
+				AND t.DRUGCATALOG_NAME = #{drugcatalogName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(status)">
+				AND t.STATUS = #{status}
+		    </if>
+			<if test="@OGNL@isNotEmpty(createDatetime)">
+				AND t.CREATE_DATETIME = #{createDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(createUser)">
+				AND t.CREATE_USER = #{createUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(updDatetime)">
+				AND t.UPD_DATETIME = #{updDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(updUser)">
+				AND t.UPD_USER = #{updUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(zbUrl)">
+				AND t.ZB_URL = #{zbUrl}
+		    </if>
+			<if test="@OGNL@isNotEmpty(pubStatus)">
+				AND t.PUB_STATUS = #{pubStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(projSource)">
+				AND t.PROJ_SOURCE = #{projSource}
+		    </if>
+		</where>
+		ORDER BY t.CREATE_DATETIME DESC
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO BID_PROJECT_RESULT (
+            NAME ,
+            PROJ_INTRO ,
+            STARTTIME ,
+            ENDTIME ,
+            PROJ_CAT ,
+            DRUGCATALOG_CODE ,
+            DRUGCATALOG_NAME ,
+            REMARK ,
+            STATUS ,
+            CREATE_DATETIME ,
+            CREATE_USER ,
+            UPD_DATETIME ,
+            UPD_USER ,
+            ZB_URL ,
+            PUB_STATUS ,
+            PROJ_SOURCE 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.name},
+        	#{item.projIntro},
+        	#{item.starttime},
+        	#{item.endtime},
+        	#{item.projCat},
+        	#{item.drugcatalogCode},
+        	#{item.drugcatalogName},
+        	#{item.remark},
+        	#{item.status},
+        	#{item.createDatetime},
+        	#{item.createUser},
+        	#{item.updDatetime},
+        	#{item.updUser},
+        	#{item.zbUrl},
+        	#{item.pubStatus},
+        	#{item.projSource}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM BID_PROJECT_RESULT t
+		<where>
+			<if test="@OGNL@isNotEmpty(projCode)">
+				AND t.PROJ_CODE = #{projCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND t.NAME = #{name}
+		    </if>
+			<if test="@OGNL@isNotEmpty(projIntro)">
+				AND t.PROJ_INTRO = #{projIntro}
+		    </if>
+			<if test="@OGNL@isNotEmpty(starttime)">
+				AND t.STARTTIME = #{starttime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(endtime)">
+				AND t.ENDTIME = #{endtime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(projCat)">
+				AND t.PROJ_CAT = #{projCat}
+		    </if>
+			<if test="@OGNL@isNotEmpty(drugcatalogCode)">
+				AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(drugcatalogName)">
+				AND t.DRUGCATALOG_NAME = #{drugcatalogName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(status)">
+				AND t.STATUS = #{status}
+		    </if>
+			<if test="@OGNL@isNotEmpty(createDatetime)">
+				AND t.CREATE_DATETIME = #{createDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(createUser)">
+				AND t.CREATE_USER = #{createUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(updDatetime)">
+				AND t.UPD_DATETIME = #{updDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(updUser)">
+				AND t.UPD_USER = #{updUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(zbUrl)">
+				AND t.ZB_URL = #{zbUrl}
+		    </if>
+			<if test="@OGNL@isNotEmpty(pubStatus)">
+				AND t.PUB_STATUS = #{pubStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(projSource)">
+				AND t.PROJ_SOURCE = #{projSource}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE BID_PROJECT_RESULT  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.name)">
+				NAME = #{model.name},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.projIntro)">
+				PROJ_INTRO = #{model.projIntro},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.starttime)">
+				STARTTIME = #{model.starttime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.endtime)">
+				ENDTIME = #{model.endtime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.projCat)">
+				PROJ_CAT = #{model.projCat},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.drugcatalogCode)">
+				DRUGCATALOG_CODE = #{model.drugcatalogCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.drugcatalogName)">
+				DRUGCATALOG_NAME = #{model.drugcatalogName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.remark)">
+				REMARK = #{model.remark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.status)">
+				STATUS = #{model.status},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.createDatetime)">
+				CREATE_DATETIME = #{model.createDatetime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.createUser)">
+				CREATE_USER = #{model.createUser},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.updDatetime)">
+				UPD_DATETIME = #{model.updDatetime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.updUser)">
+				UPD_USER = #{model.updUser},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.zbUrl)">
+				ZB_URL = #{model.zbUrl},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.pubStatus)">
+				PUB_STATUS = #{model.pubStatus},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.projSource)">
+				PROJ_SOURCE = #{model.projSource},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.projCode)">
+				AND t.PROJ_CODE = #{params.projCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.name)">
+				AND t.NAME = #{params.name}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.projIntro)">
+				AND t.PROJ_INTRO = #{params.projIntro}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.starttime)">
+				AND t.STARTTIME = #{params.starttime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.endtime)">
+				AND t.ENDTIME = #{params.endtime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.projCat)">
+				AND t.PROJ_CAT = #{params.projCat}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.drugcatalogCode)">
+				AND t.DRUGCATALOG_CODE = #{params.drugcatalogCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.drugcatalogName)">
+				AND t.DRUGCATALOG_NAME = #{params.drugcatalogName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.remark)">
+				AND t.REMARK = #{params.remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.status)">
+				AND t.STATUS = #{params.status}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.createDatetime)">
+				AND t.CREATE_DATETIME = #{params.createDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.createUser)">
+				AND t.CREATE_USER = #{params.createUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.updDatetime)">
+				AND t.UPD_DATETIME = #{params.updDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.updUser)">
+				AND t.UPD_USER = #{params.updUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.zbUrl)">
+				AND t.ZB_URL = #{params.zbUrl}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.pubStatus)">
+				AND t.PUB_STATUS = #{params.pubStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.projSource)">
+				AND t.PROJ_SOURCE = #{params.projSource}
+		    </if>
+		</where>
+	</update>
+	
+	<insert id="addProject" parameterType="map">
+		INSERT INTO bid_project_result t
+		(
+		    t.PROJ_CODE,
+	        t.NAME,
+	        t.PROJ_INTRO,
+	        t.STARTTIME,
+	        t.ENDTIME,
+	        t.PROJ_CAT,
+	        t.DRUGCATALOG_CODE,
+	        t.DRUGCATALOG_NAME,
+	        t.REMARK,
+	        t.STATUS,
+	        t.CREATE_DATETIME,
+	        t.CREATE_USER,
+	        t.UPD_DATETIME,
+	        t.UPD_USER,
+	        t.ZB_URL,
+	        t.PUB_STATUS,
+	        t.PROJ_SOURCE
+		)
+		SELECT  p.PROJ_CODE,
+		        p.NAME,
+		        p.PROJ_INTRO,
+		        p.STARTTIME,
+		        p.ENDTIME,
+		        p.PROJ_CAT,
+		        p.DRUGCATALOG_CODE,
+		        p.DRUGCATALOG_NAME,
+		        p.REMARK,
+		        p.STATUS,
+		        p.CREATE_DATETIME,
+		        p.CREATE_USER,
+		        SYSDATE,
+		        #{userId},
+		        p.ZB_URL,
+		        p.PUB_STATUS,
+		        '招标库' 
+		        FROM bid_project p 
+		        WHERE p.proj_code = #{projCode}
+	</insert>
+	
+	<update id="updateProject" parameterType="map">
+		UPDATE bid_project_result t SET (
+		        t.NAME,
+		        t.PROJ_INTRO,
+		        t.STARTTIME,
+		        t.ENDTIME,
+		        t.PROJ_CAT,
+		        t.DRUGCATALOG_CODE,
+		        t.DRUGCATALOG_NAME,
+		        t.REMARK,
+		        t.STATUS,
+		        t.CREATE_DATETIME,
+		        t.CREATE_USER,
+		        t.UPD_DATETIME,
+		        t.UPD_USER,
+		        t.ZB_URL,
+		        t.PUB_STATUS
+		) = (SELECT 
+		        p.NAME,
+		        p.PROJ_INTRO,
+		        p.STARTTIME,
+		        p.ENDTIME,
+		        p.PROJ_CAT,
+		        p.DRUGCATALOG_CODE,
+		        p.DRUGCATALOG_NAME,
+		        p.REMARK,
+		        p.STATUS,
+		        p.CREATE_DATETIME,
+		        p.CREATE_USER,
+		        SYSDATE,
+		        #{userId},
+		        p.ZB_URL,
+		        p.PUB_STATUS 
+		        FROM bid_project p 
+		        WHERE p.proj_code = #{projCode})
+	</update>
+	<update id="updateProjectName" parameterType="map">
+		UPDATE bid_project_result SET 
+		        NAME=#{newProjName}
+		        WHERE proj_code = #{projCode}
+	</update>
+</mapper>

@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdOaReceivedDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdOaReceived" id="BaseResultMap">
+        <result property="id" column="id" javaType="String"/>
+        <result property="receivedType" column="received_type" javaType="Integer"/>
+        <result property="secretLevel" column="secret_level" javaType="Integer"/>
+        <result property="urgencyLevel" column="urgency_level" javaType="Integer"/>
+        <result property="receivedNumber" column="received_number" javaType="String"/>
+        <result property="receivedDate" column="received_date" javaType="Date"/>
+        <result property="content" column="content" javaType="String"/>
+        <result property="auditRemark" column="audit_remark" javaType="String"/>
+        <result property="receivedStatus" column="received_status" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="comCompany" column="com_company" javaType="String"/>
+        <result property="comTitle" column="com_title" javaType="String"/>
+        <result property="comNumber" column="com_number" javaType="String"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="departmentId" column="department_id" javaType="String"/>
+        <result property="departmentName" column="department_name" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.received_type,
+        t.secret_level,
+        t.urgency_level,
+        t.received_number,
+        t.received_date,
+        t.content,
+        t.audit_remark,
+        t.received_status,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.com_company,
+        t.com_title,
+        t.com_number,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.department_id,
+        t.department_name
+	</sql>
+		
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM std_oa_received t
+		WHERE t.id =  #{value}
+	</select>
+	<select id="getById" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM std_oa_received t
+		WHERE t.id =  #{value}
+	</select>
+
+	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.std.model.StdOaReceived">
+		<selectKey resultType="java.lang.String" keyProperty="id">
+			SELECT LAST_INSERT_ID() from dual
+        </selectKey>
+		INSERT INTO std_oa_received(
+				id,
+	            received_type ,
+	            secret_level ,
+	            urgency_level ,
+	            received_number ,
+	            received_date ,
+	            content ,
+	            audit_remark ,
+	            received_status ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            com_company ,
+	            com_title ,
+	            com_number ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time,
+	            department_id,
+        		department_name
+		)
+		VALUES (
+				#{id},
+	        	#{receivedType},
+	        	#{secretLevel},
+	        	#{urgencyLevel},
+	        	#{receivedNumber},
+	        	#{receivedDate},
+	        	#{content},
+	        	#{auditRemark},
+	        	#{receivedStatus},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{comCompany},
+	        	#{comTitle},
+	        	#{comNumber},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime},
+	        	#{departmentId},
+	        	#{departmentName}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdOaReceived">
+		UPDATE std_oa_received  
+		<set>
+			received_type = #{receivedType},
+			secret_level = #{secretLevel},
+			urgency_level = #{urgencyLevel},
+			received_number = #{receivedNumber},
+			received_date = #{receivedDate},
+			content = #{content},
+			audit_remark = #{auditRemark},
+			received_status = #{receivedStatus},
+			add_user_id = #{addUserId},
+			add_user_name = #{addUserName},
+			add_time = #{addTime},
+			com_company = #{comCompany},
+			com_title = #{comTitle},
+			com_number = #{comNumber},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = #{lastUpdateTime},
+			department_id = #{departmentId},
+			department_name = #{departmentName},
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.StdOaReceived">
+		UPDATE std_oa_received  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(receivedType)">
+				received_type = #{receivedType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(secretLevel)">
+				secret_level = #{secretLevel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(urgencyLevel)">
+				urgency_level = #{urgencyLevel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(receivedNumber)">
+				received_number = #{receivedNumber},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(receivedDate)">
+				received_date = #{receivedDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(content)">
+				content = #{content},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditRemark)">
+				audit_remark = #{auditRemark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(receivedStatus)">
+				received_status = #{receivedStatus},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				add_user_id = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				add_user_name = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				add_time = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(comCompany)">
+				com_company = #{comCompany},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(comTitle)">
+				com_title = #{comTitle},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(comNumber)">
+				com_number = #{comNumber},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				last_update_user_id = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				last_update_user_name = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				last_update_time = #{lastUpdateTime},
+			</if>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+				department_id = #{departmentId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(departmentName)">
+				department_name = #{departmentName},
+			</if>
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_oa_received WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_oa_received t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(receivedType)">
+				AND t.received_type = #{receivedType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(secretLevel)">
+				AND t.secret_level = #{secretLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(urgencyLevel)">
+				AND t.urgency_level = #{urgencyLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(receivedNumber)">
+				AND t.received_number like '%'||#{receivedNumber}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(receivedDate)">
+				AND t.received_date = #{receivedDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(content)">
+				AND t.content = #{content}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditRemark)">
+				AND t.audit_remark = #{auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(receivedStatus)">
+				AND t.received_status = #{receivedStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(comCompany)">
+				AND t.com_company like '%'||#{comCompany}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(comTitle)">
+				AND t.com_title like '%'||#{comTitle}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(comNumber)">
+				AND t.com_number like '%'||#{comNumber}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(departmentId)">
+				department_id = #{departmentId}
+			</if>
+	    	<if test="@OGNL@isNotEmpty(departmentName)">
+				department_name = #{departmentName}
+			</if>
+			<if test="@OGNL@isNotEmpty(startTime)">
+				AND t.add_time &gt; #{startTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.add_time &lt; DATE_ADD(CAST(#{endTime} AS DATE),INTERVAL 1 DAY)
+		    </if> 
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_oa_received (
+            received_type ,
+            secret_level ,
+            urgency_level ,
+            received_number ,
+            received_date ,
+            content ,
+            audit_remark ,
+            received_status ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            com_company ,
+            com_title ,
+            com_number ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time,
+            department_id,
+        	department_name
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.receivedType},
+        	#{item.secretLevel},
+        	#{item.urgencyLevel},
+        	#{item.receivedNumber},
+        	#{item.receivedDate},
+        	#{item.content},
+        	#{item.auditRemark},
+        	#{item.receivedStatus},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.comCompany},
+        	#{item.comTitle},
+        	#{item.comNumber},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime},
+        	#{item.departmentId},
+        	#{item.departmentName}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM std_oa_received t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(receivedType)">
+				AND t.received_type = #{receivedType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(secretLevel)">
+				AND t.secret_level = #{secretLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(urgencyLevel)">
+				AND t.urgency_level = #{urgencyLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(receivedNumber)">
+				AND t.received_number = #{receivedNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(receivedDate)">
+				AND t.received_date = #{receivedDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(content)">
+				AND t.content = #{content}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditRemark)">
+				AND t.audit_remark = #{auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(receivedStatus)">
+				AND t.received_status = #{receivedStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(comCompany)">
+				AND t.com_company = #{comCompany}
+		    </if>
+			<if test="@OGNL@isNotEmpty(comTitle)">
+				AND t.com_title = #{comTitle}
+		    </if>
+			<if test="@OGNL@isNotEmpty(comNumber)">
+				AND t.com_number = #{comNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(departmentId)">
+				department_id = #{departmentId}
+			</if>
+	    	<if test="@OGNL@isNotEmpty(departmentName)">
+				department_name = #{departmentName}
+			</if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE std_oa_received  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.receivedType)">
+				received_type = #{model.receivedType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.secretLevel)">
+				secret_level = #{model.secretLevel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.urgencyLevel)">
+				urgency_level = #{model.urgencyLevel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.receivedNumber)">
+				received_number = #{model.receivedNumber},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.receivedDate)">
+				received_date = #{model.receivedDate},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.content)">
+				content = #{model.content},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.auditRemark)">
+				audit_remark = #{model.auditRemark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.receivedStatus)">
+				received_status = #{model.receivedStatus},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				add_user_id = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				add_user_name = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				add_time = #{model.addTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.comCompany)">
+				com_company = #{model.comCompany},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.comTitle)">
+				com_title = #{model.comTitle},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.comNumber)">
+				com_number = #{model.comNumber},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				last_update_user_id = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				last_update_user_name = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				last_update_time = #{model.lastUpdateTime},
+			</if>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+				department_id = #{departmentId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(departmentName)">
+				department_name = #{departmentName},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.id = #{params.id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.receivedType)">
+				AND t.received_type = #{params.receivedType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.secretLevel)">
+				AND t.secret_level = #{params.secretLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.urgencyLevel)">
+				AND t.urgency_level = #{params.urgencyLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.receivedNumber)">
+				AND t.received_number = #{params.receivedNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.receivedDate)">
+				AND t.received_date = #{params.receivedDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.content)">
+				AND t.content = #{params.content}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.auditRemark)">
+				AND t.audit_remark = #{params.auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.receivedStatus)">
+				AND t.received_status = #{params.receivedStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.add_user_id = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.add_user_name = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.add_time = #{params.addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.comCompany)">
+				AND t.com_company = #{params.comCompany}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.comTitle)">
+				AND t.com_title = #{params.comTitle}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.comNumber)">
+				AND t.com_number = #{params.comNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.last_update_user_id = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.last_update_user_name = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.last_update_time = #{params.lastUpdateTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(departmentId)">
+				department_id = #{departmentId}
+			</if>
+	    	<if test="@OGNL@isNotEmpty(departmentName)">
+				department_name = #{departmentName}
+			</if>
+		</where>
+	</update>
+</mapper>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysNoticeDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysNotice" id="BaseResultMap">
+        <result property="sysNoticeId" column="sys_notice_id" javaType="String"/>
+        <result property="sysNoticeCode" column="sys_notice_code" javaType="String"/>
+        <result property="title" column="title" javaType="String"/>
+        <result property="userType" column="user_type" javaType="String"/>
+        <result property="content" column="content" javaType="String"/>
+        <result property="datetime" column="datetime" javaType="Date"/>
+        <result property="status" column="status" javaType="Integer"/>
+        <result property="readCount" column="read_count" javaType="Integer"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.sys_notice_id,
+        t.sys_notice_code,
+        t.title,
+        t.user_type,
+        t.content,
+        t.datetime,
+        t.status,
+        t.read_count,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	<select id="getNoticeList" parameterType="map" resultMap="BaseResultMap">
+		select * from (SELECT <include refid="full-columns" />
+		FROM sys_notice t
+		where t.status=1
+		<if test="@OGNL@isNotEmpty(noticeType)">
+			AND t.NOTICE_TYPE =#{noticeType}
+		</if>
+		order by t.last_update_time desc
+		)where rownum &lt;=5
+	</select>
+
+	<select id="getAllById" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM sys_notice t
+		WHERE t.sys_notice_id =  #{value}
+	</select>
+
+	<select id="load" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> 
+		FROM sys_notice t
+		WHERE t.sys_notice_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM sys_notice t
+		WHERE t.sys_notice_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> FROM sys_notice t
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysNotice">
+		INSERT INTO sys_notice(
+	            sys_notice_code ,
+	            title ,
+	            user_type ,
+	            content ,
+	            datetime ,
+	            status ,
+	            read_count ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{sysNoticeCode},
+	        	#{title},
+	        	#{userType},
+	        	#{content},
+	        	#{datetime},
+	        	#{status},
+	        	#{readCount},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="false" keyProperty="sysNoticeId" parameterType="com.hsnn.medstgmini.base.sys.model.SysNotice">
+		<selectKey resultType="java.lang.String" keyProperty="sysNoticeId" order="BEFORE">
+			SELECT SYSNOTICESEQ.nextval from dual
+        </selectKey>
+		INSERT INTO sys_notice(
+				sys_notice_id,
+	            sys_notice_code ,
+	            title ,
+	            user_type ,
+	            content ,
+	            datetime ,
+	            status ,
+	            read_count ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+				#{sysNoticeId},
+	        	#{sysNoticeCode},
+	        	#{title},
+	        	#{userType},
+	        	#{content},
+	        	SYSDATE,
+	        	#{status},
+	        	#{readCount},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysNotice">
+		UPDATE sys_notice  
+		<set>
+				<if test="@OGNL@isNotEmpty(sysNoticeCode)">
+	        		sys_notice_code = #{sysNoticeCode},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(title)">
+	        		title = #{title},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(userType)">
+	        		user_type = #{userType},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(content)">
+	        		content = #{content},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(datetime)">
+	        		datetime = #{datetime},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(status)">
+	        		status = #{status},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(readCount)">
+	        		read_count = #{readCount},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	        		last_update_user_id = #{lastUpdateUserId},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	        		last_update_user_name = #{lastUpdateUserName},
+	        	</if>
+	        	last_update_time = SYSDATE,
+        </set>
+		WHERE  sys_notice_id =  #{sysNoticeId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM sys_notice WHERE  sys_notice_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_notice t
+		<where>
+			<if test="@OGNL@isNotEmpty(userType)">
+	            instr(t.user_type,'5') <![CDATA[<>]]> 0
+	        </if>
+			<if test="@OGNL@isNotEmpty(sysNoticeId)">
+	            AND t.sys_notice_id = #{sysNoticeId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sysNoticeCode)">
+	            AND t.sys_notice_code = #{sysNoticeCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(title)">
+	            AND t.title like CONCAT(CONCAT('%', #{title}), '%')
+	        </if>
+			<if test="@OGNL@isNotEmpty(datetime)">
+	            AND t.datetime = #{datetime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(status)">
+	            AND t.status = #{status}
+	        </if>
+			<if test="@OGNL@isNotEmpty(readCount)">
+	            AND t.read_count = #{readCount}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_notice (
+            sys_notice_code ,
+            title ,
+            user_type ,
+            content ,
+            datetime ,
+            status ,
+            read_count ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.sysNoticeCode},
+        	#{item.title},
+        	#{item.userType},
+        	#{item.content},
+        	#{item.datetime},
+        	#{item.status},
+        	#{item.readCount},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+</mapper>

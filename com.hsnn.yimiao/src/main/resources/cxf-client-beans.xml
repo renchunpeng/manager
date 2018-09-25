@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://cxf.apache.org/jaxws 
+		http://cxf.apache.org/schemas/jaxws.xsd">
+	
+	<!--<jaxws:client 
+		id="payInterface" 
+		address="http://192.168.1.206:18081/bankInterface/webServices/PayInterface" 
+		serviceClass="com.hsnn.medstgmini.pay.service.IPayInterface"/>
+	
+	
+	 <jaxws:client 
+		id="sysUser" 
+		address="http://192.168.1.206:18081/upms/webServices/SysUser" 
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysUser"/> 
+		
+	<jaxws:client 
+		id="sysUserResource" 
+		address="http://192.168.1.206:18081/upms/webServices/ISysUserResource" 
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysUserResource"/>-->
+		
+ 	<!-- <jaxws:client 
+		id="sysChangeLog" 
+		address="http://192.168.1.206:18081/upms/webServices/SysChangeLog" 
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysChangeLog"/>
+	<jaxws:client 
+		id="sysOperationLog"
+		address="http://192.168.1.206:18081/upms/webServices/SysOperationLog" 
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysOperationLog"/> -->
+	<!-- <jaxws:client 
+		id="sysResource"
+		address="http://192.168.1.206:18081/upms/webServices/SysResource" 
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysResource"/> -->
+	<!-- <jaxws:client 
+		id="sysRole"
+		address="http://192.168.1.206:18081/upms/webServices/SysRole" 
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysRole"/> 
+	<jaxws:client 
+		id="sysRoleResource"
+		address="http://192.168.1.206:18081/upms/webServices/SysRoleResource" 
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysRoleResource"/>
+	<jaxws:client 
+		id="sysDepartment"
+		address="http://192.168.1.206:18081/upms/webServices/SysDepartment"
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysDepartmentManager"/> 
+	<jaxws:client
+		id="sysPost"
+		address="http://192.168.1.206:18081/upms/webServices/SysPost"
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysPostManager"/>
+	<jaxws:client
+		id="sysOrgResourceForbidden"
+		address="http://192.168.1.206:18081/upms/webServices/SysOrgResourceForbidden"
+		serviceClass="com.hsnn.medstgmini.base.sys.service.ISysOrgResourceForbiddenManager"/>-->
+</beans>

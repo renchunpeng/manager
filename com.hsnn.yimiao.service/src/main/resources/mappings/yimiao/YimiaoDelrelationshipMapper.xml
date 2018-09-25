@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.yimiao.dao.YimiaoDelrelationshipDao">
+	<resultMap type="com.hsnn.medstgmini.yimiao.model.YimiaoDelrelationship" id="BaseResultMap">
+        <result property="delRelId" column="DEL_REL_ID" javaType="String"/>
+        <result property="prodCompCode" column="PROD_COMP_CODE" javaType="String"/>
+        <result property="prodCompName" column="PROD_COMP_NAME" javaType="String"/>
+        <result property="prodCompNameSpel" column="PROD_COMP_NAME_SPEL" javaType="String"/>
+        <result property="prodCompStatus" column="PROD_COMP_STATUS" javaType="Integer"/>
+        <result property="delCompCode" column="DEL_COMP_CODE" javaType="String"/>
+        <result property="delCompName" column="DEL_COMP_NAME" javaType="String"/>
+        <result property="delCompNameSpel" column="DEL_COMP_NAME_SPEL" javaType="String"/>
+        <result property="delCompStatus" column="DEL_COMP_STATUS" javaType="Integer"/>
+        <result property="updUser" column="UPD_USER" javaType="String"/>
+        <result property="updDatetime" column="UPD_DATETIME" javaType="Date"/>
+        
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.DEL_REL_ID,
+        t.PROD_COMP_CODE,
+        t.PROD_COMP_NAME,
+        t.PROD_COMP_NAME_SPEL,
+        t.PROD_COMP_STATUS,
+        t.DEL_COMP_CODE,
+        t.DEL_COMP_NAME,
+        t.DEL_COMP_NAME_SPEL,
+        t.DEL_COMP_STATUS,
+        t.UPD_USER,
+        t.UPD_DATETIME
+ 
+	</sql>
+	
+<insert id="insertRelation" useGeneratedKeys="true" keyProperty="delRelId"  parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoDelrelationship">
+	INSERT INTO yimiao_delrelationship (
+		        PROD_COMP_CODE,
+		        PROD_COMP_NAME,
+		        PROD_COMP_NAME_SPEL,
+		        PROD_COMP_STATUS,
+		        DEL_COMP_CODE,
+		        DEL_COMP_NAME,
+		        DEL_COMP_NAME_SPEL,
+		        DEL_COMP_STATUS,
+		        UPD_USER,
+		        UPD_DATETIME
+		) 
+		VALUES (
+	        	#{prodCompCode},
+	        	#{prodCompName},
+	        	#{prodCompNameSpel},
+	        	#{prodCompStatus},
+	        	#{delCompCode},
+	        	#{delCompName},
+	        	#{delCompNameSpel},
+	        	#{delCompStatus},
+	        	#{updUser},
+	        	#{updDatetime}
+	        	
+		)
+</insert>
+
+	
+	
+	
+	
+	<delete id="deleteRelation" parameterType="java.util.Map">
+		DELETE FROM yimiao_delrelationship WHERE  PROD_COMP_CODE =  #{prodCompCode} and DEL_COMP_CODE= #{delCompCode}
+	</delete>
+
+	<select id="findRelation" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /><!-- ,u.user_Name -->
+	    FROM yimiao_delrelationship t 
+		<where>
+		    <if test="@OGNL@isNotEmpty(delCompName)">
+		    	AND (t.DEL_COMP_NAME  like CONCAT(CONCAT('%', #{delCompName}), '%')
+				or t.DEL_COMP_NAME_SPEL like CONCAT(CONCAT('%', #{delCompName}), '%'))
+		    </if>
+		     <if test="@OGNL@isNotEmpty(prodCompName)">
+		    	AND (t.PROD_COMP_NAME  like CONCAT(CONCAT('%', #{prodCompName}), '%')
+				 or t.PROD_COMP_NAME_SPEL like CONCAT(CONCAT('%', #{prodCompName}), '%'))
+		    </if>
+	        <if test="@OGNL@isNotEmpty(prodCompCode)">
+				AND t.PROD_COMP_CODE = #{prodCompCode}
+	        </if>
+	         <if test="@OGNL@isNotEmpty(delCompCode)">
+				AND t.DEL_COMP_CODE = #{delCompCode}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(delCompStatus)">
+				AND t.DEL_COMP_STATUS = #{delCompStatus}
+	        </if>
+	         <if test="@OGNL@isNotEmpty(prodCompStatus)">
+				AND t.PROD_COMP_STATUS = #{prodCompStatus}
+	        </if>
+		</where>
+        
+	</select>
+	
+	
+	
+
+</mapper>

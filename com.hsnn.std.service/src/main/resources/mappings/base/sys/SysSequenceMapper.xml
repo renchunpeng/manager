@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysSequenceDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysSequence" id="BaseResultMap">
+        <result property="sequenceId" column="SEQUENCE_ID" javaType="String"/>
+        <result property="sequenceNum" column="SEQUENCE_NUM" javaType="String"/>
+        <result property="remark" column="REMARK" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.SEQUENCE_ID,
+        t.SEQUENCE_NUM,
+        t.REMARK
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM SYS_SEQUENCE t
+		WHERE t.SEQUENCE_ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.sys.model.SysSequence">
+		INSERT INTO SYS_SEQUENCE(
+	            REMARK 
+		)
+		VALUES (
+	        	#{remark}
+		)
+		<selectKey resultType="java.lang.String" keyProperty="sequenceId">
+			SELECT LAST_INSERT_ID() AS SEQUENCE_ID
+        </selectKey>
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysSequence">
+		UPDATE SYS_SEQUENCE  
+		<set>
+			REMARK = #{remark},
+			SEQUENCE_NUM = #{sequenceNum}
+        </set>
+		WHERE  SEQUENCE_ID =  #{sequenceId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.sys.model.SysSequence">
+		UPDATE SYS_SEQUENCE  
+		<set>
+			<if test="@OGNL@isNotEmpty(sequenceNum)">
+				SEQUENCE_NUM = #{sequenceNum},
+		    </if>
+	    	<if test="@OGNL@isNotEmpty(remark)">
+				REMARK = #{remark},
+			</if>
+        </set>
+		WHERE  SEQUENCE_ID =  #{sequenceId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM SYS_SEQUENCE WHERE  SEQUENCE_ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM SYS_SEQUENCE t
+		<where>
+			<if test="@OGNL@isNotEmpty(sequenceId)">
+				AND t.SEQUENCE_ID = #{sequenceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sequenceNum)">
+				AND t.SEQUENCE_NUM = #{sequenceNum}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO SYS_SEQUENCE (
+            REMARK 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.remark}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM SYS_SEQUENCE t
+		<where>
+			<if test="@OGNL@isNotEmpty(sequenceId)">
+				AND t.SEQUENCE_ID = #{sequenceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sequenceNum)">
+				AND t.SEQUENCE_NUM = #{sequenceNum}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE SYS_SEQUENCE  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.remark)">
+				REMARK = #{model.remark},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.sequenceId)">
+				AND t.SEQUENCE_ID = #{params.sequenceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.sequenceNum)">
+				AND t.SEQUENCE_NUM = #{params.sequenceNum}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.remark)">
+				AND t.REMARK = #{params.remark}
+		    </if>
+		</where>
+	</update>
+	<select id="getSequence" parameterType="Integer" resultMap="BaseResultMap">
+		SELECT t.SEQUENCE_NUM
+	    	FROM SYS_SEQUENCE t
+				where t.sequence_id = #{userType}
+	</select>
+	<update id="UpdateSequence">
+		UPDATE SYS_SEQUENCE  set SEQUENCE_NUM = #{sequence}
+		WHERE  SEQUENCE_ID =  #{userType}
+	</update>
+</mapper>

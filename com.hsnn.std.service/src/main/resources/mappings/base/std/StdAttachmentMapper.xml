@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdAttachmentDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdAttachment" id="BaseResultMap">
+        <result property="attrId" column="attr_id" javaType="String"/>
+        <result property="type" column="type" javaType="String"/>
+        <result property="sysId" column="sys_id" javaType="String"/>
+        <result property="targetTable" column="target_table" javaType="String"/>
+        <result property="targetField" column="target_field" javaType="String"/>
+        <result property="targetId" column="target_id" javaType="String"/>
+        <result property="originName" column="origin_name" javaType="String"/>
+        <result property="suffix" column="suffix" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+        <result property="url" column="url" javaType="String"/>
+        <result property="relPath" column="rel_path" javaType="String"/>
+        <result property="downloadCount" column="download_count" javaType="Integer"/>
+        <result property="remark" column="remark" javaType="String"/>
+        <result property="deleted" column="deleted" javaType="Integer"/>
+        <result property="updUser" column="upd_user" javaType="String"/>
+        <result property="updDatetime" column="upd_datetime" javaType="Date"/>
+        
+        <result property="projCode" column="proj_code" javaType="String"/>	
+        <result property="companyId" column="company_id" javaType="String"/>
+		<result property="signId" column="sign_id" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.attr_id,
+        t.type,
+        t.sys_id,
+        t.target_table,
+        t.target_field,
+        t.target_id,
+        t.origin_name,
+        t.suffix,
+        t.name,
+        t.url,
+        t.rel_path,
+        t.download_count,
+        t.remark,
+        t.deleted,
+        t.upd_user,
+        t.upd_datetime,
+        t.proj_code,
+        t.company_id,
+        t.sign_id
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> 
+		FROM std_attachment t
+		WHERE t.attr_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_attachment t
+		WHERE t.attr_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> FROM std_attachment t
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdAttachment">
+		INSERT INTO std_attachment(
+				attr_id,
+	            type ,
+	            sys_id ,
+	            target_table ,
+	            target_field ,
+	            target_id ,
+	            origin_name ,
+	            suffix ,
+	            name ,
+	            url ,
+	            rel_path ,
+	            download_count ,
+	            remark ,
+	            deleted ,
+	            upd_user ,
+	            upd_datetime 
+	    ) 
+		VALUES (
+				#{attrId},
+	        	#{type},
+	        	#{sysId},
+	        	#{targetTable},
+	        	#{targetField},
+	        	#{targetId},
+	        	#{originName},
+	        	#{suffix},
+	        	#{name},
+	        	#{url},
+	        	#{relPath},
+	        	#{downloadCount},
+	        	#{remark},
+	        	#{deleted},
+	        	#{updUser},
+	        	#{updDatetime}
+		)
+	</insert>
+	
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdAttachment">
+		INSERT INTO std_attachment(
+				attr_id,
+	            type ,
+	            sys_id ,
+	            target_table ,
+	            target_field ,
+	            target_id ,
+	            origin_name ,
+	            suffix ,
+	            name ,
+	            url ,
+	            rel_path ,
+	            download_count ,
+	            remark ,
+	            deleted ,
+	            upd_user ,
+	            upd_datetime,
+	            proj_code,
+	            company_id,
+	            sign_id
+		) 
+		VALUES (
+				#{attrId},
+	        	#{type},
+	        	#{sysId},
+	        	#{targetTable},
+	        	#{targetField},
+	        	#{targetId},
+	        	#{originName},
+	        	#{suffix},
+	        	#{name},
+	        	#{url},
+	        	#{relPath},
+	        	#{downloadCount},
+	        	#{remark},
+	        	#{deleted},
+	        	#{updUser},
+	        	#{updDatetime},
+	        	#{projCode},
+	        	#{companyId},
+	        	#{signId}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdAttachment">
+		UPDATE std_attachment  
+		<set>
+	        	type = #{type},
+	        	sys_id = #{sysId},
+	        	target_table = #{targetTable},
+	        	target_field = #{targetField},
+	        	target_id = #{targetId},
+	        	origin_name = #{originName},
+	        	suffix = #{suffix},
+	        	name = #{name},
+	        	url = #{url},
+	        	rel_path = #{relPath},
+	        	download_count = #{downloadCount},
+	        	remark = #{remark},
+	        	deleted = #{deleted},
+	        	upd_user = #{updUser},
+	        	upd_datetime = #{updDatetime},
+        </set>
+		WHERE  attr_id =  #{attrId}
+	</update>
+	
+	<update id="updateByTargetId" parameterType="com.hsnn.medstgmini.base.std.model.StdAttachment">
+		UPDATE std_attachment  
+		<set>
+	        	type = #{type},
+	        	sys_id = #{sysId},
+	        	target_table = #{targetTable},
+	        	target_field = #{targetField},
+	        	origin_name = #{originName},
+	        	suffix = #{suffix},
+	        	name = #{name},
+	        	url = #{url},
+	        	rel_path = #{relPath},
+	        	download_count = #{downloadCount},
+	        	remark = #{remark},
+	        	deleted = #{deleted},
+	        	upd_user = #{updUser},
+	        	upd_datetime = #{updDatetime},
+        </set>
+		WHERE  target_id = #{targetId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM std_attachment WHERE  attr_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_attachment t
+		<where>
+			<if test="@OGNL@isNotEmpty(attrId)">
+	            AND t.attr_id = #{attrId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(type)">
+	            AND t.type = #{type}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sysId)">
+	            AND t.sys_id = #{sysId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(targetTable)">
+	            AND t.target_table = #{targetTable}
+	        </if>
+			<if test="@OGNL@isNotEmpty(targetField)">
+	            AND t.target_field = #{targetField}
+	        </if>
+			<if test="@OGNL@isNotEmpty(targetId)">
+	            AND t.target_id = #{targetId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(originName)">
+	            AND t.origin_name = #{originName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(suffix)">
+	            AND t.suffix = #{suffix}
+	        </if>
+			<if test="@OGNL@isNotEmpty(name)">
+	            AND t.name = #{name}
+	        </if>
+			<if test="@OGNL@isNotEmpty(url)">
+	            AND t.url = #{url}
+	        </if>
+			<if test="@OGNL@isNotEmpty(relPath)">
+	            AND t.rel_path = #{relPath}
+	        </if>
+			<if test="@OGNL@isNotEmpty(downloadCount)">
+	            AND t.download_count = #{downloadCount}
+	        </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+	            AND t.remark = #{remark}
+	        </if>
+			<if test="@OGNL@isNotEmpty(deleted)">
+	            AND t.deleted = #{deleted}
+	        </if>
+			<if test="@OGNL@isNotEmpty(updUser)">
+	            AND t.upd_user = #{updUser}
+	        </if>
+			<if test="@OGNL@isNotEmpty(updDatetime)">
+	            AND t.upd_datetime = #{updDatetime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyId)">
+				AND t.company_id = #{companyId}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_attachment (
+        	attr_id,
+            type ,
+            sys_id ,
+            target_table ,
+            target_field ,
+            target_id ,
+            origin_name ,
+            suffix ,
+            name ,
+            url ,
+            rel_path ,
+            download_count ,
+            remark ,
+            deleted ,
+            upd_user ,
+            upd_datetime 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.attrId},
+        	#{item.type},
+        	#{item.sysId},
+        	#{item.targetTable},
+        	#{item.targetField},
+        	#{item.targetId},
+        	#{item.originName},
+        	#{item.suffix},
+        	#{item.name},
+        	#{item.url},
+        	#{item.relPath},
+        	#{item.downloadCount},
+        	#{item.remark},
+        	#{item.deleted},
+        	#{item.updUser},
+        	#{item.updDatetime}
+        )
+        </foreach>
+	</insert>
+	
+	<delete id="deleteAll" parameterType="String">
+		DELETE FROM STD_ATTACHMENT T 
+		WHERE T.BID_ATTR_ID = #{bidAttrId}
+	</delete>
+	
+	<select id="getByCodeAndId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> 
+		FROM std_attachment t
+		WHERE t.PROJ_CODE =  #{projCode} 
+		and t.COMPANY_ID = #{companyId} 
+		and t.PAPERS_TYPE in (1,2) 
+	</select>
+
+	<select id="getSignId" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM STD_ATTACHMENT T
+		  WHERE T.sign_id=#{signId}
+	</select>
+	<select id="getAttrId" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		  FROM STD_ATTACHMENT T
+		<if test="@OGNL@isNotEmpty(flag)">
+			left join std_comp_app s
+			on s.company_id=t.company_id
+			AND S.PROJ_CODE=T.PROJ_CODE
+		</if>
+		 WHERE T.TARGET_FIELD = #{colnName}
+		<if test="@OGNL@isNotEmpty(flag)">
+			AND s.ce_audit_status =1
+		</if>
+		<if test="@OGNL@isNotEmpty(projCode)">
+		   AND T.PROJ_CODE = #{projCode}
+		</if>
+		   AND T.TARGET_TABLE = #{targetTable}
+		  <if test="@OGNL@isNotEmpty(companyId)">
+	           AND T.COMPANY_ID = #{companyId}
+	      </if>
+		  <if test="@OGNL@isNotEmpty(bidAttrId)">
+	           AND T.BID_ATTR_ID = #{bidAttrId}
+	      </if>
+		<if test="@OGNL@isNotEmpty(signId)">
+			AND T.sign_id = #{signId}
+		</if>
+	      order by t.upd_datetime desc
+	</select>
+
+	<select id="getAttrByTargetId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM STD_ATTACHMENT T
+		  WHERE T.TARGET_ID = #{targetId}
+		order by t.upd_datetime desc
+	</select>
+
+	<delete id="deleteByCodeAndId" parameterType="map">
+		DELETE FROM std_attachment t WHERE  t.PROJ_CODE =  #{projCode} and t.COMPANY_ID = #{companyId}
+	</delete>
+</mapper>

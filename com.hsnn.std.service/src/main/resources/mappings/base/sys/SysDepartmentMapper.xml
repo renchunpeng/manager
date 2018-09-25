@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysDepartmentDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysDepartment" id="BaseResultMap">
+        <result property="departmentId" column="department_id" javaType="Integer"/>
+        <result property="orgId" column="org_id" javaType="String"/>
+        <result property="orgName" column="org_name" javaType="String"/>
+        <result property="burSpelCode" column="bur_spel_code" javaType="String"/>
+        <result property="areaId" column="area_id" javaType="String"/>
+        <result property="areaName" column="area_name" javaType="String"/>
+        <result property="areaShortname" column="areaShortname" javaType="String"/>
+        <result property="departmentType" column="department_type" javaType="Integer"/>
+        <result property="groupName" column="group_name" javaType="String"/>
+        <result property="nonBasedrugDistributeAreaName" column="non_basedrug_distri_area_name" javaType="String"/>
+        <result property="nonBasedrugDistributeAreaId" column="non_basedrug_distri_area_id" javaType="Integer"/>
+        <result property="basedrugDistributeAreaName" column="basedrug_distribute_area_name" javaType="String"/>
+        <result property="basedrugDistributeAreaId" column="basedrug_distribute_area_id" javaType="Integer"/>
+        <result property="suppliesDistributeAreaName" column="supplies_distribute_area_name" javaType="String"/>
+        <result property="suppliesDistributeAreaId" column="supplies_distribute_area_id" javaType="Integer"/>
+        <result property="drugPurchaseProperty" column="drug_purchase_property" javaType="Integer"/>
+        <result property="departmentLeader" column="department_leader" javaType="String"/>
+        <result property="departmentTel" column="department_tel" javaType="String"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="sort" column="sort" javaType="Integer"/>
+        <result property="remark" column="remark" javaType="String"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        
+         <result property="userName" column="user_name" javaType="String"/>
+         <result property="orgAreaName" column="org_area_name" javaType="String"/>
+         <result property="director" column="director" javaType="String"/>
+         <result property="directorId" column="director_id" javaType="String"/>
+	</resultMap>
+	
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysDepartment" id="hosResultMap" extends="BaseResultMap">
+        <result property="hospitalId" column="hospital_id" javaType="String"/>
+        <result property="hospitalName" column="hospital_name" javaType="String"/>
+	    <result property="hospitalAddress" column="hospital_address" javaType="String"/>
+	    <result property="hospitalLevel" column="hospital_level" javaType="String"/>
+	    <result property="contactPerson" column="contact_person" javaType="String"/>
+	    <result property="contactTel" column="contact_tel" javaType="String"/>
+	    <result property="healthOrganizationCode" column="health_organization_code" javaType="String"/>
+	    <result property="healthOrgSort" column="health_org_sort" javaType="String"/>
+	    <result property="isHospUsing" column="is_hosp_using" javaType="Integer"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.department_id,
+        t.org_id,
+        t.org_name,
+        t.bur_spel_code,
+        t.area_id,
+        t.area_name,
+        t.department_type,
+        t.group_name,
+        t.non_basedrug_distri_area_name,
+        t.non_basedrug_distri_area_id,
+        t.basedrug_distribute_area_name,
+        t.basedrug_distribute_area_id,
+        t.supplies_distribute_area_name,
+        t.supplies_distribute_area_id,
+        t.drug_purchase_property,
+        t.department_leader,
+        t.department_tel,
+        t.is_using,
+        t.sort,
+        t.remark,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.director,
+        t.director_id
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_department where department_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_department where department_id =  #{value,jdbcType=NUMERIC}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from sys_department 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysDepartment">
+		INSERT INTO sys_department(
+	            org_id ,
+	            org_name ,
+	            bur_spel_code ,
+	            area_id ,
+	            area_name ,
+	            department_type ,
+	            group_name ,
+	            non_basedrug_distri_area_name ,
+	            non_basedrug_distri_area_id ,
+	            basedrug_distribute_area_name ,
+	            basedrug_distribute_area_id ,
+	            supplies_distribute_area_name ,
+	            supplies_distribute_area_id ,
+	            drug_purchase_property ,
+	            department_leader ,
+	            department_tel ,
+	            is_using ,
+	            sort ,
+	            remark ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{orgId},
+	        	#{orgName},
+	        	#{burSpelCode},
+	        	#{areaId},
+	        	get_full_name(#{areaId}),
+	        	#{departmentType},
+	        	#{groupName},
+	        	get_full_name(#{nonBasedrugDistributeAreaId}),
+	        	#{nonBasedrugDistributeAreaId},
+	        	get_full_name(#{basedrugDistributeAreaId}),
+	        	#{basedrugDistributeAreaId},
+	        	get_full_name(#{suppliesDistributeAreaId}),
+	        	#{suppliesDistributeAreaId},
+	        	#{drugPurchaseProperty},
+	        	#{departmentLeader},
+	        	#{departmentTel},
+	        	#{isUsing},
+	        	#{sort},
+	        	#{remark},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="departmentId" parameterType="com.hsnn.medstgmini.base.sys.model.SysDepartment">
+		<!--<selectKey resultType="java.lang.Integer" keyProperty="departmentId" order="BEFORE"> -->
+			<!--SELECT SYSDEPARTMENTSEQ.nextval from dual-->
+        <!--</selectKey>-->
+		INSERT INTO sys_department(
+				<!--department_Id,-->
+	            org_id ,
+	            org_name ,
+	            bur_spel_code ,
+	            area_id ,
+	            area_name ,
+	            department_type ,
+	            group_name ,
+	            non_basedrug_distri_area_name ,
+	            non_basedrug_distri_area_id ,
+	            basedrug_distribute_area_name ,
+	            basedrug_distribute_area_id ,
+	            supplies_distribute_area_name ,
+	            supplies_distribute_area_id ,
+	            drug_purchase_property ,
+	            department_leader ,
+	            department_tel ,
+	            is_using ,
+	            sort ,
+	            remark ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+				<!--#{departmentId},-->
+	        	#{orgId},
+	        	#{orgName},
+	        	#{burSpelCode},
+	        	#{areaId},
+	        	get_full_name(#{areaId}),
+	        	#{departmentType},
+	        	#{groupName},
+	        	get_full_name(#{nonBasedrugDistributeAreaId}),
+	        	#{nonBasedrugDistributeAreaId},
+	        	get_full_name(#{basedrugDistributeAreaId}),
+	        	#{basedrugDistributeAreaId},
+	        	get_full_name(#{suppliesDistributeAreaId}),
+	        	#{suppliesDistributeAreaId},
+	        	#{drugPurchaseProperty},
+	        	#{departmentLeader},
+	        	#{departmentTel},
+	        	#{isUsing},
+	        	#{sort},
+	        	#{remark},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	now(),
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	now()
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysDepartment">
+		UPDATE sys_department  
+		<set>
+	        	org_id = #{orgId},
+	        	org_name = #{orgName},
+	        	bur_spel_code = #{burSpelCode},
+	        	area_name = get_full_name(#{areaId}),
+	        	area_id = #{areaId},
+	        	department_type = #{departmentType},
+	        	group_name = #{groupName},
+	        	non_basedrug_distri_area_name = get_full_name(#{nonBasedrugDistributeAreaId}),
+	        	non_basedrug_distri_area_id = #{nonBasedrugDistributeAreaId},
+	        	basedrug_distribute_area_name = get_full_name(#{basedrugDistributeAreaId}),
+	        	basedrug_distribute_area_id = #{basedrugDistributeAreaId},
+	        	supplies_distribute_area_name = get_full_name(#{suppliesDistributeAreaId}),
+	        	supplies_distribute_area_id = #{suppliesDistributeAreaId},
+	        	drug_purchase_property = #{drugPurchaseProperty},
+	        	department_leader = #{departmentLeader},
+	        	department_tel = #{departmentTel},
+	        	is_using = #{isUsing},
+	        	sort = #{sort},
+	        	remark = #{remark},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = #{lastUpdateTime},
+        </set>
+		WHERE  department_id =  #{departmentId}
+	</update>
+	
+	<update id="updateDepartment" parameterType="com.hsnn.medstgmini.base.sys.model.SysDepartment">
+		UPDATE sys_department  
+		<set>
+			    <if test="orgId != null and orgId !='' ">
+					org_id = #{orgId},
+				</if>
+	        	<if test="orgName != null and orgName !='' ">
+	            	org_name = #{orgName},
+	        	</if>
+	        	<if test="burSpelCode != null and burSpelCode !='' ">
+	            	bur_spel_code = #{burSpelCode},
+	        	</if>
+	        	<if test="areaId != null and areaId !='' ">
+	        	  area_id = #{areaId},
+	        	  area_name = get_full_name(#{areaId}),
+	        	</if>
+	        	<if test="departmentType != null and departmentType !='' ">
+	        	  department_type = #{departmentType},
+	        	</if>
+	        	<if test="groupName != null and groupName !='' ">
+	        	  group_name = #{groupName},
+	        	</if>
+	        	<if test="nonBasedrugDistributeAreaId != null and nonBasedrugDistributeAreaId !='' ">
+	        	  non_basedrug_distri_area_id = #{nonBasedrugDistributeAreaId},
+	        	  non_basedrug_distri_area_name = get_full_name(#{nonBasedrugDistributeAreaId}),
+	        	</if>
+	        	<if test="basedrugDistributeAreaId != null and basedrugDistributeAreaId !='' ">
+	        	    basedrug_distribute_area_id = #{basedrugDistributeAreaId},
+	        	    basedrug_distribute_area_name = get_full_name(#{basedrugDistributeAreaId}),
+	        	</if>
+	        	<if test="suppliesDistributeAreaId != null and suppliesDistributeAreaId !='' ">
+	        	   supplies_distribute_area_id = #{suppliesDistributeAreaId},
+	        	   supplies_distribute_area_name = get_full_name(#{suppliesDistributeAreaId}),
+	        	</if>
+	        	<if test="drugPurchaseProperty != null and drugPurchaseProperty !='' ">
+	        	   drug_purchase_property = #{drugPurchaseProperty},
+	        	</if>
+	        	<if test="departmentLeader != null and departmentLeader !='' ">
+	        	    department_leader = #{departmentLeader},
+	        	</if>
+	        	<if test="departmentTel != null and departmentTel !='' ">
+	        	    department_tel = #{departmentTel},
+	        	</if>
+	        	<if test="isUsing != null">
+	        	   is_using = #{isUsing},
+	        	</if>
+	        	<if test="sort != null and sort !='' ">
+	        	    sort = #{sort},
+	        	</if>
+	        	<if test="remark != null and remark !='' ">
+	        	   remark = #{remark},
+	        	</if>
+	        	<if test="addUserId != null and addUserId !='' ">
+	        	   add_user_id = #{addUserId},
+	        	</if>
+	        	<if test="addUserName != null and addUserName !='' ">
+	        	  add_user_name = #{addUserName},
+	        	</if>
+	        	<if test="addTime != null and addTime !='' ">
+	        	  add_time = #{addTime},
+	        	</if>
+	        	<if test="lastUpdateUserId != null and lastUpdateUserId !='' ">
+	        	   last_update_user_id = #{lastUpdateUserId},
+	        	</if>
+	        	<if test="lastUpdateUserName != null and lastUpdateUserName !='' ">
+	        	   last_update_user_name = #{lastUpdateUserName},
+	        	</if>
+	        	<if test="lastUpdateTime != null and lastUpdateTime !='' ">
+	        	   last_update_time = #{lastUpdateTime}
+	        	</if>
+	        	
+        </set>
+		WHERE  department_id =  #{departmentId}
+	</update>
+
+<update id="updateDepartmentByIsNull" parameterType="com.hsnn.medstgmini.base.sys.model.SysDepartment">
+		UPDATE sys_department  
+		<set>
+			    <if test="orgId != null and orgId !='' ">
+					org_id = #{orgId},
+				</if>
+	        	<if test="orgName != null and orgName !='' ">
+	            	org_name = #{orgName},
+	        	</if>
+	        	<if test="burSpelCode != null and burSpelCode !='' ">
+	            	bur_spel_code = #{burSpelCode},
+	        	</if>
+	        	<if test="areaId != null and areaId !='' ">
+	        	  area_id = #{areaId},
+	        	  area_name = get_full_name(#{areaId}),
+	        	</if>
+	        	<if test="departmentType != null and departmentType !='' ">
+	        	  department_type = #{departmentType},
+	        	</if>
+	        	<if test="groupName != null and groupName !='' ">
+	        	  group_name = #{groupName},
+	        	</if>
+	        	<if test="nonBasedrugDistributeAreaId != null and nonBasedrugDistributeAreaId !='' ">
+	        	  non_basedrug_distri_area_id = #{nonBasedrugDistributeAreaId},
+	        	  non_basedrug_distri_area_name = get_full_name(#{nonBasedrugDistributeAreaId}),
+	        	</if>
+	        	<if test="basedrugDistributeAreaId != null and basedrugDistributeAreaId !='' ">
+	        	    basedrug_distribute_area_id = #{basedrugDistributeAreaId},
+	        	    basedrug_distribute_area_name = get_full_name(#{basedrugDistributeAreaId}),
+	        	</if>
+	        	<if test="suppliesDistributeAreaId != null and suppliesDistributeAreaId !='' ">
+	        	   supplies_distribute_area_id = #{suppliesDistributeAreaId},
+	        	   supplies_distribute_area_name = get_full_name(#{suppliesDistributeAreaId}),
+	        	</if>
+	        	<if test="drugPurchaseProperty != null and drugPurchaseProperty !='' ">
+	        	   drug_purchase_property = #{drugPurchaseProperty},
+	        	</if>
+	        	    department_leader = #{departmentLeader},
+	        	    department_tel = #{departmentTel},
+	        	<if test="isUsing != null">
+	        	   is_using = #{isUsing},
+	        	</if>
+	        	<if test="sort != null and sort !='' ">
+	        	    sort = #{sort},
+	        	</if>
+	        	   remark = #{remark},
+	        	<if test="addUserId != null and addUserId !='' ">
+	        	   add_user_id = #{addUserId},
+	        	</if>
+	        	<if test="addUserName != null and addUserName !='' ">
+	        	  add_user_name = #{addUserName},
+	        	</if>
+	        	<if test="addTime != null and addTime !='' ">
+	        	  add_time = #{addTime},
+	        	</if>
+	        	<if test="lastUpdateUserId != null and lastUpdateUserId !='' ">
+	        	   last_update_user_id = #{lastUpdateUserId},
+	        	</if>
+	        	<if test="lastUpdateUserName != null and lastUpdateUserName !='' ">
+	        	   last_update_user_name = #{lastUpdateUserName},
+	        	</if>
+	        	<if test="lastUpdateTime != null and lastUpdateTime !='' ">
+	        	   last_update_time = #{lastUpdateTime}
+	        	</if>
+	        	
+        </set>
+		WHERE  department_id =  #{departmentId}
+	</update>
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_department WHERE  department_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,u.user_name "userName" 
+	    FROM sys_department t left join sys_user u 
+        on t.department_id = u.department_id and u.acct_type = 0
+		<where>
+			<if test="departmentId != null and departmentId !='' ">
+	            AND t.department_id = #{departmentId}
+	        </if>
+	        <if test="orgId != null">
+	            AND t.org_id = #{orgId}
+	        </if>
+			<if test="orgName != null and orgName !='' ">
+	            AND t.org_name like #{orgName}
+	        </if>
+			<if test="burSpelCode != null and burSpelCode !='' ">
+	            AND t.bur_spel_code = #{burSpelCode}
+	        </if>
+	        <if test="groupName != null and groupName !='' ">
+	            AND t.group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+	         <if test="@OGNL@isNotEmpty(departmentType)">
+	            AND t.department_type = #{departmentType}
+	        </if>
+		</where>
+		<if test="orderColumn != null and orderColumn !='' ">
+        ORDER BY t.${orderColumn} <if test="orderDirection != null and orderDirection !=''  ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<select id="departMentQueryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT  t.group_name,t.department_id,t.org_id,t.director,t.director_id,t.org_name
+	    FROM sys_department t
+		<where>
+			<if test="departmentId != null and departmentId !='' and departmentId!='null'">
+	            AND t.department_id not in (${departmentId}) 
+	        </if>
+	        <if test="orgId != null">
+	            AND t.org_id = #{orgId}
+	        </if>
+			<if test="orgName != null and orgName !='' ">
+	            AND t.org_name like #{orgName}
+	        </if>
+			<if test="burSpelCode != null and burSpelCode !='' ">
+	            AND t.bur_spel_code = #{burSpelCode}
+	        </if>
+	        <if test="groupName != null and groupName !='' ">
+	            AND t.group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+	         <if test="@OGNL@isNotEmpty(departmentType)">
+	            AND t.department_type = #{departmentType}
+	        </if>
+		</where>
+        order by t.department_id
+	</select>
+	
+	<select id="getReviewDeptName" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_department t 
+		<where>
+			<if test="orgId != null">
+	            AND t.org_id = #{orgId}
+	        </if>
+	        <if test="groupName != null and groupName !='' ">
+	            AND t.group_name = #{groupName}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(departmentType)">
+	            AND t.department_type = #{departmentType}
+	        </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_department (
+        	department_Id,
+            org_id ,
+            org_name ,
+            bur_spel_code ,
+            area_name ,
+            area_id ,
+            department_type ,
+            group_name ,
+            non_basedrug_distri_area_name ,
+            non_basedrug_distri_area_id ,
+            basedrug_distribute_area_name ,
+            basedrug_distribute_area_id ,
+            supplies_distribute_area_name ,
+            supplies_distribute_area_id ,
+            drug_purchase_property ,
+            department_leader ,
+            department_tel ,
+            is_using ,
+            sort ,
+            remark ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) p.* from (
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select 
+        	#{item.orgId},
+        	#{item.orgName},
+        	#{item.burSpelCode},
+        	get_full_name(#{item.areaId}),
+        	#{item.areaId},
+        	#{item.departmentType},
+        	#{item.groupName},
+        	get_full_name(#{item.nonBasedrugDistributeAreaId}),
+        	#{item.nonBasedrugDistributeAreaId},
+        	get_full_name(#{item.basedrugDistributeAreaId}),
+        	#{item.basedrugDistributeAreaId},
+        	get_full_name(#{item.suppliesDistributeAreaId}),
+        	#{item.suppliesDistributeAreaId},
+        	#{item.drugPurchaseProperty},
+        	#{item.departmentLeader},
+        	#{item.departmentTel},
+        	#{item.isUsing},
+        	#{item.sort},
+        	#{item.remark},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	now(),
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime} 
+        from dual
+        </foreach> ) p
+	</insert>
+
+	
+	
+	
+	
+	
+	
+	<select id="getJgDepartmentList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,o.area_name "org_area_name"
+	    FROM sys_department t left join std_manage_org o on 
+t.org_id = o.id
+		<where>
+			<if test="orgName != null and orgName != ''">
+	            AND (t.org_name like #{orgName} or t.bur_spel_code like #{orgName})
+	        </if>
+	        <if test="departmentType != null and departmentType != ''">
+	              AND t.department_type = #{departmentType}
+	         </if>
+	         AND o.area_id like #{areaId} 
+		</where>
+	</select>
+	
+	<select id="getResourceList" parameterType="map" resultType="hashmap">
+		select distinct a.resource_id "id",a.parent_resource_id "pid",a.menu_name "menuName",
+		a.resource_url "resourceUrl",a.icon "icon",a.resource_type "type",a.sort "sort"
+		 from sys_resource a 
+		inner join sys_role_resource c on c.resource_id = a.resource_id
+		LEFT JOIN sys_org_resource_forbidden d ON d.org_id=#{orgId}
+		AND c.resource_id = d.resource_id
+		<where>
+			<if test="departmentId != null and departmentId != ''">
+	            AND c.belong_department_id = #{departmentId}
+	        </if>
+	        <if test="postId != null and postId != ''">
+	            AND c.belong_post_id = #{postId}
+	        </if>
+	        <if test="roleId != null and roleId != ''">
+	            AND c.role_id = #{roleId}
+	            and c.is_using = 1
+	        </if>
+	        AND d.resource_id IS NULL
+	        and a.is_using = 1 order by a.sort asc
+		</where>
+		
+	</select>
+	
+
+	
+	<select id="findDepartmentIdAndName" parameterType="map" resultMap="BaseResultMap">
+		SELECT department_id,group_name,department_type,org_id from sys_department 
+		<where>
+			<if test="departmentId != null and departmentId !='' ">
+	            AND department_id = #{departmentId}
+	        </if>
+		</where>
+	</select>
+
+	
+	<select id="getHospDepartmentList" parameterType="map" resultType="hashmap">
+		SELECT t.department_id "departmentId",t.org_name "orgName",t.area_name "areaName",
+		a.hospital_level "level",a.drug_purchase_property "purchase",t.group_name "groupName",
+		t.is_using "isUsing",t.remark "remark",a.area_name "orgAreaName"
+	    FROM sys_department t inner join std_hospital a on a.hospital_id = t.org_id
+		<where>
+			<if test="orgName != null and orgName != ''">
+	            AND (t.org_name like #{orgName} or t.bur_spel_code like #{orgName})
+	        </if>
+	        <if test="level != null and level != ''">
+	            AND a.hospital_level = #{level}
+	        </if>
+	        <if test="purchase != null and purchase != ''">
+	            AND a.drug_purchase_property = #{purchase}
+	        </if>
+	        <if test="departmentType != null and departmentType != ''">
+	            AND t.department_type = #{departmentType}
+	        </if>
+	            AND a.area_id like #{areaId} 
+		</where>
+	</select>
+	<select id="getHospDepartmentDetail" parameterType="java.lang.Integer" resultType="hashmap">
+		select a.department_id "departmentId",a.org_name "orgName",a.area_name "areaName",a.group_name "groupName",
+		a.is_using "isUsing",a.remark "remark",b.hospital_address "address",a.department_leader "leader",a.department_tel "tel"
+		from sys_department a left join std_hospital b on b.hospital_id = a.org_id where a.department_id = #{id}
+	</select>
+	
+	<select id="getCompDepartmentList" parameterType="map" resultType="hashmap">
+		SELECT t.department_id "departmentId",t.org_name "orgName",a.address "address",a.area_name "areaName",
+		a.company_simple_name "simpleName",a.company_type "comType",t.group_name "groupName",
+		t.is_using "isUsing",t.remark "remark"
+	    FROM sys_department t inner join std_company a on a.company_id = t.org_id
+		<where>
+			<if test="orgName != null and orgName != ''">
+	            AND (t.org_name like #{orgName} or t.bur_spel_code like #{orgName} or a.company_simple_name like #{orgName})
+	        </if>
+	        <if test="compType != null and compType != ''">
+	            AND a.company_type = #{compType}
+	        </if>
+	        <if test="areaId != null and areaId != ''">
+	            AND a.area_id like #{areaId}
+	        </if>
+	          and (t.department_type = #{scType} or t.department_type = #{psType} or t.department_type = #{scpsType})
+		</where>
+	</select>
+	<select id="getCompDepartmentDetail" parameterType="java.lang.Integer" resultType="hashmap">
+		SELECT a.department_id "departmentId",a.org_name "orgName",b.address "address",
+		b.company_simple_name "simpleName",b.company_type "comType",a.group_name "groupName",
+		a.is_using "isUsing",a.remark "remark",a.department_leader "leader",a.department_tel "tel"
+		from sys_department a left join std_company b on b.company_id = a.org_id where a.department_id = #{id}
+	</select>
+	
+	<select id="getDepartmentList" parameterType="map" resultType="hashmap">
+		SELECT a.department_id "departmentId",a.group_name "groupName",a.remark "remark",a.is_using "isUsing",
+		a.org_id "orgId",a.org_name "orgName",a.area_name "areaName",b.org_address "address"
+	    FROM sys_department a join std_manage_org b on b.id = a.org_id 
+	    <where>
+			<if test="groupName != null and groupName != ''">
+	            AND a.group_name like #{groupName}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(departmentType)">
+	            AND a.department_type = #{departmentType}
+	        </if>
+	          and a.org_id = #{orgId} and a.is_using = 1
+		</where>
+	</select>
+	<select id="getDepartmentResource" parameterType="map" resultType="hashmap">
+        SELECT distinct a.resource_id "id", a.menu_name "menuName", a.resource_type "type", a.icon, a.sort, 
+          a.resource_url, a.parent_resource_id "pid", case when t.id is null then 0 else 1 end "checked" 
+		 from sys_resource a 
+		 join sys_role_resource b on b.resource_id = a.resource_id
+		 LEFT JOIN sys_org_resource_forbidden c ON c.resource_id = b.resource_id
+		  AND c.org_id = #{orgId}
+		 left join (
+				SELECT a.resource_id id  from sys_resource a 
+				join sys_role_resource b on b.resource_id = a.resource_id
+				where b.belong_org = #{orgId} and b.belong_post_id is null and b.belong_department_id = #{departmentId} and a.is_using = 1
+		)t  on t.id = a.resource_id
+		 where b.role_id = #{roleId}  
+		 and a.is_using = 1 
+		 AND c.resource_id IS NULL
+		 order by a.sort asc 
+	</select>
+	
+	<delete id="deleteDepartmentResource">
+		DELETE FROM sys_role_resource WHERE  belong_department_id  = #{departmentId}
+		and resource_id in 
+		<foreach collection="dels" item="item" index="index" separator="," open="(" close=")">
+        #{item}
+        </foreach>
+	</delete>
+	<delete id="deleteUserResource">
+		DELETE FROM sys_user_resource WHERE  belong_department_id  = #{departmentId}
+		and resource_id in 
+		<foreach collection="dels" item="item" index="index" separator="," open="(" close=")">
+        #{item}
+        </foreach>
+	</delete>
+	
+	<insert id="addDepartmentResource" parameterType="java.util.List" >
+        INSERT INTO sys_role_resource (
+        	id,
+            role_id ,
+            resource_id ,
+            belong_org,
+            belong_department_id,
+            is_using ,
+            type,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) p.* from(
+        <foreach collection="list" item="item" index="index" separator="union all">
+         select 
+        	#{item.roleId},
+        	#{item.resourceId},
+        	#{item.belongOrg},
+        	#{item.belongDepartmentId},
+        	#{item.isUsing},
+        	#{item.type},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+         from dual
+        </foreach>) p
+	</insert>
+	<select id="getRoleByDepartmentId" parameterType="map" resultType="hashmap">
+		select role_id "roleId" from sys_role where belong_department_id = #{departmentId} and belong_post_id is null
+	</select>
+	
+	<select id="getDepartmentById"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select <include refid="full-columns" />
+        from sys_department t
+        where t.department_id = #{departmentId} 
+	</select>
+	
+	<!--  医疗机构为主的部门查看   -->
+	<select id="queryHosDeptAll" parameterType="map" resultMap="hosResultMap">
+		SELECT  <include refid="full-columns" />,a.hospital_id,a.hospital_name,a.hospital_address,a.hospital_level,
+		a.contact_person,a.contact_tel,a.health_organization_code,a.is_using is_hosp_using,a.health_org_sort
+		FROM std_hospital a
+		LEFT JOIN sys_department t ON a.hospital_id = t.org_id
+		<where>
+		  <if test="@OGNL@isNotEmpty(hospitalIds)">
+	           AND a.hospital_id in
+				<foreach collection="hospitalIds" item="item" index="index" separator="," open="(" close=")">
+					#{item}
+				</foreach>
+	        </if>
+			<if test="departmentId != null and departmentId !='' ">
+				AND t.department_id = #{departmentId}
+			</if>
+			<if test="orgId != null">
+				AND t.org_id = #{orgId}
+			</if>
+			<if test="orgName != null and orgName !='' ">
+				AND t.org_name = #{orgName}
+			</if>
+			<if test="burSpelCode != null and burSpelCode !='' ">
+				AND t.bur_spel_code = #{burSpelCode}
+			</if>
+			<if test="groupName != null and groupName !='' ">
+				AND t.group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.is_using = #{isUsing}
+			</if>
+			<if test="@OGNL@isNotEmpty(departmentType)">
+				AND t.department_type = #{departmentType}
+			</if>
+			<if test="@OGNL@isNotEmpty(month)">
+	           AND (  to_char(t.last_update_time,'yyyy-MM') = #{month}
+		             or to_char(a.last_update_time,'yyyy-MM') = #{month}
+		            )
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn) ">
+          ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<update id="updateIsUsingByOrgId" parameterType="map">
+		UPDATE sys_department  
+		<set>
+	        	is_using = #{isUsing}, 
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+            	last_update_time = SYSDATE
+        </set>
+		WHERE  org_id =  #{orgId} and is_using != #{isUsing}
+	</update>
+	
+	<!-- 监管机构部门查看 :省级机构-->
+	<select id="getJGDepartmentListSJ" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+		    department_id,
+			org_name,
+			group_name,
+			department_type,
+			department_leader,
+			department_tel,
+			a.is_using
+		FROM
+		    sys_department a
+		<where>
+			<if test="@OGNL@isNotEmpty(departmentType) ">
+			    and department_type = #{departmentType}
+			</if>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+			</if>
+			<if test="groupName != null and groupName !='' ">
+				AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND a.is_using = #{isUsing}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 监管机构部门查看 :市级机构-->
+	<select id="getJGDepartmentListShJ" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+			*
+		FROM
+			(
+				SELECT
+				    a.department_id,
+					org_name,
+					group_name,
+					department_type,
+					department_leader,
+					department_tel,
+					a.is_using
+				FROM
+				  sys_department a
+		         INNER JOIN std_hospital b ON a.org_id = b.hospital_id
+				<if test="adminAreaIdDrug !=null || adminAreaIdDrug!='' ">
+					AND b.admin_area_id_drug LIKE CONCAT(CONCAT('%', #{adminAreaIdDrug}), '%')
+				</if>
+				UNION ALL
+					SELECT
+					    a.department_id,
+						org_name,
+						group_name,
+						department_type,
+						department_leader,
+						department_tel,
+						a.is_using
+					FROM
+						sys_department a
+			        INNER JOIN std_manage_org b ON a.org_id = b.id
+					<if test="areaId !=null || areaId!='' ">
+						AND b.area_id LIKE CONCAT(CONCAT('%', #{areaId}), '%')
+					</if>
+			) tab
+			<where>
+			     <if test="@OGNL@isNotEmpty(departmentType) ">
+				    and department_type = #{departmentType}
+				</if>
+				<if test="@OGNL@isNotEmpty(orgName)">
+					AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+				</if>
+				<if test="groupName != null and groupName !='' ">
+					AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+				</if>
+				<if test="@OGNL@isNotEmpty(isUsing)">
+					AND is_using = #{isUsing}
+				</if>
+			</where>
+	</select>
+	
+	<!-- 监管机构部门查看 :县级机构-->
+	<select id="getJGDepartmentListXJ" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+		    a.department_id,
+			org_name,
+			group_name,
+			department_type,
+			department_leader,
+			department_tel,
+			a.is_using
+		FROM
+			sys_department a
+		INNER JOIN std_hospital b ON a.org_id = b.hospital_id
+		<if test="adminAreaIdDrug !=null || adminAreaIdDrug!='' ">
+			AND b.admin_area_id_drug = #{adminAreaIdDrug}
+		</if>
+		<where>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+			</if>
+			<if test="groupName != null and groupName !='' ">
+				AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			 <if test="@OGNL@isNotEmpty(departmentType) ">
+			    and department_type = #{departmentType}
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND is_using = #{isUsing}
+			</if>
+		</where>
+	</select>
+	<update id="updateDepartmentById" parameterType="com.hsnn.medstgmini.base.sys.model.SysDepartment">
+		update sys_department s set s.director = #{director},s.director_id=#{directorId} where s.department_id = #{departmentId}
+	</update>
+	<select id="selectNameAndId" resultMap="BaseResultMap" parameterType="com.hsnn.medstgmini.base.sys.model.SysDepartment">
+		select s.department_id,s.group_name,s.director,s.director_id from sys_department s 
+		<where>
+			<if test="departmentId != null and departmentId !='' ">
+	          and    s.department_id = #{departmentId}
+	        </if>
+	        <if test="orgId != null and orgId !='' ">
+	          and    s.org_id = #{orgId}
+	        </if>
+		</where>
+	</select>
+	
+	<insert id="addDepartment" useGeneratedKeys="true" keyProperty="departmentId" parameterType="com.hsnn.medstgmini.base.sys.model.SysDepartment">
+		<!--<selectKey resultType="java.lang.Integer" keyProperty="departmentId" order="BEFORE"> -->
+			<!--SELECT SYSDEPARTMENTSEQ.nextval from dual-->
+        <!--</selectKey>-->
+		insert into sys_department(
+			<!--department_id,-->
+			org_id,
+			org_name,
+			area_id,
+			area_name,
+			department_type,
+			group_name,
+			is_using,
+			sort,
+			add_user_id,
+			add_user_name,
+			add_time
+		)values(
+			<!--#{departmentId},-->
+			#{orgId},
+			#{orgName},
+			#{areaId},
+			#{areaName},
+			#{departmentType},
+			#{groupName},
+			1,
+			1,
+			#{addUserId},
+			#{addUserName},
+			now()
+		)
+	</insert>
+</mapper>

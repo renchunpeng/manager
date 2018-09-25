@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysDatainterfaceOrganizationDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceOrganization" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="orgId" column="org_id" javaType="String"/>
+        <result property="orgUserName" column="org_user_name" javaType="String"/>
+        <result property="departmentUserName" column="department_user_name" javaType="String"/>
+        <result property="orgType" column="org_type" javaType="Integer"/>
+        <result property="departmentId" column="department_id" javaType="Integer"/>
+        <result property="publicKey" column="public_key" javaType="String"/>
+        <result property="privateKey" column="private_key" javaType="String"/>
+        <result property="ipv4" column="ipv4" javaType="String"/>
+        <result property="accessToken" column="access_token" javaType="String"/>
+        <result property="expireTime" column="expire_time" javaType="Date"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="lastAccessTime" column="last_access_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+	</resultMap>
+	
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceOrganization" id="comResultMap" extends="BaseResultMap">
+	     <result property="companyName" column="company_name" javaType="String"/>
+	     <association property="stdCompany" resultMap="com.hsnn.medstgmini.base.std.dao.StdCompanyDao.BaseResultMap"/>
+	</resultMap>
+	
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceOrganization" id="hosResultMap" extends="BaseResultMap">
+	     <result property="hospitalName" column="hospital_name" javaType="String"/>
+	     <result property="deptId" column="deptId" javaType="Integer"/>
+	     <association property="sysDepartment" resultMap="com.hsnn.medstgmini.base.sys.dao.SysDepartmentDao.BaseResultMap"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.org_id,
+        t.org_user_name,
+        t.department_user_name,
+        t.org_type,
+        t.department_id,
+        t.public_key,
+        t.private_key,
+        t.ipv4,
+        t.access_token,
+        t.expire_time,
+        t.is_using,
+        t.last_access_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+		
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM sys_datainterface_organization t
+		WHERE t.id =  #{value}
+	</select>
+
+	<select id="getCompData" parameterType="map" resultType="hashmap">
+	 SELECT
+ 		company_id org_id,
+ 		company_name company_name,
+		company_account_code org_user_name,
+		'' department_user_name,
+		t.user_type org_type,
+		'' department_id
+	FROM std_company a
+	INNER JOIN sys_user t ON a.company_id = t.org_id
+	and t.acct_type = '0' and t.department_id is null
+	WHERE
+		initialization_state = 4
+	AND NOT EXISTS (
+		SELECT
+			*
+		FROM
+			sys_datainterface_organization b
+		WHERE
+			a.company_account_code = b.org_user_name
+    )
+	<if test="@OGNL@isNotEmpty(orgUserName)">
+	  AND a.company_account_code = #{orgUserName}
+	</if>
+	<if test="@OGNL@isNotEmpty(companyName)">
+	  AND a.company_name = #{companyName}
+	</if>
+	<if test="@OGNL@isNotEmpty(companyTypes)">
+	  AND a.company_type in
+      <foreach collection="companyTypes" item="item" index="index" separator="," open="(" close=")">
+		 #{item}
+	  </foreach>
+	</if>
+	</select>
+	
+	<select id="getHospData" parameterType="map" resultType="hashmap">
+	SELECT
+		b.org_id,
+		c.user_name org_user_name,
+		b.user_name department_user_name,
+		b.user_type org_type,
+		b.department_id
+	FROM
+		sys_department a
+	INNER JOIN sys_user b ON a.department_id = b.department_id
+	INNER JOIN std_hospital c ON b.org_id = c.hospital_id
+	WHERE
+		a.department_type IN (4, 7)
+	AND b.acct_type = 0
+	AND NOT EXISTS (
+		SELECT
+			*
+		FROM
+			sys_datainterface_organization d
+		WHERE
+			c.user_name = d.org_user_name
+   	 AND b.user_name = d.department_user_name
+)
+	<if test="@OGNL@isNotEmpty(orgUserName)">
+	AND c.user_name = #{orgUserName}
+	</if>
+	</select>
+	
+	<select id="getData" parameterType="map" resultMap="BaseResultMap">
+	select <include refid="full-columns" />
+	 from sys_datainterface_organization t
+	<where>
+	<if test="@OGNL@isNotEmpty(orgUserName)">
+	And	t.org_user_name = #{orgUserName}
+	</if>
+	</where>
+	</select>
+	
+	<insert id="save" useGeneratedKeys="false"  keyProperty="id" parameterType="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceOrganization">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+			SELECT SYSDATAINTERFACEORGANIZATSEQ.nextval from dual
+        </selectKey>
+		INSERT INTO sys_datainterface_organization(
+				id,
+	            org_id ,
+	            org_user_name ,
+	            department_user_name ,
+	            org_type ,
+	            department_id ,
+	            public_key ,
+	            private_key ,
+	            ipv4 ,
+	            access_token ,
+	            expire_time ,
+	            is_using ,
+	            last_access_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		)
+		VALUES (
+				#{id},
+	        	#{orgId},
+	        	#{orgUserName},
+	        	#{departmentUserName},
+	        	#{orgType},
+	        	#{departmentId},
+	        	#{publicKey},
+	        	#{privateKey},
+	        	#{ipv4},
+	        	#{accessToken},
+	        	#{expireTime},
+	        	#{isUsing},
+	        	#{lastAccessTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceOrganization">
+		UPDATE sys_datainterface_organization  
+		<set>
+			org_id = #{orgId},
+			org_user_name = #{orgUserName},
+			department_user_name = #{departmentUserName},
+			org_type = #{orgType},
+			department_id = #{departmentId},
+			public_key = #{publicKey},
+			private_key = #{privateKey},
+			ipv4 = #{ipv4},
+			access_token = #{accessToken},
+			expire_time = #{expireTime},
+			is_using = #{isUsing},
+			last_access_time = #{lastAccessTime},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = #{lastUpdateTime},
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceOrganization">
+		UPDATE sys_datainterface_organization  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(orgId)">
+				org_id = #{orgId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orgUserName)">
+				org_user_name = #{orgUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(departmentUserName)">
+				department_user_name = #{departmentUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orgType)">
+				org_type = #{orgType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(departmentId)">
+				department_id = #{departmentId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(publicKey)">
+				public_key = #{publicKey},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(privateKey)">
+				private_key = #{privateKey},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(ipv4)">
+				ipv4 = #{ipv4},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(accessToken)">
+				access_token = #{accessToken},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(expireTime)">
+				expire_time = #{expireTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isUsing)">
+				is_using = #{isUsing},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastAccessTime)">
+				last_access_time = #{lastAccessTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				last_update_user_id = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				last_update_user_name = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				last_update_time = SYSDATE,
+			</if>
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_datainterface_organization WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_datainterface_organization t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgUserName)">
+				AND t.org_user_name = #{orgUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(departmentUserName)">
+				AND t.department_user_name = #{departmentUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgType)">
+				AND t.org_type = #{orgType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+				AND t.department_id = #{departmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(publicKey)">
+				AND t.public_key = #{publicKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(privateKey)">
+				AND t.private_key = #{privateKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(ipv4)">
+				AND t.ipv4 = #{ipv4}
+		    </if>
+			<if test="@OGNL@isNotEmpty(accessToken)">
+				AND t.access_token = #{accessToken}
+		    </if>
+			<if test="@OGNL@isNotEmpty(expireTime)">
+				AND t.expire_time = #{expireTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.is_using = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastAccessTime)">
+				AND t.last_access_time = #{lastAccessTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 企业 -->
+	<select id="getComList" parameterType="map" resultMap="comResultMap">
+		SELECT <include refid="full-columns" />,c.company_id,c.company_account_code,c.company_name,c.company_type_system,c.company_type
+	 	from std_company c LEFT join sys_datainterface_organization t 
+        on t.org_id = c.company_id
+		<where>
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            AND (c.company_name Like '%'||#{companyName}||'%'
+	            or c.comp_spel_code Like '%'||#{companyName}||'%')
+	            ) 
+	        </if>
+	        <if test="@OGNL@isNotEmpty(conditionName)">
+				AND (c.company_name LIKE '%'||#{conditionName}||'%'
+				or c.comp_spel_code LIKE '%'||#{conditionName}||'%'
+				or c.company_simple_name LIKE '%'||#{conditionName}||'%'
+				or c.company_simple_name_spell LIKE '%'||#{conditionName}||'%'
+				)
+	        </if>
+	        <if test="@OGNL@isNotEmpty(companyTypeSystem)">
+	            AND c.company_type_system = #{companyTypeSystem}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyType)">
+	            AND c.company_type = #{companyType}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(initializationState)">
+	            AND c.initialization_state = #{initializationState}
+	        </if>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgUserName)">
+				AND t.org_user_name = #{orgUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(departmentUserName)">
+				AND t.department_user_name = #{departmentUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgType)">
+				AND t.org_type = #{orgType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+				AND t.department_id = #{departmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(publicKey)">
+				AND t.public_key = #{publicKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(privateKey)">
+				AND t.private_key = #{privateKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(ipv4)">
+				AND t.ipv4 = #{ipv4}
+		    </if>
+			<if test="@OGNL@isNotEmpty(accessToken)">
+				AND t.access_token = #{accessToken}
+		    </if>
+			<if test="@OGNL@isNotEmpty(expireTime)">
+				AND t.expire_time = #{expireTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+			   <if test="isUsing == 0">
+			     AND (t.is_using = #{isUsing} or t.is_using is null)
+			   </if>
+				<if test="isUsing != 0">
+			      AND t.is_using = #{isUsing}
+			   </if>
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastAccessTime)">
+				AND t.last_access_time = #{lastAccessTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 医疗机构 -->
+	<select id="getHosList" parameterType="map" resultMap="hosResultMap">
+		SELECT <include refid="full-columns" />,d.org_name hospital_name,d.group_name,d.department_type,d.department_id deptId,u.user_name
+		FROM sys_department d
+		left join sys_user u on d.department_id = u.department_id and u.acct_type = 0
+		LEFT JOIN sys_datainterface_organization t ON t.department_id = d.department_id
+		<where>
+			 d.department_type in(4,7) AND d.is_using = 1
+			 <if test="departmentId != null and departmentId !='' ">
+	            AND d.department_id = #{departmentId}
+	        </if>
+	        <if test="orgId != null">
+	            AND d.org_id = #{orgId}
+	        </if>
+			<if test="orgName != null and orgName !='' ">
+	            AND d.org_name = #{orgName}
+	        </if>
+	        <if test="groupName != null and groupName !='' ">
+	            AND d.group_name like '%'||#{groupName}||'%'
+	        </if>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgUserName)">
+				AND t.org_user_name = #{orgUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(departmentUserName)">
+				AND t.department_user_name = #{departmentUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgType)">
+				AND t.org_type = #{orgType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+				AND t.department_id = #{departmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(publicKey)">
+				AND t.public_key = #{publicKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(privateKey)">
+				AND t.private_key = #{privateKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(ipv4)">
+				AND t.ipv4 = #{ipv4}
+		    </if>
+			<if test="@OGNL@isNotEmpty(accessToken)">
+				AND t.access_token = #{accessToken}
+		    </if>
+			<if test="@OGNL@isNotEmpty(expireTime)">
+				AND t.expire_time = #{expireTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				<if test="isUsing == 0">
+			     AND (t.is_using = #{isUsing} or t.is_using is null)
+			   </if>
+				<if test="isUsing != 0">
+			      AND t.is_using = #{isUsing}
+			   </if>
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastAccessTime)">
+				AND t.last_access_time = #{lastAccessTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	
+	
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_datainterface_organization (
+            org_id ,
+            org_user_name ,
+            department_user_name ,
+            org_type ,
+            department_id ,
+            public_key ,
+            private_key ,
+            ipv4 ,
+            access_token ,
+            expire_time ,
+            is_using ,
+            last_access_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.orgId},
+        	#{item.orgUserName},
+        	#{item.departmentUserName},
+        	#{item.orgType},
+        	#{item.departmentId},
+        	#{item.publicKey},
+        	#{item.privateKey},
+        	#{item.ipv4},
+        	#{item.accessToken},
+        	#{item.expireTime},
+        	#{item.isUsing},
+        	#{item.lastAccessTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM sys_datainterface_organization t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgUserName)">
+				AND t.org_user_name = #{orgUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(departmentUserName)">
+				AND t.department_user_name = #{departmentUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgType)">
+				AND t.org_type = #{orgType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+				AND t.department_id = #{departmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(publicKey)">
+				AND t.public_key = #{publicKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(privateKey)">
+				AND t.private_key = #{privateKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(ipv4)">
+				AND t.ipv4 = #{ipv4}
+		    </if>
+			<if test="@OGNL@isNotEmpty(accessToken)">
+				AND t.access_token = #{accessToken}
+		    </if>
+			<if test="@OGNL@isNotEmpty(expireTime)">
+				AND t.expire_time = #{expireTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.is_using = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastAccessTime)">
+				AND t.last_access_time = #{lastAccessTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE sys_datainterface_organization  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.orgId)">
+				org_id = #{model.orgId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orgUserName)">
+				org_user_name = #{model.orgUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.departmentUserName)">
+				department_user_name = #{model.departmentUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orgType)">
+				org_type = #{model.orgType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.departmentId)">
+				department_id = #{model.departmentId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.publicKey)">
+				public_key = #{model.publicKey},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.privateKey)">
+				private_key = #{model.privateKey},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.ipv4)">
+				ipv4 = #{model.ipv4},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.accessToken)">
+				access_token = #{model.accessToken},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.expireTime)">
+				expire_time = #{model.expireTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isUsing)">
+				is_using = #{model.isUsing},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastAccessTime)">
+				last_access_time = #{model.lastAccessTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				last_update_user_id = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				last_update_user_name = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				last_update_time = #{model.lastUpdateTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.id = #{params.id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orgId)">
+				AND t.org_id = #{params.orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orgUserName)">
+				AND t.org_user_name = #{params.orgUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.departmentUserName)">
+				AND t.department_user_name = #{params.departmentUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orgType)">
+				AND t.org_type = #{params.orgType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.departmentId)">
+				AND t.department_id = #{params.departmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.publicKey)">
+				AND t.public_key = #{params.publicKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.privateKey)">
+				AND t.private_key = #{params.privateKey}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.ipv4)">
+				AND t.ipv4 = #{params.ipv4}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.accessToken)">
+				AND t.access_token = #{params.accessToken}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.expireTime)">
+				AND t.expire_time = #{params.expireTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isUsing)">
+				AND t.is_using = #{params.isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastAccessTime)">
+				AND t.last_access_time = #{params.lastAccessTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.last_update_user_id = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.last_update_user_name = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.last_update_time = #{params.lastUpdateTime}
+		    </if>
+		</where>
+	</update>
+</mapper>

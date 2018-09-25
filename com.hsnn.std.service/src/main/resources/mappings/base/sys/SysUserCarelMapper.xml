@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysUserCarelDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysUserCarel" id="BaseResultMap">
+        <result property="caCode" column="ca_code" javaType="String"/>
+        <result property="userId" column="user_id" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.CA_CODE,
+        t.USER_ID
+	</sql>
+		
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM SYS_USER_CAREL t
+		<where>
+			<if test="@OGNL@isNotEmpty(caCode)">
+				AND t.CA_CODE = #{caCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(userId)">
+				AND t.USER_ID = #{userId}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.sys.model.SysUserCarel">
+		INSERT INTO SYS_USER_CAREL(
+	            CA_CODE ,
+	            USER_ID 
+		)
+		VALUES (
+	        	#{caCode},
+	        	#{userId}
+		)
+	</insert>
+	
+	<select id="checkRepeat"  resultMap="BaseResultMap">
+		select * from SYS_USER_CAREL t
+		<where>
+			<if test="@OGNL@isNotEmpty(caCode)">
+				AND t.CA_CODE = #{caCode}
+		    </if>
+		</where> 
+	</select>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from SYS_USER_CAREL where CA_CODE =  #{value}
+	</select>
+	
+	<select id="getValidateId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from SYS_USER_CAREL t where t.CA_CODE =  #{caCode} and t.USER_ID = #{userId}
+	</select>
+	
+</mapper>

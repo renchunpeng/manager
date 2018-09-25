@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+
+	<display-name>medstgmini</display-name>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring.xml,classpath:spring-mybatis.xml,classpath:spring-redis.xml</param-value>
+	</context-param>
+	
+	<!-- 该过滤器用于CAS实现单点登出功能 -->  
+    <filter>  
+        <filter-name>CAS Single Sign Out Filter</filter-name>  
+        <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>CAS Single Sign Out Filter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+    
+    <!-- 该过滤器负责CAS用户的认证工作 -->  
+    <filter>  
+        <filter-name>CASFilter</filter-name>  
+        <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>  
+        <init-param>  
+            <param-name>casServerLoginUrl</param-name>  
+            <param-value>http://192.168.1.156:9000/cas/login</param-value>  
+            <!--这里的server是服务端的IP -->  
+        </init-param>  
+        <init-param>  
+            <param-name>serverName</param-name>  
+            <param-value>http://localhost:8080</param-value>
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>CASFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+    
+    <!-- 该过滤器负责CAS对Ticket的校验工作 -->  
+    <filter>  
+        <filter-name>CAS Validation Filter</filter-name>  
+        <filter-class>  
+            org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>  
+        <init-param>  
+            <param-name>casServerUrlPrefix</param-name>  
+            <param-value>http://192.168.1.156:9000/cas</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>serverName</param-name>  
+            <param-value>http://localhost:8080</param-value>  
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>CAS Validation Filter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping>  
+    
+    <!-- 该过滤器使得开发者可以通过org.jasig.cas.client.util.AssertionHolder来获取用户的登录名。 比如AssertionHolder.getAssertion().getPrincipal().getName()。 -->  
+    <filter>  
+        <filter-name>CAS Assertion Thread Local Filter</filter-name>  
+        <filter-class>org.jasig.cas.client.util.AssertionThreadLocalFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>CAS Assertion Thread Local Filter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+    </filter-mapping> 
+    
+    <!-- 用于将通过CAS认证的用户信息放入当前应用的上下文环境 -->
+    <filter>  
+        <filter-name>AutoSetUserFromCASFilter</filter-name>  
+        <filter-class>com.hsnn.medstgmini.filter.AutoSetUserFromCASFilter</filter-class>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>AutoSetUserFromCASFilter</filter-name>  
+        <url-pattern>*.html</url-pattern>  
+    </filter-mapping> 
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+  	
+  	<filter>   
+	    <filter-name>AuthFilter</filter-name>   
+	    <filter-class>com.hsnn.medstgmini.filter.AuthFilter</filter-class>
+	    <init-param>   
+	       <param-name>loginpage</param-name>   
+	       <param-value>login.html</param-value>   
+	    </init-param>
+	    <init-param>   
+	       <param-name>homepage</param-name>   
+	       <param-value>index.html</param-value>   
+	    </init-param>
+	    <init-param>   
+	       <param-name>cssfolder</param-name>   
+	       <param-value>lib</param-value>   
+	    </init-param> 
+	    <init-param>   
+	       <param-name>jsfolder</param-name>   
+	       <param-value>lib</param-value>   
+	    </init-param> 
+	</filter>
+ 	<filter-mapping>
+		<filter-name>AuthFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- CAS单点认证监听器 -->
+	<listener>  
+        <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>  
+    </listener>  
+	
+	<!-- 监听servletContext，启动contextConfigLocation中的spring配置信息 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+ 
+	<!-- 防止spring内存溢出监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<servlet>
+		<description>spring mvc servlet</description>
+		<servlet-name>reqhandler</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<!-- 此处配置的是SpringMVC的配置文件 -->
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reqhandler</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+        <servlet-name>HsnnCaptchaServlet</servlet-name>
+        <servlet-class>com.hsnn.medstgmini.servlet.HsnnCaptchaServlet</servlet-class>
+        <!-- The width and height params are optional; if unspecified they default to 200 and 50 respectively. -->
+        <init-param>
+            <param-name>width</param-name>
+            <param-value>124</param-value>
+        </init-param>
+        <init-param>
+            <param-name>height</param-name>
+            <param-value>36</param-value>
+        </init-param>
+    </servlet>
+    
+	<servlet-mapping>
+        <servlet-name>HsnnCaptchaServlet</servlet-name>
+        <url-pattern>/captchaImg</url-pattern>
+    </servlet-mapping>
+    
+	<!-- 配置session超时时间，单位分钟 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	
+	 <!-- 控制jsp:include的编码 -->
+	 <jsp-config>  
+	     <jsp-property-group>  
+	         <description>  
+	             Special property group for JSP Configuration HTML   
+	             example.   
+	         </description>  
+	         <display-name>JSPConfiguration</display-name>  
+	         <url-pattern>*.xml</url-pattern>  
+	         <el-ignored>true</el-ignored>  
+	         <page-encoding>UTF-8</page-encoding>  
+	         <scripting-invalid>false</scripting-invalid>  
+	         <include-prelude></include-prelude>  
+	         <include-coda></include-coda>  
+	     </jsp-property-group>  
+	 </jsp-config> 
+
+	<welcome-file-list>
+		<welcome-file>/index.html</welcome-file>
+	</welcome-file-list>
+	
+	<error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/home.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
+</web-app>

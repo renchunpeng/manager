@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysFlowLogDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysFlowLog" id="BaseResultMap">
+        <result property="logId" column="LOG_ID" javaType="String"/>
+        <result property="tableName" column="TABLE_NAME" javaType="String"/>
+        <result property="foreignId" column="FOREIGN_ID" javaType="String"/>
+        <result property="doType" column="DO_TYPE" javaType="String"/>
+        <result property="doUser" column="DO_USER" javaType="String"/>
+        <result property="doReason" column="DO_REASON" javaType="String"/>
+        <result property="doDate" column="DO_DATE" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.LOG_ID,
+        t.TABLE_NAME,
+        t.FOREIGN_ID,
+        t.DO_TYPE,
+        t.DO_USER,
+        t.DO_REASON,
+        t.DO_DATE
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM SYS_FLOW_LOG t
+		WHERE t.LOG_ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.sys.model.SysFlowLog">
+		INSERT INTO SYS_FLOW_LOG(
+				LOG_ID,
+	            TABLE_NAME ,
+	            FOREIGN_ID ,
+	            DO_TYPE ,
+	            DO_USER ,
+	            DO_REASON ,
+	            DO_DATE 
+		)
+		VALUES (
+				#{logId},
+	        	#{tableName},
+	        	#{foreignId},
+	        	#{doType},
+	        	#{doUser},
+	        	#{doReason},
+	        	#{doDate}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysFlowLog">
+		UPDATE SYS_FLOW_LOG  
+		<set>
+			TABLE_NAME = #{tableName},
+			FOREIGN_ID = #{foreignId},
+			DO_TYPE = #{doType},
+			DO_USER = #{doUser},
+			DO_REASON = #{doReason},
+			DO_DATE = #{doDate},
+        </set>
+		WHERE  LOG_ID =  #{logId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.sys.model.SysFlowLog">
+		UPDATE SYS_FLOW_LOG  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(tableName)">
+				TABLE_NAME = #{tableName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(foreignId)">
+				FOREIGN_ID = #{foreignId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(doType)">
+				DO_TYPE = #{doType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(doUser)">
+				DO_USER = #{doUser},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(doReason)">
+				DO_REASON = #{doReason},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(doDate)">
+				DO_DATE = #{doDate},
+			</if>
+        </set>
+		WHERE  LOG_ID =  #{logId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM SYS_FLOW_LOG WHERE  LOG_ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM SYS_FLOW_LOG t
+		<where>
+			<if test="@OGNL@isNotEmpty(tableName)">
+				AND t.TABLE_NAME = #{tableName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(foreignId)">
+				AND instr(t.FOREIGN_ID,#{foreignId}) > 0
+			</if>
+			<if test="@OGNL@isNotEmpty(doType)">
+				AND t.DO_TYPE = #{doType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(doUser)">
+				AND t.DO_USER = #{doUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(doReason)">
+				AND t.DO_REASON = #{doReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(doDate)">
+				AND t.DO_DATE = #{doDate}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO SYS_FLOW_LOG (
+			LOG_ID ,
+            TABLE_NAME ,
+            FOREIGN_ID ,
+            DO_TYPE ,
+            DO_USER ,
+            DO_REASON ,
+            DO_DATE 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+			#{item.logId},
+        	#{item.tableName},
+        	#{item.foreignId},
+        	#{item.doType},
+        	#{item.doUser},
+        	#{item.doReason},
+        	#{item.doDate}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM SYS_FLOW_LOG t
+		<where>
+			<if test="@OGNL@isNotEmpty(logId)">
+				AND t.LOG_ID = #{logId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(tableName)">
+				AND t.TABLE_NAME = #{tableName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(foreignId)">
+				AND t.FOREIGN_ID = #{foreignId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(doType)">
+				AND t.DO_TYPE = #{doType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(doUser)">
+				AND t.DO_USER = #{doUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(doReason)">
+				AND t.DO_REASON = #{doReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(doDate)">
+				AND t.DO_DATE = #{doDate}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE SYS_FLOW_LOG  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.tableName)">
+				TABLE_NAME = #{model.tableName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.foreignId)">
+				FOREIGN_ID = #{model.foreignId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.doType)">
+				DO_TYPE = #{model.doType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.doUser)">
+				DO_USER = #{model.doUser},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.doReason)">
+				DO_REASON = #{model.doReason},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.doDate)">
+				DO_DATE = #{model.doDate},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.logId)">
+				AND t.LOG_ID = #{params.logId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.tableName)">
+				AND t.TABLE_NAME = #{params.tableName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.foreignId)">
+				AND t.FOREIGN_ID = #{params.foreignId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.doType)">
+				AND t.DO_TYPE = #{params.doType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.doUser)">
+				AND t.DO_USER = #{params.doUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.doReason)">
+				AND t.DO_REASON = #{params.doReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.doDate)">
+				AND t.DO_DATE = #{params.doDate}
+		    </if>
+		</where>
+	</update>
+</mapper>

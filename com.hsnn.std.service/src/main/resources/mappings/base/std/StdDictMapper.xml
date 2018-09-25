@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdDictDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdDict" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="parentId" column="parent_id" javaType="Integer"/>
+        <result property="dictionaryKey" column="dictionary_key" javaType="String"/>
+        <result property="dictionaryValue" column="dictionary_value" javaType="String"/>
+        <result property="classify" column="classify" javaType="String"/>
+        <result property="classifyName" column="classify_name" javaType="String"/>
+        <result property="type" column="type" javaType="String"/>
+        <result property="sort" column="sort" javaType="Integer"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+		<result property="ndictId" column="ndict_Id" javaType="String"/>
+
+
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.parent_id,
+        t.dictionary_key,
+        t.dictionary_value,
+        t.classify,
+        t.classify_name,
+        t.type,
+        t.sort,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	<select id="queryListId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select <include refid="full-columns"></include> from std_dict de where de.classify_name='医院相关字典' and de.is_using=1 and de.type='专家' and de.parent_id=#{value}
+	</select>
+	<!--根据dicttonary_key进行查询-->
+	<select id="getdicttonary" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_dict t
+		WHERE T.TYPE = '项目时间阶段'
+		and  dictionary_key=#{dicttonarykey}
+	</select>
+
+	 <select id="checkRepeatStdCataProdRelLinProdName" parameterType="com.hsnn.medstgmini.base.std.model.StdDict" resultType="java.lang.Integer">
+		SELECT count(*)
+	    FROM std_dict t
+		<where>
+			<if test="null != dictionaryValue and '' != dictionaryValue ">
+				 AND t.dictionary_value = #{dictionaryValue}
+		    </if>
+			<if test="null != classify and '' != classify ">
+				 AND t.classify = #{classify}
+		    </if>
+			<if test="null != classifyName and '' != classifyName ">
+				 AND t.classify_name = #{classifyName}
+		    </if>
+	        <if test="null != type and '' != type ">
+	            AND t.type = #{type}
+	        </if>
+	        <if test="null != id and '' != id ">
+	           and t.id != #{id}
+	        </if>
+		</where>
+	</select>
+
+	<select id="getDictionaryKey" resultType="java.lang.String">
+		select DICTIONARYKEYSEQ.nextval as DICTIONARY_KEY from dual
+	</select>
+
+
+
+	<insert id="addStdDictProdName"  useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.std.model.StdDict">
+		<selectKey resultType="Integer"  keyProperty="id" order="BEFORE">
+			select STDDICTSEQ.nextval as Id from dual
+		</selectKey>
+			INSERT INTO std_dict(
+				id,
+	            parent_id ,
+	            dictionary_key ,
+	            dictionary_value ,
+	             classify,
+	            classify_name,
+	            type ,
+	            sort ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+				#{id},
+	        	#{parentId},
+	        	#{dictionaryKey},
+	        	#{dictionaryValue},
+	        	#{classify},
+	        	#{classifyName},
+	        	#{type},
+	        	#{sort},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	<select id="checkRepeatStdCataProdRelLinProdMed" parameterType="com.hsnn.medstgmini.base.std.model.StdDict" resultType="java.lang.Integer">
+		SELECT count(*)
+	    FROM std_dict t
+		<where>
+			<if test="null != dictionaryValue and '' != dictionaryValue ">
+				 AND t.dictionary_value = #{dictionaryValue}
+		    </if>
+			<if test="null != classify and '' != classify ">
+				 AND t.classify = #{classify}
+		    </if>
+			<if test="null != classifyName and '' != classifyName ">
+				 AND t.classify_name = #{classifyName}
+		    </if>
+	        <if test="null != type and '' != type ">
+	            AND t.type = #{type}
+	        </if>
+	        <if test="null != id and '' != id ">
+	           and t.id != #{id}
+	        </if>
+		</where>
+	</select>
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_dict where id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_dict where id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from std_dict 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdDict">
+		INSERT INTO std_dict(
+	            parent_id ,
+	            dictionary_key ,
+	            dictionary_value ,
+	            classify,
+	            classify_name,
+	            type ,
+	            sort ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{parentId},
+	        	#{dictionaryKey},
+	        	#{dictionaryValue},
+	        	#{classify},
+	        	#{classifyName},
+	        	#{type},
+	        	#{sort},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.std.model.StdDict">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+			SELECT STDDICTSEQ.nextval from dual
+        </selectKey>
+		INSERT INTO std_dict(
+				id,
+	            parent_id ,
+	            dictionary_key ,
+	            dictionary_value ,
+	            classify,
+	            classify_name,
+	            type ,
+	            sort ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+	        	#{id},
+	        	#{parentId},
+	        	#{dictionaryKey},
+	        	#{dictionaryValue},
+	        	#{classify},
+	        	#{classifyName},
+	        	#{type},
+	        	#{sort},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdDict">
+		UPDATE std_dict  
+		<set>
+	        	parent_id = #{parentId},
+	        	dictionary_key = #{dictionaryKey},
+	        	dictionary_value = #{dictionaryValue},
+	        	classify = #{classify},
+	        	classify_name = #{classifyName},
+	        	type = #{type},
+	        	sort = #{sort},
+	        	is_using = #{isUsing},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = SYSDATE,
+        </set>
+		WHERE  id =  #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_dict WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_dict t
+		<where>
+			<if test="@OGNL@isNotEmpty(ndictId)">
+				AND t.NDICT_ID  like CONCAT(CONCAT('%',#{ndictId}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(parentId)">
+	            AND t.parent_id = #{parentId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(dictionaryKey)">
+	            AND t.dictionary_key = #{dictionaryKey}
+	        </if>
+			<if test="@OGNL@isNotEmpty(dictionaryValue)">
+	            AND t.dictionary_value like CONCAT(CONCAT('%',#{dictionaryValue}), '%')
+	        </if>
+			<if test="@OGNL@isNotEmpty(classify)">
+	            AND t.classify = #{classify}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(classifyName)">
+	            AND t.classify_name = #{classifyName}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(type)">
+	            AND t.type = #{type}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sort)">
+	            AND t.sort = #{sort}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(groupType) and groupType =='true'"><!-- 对类型分组.. -->
+	           group By t.type,
+	           t.id,
+	    	t.parent_id,
+	    	t.dictionary_key,
+	    	t.dictionary_value,
+	    	t.classify,
+        	t.classify_name,
+        	t.sort,
+        	t.is_using,
+        	t.add_user_id,
+        	t.add_user_name,
+        	t.add_time,
+        	t.last_update_user_id,
+        	t.last_update_user_name,
+        	t.last_update_time
+	    </if>
+	</select>
+
+
+
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_dict (
+            parent_id ,
+            dictionary_key ,
+            dictionary_value ,
+            classify ,
+            classify_name ,
+            type ,
+            sort ,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.parentId},
+        	#{item.dictionaryKey},
+        	#{item.dictionaryValue},
+        	#{item.classify},
+        	#{item.classifyName},
+        	#{item.type},
+        	#{item.sort},
+        	#{item.isUsing},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+	<select id="getAptitudeByFaterId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from std_dict t where t.PARENT_ID = #{value}
+	</select>
+
+	<select id="getType"  resultMap="BaseResultMap">
+		SELECT type,classify,sort from std_dict t where t.is_using = 1 group by type,classify,sort order by classify 
+	</select>
+	<select id="getClassify"  resultMap="BaseResultMap">
+		SELECT distinct classify,classify_name from std_dict t where t.is_using = 1 order by classify
+	</select>
+	
+	<select id="checkRepeat" parameterType="com.hsnn.medstgmini.base.std.model.StdDict" resultType="java.lang.Integer">
+		select count(*) from std_dict t
+		<where>
+			<if test="@OGNL@isNotEmpty(dictionaryKey)">
+	           and t.dictionary_key = #{dictionaryKey}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(dictionaryValue)">
+	           and t.dictionary_value = #{dictionaryValue}
+	        </if>
+	         AND t.type = #{type} and t.id != #{id}
+		</where> 
+	</select>
+	
+	<update id="batchUpdate" parameterType="java.util.List">
+	 <foreach collection="list" item="model" index="index" open="" separator=";" close="">
+			UPDATE std_dict t
+		<set>
+			 <if test="@OGNL@isNotEmpty(model.parentId)">
+				t.parent_id = #{model.parentId},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.dictionaryKey)">
+				t.dictionary_key = #{model.dictionaryKey},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.dictionaryValue)">
+				t.dictionary_value like #{model.dictionaryValue},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.classify)">
+				t.classify = #{model.classify},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.classifyName)">
+				t.classify_name = #{model.classifyName},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.type)">
+				t.type = #{model.type},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.sort)">
+				t.sort = #{model.sort},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.isUsing)">
+				t.is_using = #{model.isUsing},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.addUserId)">
+				t.add_user_id = #{model.addUserId},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.addUserName)">
+				t.add_user_name = #{model.addUserName},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.addTime)">
+				t.add_time = #{model.addTime},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				t.last_update_user_id = #{model.lastUpdateUserId},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				t.last_update_user_name = #{model.lastUpdateUserName},
+			</if>
+				t.last_update_time = SYSDATE
+         </set>
+		 where t.id =#{model.id}
+	   </foreach>
+	</update>
+	
+	
+	 <select id="checkRepeatStdCataProdRelLinProdOutlook" parameterType="com.hsnn.medstgmini.base.std.model.StdDict" resultType="java.lang.Integer">
+		SELECT count(*)
+	    FROM std_dict t
+		<where>
+			<if test="null != dictionaryValue and '' != dictionaryValue ">
+				 AND t.dictionary_value = #{dictionaryValue}
+		    </if>
+			<if test="null != classify and '' != classify ">
+				 AND t.classify = #{classify}
+		    </if>
+			<if test="null != classifyName and '' != classifyName ">
+				 AND t.classify_name = #{classifyName}
+		    </if>
+	        <if test="null != type and '' != type ">
+	            AND t.type = #{type}
+	        </if>
+	        <if test="null != id and '' != id ">
+	           and t.id != #{id}
+	        </if>
+		</where>
+	</select>
+	
+	      <!-- 监管医疗机构页面医疗机构等级下拉获取数据-->
+    <select id="getyydjDate" parameterType="map" resultMap="BaseResultMap">
+	    SELECT  t.dictionary_value 
+		    FROM std_dict t
+			<where>
+				<if test="@OGNL@isNotEmpty(classify)">
+		            AND t.classify = #{classify}
+		        </if>
+		        <if test="@OGNL@isNotEmpty(classifyName)">
+		            AND t.classify_name = #{classifyName}
+		        </if>
+		        <if test="@OGNL@isNotEmpty(type)">
+		            AND t.type = #{type}
+		        </if>
+				<if test="@OGNL@isNotEmpty(isUsing)">
+		            AND t.is_using = #{isUsing}
+		        </if>
+		    </where>
+    </select>
+	
+	<select id="getDiSys" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from std_dict t where t.type = #{type}
+	</select>
+	
+	<select id="getStgList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	      FROM std_dict t
+	   	 WHERE T.TYPE = #{type}
+       	   AND T.ID NOT IN (SELECT A.STG_NAME_ID
+                          FROM BID_PROJECT_DETAILS A
+                         WHERE A.PROJ_ID = #{projCode})
+                         ORDER BY ID
+	</select>
+	
+	<!-- 通用名选择框 -->
+	<select id="getDictListByProduct" parameterType="map" resultMap="BaseResultMap">
+		SELECT 
+			T.DICTIONARY_KEY,
+			T.DICTIONARY_VALUE
+		FROM STD_DICT T
+	   	 WHERE T.TYPE = #{type}
+       	 <if test="@OGNL@isNotEmpty(dictionaryValue)">
+           AND t.DICTIONARY_VALUE LIKE CONCAT(CONCAT('%',#{dictionaryValue}), '%')
+       </if>
+	</select>
+	
+	<select id="getDictList" resultMap="BaseResultMap">
+    	SELECT * FROM std_dict WHERE TYPE IN ('机构登记注册类型','年检年度')
+    </select>
+	<select id="stdDictUpdateName" parameterType="java.util.Map" statementType="CALLABLE" resultType="java.util.Map">
+		call stdDictUpdate_productName(#{id,mode=IN,jdbcType=VARCHAR},#{key,mode=IN,jdbcType=VARCHAR},#{productName,mode=IN,jdbcType=VARCHAR},#{userId,mode=IN,jdbcType=VARCHAR},#{userNmae,mode=IN,jdbcType=VARCHAR})
+	</select>
+</mapper>

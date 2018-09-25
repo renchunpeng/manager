@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdAreaDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdArea" id="BaseResultMap">
+        <result property="areaId" column="area_id" javaType="String"/>
+        <result property="areaName" column="area_name" javaType="String"/>
+        <result property="fatherId" column="father_id" javaType="String"/>
+        <result property="areaShortname" column="area_shortname" javaType="String"/>
+        <result property="areaFullname" column="area_fullname" javaType="String"/>
+        <result property="status" column="status" javaType="Integer"/>
+        <result property="updDatetime" column="upd_datetime" javaType="Date"/>
+        <result property="updUser" column="upd_user" javaType="String"/>
+        <result property="sortId" column="sort_id" javaType="Integer"/>
+        <result property="maxDelnumCounty" column="max_delnum_county" javaType="Integer"/>
+        <result property="maxDelnumBase" column="max_delnum_base" javaType="Integer"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.area_id,
+        t.area_name,
+        t.father_id,
+        t.area_shortname,
+        t.area_fullname,
+        t.status,
+        t.upd_datetime,
+        t.upd_user,
+        t.sort_id,
+        t.max_delnum_county,
+        t.max_delnum_base
+	</sql>
+
+	<select id="getSqlStdAreaById" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from std_area where area_id =  #{value}
+	</select>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_area t
+        <where>
+			<if test="@OGNL@isNotEmpty(city)">
+				and t.area_id like '52%' and substr(t.area_id, 5, 2)='00' and substr(t.area_id, 4, 3)!='000'
+			</if>
+			<if test="@OGNL@isNotEmpty(town)">
+				t.area_id like '52%'  and substr(t.area_id, 6, 1)!='0'
+			</if>
+			<if test="@OGNL@isNotEmpty(shiId) and @OGNL@isEmpty(xianId)">
+				AND t.area_id like CONCAT(SUBSTR(#{shiId},0,4), '%')
+		    </if>
+		     <if test="@OGNL@isNotEmpty(xianId)">
+				AND t.area_id = #{xianId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(noAreaId)">
+				and t.area_id = '0'
+			</if>
+			<if test="@OGNL@isNotEmpty(allAreaId)">
+				and t.area_id like '52%'
+			</if>
+			<if test="@OGNL@isNotEmpty(newAreaIdList)">
+				and t.area_id like '52%' and t.area_id != '520000' and t.area_id not in (<foreach collection="newAreaIdList" item="item" index="index" separator=",">#{item}</foreach>)
+			</if>
+		</where>
+	</select>
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdArea">
+		INSERT INTO std_area(
+	            father_id ,
+	            area_shortname ,
+	            upd_datetime ,
+	            upd_user ,
+	            sort_id ,
+	            max_delnum_county ,
+	            max_delnum_base 
+		) 
+		VALUES (
+	        	#{fatherId},
+	        	#{areaShortname},
+	        	#{updDatetime},
+	        	#{updUser},
+	        	#{sortId},
+	        	#{maxDelnumCounty},
+	        	#{maxDelnumBase}
+		)
+	</insert>
+	
+	<insert id="add" parameterType="com.hsnn.medstgmini.base.std.model.StdArea">
+		INSERT INTO std_area(
+				area_id,
+				area_name,
+	            father_id ,
+	            arae_shortname ,
+	            upd_datetime ,
+	            upd_user ,
+	            sort_id ,
+	            max_delnum_county ,
+	            max_delnum_base 
+		) 
+		VALUES (
+	        	#{areaId},
+	        	#{areaName},
+	        	#{fatherId},
+	        	#{areaShortname},
+	        	#{updDatetime},
+	        	#{updUser},
+	        	#{sortId},
+	        	#{maxDelnumCounty},
+	        	#{maxDelnumBase}
+		)
+	</insert>
+	
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdArea">
+		UPDATE std_area  
+		<set>
+	        	father_id = #{fatherId},
+	        	area_shortname = #{arShortname},
+	        	upd_datetime = #{updDatetime},
+	        	upd_user = #{updUser},
+	        	sort_id = #{sortId},
+	        	max_delnum_county = #{maxDelnumCounty},
+	        	max_delnum_base = #{maxDelnumBase},
+        </set>
+		WHERE  area_id =  #{areaId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM std_area WHERE  area_id =  #{value}
+	</delete>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_area (
+            father_id ,
+            area_shortname ,
+            upd_datetime ,
+            upd_user ,
+            sort_id ,
+            max_delnum_county ,
+            max_delnum_base 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.fatherId},
+        	#{item.areaShortname},
+        	#{item.updDatetime},
+        	#{item.updUser},
+        	#{item.sortId},
+        	#{item.maxDelnumCounty},
+        	#{item.maxDelnumBase}
+        )
+        </foreach>
+	</insert>
+	
+	<!-- 根据地区编号获取地区信息 -->
+	<select id="getAreaByAreaId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from std_area t where t.area_id = #{value}
+	</select>
+	
+	<!-- 根据地区父类id获取地区信息 -->
+	<select id="getAreaByFaterId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from std_area t where t.father_id = #{value}
+	</select>
+	
+	<select id="getAreaByCity" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from std_area t where t.father_id = #{value}
+	</select>
+	
+	<select id="getAreaByCityId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from std_area t where t.father_id = #{value}
+	</select>
+	
+	<!-- 根据地区父类id获取地区信息 -->
+	<select id="getAreaByCompanyId" parameterType="map" resultMap="BaseResultMap">
+		select * from std_area t where t.father_id = #{fatherId} 
+		and t.area_id NOT IN (
+			SELECT area_id from drugpur_area_distri_permission where company_id_ps = ${companyId}
+		)
+	</select>
+	
+	<select id="getByAreaId" parameterType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="BaseResultMap">
+		select * from std_area t where t.area_id = #{areaId}
+	</select>
+	<select id="getByAreaName" parameterType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="BaseResultMap">
+		select * from std_area t where t.area_name = #{areaName}
+	</select>
+	<select id="getAllList" parameterType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="BaseResultMap">
+		select * from std_area
+	</select>
+	
+	<select id="selectAreaList" parameterType="map" resultType="map">
+		
+		select
+		  sa.area_id,
+		  sd.area_name as parent_name,
+		  sa.area_name,
+		  sa.father_id,
+		  sa.area_fullname
+		from std_area sa
+		left join std_area sd on sa.father_id = sd.area_id
+		where  sa.father_id = ${fid}
+		       or  sd.father_id = ${fid}
+		       or sa.area_id = ${fid}
+		       order by sa.area_id
+	</select>
+	
+	<select id="getCountyList" resultMap="BaseResultMap">
+		select area_id,area_name,father_id
+		  from std_area t
+		 where t.father_id in
+		       (select area_id from std_area a where a.father_id = '520000')
+		    or t.area_id in (select area_id
+		                       from std_area a
+		                      where a.father_id = '520000')
+	</select>
+	
+	<select id="getCityList" resultMap="BaseResultMap">
+		select area_id,area_name
+		  from std_area t
+		 where t.father_id  = '520000'
+	</select>
+	
+	<select id="getFatherAreas" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select <include refid="full-columns" /> from std_area t start with 
+		area_id = #{areaId} connect by prior father_id = area_id
+	</select>
+
+	<select id="getAreaNameCity" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT
+			AREA_NAME
+		FROM STD_AREA
+		where FATHER_ID = '520000' AND AREA_ID !='529900'
+		ORDER  BY AREA_ID
+	</select>
+
+	<select id="getGoodsAreaPrice" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,b.bid_price,b.bid_date,b.id,b.MRP,b.MAX_FACTORY_PRICE,b.SHORTLISTED_PRICE,b.CORRESPONDING_QUANTITY,b.MINIMUM_DOSAGE_PRICE,b.MRP_DATE,b.MAX_FACTORY_PRICE_DATE,b.MINIMUM_DOSAGE_PRICE_DATE,b.SHORTLISTED_PRICE_DATE
+		FROM STD_AREA t
+		LEFT JOIN (select *  from BID_GOODS_AREA_PRICE where proj_id=#{projId}) b
+		ON b.area_id = t.area_id
+		WHERE t.AREA_ID LIKE '%0000' AND t.AREA_ID NOT
+		IN('000000','710000','810000','820000','910000','610000','440000')
+		ORDER BY t.area_id
+	</select>
+	
+</mapper>

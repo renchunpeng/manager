@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysReqRecordDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysReqRecord" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="executeTime" column="execute_time" javaType="String"/>
+        <result property="executeContent" column="execute_content" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.execute_time,
+        t.execute_content,
+        t.add_time
+	</sql>
+		
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM sys_req_record t
+		WHERE t.id =  #{value}
+	</select>
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.hsnn.medstgmini.base.sys.model.SysReqRecord">
+		<!--<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">-->
+			<!--SELECT SYSREQRECORDSEQ.nextval from dual-->
+        <!--</selectKey>-->
+		INSERT INTO sys_req_record(
+	            execute_time ,
+	            execute_content 
+		)
+		VALUES (
+	        	#{executeTime},
+	        	#{executeContent}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysReqRecord">
+		UPDATE sys_req_record  
+		<set>
+			execute_time = #{executeTime},
+			execute_content = #{executeContent},
+			add_time = #{addTime},
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.sys.model.SysReqRecord">
+		UPDATE sys_req_record  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(executeTime)">
+				execute_time = #{executeTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(executeContent)">
+				execute_content = #{executeContent},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				add_time = #{addTime},
+			</if>
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_req_record WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_req_record t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(executeTime)">
+				AND t.execute_time = #{executeTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(executeContent)">
+				AND t.execute_content = #{executeContent}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_req_record (
+            execute_time ,
+            execute_content ,
+            add_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.executeTime},
+        	#{item.executeContent},
+        	#{item.addTime}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM sys_req_record t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(executeTime)">
+				AND t.execute_time = #{executeTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(executeContent)">
+				AND t.execute_content = #{executeContent}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE sys_req_record  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.executeTime)">
+				execute_time = #{model.executeTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.executeContent)">
+				execute_content = #{model.executeContent},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				add_time = #{model.addTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.id = #{params.id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.executeTime)">
+				AND t.execute_time = #{params.executeTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.executeContent)">
+				AND t.execute_content = #{params.executeContent}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.add_time = #{params.addTime}
+		    </if>
+		</where>
+	</update>
+</mapper>

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdScCompanyDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdScCompany" id="BaseResultMap">
+        <result property="id" column="ID" javaType="String"/>
+        <result property="companyAccountCode" column="COMPANY_ACCOUNT_CODE" javaType="String"/>
+        <result property="companyIdSc" column="COMPANY_ID_SC" javaType="String"/>
+        <result property="companyNameSc" column="COMPANY_NAME_SC" javaType="String"/>
+        <result property="submitState" column="SUBMIT_STATE" javaType="Integer"/>
+        <result property="remark" column="REMARK" javaType="String"/>
+        <result property="addUserId" column="ADD_USER_ID" javaType="String"/>
+        <result property="addTime" column="ADD_TIME" javaType="Date"/>
+        <result property="addUserName" column="ADD_USER_NAME" javaType="String"/>
+        <result property="lastUpdateUserId" column="LAST_UPDATE_USER_ID" javaType="String"/>
+        <result property="lastUpdateUserName" column="LAST_UPDATE_USER_NAME" javaType="String"/>
+        <result property="lastUpdateTime" column="LAST_UPDATE_TIME" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.ID,
+        t.COMPANY_ACCOUNT_CODE,
+        t.COMPANY_ID_SC,
+        t.COMPANY_NAME_SC,
+        t.SUBMIT_STATE,
+        t.REMARK,
+        t.ADD_USER_ID,
+        t.ADD_TIME,
+        t.ADD_USER_NAME,
+        t.LAST_UPDATE_USER_ID,
+        t.LAST_UPDATE_USER_NAME,
+        t.LAST_UPDATE_TIME
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_SC_COMPANY t
+		WHERE t.ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdScCompany">
+		INSERT INTO STD_SC_COMPANY(
+				ID,
+	            COMPANY_ACCOUNT_CODE ,
+	            COMPANY_ID_SC ,
+	            COMPANY_NAME_SC ,
+	            SUBMIT_STATE ,
+	            REMARK ,
+	            ADD_USER_ID ,
+	            ADD_TIME ,
+	            ADD_USER_NAME ,
+	            LAST_UPDATE_USER_ID ,
+	            LAST_UPDATE_USER_NAME ,
+	            LAST_UPDATE_TIME 
+		)
+		VALUES (
+				sys_guid(),
+	        	#{companyAccountCode},
+	        	#{companyIdSc},
+	        	#{companyNameSc},
+	        	#{submitState},
+	        	#{remark},
+	        	#{addUserId},
+	        	SYSDATE,
+	        	#{addUserName},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdScCompany">
+		UPDATE STD_SC_COMPANY  
+		<set>
+			COMPANY_ACCOUNT_CODE = #{companyAccountCode},
+			COMPANY_ID_SC = #{companyIdSc},
+			COMPANY_NAME_SC = #{companyNameSc},
+			SUBMIT_STATE = #{submitState},
+			REMARK = #{remark},
+			ADD_USER_ID = #{addUserId},
+			ADD_TIME = #{addTime},
+			ADD_USER_NAME = #{addUserName},
+			LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			LAST_UPDATE_TIME = SYSDATE,
+        </set>
+		WHERE  ID =  #{id}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.StdScCompany">
+		UPDATE STD_SC_COMPANY  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(companyAccountCode)">
+				COMPANY_ACCOUNT_CODE = #{companyAccountCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyIdSc)">
+				COMPANY_ID_SC = #{companyIdSc},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyNameSc)">
+				COMPANY_NAME_SC = #{companyNameSc},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(submitState)">
+				SUBMIT_STATE = #{submitState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(remark)">
+				REMARK = #{remark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				ADD_USER_ID = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				ADD_TIME = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				ADD_USER_NAME = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				LAST_UPDATE_TIME = #{lastUpdateTime},
+			</if>
+        </set>
+		WHERE  ID =  #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM STD_SC_COMPANY WHERE  ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_SC_COMPANY t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.ID = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyAccountCode)">
+				AND t.COMPANY_ACCOUNT_CODE = #{companyAccountCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdSc)">
+				AND t.COMPANY_ID_SC = #{companyIdSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like '%'||#{companyNameSc}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitState)">
+				AND t.SUBMIT_STATE = #{submitState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTimes)">
+				AND t.ADD_TIME &gt;= to_date(#{startTimes},'yyyy-MM-dd')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTimes)">
+				AND t.ADD_TIME &lt;= to_date(#{endTimes},'yyyy-MM-dd')+1
+		    </if>
+		</where>
+	</select>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM STD_SC_COMPANY t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.ID = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyAccountCode)">
+				AND t.COMPANY_ACCOUNT_CODE = #{companyAccountCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdSc)">
+				AND t.COMPANY_ID_SC = #{companyIdSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC = #{companyNameSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitState)">
+				AND t.SUBMIT_STATE = #{submitState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+</mapper>

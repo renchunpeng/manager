@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.demo.excel.dao.TestImportExportDao">
+	<resultMap type="com.hsnn.medstgmini.demo.excel.model.TestImportExport" id="BaseResultMap">
+        <result property="id" column="id" javaType="String"/>
+        <result property="firstName" column="first_name" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="tmpImportId" column="tmp_import_id" javaType="String"/><!-- 临时表主键 -->
+        <result property="tmpImportDataDescription" column="tmp_import_data_description" javaType="String"/><!-- 临时表行数据描述 -->
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.first_name,
+        t.name,
+        t.add_time
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM test_import_export t
+		WHERE t.id =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.demo.excel.model.TestImportExport">
+		INSERT INTO test_import_export(
+				id,
+	            first_name ,
+	            name ,
+	            add_time 
+		)
+		VALUES (
+				#{id},
+	        	#{firstName},
+	        	#{name},
+	        	SYSDATE
+		)
+		<selectKey resultType="java.lang.String" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.demo.excel.model.TestImportExport">
+		UPDATE test_import_export  
+		<set>
+			first_name = #{firstName},
+			name = #{name},
+			add_time = #{addTime},
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.demo.excel.model.TestImportExport">
+		UPDATE test_import_export  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(firstName)">
+				first_name = #{firstName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(name)">
+				name = #{name},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				add_time = #{addTime},
+			</if>
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM test_import_export WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM test_import_export t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(firstName)">
+				AND t.first_name = #{firstName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND (
+					t.name LIKE '%'||#{name}||'%'
+					OR t.first_name LIKE '%'||#{name}||'%'
+				)
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- 导入数据关联sql 必须有 -->
+	<select id="queryAllWithImport" parameterType="map" resultMap="BaseResultMap">
+		SELECT DISTINCT t.姓 as first_name, t.名 AS name ,u.name AS user_name, t.tmp_import_id, t.tmp_import_id AS id,t.tmp_import_data_description
+	    FROM ${tableName} t
+	    LEFT JOIN sys_user u ON u.name = t.姓
+	    <where>
+			<if test="@OGNL@isNotEmpty(tmpImportDataState)">
+				AND t.tmp_import_data_state = #{tmpImportDataState}
+			</if>
+	    </where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO test_import_export (
+        	id,
+            first_name ,
+            name ,
+            add_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.id},
+        	#{item.firstName},
+        	#{item.name},
+        	SYSDATE
+        )
+        </foreach>
+	</insert>
+	
+	<!-- <insert id="insertBatchTemp">
+        INSERT INTO ${tableName} (
+        	id,
+            first_name ,
+            name ,
+            add_time 
+            <if test="@OGNL@isNotEmpty(isError)">
+            ,import_descriptions
+            </if>
+        ) VALUES 
+        <foreach collection="models" item="item" index="index" separator=",">
+        (
+        	#{item.id},
+        	#{item.firstName},
+        	#{item.name},
+        	SYSDATE
+        	<if test="@OGNL@isNotEmpty(isError)">
+            ,#{item.importDescriptions}
+            </if>
+        )
+        </foreach>
+	</insert> -->
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM test_import_export t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(firstName)">
+				AND t.first_name = #{firstName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND t.name = #{name}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE test_import_export  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.firstName)">
+				first_name = #{model.firstName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.name)">
+				name = #{model.name},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				add_time = #{model.addTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.id = #{params.id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.firstName)">
+				AND t.first_name = #{params.firstName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.name)">
+				AND t.name = #{params.name}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.add_time = #{params.addTime}
+		    </if>
+		</where>
+	</update>
+</mapper>

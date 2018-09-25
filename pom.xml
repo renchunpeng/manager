@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.hsnn</groupId>
+	<artifactId>medicalstage</artifactId>
+	<version>v0.0.1</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>com.hsnn.util</module>
+	    <module>com.hsnn.std.service</module>
+		<module>com.hsnn.yimiao</module>
+		<module>com.hsnn.yimiao.service</module>
+  	</modules>
+  	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<oracle.connector.version>10.2.0.2.0</oracle.connector.version>
+		<spring.version>4.1.4.RELEASE</spring.version>
+		<hibernate.version>4.3.8.Final</hibernate.version>
+		<jackson.version>2.5.0</jackson.version>
+		<commons.dbcp.version>1.4</commons.dbcp.version>
+		<commons.lang.version>2.3</commons.lang.version>
+		<commons.lang3.version>3.4</commons.lang3.version>
+		<commons.validator.version>1.4.0</commons.validator.version>
+		<simplecaptha.version>1.2.1</simplecaptha.version>
+		<ueditor.version>1.1.2</ueditor.version>
+		<ehcache.version>2.9.0</ehcache.version>
+		<junit.version>4.12</junit.version>
+		<log4j.version>1.2.17</log4j.version>
+		<c3p0.version>0.9.5-pre10</c3p0.version>
+		<fastjson.version>1.2.3</fastjson.version>
+		<aspectj.version>1.8.4</aspectj.version>
+		<jstl.version>1.2</jstl.version>
+		<commons.codec.version>1.10</commons.codec.version>
+		<gson.version>2.2.2</gson.version>
+		<servlet.version>3.0-alpha-1</servlet.version>
+		<pinyin4j.version>2.5.0</pinyin4j.version>
+		<poi.version>3.11</poi.version>
+		<commons.fileupload.version>1.2.2</commons.fileupload.version>
+		<commons.io.version>2.4</commons.io.version>
+		<itext.version>2.1.7</itext.version>
+		<casClientCore.version>3.3.3</casClientCore.version>
+		<slf4jApi.version>1.7.1</slf4jApi.version>
+		<json.version>20151123</json.version>
+		<cxf.version>3.1.4</cxf.version>
+		<activiti.version>5.19.0</activiti.version>
+		<dom4j.version>1.6.1</dom4j.version>
+		<druid.version>1.0.31</druid.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+			<classifier/>
+		</dependency>
+		
+		<!-- oracle连接 -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc14</artifactId>
+			<version>${oracle.connector.version}</version>
+		</dependency>
+
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- 使用SpringMVC配置-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- 关系型数据库整合时需配置 如hibernate jpa等-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!--org.apache-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
+		<!-- 二级缓存ehcache -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>${ehcache.version}</version>
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+
+		<!-- c3p0数据源-->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>${c3p0.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons.dbcp.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>xercesImpl</artifactId>
+					<groupId>xerces</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
+		</dependency>
+
+		<!-- json -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		
+		<!-- aop -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectj.version}</version>
+		</dependency>
+
+		<!-- servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons.codec.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>${commons.validator.version}</version>
+		</dependency>
+
+		<!-- google json 解析包-->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>${json.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.belerweb</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>${pinyin4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons.fileupload.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+
+		<!-- iText 生成pdf工具-->
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>${itext.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>${dom4j.version}</version>
+		</dependency>
+		
+		<!-- mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.2.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.2.2</version>
+		</dependency>
+		
+		<!-- mybatis分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.3.Final</version>
+		</dependency>
+		<!-- java mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<!-- log4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+		
+		<!-- cas client -->
+		<dependency>
+			<groupId>org.jasig.cas.client</groupId>
+			<artifactId>cas-client-core</artifactId>
+			<version>3.3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+		</dependency>
+		
+		<!-- redis client -->
+		<dependency>  
+	        <groupId>redis.clients</groupId>  
+	        <artifactId>jedis</artifactId>  
+	        <version>2.7.2</version>  
+	    </dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<finalName>medicalstageStd</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+                    	<uriEncoding>UTF-8</uriEncoding>
+                	</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<!-- Run the JUnit unit tests in an isolated classloader -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				</configuration>
+			</plugin>
+
+			<!-- generate java doc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<configuration>
+					<javadocDirectory>target/javadoc</javadocDirectory>
+					<reportOutputDirectory>target/javadoc</reportOutputDirectory>
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+					<docencoding>UTF-8</docencoding>
+					<show>private</show>
+				</configuration>
+			</plugin>
+
+			<!-- 部署至本机 -->
+			<!-- <plugin> <groupId>org.codehaus.cargo</groupId> <artifactId>cargo-maven2-plugin</artifactId> 
+				<version>1.0</version> <configuration> <container> <containerId>tomcat6x</containerId> 
+				<home>D:\WebServer\apache-tomcat-6.0.39</home> </container> <configuration> 
+				<type>existing</type> <home>D:\WebServer\apache-tomcat-6.0.39</home> </configuration> 
+				</configuration> </plugin> -->
+				
+			<plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-compiler-plugin</artifactId>
+		        <version>3.1</version>
+		        <configuration>
+		          <source>1.7</source>
+		          <target>1.7</target>
+		        </configuration>
+            </plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+	        <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>			
+				<properties>
+			    <log.level>DEBUG</log.level>
+			    <jdbc.url><![CDATA[jdbc:mysql://192.168.1.10:3306/guizhou_bank?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+			    <jdbc.username>javauser</jdbc.username>
+			    <jdbc.password>java123456</jdbc.password> 
+			    <jdbc.driver.name>com.mysql.jdbc.Driver</jdbc.driver.name>
+			    <jdbc.max.active>10</jdbc.max.active>
+			    <jdbc.max.wait>10</jdbc.max.wait>
+			    <hibernate.show.sql>true</hibernate.show.sql>
+				<hibernate.format.sql>true</hibernate.format.sql>
+				
+			    <captcha.enable>false</captcha.enable>
+			    <system.province></system.province>
+			    <system.provname></system.provname>
+			    <system.center.name></system.center.name>
+			    <system.settlementType>1</system.settlementType>
+			    <system.keystore.filepath>/WEB-INF/keystore/sysKeyStore</system.keystore.filepath>
+			    <system.pub.filepath>lib/pdf/</system.pub.filepath>
+			    <system.swftoolspath></system.swftoolspath>
+			    <system.uploadPath>C:/upload/</system.uploadPath>
+			    <system.importDrugPath>drug/</system.importDrugPath>
+			    <system.importDrugResultPath>drug/result/</system.importDrugResultPath>
+			    <system.importGoodsPath>goods/</system.importGoodsPath>
+			    <system.importGoodsResultPath>goods/result/</system.importGoodsResultPath>
+			    <system.importDrugMobanPath>C:/excelModel/</system.importDrugMobanPath>
+			    <system.importDrugMoban>importDrugMoban.xlsx</system.importDrugMoban>
+			    <system.importGoodsMobanPath>C:/excelModel/</system.importGoodsMobanPath>
+			    <system.importGoodsMoban>importGoodsMoban.xlsx</system.importGoodsMoban>
+			    <system.setpuDelNumConfig>2</system.setpuDelNumConfig>
+			    <system.linxuan>true</system.linxuan>
+			    <system.delWithHosp>false</system.delWithHosp>
+			    <rule.infusion>true</rule.infusion>
+			    <system.purProportion>0.8</system.purProportion>
+			    <system.gzfjydel>0</system.gzfjydel>
+			   
+			    <backpur.reason0></backpur.reason0>
+			    <backpur.reason1></backpur.reason1>
+			    <backpur.reason2></backpur.reason2>
+			    <backpur.reason3></backpur.reason3>
+			    
+			    <main.leixing.yiju>0</main.leixing.yiju>
+			    <main.yewu.xianshi>1</main.yewu.xianshi>
+			    <username.login.address>http://112.112.12.17:7001/com.hsnn.sso/login.html</username.login.address>
+			    <system.xml>system.xml</system.xml>
+			    
+			    <bak.longterm>0</bak.longterm>
+			    <bak.tamperary>1</bak.tamperary>
+				<system.importMessagePath>message/</system.importMessagePath>
+				<system.importMessageResultPath>message/result/</system.importMessageResultPath>
+			    <system.isSetCatalogPrice>true</system.isSetCatalogPrice>
+			    <system.isSetPlanPrice>false</system.isSetPlanPrice>
+			    <system.setBakDel>true</system.setBakDel>
+			    <system.bakBatchBuy>false</system.bakBatchBuy>
+			    <system.title></system.title>
+			    <system.host.unit></system.host.unit>
+			    <system.isHisRecordAmount>false</system.isHisRecordAmount>
+			</properties>
+		</profile>
+	</profiles>
+</project>

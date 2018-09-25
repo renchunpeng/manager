@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdDrugcatalogDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdDrugcatalog" id="BaseResultMap">
+        <result property="drugcatalogCode" column="DRUGCATALOG_CODE" javaType="String"/>
+        <result property="drugcatalogName" column="DRUGCATALOG_NAME" javaType="String"/>
+        <result property="drugcatalogCodeSelf" column="DRUGCATALOG_CODE_SELF" javaType="String"/>
+        <result property="drugcatalogCodeKind" column="DRUGCATALOG_CODE_KIND" javaType="String"/>
+        <result property="drugcatalogCkRemark" column="DRUGCATALOG_CK_REMARK" javaType="String"/>
+        <result property="version" column="VERSION" javaType="String"/>
+        <result property="remark" column="REMARK" javaType="String"/>
+        <result property="type" column="TYPE" javaType="Integer"/>
+        <result property="updDatetime" column="UPD_DATETIME" javaType="Date"/>
+        <result property="updUser" column="UPD_USER" javaType="String"/>
+		<result property="audictOpinion" column="audict_Opinion" javaType="String"/>
+		<result property="auditState" column="audit_State" javaType="String"/>
+
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.drugcatalog_code,
+        t.drugcatalog_name,
+        t.drugcatalog_code_self,
+        t.drugcatalog_code_kind,
+        t.drugcatalog_ck_remark,
+        t.version,
+        t.remark,
+        t.type,
+        t.upd_datetime,
+        t.upd_user
+	</sql>
+
+	<select id="removalqueryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM  STD_DRUGCATALOG t
+		<where>
+			<if test="null != drugcatalogCode and '' != drugcatalogCode ">
+				AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+			</if>
+			<if test="null != drugcatalogName and '' != drugcatalogName ">
+				AND t.DRUGCATALOG_NAME like '%'|| #{drugcatalogName} ||'%'
+			</if>
+			<if test="null != drugcatalogCodeSelf and '' != drugcatalogCodeSelf ">
+				AND t.DRUGCATALOG_CODE_SELF = #{drugcatalogCodeSelf}
+			</if>
+			<if test="null != drugcatalogCodeKind and '' != drugcatalogCodeKind ">
+				AND t.DRUGCATALOG_CODE_KIND = #{drugcatalogCodeKind}
+			</if>
+			<if test="null != drugcatalogCkRemark and '' != drugcatalogCkRemark ">
+				AND t.DRUGCATALOG_CK_REMARK = #{drugcatalogCkRemark}
+			</if>
+			<if test="null != version and '' != version ">
+				AND t.VERSION = #{version}
+			</if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+			</if>
+			<if test="@OGNL@isNotEmpty(type)">
+				AND t.TYPE = #{type}
+			</if>
+			<if test="null != updDatetime and '' != updDatetime ">
+				AND t.UPD_DATETIME = #{updDatetime}
+			</if>
+			<if test="null != updUser and '' != updUser ">
+				AND t.UPD_USER = #{updUser}
+			</if>
+			<if test="null !=auditState">
+				AND t.AUDIT_STATE=#{auditState}
+			</if>
+			<if test="null !=projCode">
+				and t.drugcatalog_code not in
+				(select drugcatalog_code from bid_proj_drugcatalog
+				where proj_code=#{projCode})
+			</if>
+		</where>
+
+		order by t.UPD_DATETIME desc
+	</select>
+
+	<select id="getContentsList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM STD_DRUGCATALOG t
+		<where>
+			t.drugcatalog_code not in (select b.drugcatalog_code from bid_Project b )
+
+			<if test="null != drugcatalogCode and '' != drugcatalogCode ">
+				AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+			</if>
+			<if test="null != drugcatalogName and '' != drugcatalogName ">
+				AND t.DRUGCATALOG_NAME like '%'|| #{drugcatalogName} ||'%'
+			</if>
+			<if test="null != drugcatalogCodeSelf and '' != drugcatalogCodeSelf ">
+				AND t.DRUGCATALOG_CODE_SELF = #{drugcatalogCodeSelf}
+			</if>
+			<if test="null != drugcatalogCodeKind and '' != drugcatalogCodeKind ">
+				AND t.DRUGCATALOG_CODE_KIND = #{drugcatalogCodeKind}
+			</if>
+			<if test="null != drugcatalogCkRemark and '' != drugcatalogCkRemark ">
+				AND t.DRUGCATALOG_CK_REMARK = #{drugcatalogCkRemark}
+			</if>
+			<if test="null != version and '' != version ">
+				AND t.VERSION = #{version}
+			</if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+			</if>
+			<if test="@OGNL@isNotEmpty(type)">
+				AND t.TYPE = #{type}
+			</if>
+			<if test="null != updDatetime and '' != updDatetime ">
+				AND t.UPD_DATETIME = #{updDatetime}
+			</if>
+			<if test="null != updUser and '' != updUser ">
+				AND t.UPD_USER = #{updUser}
+			</if>
+		</where>
+		order by t.UPD_DATETIME desc
+	</select>
+
+
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_DRUGCATALOG t
+		<where>
+			<if test="null != drugcatalogCode and '' != drugcatalogCode ">
+				AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+		    </if>
+			<if test="null != drugcatalogName and '' != drugcatalogName ">
+				AND t.DRUGCATALOG_NAME like '%'|| #{drugcatalogName} ||'%'
+		    </if>
+			<if test="null != drugcatalogCodeSelf and '' != drugcatalogCodeSelf ">
+				AND t.DRUGCATALOG_CODE_SELF = #{drugcatalogCodeSelf}
+		    </if>
+			<if test="null != drugcatalogCodeKind and '' != drugcatalogCodeKind ">
+				AND t.DRUGCATALOG_CODE_KIND = #{drugcatalogCodeKind}
+		    </if>
+			<if test="null != drugcatalogCkRemark and '' != drugcatalogCkRemark ">
+				AND t.DRUGCATALOG_CK_REMARK = #{drugcatalogCkRemark}
+		    </if>
+			<if test="null != version and '' != version ">
+				AND t.VERSION = #{version}
+		    </if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(type)">
+				AND t.TYPE = #{type}
+		    </if>
+			<if test="null != updDatetime and '' != updDatetime ">
+				AND t.UPD_DATETIME = #{updDatetime}
+		    </if>
+			<if test="null != updUser and '' != updUser ">
+				AND t.UPD_USER = #{updUser}
+		    </if>		   
+		</where>
+		 order by t.UPD_DATETIME desc
+	</select>
+	
+	<select id="checkRepeat" parameterType="com.hsnn.medstgmini.base.std.model.StdDrugcatalog" resultType="java.lang.Integer">
+		SELECT count(*)
+	    FROM STD_DRUGCATALOG t
+		<where>
+			<if test="null != drugcatalogName and '' != drugcatalogName ">
+	            AND t.DRUGCATALOG_NAME = #{drugcatalogName}
+	        </if>
+	        <if test="null != drugcatalogCode and '' != drugcatalogCode ">
+	            AND t.DRUGCATALOG_CODE not in (#{drugcatalogCode})
+	        </if>
+		</where>
+	</select>
+	
+	
+ 	<insert id="save"  parameterType="com.hsnn.medstgmini.base.std.model.StdDrugcatalog">
+		INSERT INTO STD_DRUGCATALOG(
+				DRUGCATALOG_CODE ,
+	            DRUGCATALOG_NAME ,
+	            DRUGCATALOG_CODE_SELF ,
+	            DRUGCATALOG_CODE_KIND ,
+	            DRUGCATALOG_CK_REMARK ,
+	            VERSION ,
+	            REMARK ,
+	            TYPE ,
+	            UPD_DATETIME ,
+	            UPD_USER ,
+	            AUDIT_OPINION,
+	            AUDIT_STATE
+		)
+		VALUES (
+	        	#{drugcatalogCode},
+	        	#{drugcatalogName},
+	        	#{drugcatalogCodeSelf},
+	        	#{drugcatalogCodeKind},
+	        	#{drugcatalogCkRemark},
+	        	#{version},
+	        	#{remark},
+	        	#{type},
+	        	#{updDatetime},
+	        	#{updUser},
+	        	#{audictOpinion},
+	        	#{auditState}
+
+		)
+	</insert> 
+	
+		
+	 <select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_DRUGCATALOG t
+		WHERE t.DRUGCATALOG_CODE =  #{drugcatalogCode}
+	</select>
+	
+	
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdDrugcatalog">
+		update std_drugcatalog  
+		<set>
+	    	<if test="null != drugcatalogName and '' != drugcatalogName ">
+				DRUGCATALOG_NAME = #{drugcatalogName},
+			</if>
+	    	<if test="null != drugcatalogCodeSelf and '' != drugcatalogCodeSelf ">
+				DRUGCATALOG_CODE_SELF = #{drugcatalogCodeSelf},
+			</if>
+	    	<if test="null != drugcatalogCodeSelf and '' != drugcatalogCodeSelf ">
+				DRUGCATALOG_CODE_KIND = #{drugcatalogCodeKind},
+			</if>
+	    	<if test="null != drugcatalogCkRemark and '' != drugcatalogCkRemark ">
+				DRUGCATALOG_CK_REMARK = #{drugcatalogCkRemark},
+			</if>
+	    	<if test="null != version and '' != version ">
+				VERSION = #{version},
+			</if>
+	    	<if test="null != remark and '' != remark ">
+				REMARK = #{remark},
+			</if>
+	    	<if test="null != type and '' != type ">
+				TYPE = #{type},
+			</if>
+	    	<if test="null != updDatetime and '' != updDatetime ">
+				UPD_DATETIME = #{updDatetime},
+			</if>
+	    	<if test="null != updUser and '' != updUser ">
+				UPD_USER = #{updUser},
+			</if>
+        </set>
+		where  DRUGCATALOG_CODE =  #{drugcatalogCode}
+	</update>
+	
+
+	
+	
+</mapper>

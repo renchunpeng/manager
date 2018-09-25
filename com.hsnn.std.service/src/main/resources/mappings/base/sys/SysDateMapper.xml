@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysDateDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysDate" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="dayValue" column="day_value" javaType="Date"/>
+        <result property="isWorkDay" column="is_work_day" javaType="Boolean"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.day_value,
+        t.is_work_day,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_date where id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_date where id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from sys_date 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysDate">
+		INSERT INTO sys_date(
+	            day_value ,
+	            is_work_day ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time
+	    ) 
+		VALUES (
+	        	#{dayValue},
+	        	#{isWorkDay},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.sys.model.SysDate">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+			SELECT SYSDATESEQ.nextval from dual id
+        </selectKey>
+		INSERT INTO sys_date(
+				id,
+	            day_value ,
+	            is_work_day ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time  
+		) 
+		VALUES (
+	        	#{id},
+	        	#{dayValue},
+	        	#{isWorkDay},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysDate">
+		UPDATE sys_date  
+		<set>
+	        	day_value = #{dayValue},
+	        	is_work_day = #{isWorkDay},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = SYSDATE,
+        </set>
+		WHERE  id =  #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_date WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_date t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(dayValue)">
+	            AND t.day_value = #{dayValue}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isWorkDay)">
+	            AND t.is_work_day = #{isWorkDay}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        
+	        <if test="@OGNL@isNotEmpty(startDate)">
+	            AND t.day_value &gt;= to_date(#{startDate},'yyyy-MM-dd')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(endDate)">
+	            AND t.day_value &lt;= to_date(#{endDate},'yyyy-MM-dd')
+	        </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_date (
+            day_value ,
+            is_work_day ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.dayValue},
+        	#{item.isWorkDay},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	SYSDATE
+        )
+        </foreach>
+	</insert>
+	
+	<delete id="deleteByParam" parameterType="map">
+		DELETE FROM sys_date 
+		<where>	        
+	        <if test="@OGNL@isNotEmpty(startDate)">
+	            AND day_value &gt;= #{startDate}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(endDate)">
+	            AND day_value &lt;= #{endDate}
+	        </if>
+		</where>
+	</delete>
+	<update id="updateByParam" parameterType="map">
+		UPDATE sys_date  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(isWorkDay)">
+	    		is_work_day = #{isWorkDay},
+	    	</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	    		last_update_user_id = #{lastUpdateUserId},
+	    	</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	        	last_update_user_name = #{lastUpdateUserName},
+	        </if>
+	        	last_update_time = SYSDATE,
+        </set>
+		<where>	        
+	        <if test="@OGNL@isNotEmpty(dates)">
+	            AND day_value in 
+	            <foreach collection="dates" item="item" separator="," open="(" close=")">
+	            	#{item}
+	            </foreach>
+	        </if>
+		</where>
+	</update>
+	
+	<select id="getWorkDayBefore" parameterType="String" resultType="java.util.Date">
+		SELECT getworkdaybefore(SYSDATE, #{timeNode}) AS result from dual
+	</select>
+	
+	<select id="getWorkDayAndNow"  resultType="hashmap">
+		SELECT SYSDATE now,is_work_day isWorkDay from sys_date where day_value = to_date(to_char(SYSDATE,'yyyy-MM-dd'),'yyyy-MM-dd') 
+	</select>
+</mapper>

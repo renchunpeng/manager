@@ -1,0 +1,1951 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.yimiao.dao.YimiaoCompanyDao">
+	<resultMap type="com.hsnn.medstgmini.yimiao.model.YimiaoCompany" id="BaseResultMap">
+        <result property="companyId" column="COMPANY_ID" javaType="String"/>
+        <result property="companyAccountCode" column="COMPANY_ACCOUNT_CODE" javaType="String"/>
+        <result property="companyName" column="COMPANY_NAME" javaType="String"/>
+        <result property="compSpelCode" column="COMP_SPEL_CODE" javaType="String"/>
+        <result property="companySimpleName" column="COMPANY_SIMPLE_NAME" javaType="String"/>
+        <result property="companySimpleNameSpell" column="COMPANY_SIMPLE_NAME_SPELL" javaType="String"/>
+        <result property="lastYearIncome" column="LAST_YEAR_INCOME" javaType="BigDecimal"/>
+        <result property="companyContactTel" column="COMPANY_CONTACT_TEL" javaType="String"/>
+        <result property="companyContactFax" column="COMPANY_CONTACT_FAX" javaType="String"/>
+        <result property="zipCode" column="ZIP_CODE" javaType="Integer"/>
+        <result property="email" column="EMAIL" javaType="String"/>
+        <result property="filingNumber" column="FILING_NUMBER" javaType="String"/>
+        <result property="companyTypeSystem" column="COMPANY_TYPE_SYSTEM" javaType="Integer"/>
+        <result property="companyType" column="COMPANY_TYPE" javaType="Integer"/>
+        <result property="onceCompanyName" column="ONCE_COMPANY_NAME" javaType="String"/>
+        <result property="areaName" column="AREA_NAME" javaType="String"/>
+        <result property="areaId" column="AREA_ID" javaType="Integer"/>
+        <result property="address" column="ADDRESS" javaType="String"/>
+        <result property="registeredCapital" column="REGISTERED_CAPITAL" javaType="Integer"/>
+        <result property="legalName" column="LEGAL_NAME" javaType="String"/>
+        <result property="legalNumber" column="LEGAL_NUMBER" javaType="String"/>
+        <result property="legalScanAttachId" column="LEGAL_SCAN_ATTACH_ID" javaType="String"/>
+        <result property="legalCellphone" column="LEGAL_CELLPHONE" javaType="String"/>
+        <result property="legalPhone" column="LEGAL_PHONE" javaType="String"/>
+        <result property="companyRegistType" column="COMPANY_REGIST_TYPE" javaType="String"/>
+        <result property="isGroupCompany" column="IS_GROUP_COMPANY" javaType="Integer"/>
+        <result property="groupCompanyName" column="GROUP_COMPANY_NAME" javaType="String"/>
+        <result property="isLawerCompany" column="IS_LAWER_COMPANY" javaType="Integer"/>
+        <result property="lawerCompoanyName" column="LAWER_COMPOANY_NAME" javaType="String"/>
+        <result property="organizationCode" column="ORGANIZATION_CODE" javaType="String"/>
+        <result property="taxRegistrationNumber" column="TAX_REGISTRATION_NUMBER" javaType="String"/>
+        <result property="businessLicense" column="BUSINESS_LICENSE" javaType="String"/>
+        <result property="businessLicenseBeginDate" column="BUSINESS_LICENSE_BEGIN_DATE" javaType="Date"/>
+        <result property="businessLicenseEndDate" column="BUSINESS_LICENSE_END_DATE" javaType="Date"/>
+        <result property="annualInspection" column="ANNUAL_INSPECTION" javaType="String"/>
+        <result property="authorizedPerson" column="AUTHORIZED_PERSON" javaType="String"/>
+        <result property="authorizedPersonFax" column="AUTHORIZED_PERSON_FAX" javaType="String"/>
+        <result property="authorizedPersonIdcard" column="AUTHORIZED_PERSON_IDCARD" javaType="String"/>
+        <result property="authorizedPersonTel" column="AUTHORIZED_PERSON_TEL" javaType="String"/>
+        <result property="productionPermissionCode" column="PRODUCTION_PERMISSION_CODE" javaType="String"/>
+        <result property="productPermissionRegAddr" column="PRODUCT_PERMISSION_REG_ADDR" javaType="String"/>
+        <result property="productionPermissionLawer" column="PRODUCTION_PERMISSION_LAWER" javaType="String"/>
+        <result property="productionPermissionEndDate" column="PRODUCTION_PERMISSION_END_DATE" javaType="Date"/>
+        <result property="productPermissionProAddr" column="PRODUCT_PERMISSION_PRO_ADDR" javaType="String"/>
+        <result property="productPermissionProRange" column="PRODUCT_PERMISSION_PRO_RANGE" javaType="String"/>
+        <result property="productPermissionSortCode" column="PRODUCT_PERMISSION_SORT_CODE" javaType="String"/>
+        <result property="businessPermissionCode" column="BUSINESS_PERMISSION_CODE" javaType="String"/>
+        <result property="businessPermissionRegAddr" column="BUSINESS_PERMISSION_REG_ADDR" javaType="String"/>
+        <result property="businessPermissionLawer" column="BUSINESS_PERMISSION_LAWER" javaType="String"/>
+        <result property="businessPermissionEndDate" column="BUSINESS_PERMISSION_END_DATE" javaType="Date"/>
+        <result property="businessPermissionWareAddr" column="BUSINESS_PERMISSION_WARE_ADDR" javaType="String"/>
+        <result property="businessPermissionRange" column="BUSINESS_PERMISSION_RANGE" javaType="String"/>
+        <result property="gspCode" column="GSP_CODE" javaType="String"/>
+        <result property="isUsing" column="IS_USING" javaType="Integer"/>
+        <result property="maintenanceState" column="MAINTENANCE_STATE" javaType="Integer"/>
+        <result property="qualificationStatus" column="QUALIFICATION_STATUS" javaType="Integer"/>
+        <result property="qualificationNopassReason" column="QUALIFICATION_NOPASS_REASON" javaType="String"/>
+        <result property="inputRemarks" column="INPUT_REMARKS" javaType="String"/>
+        <result property="initializationState" column="INITIALIZATION_STATE" javaType="Integer"/>
+        <result property="clearStatus" column="CLEAR_STATUS" javaType="Integer"/>
+        <result property="addUserId" column="ADD_USER_ID" javaType="String"/>
+        <result property="addUserName" column="ADD_USER_NAME" javaType="String"/>
+        <result property="addTime" column="ADD_TIME" javaType="Date"/>
+        <result property="reauditUserId" column="REAUDIT_USER_ID" javaType="String"/>
+        <result property="reauditUserName" column="REAUDIT_USER_NAME" javaType="String"/>
+        <result property="reauditAddTime" column="REAUDIT_ADD_TIME" javaType="Date"/>
+        <result property="reauditRemark" column="REAUDIT_REMARK" javaType="String"/>
+        <result property="auditUserId" column="AUDIT_USER_ID" javaType="String"/>
+        <result property="auditUserName" column="AUDIT_USER_NAME" javaType="String"/>
+        <result property="auditAddTime" column="AUDIT_ADD_TIME" javaType="Date"/>
+        <result property="auditRemark" column="AUDIT_REMARK" javaType="String"/>
+        <result property="bankBasicAccount" column="BANK_BASIC_ACCOUNT" javaType="String"/>
+        <result property="bankBasicName" column="BANK_BASIC_NAME" javaType="String"/>
+        <result property="bankAuditState" column="BANK_AUDIT_STATE" javaType="Integer"/>
+        <result property="bankAuditUserId" column="BANK_AUDIT_USER_ID" javaType="String"/>
+        <result property="bankAuditUserName" column="BANK_AUDIT_USER_NAME" javaType="String"/>
+        <result property="bankAuditTime" column="BANK_AUDIT_TIME" javaType="Date"/>
+        <result property="lastUpdateUserId" column="LAST_UPDATE_USER_ID" javaType="String"/>
+        <result property="lastUpdateUserName" column="LAST_UPDATE_USER_NAME" javaType="String"/>
+        <result property="lastUpdateTime" column="LAST_UPDATE_TIME" javaType="Date"/>
+        <result property="orgId" column="ORG_ID" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.COMPANY_ID,
+        t.COMPANY_ACCOUNT_CODE,
+        t.COMPANY_NAME,
+        t.COMP_SPEL_CODE,
+        t.COMPANY_SIMPLE_NAME,
+        t.COMPANY_SIMPLE_NAME_SPELL,
+        t.LAST_YEAR_INCOME,
+        t.COMPANY_CONTACT_TEL,
+        t.COMPANY_CONTACT_FAX,
+        t.ZIP_CODE,
+        t.EMAIL,
+        t.FILING_NUMBER,
+        t.COMPANY_TYPE_SYSTEM,
+        t.COMPANY_TYPE,
+        t.ONCE_COMPANY_NAME,
+        t.AREA_NAME,
+        t.AREA_ID,
+        t.ADDRESS,
+        t.REGISTERED_CAPITAL,
+        t.LEGAL_NAME,
+        t.LEGAL_NUMBER,
+        t.LEGAL_SCAN_ATTACH_ID,
+        t.LEGAL_CELLPHONE,
+        t.LEGAL_PHONE,
+        t.COMPANY_REGIST_TYPE,
+        t.IS_GROUP_COMPANY,
+        t.GROUP_COMPANY_NAME,
+        t.IS_LAWER_COMPANY,
+        t.LAWER_COMPOANY_NAME,
+        t.ORGANIZATION_CODE,
+        t.TAX_REGISTRATION_NUMBER,
+        t.BUSINESS_LICENSE,
+        t.BUSINESS_LICENSE_BEGIN_DATE,
+        t.BUSINESS_LICENSE_END_DATE,
+        t.ANNUAL_INSPECTION,
+        t.AUTHORIZED_PERSON,
+        t.AUTHORIZED_PERSON_FAX,
+        t.AUTHORIZED_PERSON_IDCARD,
+        t.AUTHORIZED_PERSON_TEL,
+        t.PRODUCTION_PERMISSION_CODE,
+        t.PRODUCT_PERMISSION_REG_ADDR,
+        t.PRODUCTION_PERMISSION_LAWER,
+        t.PRODUCTION_PERMISSION_END_DATE,
+        t.PRODUCT_PERMISSION_PRO_ADDR,
+        t.PRODUCT_PERMISSION_PRO_RANGE,
+        t.PRODUCT_PERMISSION_SORT_CODE,
+        t.BUSINESS_PERMISSION_CODE,
+        t.BUSINESS_PERMISSION_REG_ADDR,
+        t.BUSINESS_PERMISSION_LAWER,
+        t.BUSINESS_PERMISSION_END_DATE,
+        t.BUSINESS_PERMISSION_WARE_ADDR,
+        t.BUSINESS_PERMISSION_RANGE,
+        t.GSP_CODE,
+        t.IS_USING,
+        t.MAINTENANCE_STATE,
+        t.QUALIFICATION_STATUS,
+        t.QUALIFICATION_NOPASS_REASON,
+        t.INPUT_REMARKS,
+        t.INITIALIZATION_STATE,
+        t.CLEAR_STATUS,
+        t.ADD_USER_ID,
+        t.ADD_USER_NAME,
+        t.ADD_TIME,
+        t.REAUDIT_USER_ID,
+        t.REAUDIT_USER_NAME,
+        t.REAUDIT_ADD_TIME,
+        t.REAUDIT_REMARK,
+        t.AUDIT_USER_ID,
+        t.AUDIT_USER_NAME,
+        t.AUDIT_ADD_TIME,
+        t.AUDIT_REMARK,
+        t.BANK_BASIC_ACCOUNT,
+        t.BANK_BASIC_NAME,
+        t.BANK_AUDIT_STATE,
+        t.BANK_AUDIT_USER_ID,
+        t.BANK_AUDIT_USER_NAME,
+        t.BANK_AUDIT_TIME,
+        t.LAST_UPDATE_USER_ID,
+        t.LAST_UPDATE_USER_NAME,
+        t.LAST_UPDATE_TIME
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM YIMIAO_COMPANY t
+		WHERE t.COMPANY_ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+		INSERT INTO YIMIAO_COMPANY(
+	            COMPANY_ACCOUNT_CODE ,
+	            COMPANY_NAME ,
+	            COMP_SPEL_CODE ,
+	            COMPANY_SIMPLE_NAME ,
+	            COMPANY_SIMPLE_NAME_SPELL ,
+	            LAST_YEAR_INCOME ,
+	            COMPANY_CONTACT_TEL ,
+	            COMPANY_CONTACT_FAX ,
+	            ZIP_CODE ,
+	            EMAIL ,
+	            FILING_NUMBER ,
+	            COMPANY_TYPE_SYSTEM ,
+	            COMPANY_TYPE ,
+	            ONCE_COMPANY_NAME ,
+	            AREA_NAME ,
+	            AREA_ID ,
+	            ADDRESS ,
+	            REGISTERED_CAPITAL ,
+	            LEGAL_NAME ,
+	            LEGAL_NUMBER ,
+	            LEGAL_SCAN_ATTACH_ID ,
+	            LEGAL_CELLPHONE ,
+	            LEGAL_PHONE ,
+	            COMPANY_REGIST_TYPE ,
+	            IS_GROUP_COMPANY ,
+	            GROUP_COMPANY_NAME ,
+	            IS_LAWER_COMPANY ,
+	            LAWER_COMPOANY_NAME ,
+	            ORGANIZATION_CODE ,
+	            TAX_REGISTRATION_NUMBER ,
+	            BUSINESS_LICENSE ,
+	            BUSINESS_LICENSE_BEGIN_DATE ,
+	            BUSINESS_LICENSE_END_DATE ,
+	            ANNUAL_INSPECTION ,
+	            AUTHORIZED_PERSON ,
+	            AUTHORIZED_PERSON_FAX ,
+	            AUTHORIZED_PERSON_IDCARD ,
+	            AUTHORIZED_PERSON_TEL ,
+	            PRODUCTION_PERMISSION_CODE ,
+	            PRODUCT_PERMISSION_REG_ADDR ,
+	            PRODUCTION_PERMISSION_LAWER ,
+	            PRODUCTION_PERMISSION_END_DATE ,
+	            PRODUCT_PERMISSION_PRO_ADDR ,
+	            PRODUCT_PERMISSION_PRO_RANGE ,
+	            PRODUCT_PERMISSION_SORT_CODE ,
+	            BUSINESS_PERMISSION_CODE ,
+	            BUSINESS_PERMISSION_REG_ADDR ,
+	            BUSINESS_PERMISSION_LAWER ,
+	            BUSINESS_PERMISSION_END_DATE ,
+	            BUSINESS_PERMISSION_WARE_ADDR ,
+	            BUSINESS_PERMISSION_RANGE ,
+	            GSP_CODE ,
+	            IS_USING ,
+	            MAINTENANCE_STATE ,
+	            QUALIFICATION_STATUS ,
+	            QUALIFICATION_NOPASS_REASON ,
+	            INPUT_REMARKS ,
+	            INITIALIZATION_STATE ,
+	            CLEAR_STATUS ,
+	            ADD_USER_ID ,
+	            ADD_USER_NAME ,
+	            ADD_TIME ,
+	            REAUDIT_USER_ID ,
+	            REAUDIT_USER_NAME ,
+	            REAUDIT_ADD_TIME ,
+	            REAUDIT_REMARK ,
+	            AUDIT_USER_ID ,
+	            AUDIT_USER_NAME ,
+	            AUDIT_ADD_TIME ,
+	            AUDIT_REMARK ,
+	            BANK_BASIC_ACCOUNT ,
+	            BANK_BASIC_NAME ,
+	            BANK_AUDIT_STATE ,
+	            BANK_AUDIT_USER_ID ,
+	            BANK_AUDIT_USER_NAME ,
+	            BANK_AUDIT_TIME ,
+	            LAST_UPDATE_USER_ID ,
+	            LAST_UPDATE_USER_NAME ,
+	            LAST_UPDATE_TIME 
+		)
+		VALUES (
+	        	#{companyAccountCode},
+	        	#{companyName},
+	        	#{compSpelCode},
+	        	#{companySimpleName},
+	        	#{companySimpleNameSpell},
+	        	#{lastYearIncome},
+	        	#{companyContactTel},
+	        	#{companyContactFax},
+	        	#{zipCode},
+	        	#{email},
+	        	#{filingNumber},
+	        	#{companyTypeSystem},
+	        	#{companyType},
+	        	#{onceCompanyName},
+	        	#{areaName},
+	        	#{areaId},
+	        	#{address},
+	        	#{registeredCapital},
+	        	#{legalName},
+	        	#{legalNumber},
+	        	#{legalScanAttachId},
+	        	#{legalCellphone},
+	        	#{legalPhone},
+	        	#{companyRegistType},
+	        	#{isGroupCompany},
+	        	#{groupCompanyName},
+	        	#{isLawerCompany},
+	        	#{lawerCompoanyName},
+	        	#{organizationCode},
+	        	#{taxRegistrationNumber},
+	        	#{businessLicense},
+	        	#{businessLicenseBeginDate},
+	        	#{businessLicenseEndDate},
+	        	#{annualInspection},
+	        	#{authorizedPerson},
+	        	#{authorizedPersonFax},
+	        	#{authorizedPersonIdcard},
+	        	#{authorizedPersonTel},
+	        	#{productionPermissionCode},
+	        	#{productPermissionRegAddr},
+	        	#{productionPermissionLawer},
+	        	#{productionPermissionEndDate},
+	        	#{productPermissionProAddr},
+	        	#{productPermissionProRange},
+	        	#{productPermissionSortCode},
+	        	#{businessPermissionCode},
+	        	#{businessPermissionRegAddr},
+	        	#{businessPermissionLawer},
+	        	#{businessPermissionEndDate},
+	        	#{businessPermissionWareAddr},
+	        	#{businessPermissionRange},
+	        	#{gspCode},
+	        	#{isUsing},
+	        	#{maintenanceState},
+	        	#{qualificationStatus},
+	        	#{qualificationNopassReason},
+	        	#{inputRemarks},
+	        	#{initializationState},
+	        	#{clearStatus},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{reauditUserId},
+	        	#{reauditUserName},
+	        	#{reauditAddTime},
+	        	#{reauditRemark},
+	        	#{auditUserId},
+	        	#{auditUserName},
+	        	#{auditAddTime},
+	        	#{auditRemark},
+	        	#{bankBasicAccount},
+	        	#{bankBasicName},
+	        	#{bankAuditState},
+	        	#{bankAuditUserId},
+	        	#{bankAuditUserName},
+	        	#{bankAuditTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+		<selectKey resultType="java.lang.String" keyProperty="companyId">
+			SELECT LAST_INSERT_ID() AS COMPANY_ID
+        </selectKey>
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+		UPDATE YIMIAO_COMPANY  
+		<set>
+			COMPANY_ACCOUNT_CODE = #{companyAccountCode},
+			COMPANY_NAME = #{companyName},
+			COMP_SPEL_CODE = #{compSpelCode},
+			COMPANY_SIMPLE_NAME = #{companySimpleName},
+			COMPANY_SIMPLE_NAME_SPELL = #{companySimpleNameSpell},
+			LAST_YEAR_INCOME = #{lastYearIncome},
+			COMPANY_CONTACT_TEL = #{companyContactTel},
+			COMPANY_CONTACT_FAX = #{companyContactFax},
+			ZIP_CODE = #{zipCode},
+			EMAIL = #{email},
+			FILING_NUMBER = #{filingNumber},
+			COMPANY_TYPE_SYSTEM = #{companyTypeSystem},
+			COMPANY_TYPE = #{companyType},
+			ONCE_COMPANY_NAME = #{onceCompanyName},
+			AREA_NAME = #{areaName},
+			AREA_ID = #{areaId},
+			ADDRESS = #{address},
+			REGISTERED_CAPITAL = #{registeredCapital},
+			LEGAL_NAME = #{legalName},
+			LEGAL_NUMBER = #{legalNumber},
+			LEGAL_SCAN_ATTACH_ID = #{legalScanAttachId},
+			LEGAL_CELLPHONE = #{legalCellphone},
+			LEGAL_PHONE = #{legalPhone},
+			COMPANY_REGIST_TYPE = #{companyRegistType},
+			IS_GROUP_COMPANY = #{isGroupCompany},
+			GROUP_COMPANY_NAME = #{groupCompanyName},
+			IS_LAWER_COMPANY = #{isLawerCompany},
+			LAWER_COMPOANY_NAME = #{lawerCompoanyName},
+			ORGANIZATION_CODE = #{organizationCode},
+			TAX_REGISTRATION_NUMBER = #{taxRegistrationNumber},
+			BUSINESS_LICENSE = #{businessLicense},
+			BUSINESS_LICENSE_BEGIN_DATE = #{businessLicenseBeginDate},
+			BUSINESS_LICENSE_END_DATE = #{businessLicenseEndDate},
+			ANNUAL_INSPECTION = #{annualInspection},
+			AUTHORIZED_PERSON = #{authorizedPerson},
+			AUTHORIZED_PERSON_FAX = #{authorizedPersonFax},
+			AUTHORIZED_PERSON_IDCARD = #{authorizedPersonIdcard},
+			AUTHORIZED_PERSON_TEL = #{authorizedPersonTel},
+			PRODUCTION_PERMISSION_CODE = #{productionPermissionCode},
+			PRODUCT_PERMISSION_REG_ADDR = #{productPermissionRegAddr},
+			PRODUCTION_PERMISSION_LAWER = #{productionPermissionLawer},
+			PRODUCTION_PERMISSION_END_DATE = #{productionPermissionEndDate},
+			PRODUCT_PERMISSION_PRO_ADDR = #{productPermissionProAddr},
+			PRODUCT_PERMISSION_PRO_RANGE = #{productPermissionProRange},
+			PRODUCT_PERMISSION_SORT_CODE = #{productPermissionSortCode},
+			BUSINESS_PERMISSION_CODE = #{businessPermissionCode},
+			BUSINESS_PERMISSION_REG_ADDR = #{businessPermissionRegAddr},
+			BUSINESS_PERMISSION_LAWER = #{businessPermissionLawer},
+			BUSINESS_PERMISSION_END_DATE = #{businessPermissionEndDate},
+			BUSINESS_PERMISSION_WARE_ADDR = #{businessPermissionWareAddr},
+			BUSINESS_PERMISSION_RANGE = #{businessPermissionRange},
+			GSP_CODE = #{gspCode},
+			IS_USING = #{isUsing},
+			MAINTENANCE_STATE = #{maintenanceState},
+			QUALIFICATION_STATUS = #{qualificationStatus},
+			QUALIFICATION_NOPASS_REASON = #{qualificationNopassReason},
+			INPUT_REMARKS = #{inputRemarks},
+			INITIALIZATION_STATE = #{initializationState},
+			CLEAR_STATUS = #{clearStatus},
+			ADD_USER_ID = #{addUserId},
+			ADD_USER_NAME = #{addUserName},
+			ADD_TIME = #{addTime},
+			REAUDIT_USER_ID = #{reauditUserId},
+			REAUDIT_USER_NAME = #{reauditUserName},
+			REAUDIT_ADD_TIME = #{reauditAddTime},
+			REAUDIT_REMARK = #{reauditRemark},
+			AUDIT_USER_ID = #{auditUserId},
+			AUDIT_USER_NAME = #{auditUserName},
+			AUDIT_ADD_TIME = #{auditAddTime},
+			AUDIT_REMARK = #{auditRemark},
+			BANK_BASIC_ACCOUNT = #{bankBasicAccount},
+			BANK_BASIC_NAME = #{bankBasicName},
+			BANK_AUDIT_STATE = #{bankAuditState},
+			BANK_AUDIT_USER_ID = #{bankAuditUserId},
+			BANK_AUDIT_USER_NAME = #{bankAuditUserName},
+			BANK_AUDIT_TIME = #{bankAuditTime},
+			LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			LAST_UPDATE_TIME = #{lastUpdateTime},
+        </set>
+		WHERE  COMPANY_ID =  #{companyId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+		UPDATE YIMIAO_COMPANY  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(companyAccountCode)">
+				COMPANY_ACCOUNT_CODE = #{companyAccountCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyName)">
+				COMPANY_NAME = #{companyName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(compSpelCode)">
+				COMP_SPEL_CODE = #{compSpelCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companySimpleName)">
+				COMPANY_SIMPLE_NAME = #{companySimpleName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companySimpleNameSpell)">
+				COMPANY_SIMPLE_NAME_SPELL = #{companySimpleNameSpell},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastYearIncome)">
+				LAST_YEAR_INCOME = #{lastYearIncome},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyContactTel)">
+				COMPANY_CONTACT_TEL = #{companyContactTel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyContactFax)">
+				COMPANY_CONTACT_FAX = #{companyContactFax},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(zipCode)">
+				ZIP_CODE = #{zipCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(email)">
+				EMAIL = #{email},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(filingNumber)">
+				FILING_NUMBER = #{filingNumber},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyTypeSystem)">
+				COMPANY_TYPE_SYSTEM = #{companyTypeSystem},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyType)">
+				COMPANY_TYPE = #{companyType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(onceCompanyName)">
+				ONCE_COMPANY_NAME = #{onceCompanyName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(areaName)">
+				AREA_NAME = #{areaName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(areaId)">
+				AREA_ID = #{areaId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(address)">
+				ADDRESS = #{address},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(registeredCapital)">
+				REGISTERED_CAPITAL = #{registeredCapital},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalName)">
+				LEGAL_NAME = #{legalName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalNumber)">
+				LEGAL_NUMBER = #{legalNumber},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalScanAttachId)">
+				LEGAL_SCAN_ATTACH_ID = #{legalScanAttachId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalCellphone)">
+				LEGAL_CELLPHONE = #{legalCellphone},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalPhone)">
+				LEGAL_PHONE = #{legalPhone},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyRegistType)">
+				COMPANY_REGIST_TYPE = #{companyRegistType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isGroupCompany)">
+				IS_GROUP_COMPANY = #{isGroupCompany},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(groupCompanyName)">
+				GROUP_COMPANY_NAME = #{groupCompanyName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isLawerCompany)">
+				IS_LAWER_COMPANY = #{isLawerCompany},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lawerCompoanyName)">
+				LAWER_COMPOANY_NAME = #{lawerCompoanyName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(organizationCode)">
+				ORGANIZATION_CODE = #{organizationCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(taxRegistrationNumber)">
+				TAX_REGISTRATION_NUMBER = #{taxRegistrationNumber},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessLicense)">
+				BUSINESS_LICENSE = #{businessLicense},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessLicenseBeginDate)">
+				BUSINESS_LICENSE_BEGIN_DATE = #{businessLicenseBeginDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessLicenseEndDate)">
+				BUSINESS_LICENSE_END_DATE = #{businessLicenseEndDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(annualInspection)">
+				ANNUAL_INSPECTION = #{annualInspection},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(authorizedPerson)">
+				AUTHORIZED_PERSON = #{authorizedPerson},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(authorizedPersonFax)">
+				AUTHORIZED_PERSON_FAX = #{authorizedPersonFax},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(authorizedPersonIdcard)">
+				AUTHORIZED_PERSON_IDCARD = #{authorizedPersonIdcard},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(authorizedPersonTel)">
+				AUTHORIZED_PERSON_TEL = #{authorizedPersonTel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productionPermissionCode)">
+				PRODUCTION_PERMISSION_CODE = #{productionPermissionCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productPermissionRegAddr)">
+				PRODUCT_PERMISSION_REG_ADDR = #{productPermissionRegAddr},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productionPermissionLawer)">
+				PRODUCTION_PERMISSION_LAWER = #{productionPermissionLawer},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productionPermissionEndDate)">
+				PRODUCTION_PERMISSION_END_DATE = #{productionPermissionEndDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productPermissionProAddr)">
+				PRODUCT_PERMISSION_PRO_ADDR = #{productPermissionProAddr},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productPermissionProRange)">
+				PRODUCT_PERMISSION_PRO_RANGE = #{productPermissionProRange},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productPermissionSortCode)">
+				PRODUCT_PERMISSION_SORT_CODE = #{productPermissionSortCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessPermissionCode)">
+				BUSINESS_PERMISSION_CODE = #{businessPermissionCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessPermissionRegAddr)">
+				BUSINESS_PERMISSION_REG_ADDR = #{businessPermissionRegAddr},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessPermissionLawer)">
+				BUSINESS_PERMISSION_LAWER = #{businessPermissionLawer},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessPermissionEndDate)">
+				BUSINESS_PERMISSION_END_DATE = #{businessPermissionEndDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessPermissionWareAddr)">
+				BUSINESS_PERMISSION_WARE_ADDR = #{businessPermissionWareAddr},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(businessPermissionRange)">
+				BUSINESS_PERMISSION_RANGE = #{businessPermissionRange},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(gspCode)">
+				GSP_CODE = #{gspCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isUsing)">
+				IS_USING = #{isUsing},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(maintenanceState)">
+				MAINTENANCE_STATE = #{maintenanceState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(qualificationStatus)">
+				QUALIFICATION_STATUS = #{qualificationStatus},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(qualificationNopassReason)">
+				QUALIFICATION_NOPASS_REASON = #{qualificationNopassReason},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(inputRemarks)">
+				INPUT_REMARKS = #{inputRemarks},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(initializationState)">
+				INITIALIZATION_STATE = #{initializationState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(clearStatus)">
+				CLEAR_STATUS = #{clearStatus},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				ADD_USER_ID = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				ADD_USER_NAME = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				ADD_TIME = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(reauditUserId)">
+				REAUDIT_USER_ID = #{reauditUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(reauditUserName)">
+				REAUDIT_USER_NAME = #{reauditUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(reauditAddTime)">
+				REAUDIT_ADD_TIME = #{reauditAddTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(reauditRemark)">
+				REAUDIT_REMARK = #{reauditRemark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditUserId)">
+				AUDIT_USER_ID = #{auditUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditUserName)">
+				AUDIT_USER_NAME = #{auditUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditAddTime)">
+				AUDIT_ADD_TIME = #{auditAddTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditRemark)">
+				AUDIT_REMARK = #{auditRemark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicAccount)">
+				BANK_BASIC_ACCOUNT = #{bankBasicAccount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicName)">
+				BANK_BASIC_NAME = #{bankBasicName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditState)">
+				BANK_AUDIT_STATE = #{bankAuditState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditUserId)">
+				BANK_AUDIT_USER_ID = #{bankAuditUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditUserName)">
+				BANK_AUDIT_USER_NAME = #{bankAuditUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditTime)">
+				BANK_AUDIT_TIME = #{bankAuditTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				LAST_UPDATE_TIME = #{lastUpdateTime},
+			</if>
+        </set>
+		WHERE  COMPANY_ID =  #{companyId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM YIMIAO_COMPANY WHERE  COMPANY_ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM YIMIAO_COMPANY t
+		<where>
+			<if test="@OGNL@isNotEmpty(companyId)">
+				AND t.COMPANY_ID = #{companyId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyAccountCode)">
+				AND t.COMPANY_ACCOUNT_CODE = #{companyAccountCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyName)">
+				AND t.COMPANY_NAME like CONCAT(CONCAT('%', #{companyName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(compSpelCode)">
+				AND t.COMP_SPEL_CODE = #{compSpelCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companySimpleName)">
+				AND t.COMPANY_SIMPLE_NAME = #{companySimpleName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companySimpleNameSpell)">
+				AND t.COMPANY_SIMPLE_NAME_SPELL = #{companySimpleNameSpell}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastYearIncome)">
+				AND t.LAST_YEAR_INCOME = #{lastYearIncome}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyContactTel)">
+				AND t.COMPANY_CONTACT_TEL = #{companyContactTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyContactFax)">
+				AND t.COMPANY_CONTACT_FAX = #{companyContactFax}
+		    </if>
+			<if test="@OGNL@isNotEmpty(zipCode)">
+				AND t.ZIP_CODE = #{zipCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(email)">
+				AND t.EMAIL = #{email}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingNumber)">
+				AND t.FILING_NUMBER = #{filingNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyTypeSystem)">
+				AND t.COMPANY_TYPE_SYSTEM = #{companyTypeSystem}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyType)">
+				AND t.COMPANY_TYPE = #{companyType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(onceCompanyName)">
+				AND t.ONCE_COMPANY_NAME = #{onceCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(areaName)">
+				AND t.AREA_NAME = #{areaName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(areaId)">
+				AND t.AREA_ID = #{areaId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(address)">
+				AND t.ADDRESS = #{address}
+		    </if>
+			<if test="@OGNL@isNotEmpty(registeredCapital)">
+				AND t.REGISTERED_CAPITAL = #{registeredCapital}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalName)">
+				AND t.LEGAL_NAME = #{legalName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalNumber)">
+				AND t.LEGAL_NUMBER = #{legalNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalScanAttachId)">
+				AND t.LEGAL_SCAN_ATTACH_ID = #{legalScanAttachId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalCellphone)">
+				AND t.LEGAL_CELLPHONE = #{legalCellphone}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalPhone)">
+				AND t.LEGAL_PHONE = #{legalPhone}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyRegistType)">
+				AND t.COMPANY_REGIST_TYPE = #{companyRegistType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isGroupCompany)">
+				AND t.IS_GROUP_COMPANY = #{isGroupCompany}
+		    </if>
+			<if test="@OGNL@isNotEmpty(groupCompanyName)">
+				AND t.GROUP_COMPANY_NAME = #{groupCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isLawerCompany)">
+				AND t.IS_LAWER_COMPANY = #{isLawerCompany}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lawerCompoanyName)">
+				AND t.LAWER_COMPOANY_NAME = #{lawerCompoanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(organizationCode)">
+				AND t.ORGANIZATION_CODE = #{organizationCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(taxRegistrationNumber)">
+				AND t.TAX_REGISTRATION_NUMBER = #{taxRegistrationNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessLicense)">
+				AND t.BUSINESS_LICENSE = #{businessLicense}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessLicenseBeginDate)">
+				AND t.BUSINESS_LICENSE_BEGIN_DATE = #{businessLicenseBeginDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessLicenseEndDate)">
+				AND t.BUSINESS_LICENSE_END_DATE = #{businessLicenseEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(annualInspection)">
+				AND t.ANNUAL_INSPECTION = #{annualInspection}
+		    </if>
+			<if test="@OGNL@isNotEmpty(authorizedPerson)">
+				AND t.AUTHORIZED_PERSON = #{authorizedPerson}
+		    </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonFax)">
+				AND t.AUTHORIZED_PERSON_FAX = #{authorizedPersonFax}
+		    </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonIdcard)">
+				AND t.AUTHORIZED_PERSON_IDCARD = #{authorizedPersonIdcard}
+		    </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonTel)">
+				AND t.AUTHORIZED_PERSON_TEL = #{authorizedPersonTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionCode)">
+				AND t.PRODUCTION_PERMISSION_CODE = #{productionPermissionCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productPermissionRegAddr)">
+				AND t.PRODUCT_PERMISSION_REG_ADDR = #{productPermissionRegAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionLawer)">
+				AND t.PRODUCTION_PERMISSION_LAWER = #{productionPermissionLawer}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionEndDate)">
+				AND t.PRODUCTION_PERMISSION_END_DATE = #{productionPermissionEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productPermissionProAddr)">
+				AND t.PRODUCT_PERMISSION_PRO_ADDR = #{productPermissionProAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productPermissionProRange)">
+				AND t.PRODUCT_PERMISSION_PRO_RANGE = #{productPermissionProRange}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productPermissionSortCode)">
+				AND t.PRODUCT_PERMISSION_SORT_CODE = #{productPermissionSortCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionCode)">
+				AND t.BUSINESS_PERMISSION_CODE = #{businessPermissionCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionRegAddr)">
+				AND t.BUSINESS_PERMISSION_REG_ADDR = #{businessPermissionRegAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionLawer)">
+				AND t.BUSINESS_PERMISSION_LAWER = #{businessPermissionLawer}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionEndDate)">
+				AND t.BUSINESS_PERMISSION_END_DATE = #{businessPermissionEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionWareAddr)">
+				AND t.BUSINESS_PERMISSION_WARE_ADDR = #{businessPermissionWareAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionRange)">
+				AND t.BUSINESS_PERMISSION_RANGE = #{businessPermissionRange}
+		    </if>
+			<if test="@OGNL@isNotEmpty(gspCode)">
+				AND t.GSP_CODE = #{gspCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maintenanceState)">
+				AND t.MAINTENANCE_STATE = #{maintenanceState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualificationStatus)">
+				AND t.QUALIFICATION_STATUS = #{qualificationStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualificationNopassReason)">
+				AND t.QUALIFICATION_NOPASS_REASON = #{qualificationNopassReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(inputRemarks)">
+				AND t.INPUT_REMARKS = #{inputRemarks}
+		    </if>
+			<if test="@OGNL@isNotEmpty(initializationState)">
+				AND t.INITIALIZATION_STATE = #{initializationState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(clearStatus)">
+				AND t.CLEAR_STATUS = #{clearStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(reauditUserId)">
+				AND t.REAUDIT_USER_ID = #{reauditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(reauditUserName)">
+				AND t.REAUDIT_USER_NAME = #{reauditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(reauditAddTime)">
+				AND t.REAUDIT_ADD_TIME = #{reauditAddTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(reauditRemark)">
+				AND t.REAUDIT_REMARK = #{reauditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditUserId)">
+				AND t.AUDIT_USER_ID = #{auditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditUserName)">
+				AND t.AUDIT_USER_NAME = #{auditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditAddTime)">
+				AND t.AUDIT_ADD_TIME = #{auditAddTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditRemark)">
+				AND t.AUDIT_REMARK = #{auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicAccount)">
+				AND t.BANK_BASIC_ACCOUNT = #{bankBasicAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicName)">
+				AND t.BANK_BASIC_NAME = #{bankBasicName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditState)">
+				AND t.BANK_AUDIT_STATE = #{bankAuditState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditUserId)">
+				AND t.BANK_AUDIT_USER_ID = #{bankAuditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditUserName)">
+				AND t.BANK_AUDIT_USER_NAME = #{bankAuditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditTime)">
+				AND t.BANK_AUDIT_TIME = #{bankAuditTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO YIMIAO_COMPANY (
+            COMPANY_ACCOUNT_CODE ,
+            COMPANY_NAME ,
+            COMP_SPEL_CODE ,
+            COMPANY_SIMPLE_NAME ,
+            COMPANY_SIMPLE_NAME_SPELL ,
+            LAST_YEAR_INCOME ,
+            COMPANY_CONTACT_TEL ,
+            COMPANY_CONTACT_FAX ,
+            ZIP_CODE ,
+            EMAIL ,
+            FILING_NUMBER ,
+            COMPANY_TYPE_SYSTEM ,
+            COMPANY_TYPE ,
+            ONCE_COMPANY_NAME ,
+            AREA_NAME ,
+            AREA_ID ,
+            ADDRESS ,
+            REGISTERED_CAPITAL ,
+            LEGAL_NAME ,
+            LEGAL_NUMBER ,
+            LEGAL_SCAN_ATTACH_ID ,
+            LEGAL_CELLPHONE ,
+            LEGAL_PHONE ,
+            COMPANY_REGIST_TYPE ,
+            IS_GROUP_COMPANY ,
+            GROUP_COMPANY_NAME ,
+            IS_LAWER_COMPANY ,
+            LAWER_COMPOANY_NAME ,
+            ORGANIZATION_CODE ,
+            TAX_REGISTRATION_NUMBER ,
+            BUSINESS_LICENSE ,
+            BUSINESS_LICENSE_BEGIN_DATE ,
+            BUSINESS_LICENSE_END_DATE ,
+            ANNUAL_INSPECTION ,
+            AUTHORIZED_PERSON ,
+            AUTHORIZED_PERSON_FAX ,
+            AUTHORIZED_PERSON_IDCARD ,
+            AUTHORIZED_PERSON_TEL ,
+            PRODUCTION_PERMISSION_CODE ,
+            PRODUCT_PERMISSION_REG_ADDR ,
+            PRODUCTION_PERMISSION_LAWER ,
+            PRODUCTION_PERMISSION_END_DATE ,
+            PRODUCT_PERMISSION_PRO_ADDR ,
+            PRODUCT_PERMISSION_PRO_RANGE ,
+            PRODUCT_PERMISSION_SORT_CODE ,
+            BUSINESS_PERMISSION_CODE ,
+            BUSINESS_PERMISSION_REG_ADDR ,
+            BUSINESS_PERMISSION_LAWER ,
+            BUSINESS_PERMISSION_END_DATE ,
+            BUSINESS_PERMISSION_WARE_ADDR ,
+            BUSINESS_PERMISSION_RANGE ,
+            GSP_CODE ,
+            IS_USING ,
+            MAINTENANCE_STATE ,
+            QUALIFICATION_STATUS ,
+            QUALIFICATION_NOPASS_REASON ,
+            INPUT_REMARKS ,
+            INITIALIZATION_STATE ,
+            CLEAR_STATUS ,
+            ADD_USER_ID ,
+            ADD_USER_NAME ,
+            ADD_TIME ,
+            REAUDIT_USER_ID ,
+            REAUDIT_USER_NAME ,
+            REAUDIT_ADD_TIME ,
+            REAUDIT_REMARK ,
+            AUDIT_USER_ID ,
+            AUDIT_USER_NAME ,
+            AUDIT_ADD_TIME ,
+            AUDIT_REMARK ,
+            BANK_BASIC_ACCOUNT ,
+            BANK_BASIC_NAME ,
+            BANK_AUDIT_STATE ,
+            BANK_AUDIT_USER_ID ,
+            BANK_AUDIT_USER_NAME ,
+            BANK_AUDIT_TIME ,
+            LAST_UPDATE_USER_ID ,
+            LAST_UPDATE_USER_NAME ,
+            LAST_UPDATE_TIME 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.companyAccountCode},
+        	#{item.companyName},
+        	#{item.compSpelCode},
+        	#{item.companySimpleName},
+        	#{item.companySimpleNameSpell},
+        	#{item.lastYearIncome},
+        	#{item.companyContactTel},
+        	#{item.companyContactFax},
+        	#{item.zipCode},
+        	#{item.email},
+        	#{item.filingNumber},
+        	#{item.companyTypeSystem},
+        	#{item.companyType},
+        	#{item.onceCompanyName},
+        	#{item.areaName},
+        	#{item.areaId},
+        	#{item.address},
+        	#{item.registeredCapital},
+        	#{item.legalName},
+        	#{item.legalNumber},
+        	#{item.legalScanAttachId},
+        	#{item.legalCellphone},
+        	#{item.legalPhone},
+        	#{item.companyRegistType},
+        	#{item.isGroupCompany},
+        	#{item.groupCompanyName},
+        	#{item.isLawerCompany},
+        	#{item.lawerCompoanyName},
+        	#{item.organizationCode},
+        	#{item.taxRegistrationNumber},
+        	#{item.businessLicense},
+        	#{item.businessLicenseBeginDate},
+        	#{item.businessLicenseEndDate},
+        	#{item.annualInspection},
+        	#{item.authorizedPerson},
+        	#{item.authorizedPersonFax},
+        	#{item.authorizedPersonIdcard},
+        	#{item.authorizedPersonTel},
+        	#{item.productionPermissionCode},
+        	#{item.productPermissionRegAddr},
+        	#{item.productionPermissionLawer},
+        	#{item.productionPermissionEndDate},
+        	#{item.productPermissionProAddr},
+        	#{item.productPermissionProRange},
+        	#{item.productPermissionSortCode},
+        	#{item.businessPermissionCode},
+        	#{item.businessPermissionRegAddr},
+        	#{item.businessPermissionLawer},
+        	#{item.businessPermissionEndDate},
+        	#{item.businessPermissionWareAddr},
+        	#{item.businessPermissionRange},
+        	#{item.gspCode},
+        	#{item.isUsing},
+        	#{item.maintenanceState},
+        	#{item.qualificationStatus},
+        	#{item.qualificationNopassReason},
+        	#{item.inputRemarks},
+        	#{item.initializationState},
+        	#{item.clearStatus},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.reauditUserId},
+        	#{item.reauditUserName},
+        	#{item.reauditAddTime},
+        	#{item.reauditRemark},
+        	#{item.auditUserId},
+        	#{item.auditUserName},
+        	#{item.auditAddTime},
+        	#{item.auditRemark},
+        	#{item.bankBasicAccount},
+        	#{item.bankBasicName},
+        	#{item.bankAuditState},
+        	#{item.bankAuditUserId},
+        	#{item.bankAuditUserName},
+        	#{item.bankAuditTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM YIMIAO_COMPANY t
+		<where>
+			<if test="@OGNL@isNotEmpty(companyId)">
+				AND t.COMPANY_ID = #{companyId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyAccountCode)">
+				AND t.COMPANY_ACCOUNT_CODE = #{companyAccountCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyName)">
+				AND t.COMPANY_NAME = #{companyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compSpelCode)">
+				AND t.COMP_SPEL_CODE = #{compSpelCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companySimpleName)">
+				AND t.COMPANY_SIMPLE_NAME = #{companySimpleName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companySimpleNameSpell)">
+				AND t.COMPANY_SIMPLE_NAME_SPELL = #{companySimpleNameSpell}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastYearIncome)">
+				AND t.LAST_YEAR_INCOME = #{lastYearIncome}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyContactTel)">
+				AND t.COMPANY_CONTACT_TEL = #{companyContactTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyContactFax)">
+				AND t.COMPANY_CONTACT_FAX = #{companyContactFax}
+		    </if>
+			<if test="@OGNL@isNotEmpty(zipCode)">
+				AND t.ZIP_CODE = #{zipCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(email)">
+				AND t.EMAIL = #{email}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingNumber)">
+				AND t.FILING_NUMBER = #{filingNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyTypeSystem)">
+				AND t.COMPANY_TYPE_SYSTEM = #{companyTypeSystem}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyType)">
+				AND t.COMPANY_TYPE = #{companyType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(onceCompanyName)">
+				AND t.ONCE_COMPANY_NAME = #{onceCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(areaName)">
+				AND t.AREA_NAME = #{areaName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(areaId)">
+				AND t.AREA_ID = #{areaId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(address)">
+				AND t.ADDRESS = #{address}
+		    </if>
+			<if test="@OGNL@isNotEmpty(registeredCapital)">
+				AND t.REGISTERED_CAPITAL = #{registeredCapital}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalName)">
+				AND t.LEGAL_NAME = #{legalName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalNumber)">
+				AND t.LEGAL_NUMBER = #{legalNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalScanAttachId)">
+				AND t.LEGAL_SCAN_ATTACH_ID = #{legalScanAttachId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalCellphone)">
+				AND t.LEGAL_CELLPHONE = #{legalCellphone}
+		    </if>
+			<if test="@OGNL@isNotEmpty(legalPhone)">
+				AND t.LEGAL_PHONE = #{legalPhone}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyRegistType)">
+				AND t.COMPANY_REGIST_TYPE = #{companyRegistType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isGroupCompany)">
+				AND t.IS_GROUP_COMPANY = #{isGroupCompany}
+		    </if>
+			<if test="@OGNL@isNotEmpty(groupCompanyName)">
+				AND t.GROUP_COMPANY_NAME = #{groupCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isLawerCompany)">
+				AND t.IS_LAWER_COMPANY = #{isLawerCompany}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lawerCompoanyName)">
+				AND t.LAWER_COMPOANY_NAME = #{lawerCompoanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(organizationCode)">
+				AND t.ORGANIZATION_CODE = #{organizationCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(taxRegistrationNumber)">
+				AND t.TAX_REGISTRATION_NUMBER = #{taxRegistrationNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessLicense)">
+				AND t.BUSINESS_LICENSE = #{businessLicense}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessLicenseBeginDate)">
+				AND t.BUSINESS_LICENSE_BEGIN_DATE = #{businessLicenseBeginDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessLicenseEndDate)">
+				AND t.BUSINESS_LICENSE_END_DATE = #{businessLicenseEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(annualInspection)">
+				AND t.ANNUAL_INSPECTION = #{annualInspection}
+		    </if>
+			<if test="@OGNL@isNotEmpty(authorizedPerson)">
+				AND t.AUTHORIZED_PERSON = #{authorizedPerson}
+		    </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonFax)">
+				AND t.AUTHORIZED_PERSON_FAX = #{authorizedPersonFax}
+		    </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonIdcard)">
+				AND t.AUTHORIZED_PERSON_IDCARD = #{authorizedPersonIdcard}
+		    </if>
+			<if test="@OGNL@isNotEmpty(authorizedPersonTel)">
+				AND t.AUTHORIZED_PERSON_TEL = #{authorizedPersonTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionCode)">
+				AND t.PRODUCTION_PERMISSION_CODE = #{productionPermissionCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productPermissionRegAddr)">
+				AND t.PRODUCT_PERMISSION_REG_ADDR = #{productPermissionRegAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionLawer)">
+				AND t.PRODUCTION_PERMISSION_LAWER = #{productionPermissionLawer}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productionPermissionEndDate)">
+				AND t.PRODUCTION_PERMISSION_END_DATE = #{productionPermissionEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productPermissionProAddr)">
+				AND t.PRODUCT_PERMISSION_PRO_ADDR = #{productPermissionProAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productPermissionProRange)">
+				AND t.PRODUCT_PERMISSION_PRO_RANGE = #{productPermissionProRange}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productPermissionSortCode)">
+				AND t.PRODUCT_PERMISSION_SORT_CODE = #{productPermissionSortCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionCode)">
+				AND t.BUSINESS_PERMISSION_CODE = #{businessPermissionCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionRegAddr)">
+				AND t.BUSINESS_PERMISSION_REG_ADDR = #{businessPermissionRegAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionLawer)">
+				AND t.BUSINESS_PERMISSION_LAWER = #{businessPermissionLawer}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionEndDate)">
+				AND t.BUSINESS_PERMISSION_END_DATE = #{businessPermissionEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionWareAddr)">
+				AND t.BUSINESS_PERMISSION_WARE_ADDR = #{businessPermissionWareAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(businessPermissionRange)">
+				AND t.BUSINESS_PERMISSION_RANGE = #{businessPermissionRange}
+		    </if>
+			<if test="@OGNL@isNotEmpty(gspCode)">
+				AND t.GSP_CODE = #{gspCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maintenanceState)">
+				AND t.MAINTENANCE_STATE = #{maintenanceState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualificationStatus)">
+				AND t.QUALIFICATION_STATUS = #{qualificationStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualificationNopassReason)">
+				AND t.QUALIFICATION_NOPASS_REASON = #{qualificationNopassReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(inputRemarks)">
+				AND t.INPUT_REMARKS = #{inputRemarks}
+		    </if>
+			<if test="@OGNL@isNotEmpty(initializationState)">
+				AND t.INITIALIZATION_STATE = #{initializationState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(clearStatus)">
+				AND t.CLEAR_STATUS = #{clearStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(reauditUserId)">
+				AND t.REAUDIT_USER_ID = #{reauditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(reauditUserName)">
+				AND t.REAUDIT_USER_NAME = #{reauditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(reauditAddTime)">
+				AND t.REAUDIT_ADD_TIME = #{reauditAddTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(reauditRemark)">
+				AND t.REAUDIT_REMARK = #{reauditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditUserId)">
+				AND t.AUDIT_USER_ID = #{auditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditUserName)">
+				AND t.AUDIT_USER_NAME = #{auditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditAddTime)">
+				AND t.AUDIT_ADD_TIME = #{auditAddTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditRemark)">
+				AND t.AUDIT_REMARK = #{auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicAccount)">
+				AND t.BANK_BASIC_ACCOUNT = #{bankBasicAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankBasicName)">
+				AND t.BANK_BASIC_NAME = #{bankBasicName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditState)">
+				AND t.BANK_AUDIT_STATE = #{bankAuditState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditUserId)">
+				AND t.BANK_AUDIT_USER_ID = #{bankAuditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditUserName)">
+				AND t.BANK_AUDIT_USER_NAME = #{bankAuditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bankAuditTime)">
+				AND t.BANK_AUDIT_TIME = #{bankAuditTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE YIMIAO_COMPANY  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.companyAccountCode)">
+				COMPANY_ACCOUNT_CODE = #{model.companyAccountCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyName)">
+				COMPANY_NAME = #{model.companyName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.compSpelCode)">
+				COMP_SPEL_CODE = #{model.compSpelCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companySimpleName)">
+				COMPANY_SIMPLE_NAME = #{model.companySimpleName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companySimpleNameSpell)">
+				COMPANY_SIMPLE_NAME_SPELL = #{model.companySimpleNameSpell},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastYearIncome)">
+				LAST_YEAR_INCOME = #{model.lastYearIncome},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyContactTel)">
+				COMPANY_CONTACT_TEL = #{model.companyContactTel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyContactFax)">
+				COMPANY_CONTACT_FAX = #{model.companyContactFax},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.zipCode)">
+				ZIP_CODE = #{model.zipCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.email)">
+				EMAIL = #{model.email},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.filingNumber)">
+				FILING_NUMBER = #{model.filingNumber},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyTypeSystem)">
+				COMPANY_TYPE_SYSTEM = #{model.companyTypeSystem},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyType)">
+				COMPANY_TYPE = #{model.companyType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.onceCompanyName)">
+				ONCE_COMPANY_NAME = #{model.onceCompanyName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.areaName)">
+				AREA_NAME = #{model.areaName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.areaId)">
+				AREA_ID = #{model.areaId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.address)">
+				ADDRESS = #{model.address},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.registeredCapital)">
+				REGISTERED_CAPITAL = #{model.registeredCapital},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.legalName)">
+				LEGAL_NAME = #{model.legalName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.legalNumber)">
+				LEGAL_NUMBER = #{model.legalNumber},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.legalScanAttachId)">
+				LEGAL_SCAN_ATTACH_ID = #{model.legalScanAttachId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.legalCellphone)">
+				LEGAL_CELLPHONE = #{model.legalCellphone},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.legalPhone)">
+				LEGAL_PHONE = #{model.legalPhone},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyRegistType)">
+				COMPANY_REGIST_TYPE = #{model.companyRegistType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isGroupCompany)">
+				IS_GROUP_COMPANY = #{model.isGroupCompany},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.groupCompanyName)">
+				GROUP_COMPANY_NAME = #{model.groupCompanyName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isLawerCompany)">
+				IS_LAWER_COMPANY = #{model.isLawerCompany},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lawerCompoanyName)">
+				LAWER_COMPOANY_NAME = #{model.lawerCompoanyName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.organizationCode)">
+				ORGANIZATION_CODE = #{model.organizationCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.taxRegistrationNumber)">
+				TAX_REGISTRATION_NUMBER = #{model.taxRegistrationNumber},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessLicense)">
+				BUSINESS_LICENSE = #{model.businessLicense},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessLicenseBeginDate)">
+				BUSINESS_LICENSE_BEGIN_DATE = #{model.businessLicenseBeginDate},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessLicenseEndDate)">
+				BUSINESS_LICENSE_END_DATE = #{model.businessLicenseEndDate},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.annualInspection)">
+				ANNUAL_INSPECTION = #{model.annualInspection},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.authorizedPerson)">
+				AUTHORIZED_PERSON = #{model.authorizedPerson},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.authorizedPersonFax)">
+				AUTHORIZED_PERSON_FAX = #{model.authorizedPersonFax},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.authorizedPersonIdcard)">
+				AUTHORIZED_PERSON_IDCARD = #{model.authorizedPersonIdcard},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.authorizedPersonTel)">
+				AUTHORIZED_PERSON_TEL = #{model.authorizedPersonTel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productionPermissionCode)">
+				PRODUCTION_PERMISSION_CODE = #{model.productionPermissionCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productPermissionRegAddr)">
+				PRODUCT_PERMISSION_REG_ADDR = #{model.productPermissionRegAddr},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productionPermissionLawer)">
+				PRODUCTION_PERMISSION_LAWER = #{model.productionPermissionLawer},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productionPermissionEndDate)">
+				PRODUCTION_PERMISSION_END_DATE = #{model.productionPermissionEndDate},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productPermissionProAddr)">
+				PRODUCT_PERMISSION_PRO_ADDR = #{model.productPermissionProAddr},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productPermissionProRange)">
+				PRODUCT_PERMISSION_PRO_RANGE = #{model.productPermissionProRange},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productPermissionSortCode)">
+				PRODUCT_PERMISSION_SORT_CODE = #{model.productPermissionSortCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessPermissionCode)">
+				BUSINESS_PERMISSION_CODE = #{model.businessPermissionCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessPermissionRegAddr)">
+				BUSINESS_PERMISSION_REG_ADDR = #{model.businessPermissionRegAddr},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessPermissionLawer)">
+				BUSINESS_PERMISSION_LAWER = #{model.businessPermissionLawer},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessPermissionEndDate)">
+				BUSINESS_PERMISSION_END_DATE = #{model.businessPermissionEndDate},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessPermissionWareAddr)">
+				BUSINESS_PERMISSION_WARE_ADDR = #{model.businessPermissionWareAddr},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.businessPermissionRange)">
+				BUSINESS_PERMISSION_RANGE = #{model.businessPermissionRange},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.gspCode)">
+				GSP_CODE = #{model.gspCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isUsing)">
+				IS_USING = #{model.isUsing},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.maintenanceState)">
+				MAINTENANCE_STATE = #{model.maintenanceState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.qualificationStatus)">
+				QUALIFICATION_STATUS = #{model.qualificationStatus},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.qualificationNopassReason)">
+				QUALIFICATION_NOPASS_REASON = #{model.qualificationNopassReason},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.inputRemarks)">
+				INPUT_REMARKS = #{model.inputRemarks},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.initializationState)">
+				INITIALIZATION_STATE = #{model.initializationState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.clearStatus)">
+				CLEAR_STATUS = #{model.clearStatus},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				ADD_USER_ID = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				ADD_USER_NAME = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				ADD_TIME = #{model.addTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.reauditUserId)">
+				REAUDIT_USER_ID = #{model.reauditUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.reauditUserName)">
+				REAUDIT_USER_NAME = #{model.reauditUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.reauditAddTime)">
+				REAUDIT_ADD_TIME = #{model.reauditAddTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.reauditRemark)">
+				REAUDIT_REMARK = #{model.reauditRemark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.auditUserId)">
+				AUDIT_USER_ID = #{model.auditUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.auditUserName)">
+				AUDIT_USER_NAME = #{model.auditUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.auditAddTime)">
+				AUDIT_ADD_TIME = #{model.auditAddTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.auditRemark)">
+				AUDIT_REMARK = #{model.auditRemark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankBasicAccount)">
+				BANK_BASIC_ACCOUNT = #{model.bankBasicAccount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankBasicName)">
+				BANK_BASIC_NAME = #{model.bankBasicName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditState)">
+				BANK_AUDIT_STATE = #{model.bankAuditState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditUserId)">
+				BANK_AUDIT_USER_ID = #{model.bankAuditUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditUserName)">
+				BANK_AUDIT_USER_NAME = #{model.bankAuditUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bankAuditTime)">
+				BANK_AUDIT_TIME = #{model.bankAuditTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				LAST_UPDATE_TIME = #{model.lastUpdateTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.companyId)">
+				AND t.COMPANY_ID = #{params.companyId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyAccountCode)">
+				AND t.COMPANY_ACCOUNT_CODE = #{params.companyAccountCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyName)">
+				AND t.COMPANY_NAME = #{params.companyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.compSpelCode)">
+				AND t.COMP_SPEL_CODE = #{params.compSpelCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companySimpleName)">
+				AND t.COMPANY_SIMPLE_NAME = #{params.companySimpleName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companySimpleNameSpell)">
+				AND t.COMPANY_SIMPLE_NAME_SPELL = #{params.companySimpleNameSpell}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastYearIncome)">
+				AND t.LAST_YEAR_INCOME = #{params.lastYearIncome}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyContactTel)">
+				AND t.COMPANY_CONTACT_TEL = #{params.companyContactTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyContactFax)">
+				AND t.COMPANY_CONTACT_FAX = #{params.companyContactFax}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.zipCode)">
+				AND t.ZIP_CODE = #{params.zipCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.email)">
+				AND t.EMAIL = #{params.email}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.filingNumber)">
+				AND t.FILING_NUMBER = #{params.filingNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyTypeSystem)">
+				AND t.COMPANY_TYPE_SYSTEM = #{params.companyTypeSystem}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyType)">
+				AND t.COMPANY_TYPE = #{params.companyType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.onceCompanyName)">
+				AND t.ONCE_COMPANY_NAME = #{params.onceCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.areaName)">
+				AND t.AREA_NAME = #{params.areaName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.areaId)">
+				AND t.AREA_ID = #{params.areaId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.address)">
+				AND t.ADDRESS = #{params.address}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.registeredCapital)">
+				AND t.REGISTERED_CAPITAL = #{params.registeredCapital}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.legalName)">
+				AND t.LEGAL_NAME = #{params.legalName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.legalNumber)">
+				AND t.LEGAL_NUMBER = #{params.legalNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.legalScanAttachId)">
+				AND t.LEGAL_SCAN_ATTACH_ID = #{params.legalScanAttachId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.legalCellphone)">
+				AND t.LEGAL_CELLPHONE = #{params.legalCellphone}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.legalPhone)">
+				AND t.LEGAL_PHONE = #{params.legalPhone}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyRegistType)">
+				AND t.COMPANY_REGIST_TYPE = #{params.companyRegistType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isGroupCompany)">
+				AND t.IS_GROUP_COMPANY = #{params.isGroupCompany}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.groupCompanyName)">
+				AND t.GROUP_COMPANY_NAME = #{params.groupCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isLawerCompany)">
+				AND t.IS_LAWER_COMPANY = #{params.isLawerCompany}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lawerCompoanyName)">
+				AND t.LAWER_COMPOANY_NAME = #{params.lawerCompoanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.organizationCode)">
+				AND t.ORGANIZATION_CODE = #{params.organizationCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.taxRegistrationNumber)">
+				AND t.TAX_REGISTRATION_NUMBER = #{params.taxRegistrationNumber}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessLicense)">
+				AND t.BUSINESS_LICENSE = #{params.businessLicense}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessLicenseBeginDate)">
+				AND t.BUSINESS_LICENSE_BEGIN_DATE = #{params.businessLicenseBeginDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessLicenseEndDate)">
+				AND t.BUSINESS_LICENSE_END_DATE = #{params.businessLicenseEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.annualInspection)">
+				AND t.ANNUAL_INSPECTION = #{params.annualInspection}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.authorizedPerson)">
+				AND t.AUTHORIZED_PERSON = #{params.authorizedPerson}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.authorizedPersonFax)">
+				AND t.AUTHORIZED_PERSON_FAX = #{params.authorizedPersonFax}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.authorizedPersonIdcard)">
+				AND t.AUTHORIZED_PERSON_IDCARD = #{params.authorizedPersonIdcard}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.authorizedPersonTel)">
+				AND t.AUTHORIZED_PERSON_TEL = #{params.authorizedPersonTel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productionPermissionCode)">
+				AND t.PRODUCTION_PERMISSION_CODE = #{params.productionPermissionCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productPermissionRegAddr)">
+				AND t.PRODUCT_PERMISSION_REG_ADDR = #{params.productPermissionRegAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productionPermissionLawer)">
+				AND t.PRODUCTION_PERMISSION_LAWER = #{params.productionPermissionLawer}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productionPermissionEndDate)">
+				AND t.PRODUCTION_PERMISSION_END_DATE = #{params.productionPermissionEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productPermissionProAddr)">
+				AND t.PRODUCT_PERMISSION_PRO_ADDR = #{params.productPermissionProAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productPermissionProRange)">
+				AND t.PRODUCT_PERMISSION_PRO_RANGE = #{params.productPermissionProRange}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productPermissionSortCode)">
+				AND t.PRODUCT_PERMISSION_SORT_CODE = #{params.productPermissionSortCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessPermissionCode)">
+				AND t.BUSINESS_PERMISSION_CODE = #{params.businessPermissionCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessPermissionRegAddr)">
+				AND t.BUSINESS_PERMISSION_REG_ADDR = #{params.businessPermissionRegAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessPermissionLawer)">
+				AND t.BUSINESS_PERMISSION_LAWER = #{params.businessPermissionLawer}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessPermissionEndDate)">
+				AND t.BUSINESS_PERMISSION_END_DATE = #{params.businessPermissionEndDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessPermissionWareAddr)">
+				AND t.BUSINESS_PERMISSION_WARE_ADDR = #{params.businessPermissionWareAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.businessPermissionRange)">
+				AND t.BUSINESS_PERMISSION_RANGE = #{params.businessPermissionRange}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.gspCode)">
+				AND t.GSP_CODE = #{params.gspCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isUsing)">
+				AND t.IS_USING = #{params.isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.maintenanceState)">
+				AND t.MAINTENANCE_STATE = #{params.maintenanceState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.qualificationStatus)">
+				AND t.QUALIFICATION_STATUS = #{params.qualificationStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.qualificationNopassReason)">
+				AND t.QUALIFICATION_NOPASS_REASON = #{params.qualificationNopassReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.inputRemarks)">
+				AND t.INPUT_REMARKS = #{params.inputRemarks}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.initializationState)">
+				AND t.INITIALIZATION_STATE = #{params.initializationState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.clearStatus)">
+				AND t.CLEAR_STATUS = #{params.clearStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.ADD_USER_ID = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.ADD_USER_NAME = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.ADD_TIME = #{params.addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.reauditUserId)">
+				AND t.REAUDIT_USER_ID = #{params.reauditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.reauditUserName)">
+				AND t.REAUDIT_USER_NAME = #{params.reauditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.reauditAddTime)">
+				AND t.REAUDIT_ADD_TIME = #{params.reauditAddTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.reauditRemark)">
+				AND t.REAUDIT_REMARK = #{params.reauditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.auditUserId)">
+				AND t.AUDIT_USER_ID = #{params.auditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.auditUserName)">
+				AND t.AUDIT_USER_NAME = #{params.auditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.auditAddTime)">
+				AND t.AUDIT_ADD_TIME = #{params.auditAddTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.auditRemark)">
+				AND t.AUDIT_REMARK = #{params.auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankBasicAccount)">
+				AND t.BANK_BASIC_ACCOUNT = #{params.bankBasicAccount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankBasicName)">
+				AND t.BANK_BASIC_NAME = #{params.bankBasicName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditState)">
+				AND t.BANK_AUDIT_STATE = #{params.bankAuditState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditUserId)">
+				AND t.BANK_AUDIT_USER_ID = #{params.bankAuditUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditUserName)">
+				AND t.BANK_AUDIT_USER_NAME = #{params.bankAuditUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bankAuditTime)">
+				AND t.BANK_AUDIT_TIME = #{params.bankAuditTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{params.lastUpdateTime}
+		    </if>
+		</where>
+	</update>
+
+	<select id="getYimiaoCompanyById" parameterType="java.lang.String" resultType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+		select t.company_id companyId,t.company_name companyName,t.comp_spel_code compSpelCode,t.is_using isUsing from yimiao_company t where company_id=#{companyId}
+	</select>
+	
+	<select id="getYimiaoComp" parameterType="map" resultMap="BaseResultMap">
+		SELECT t.company_name "companyName",
+		t.comp_spel_code "compSpelCode",
+		t.is_using "isUsing",
+		t.company_id "companyId"
+		from yimiao_company t where t.company_id not in 
+		(select p.del_comp_code from yimiao_delrelationship p where p.prod_comp_code=#{prodCompCode}) 
+		<if test="@OGNL@isNotEmpty(delCompName)">
+		    	AND (t.company_name  like CONCAT(CONCAT('%', #{delCompName}), '%') or t.COMP_SPEL_CODE like CONCAT(CONCAT('%', #{delCompName}), '%'))
+		</if>
+	    <if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.is_using = #{isUsing}
+	    </if>
+		and t.company_type=1
+	</select>
+	<select id="getAllList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> 
+		FROM YIMIAO_COMPANY t 
+		<where>
+		    <if test="@OGNL@isNotEmpty(companyName)">
+				AND (t.COMPANY_NAME like CONCAT(CONCAT('%', #{companyName}), '%')
+				or t.COMP_SPEL_CODE like  CONCAT(CONCAT('%', #{companyName}), '%')
+				or t.COMPANY_SIMPLE_NAME_SPELL like CONCAT(CONCAT('%', #{companyName}), '%') )
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+	    	</if>
+		    <if test="@OGNL@isNotEmpty(companyType)">
+				AND t.COMPANY_TYPE = #{companyType}
+	    	</if>
+		</where>
+	</select>
+	<update id="updateStart" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+		UPDATE YIMIAO_COMPANY t SET t.IS_USING=1 WHERE t.COMPANY_ID =  #{companyId};
+		UPDATE SYS_USER s SET s.IS_USING=1 WHERE s.ORG_ID =  #{companyId};
+		UPDATE YIMIAO_DELRELATIONSHIP y set y.del_comp_status=1 where y.del_comp_code=#{companyId};
+		UPDATE YIMIAO_DELRELATIONSHIP y set y.PROD_COMP_STATUS=1 where y.PROD_COMP_CODE=#{companyId};
+	</update>
+	<update id="updateStartsc" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+		UPDATE YIMIAO_COMPANY t SET t.IS_USING=1 WHERE t.COMPANY_ID =  #{companyId};
+		UPDATE SYS_USER s SET s.IS_USING=1 WHERE s.ORG_ID =  #{companyId};
+		UPDATE YIMIAO_DELRELATIONSHIP y set y.prod_comp_status=1 where y.prod_comp_code=#{companyId};
+		UPDATE YIMIAO_DELRELATIONSHIP y set y.del_comp_status=1 where y.del_comp_code=#{companyId};
+	</update>
+	<update id="updateDisable" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+		UPDATE YIMIAO_COMPANY t SET t.IS_USING=0 WHERE t.COMPANY_ID =  #{companyId};
+		UPDATE SYS_USER s SET s.IS_USING=0 WHERE s.ORG_ID =  #{companyId};
+		UPDATE YIMIAO_DELRELATIONSHIP y set y.del_comp_status=0 where y.del_comp_code=#{companyId};
+		UPDATE YIMIAO_DELRELATIONSHIP y set y.prod_comp_status=0 where y.prod_comp_code=#{companyId};
+	</update>
+	<update id="updateDisablesc" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+		UPDATE YIMIAO_COMPANY t SET t.IS_USING=0 WHERE t.COMPANY_ID =  #{companyId};
+		UPDATE SYS_USER s SET s.IS_USING=0 WHERE s.ORG_ID =  #{companyId};
+		UPDATE YIMIAO_DELRELATIONSHIP y set y.prod_comp_status=0 where y.prod_comp_code=#{companyId};
+		UPDATE YIMIAO_DELRELATIONSHIP y set y.del_comp_status=0 where y.del_comp_code=#{companyId};
+	</update>
+	
+	<select id="getExportExcelData" parameterType="map" resultType="hashmap">
+		SELECT t.COMPANY_NAME "企业名称",
+			   t.COMPANY_TYPE "企业类型",
+			   t.IS_USING "状态"
+		FROM YIMIAO_COMPANY t 
+		<where>
+		    <if test="@OGNL@isNotEmpty(companyName)">
+				AND (t.COMPANY_NAME like CONCAT(CONCAT('%', #{companyName}), '%')
+				or t.COMP_SPEL_CODE like CONCAT(CONCAT('%', #{companyName}), '%')
+				or t.COMPANY_SIMPLE_NAME_SPELL like CONCAT(CONCAT('%', #{companyName}), '%') )
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+	    	</if>
+		    <if test="@OGNL@isNotEmpty(companyType)">
+				AND t.COMPANY_TYPE = #{companyType}
+	    	</if>
+		</where>
+	</select>
+	
+	<!-- 根据企业名称验证企业是否存在 -->
+	<select id="getCompanyName" parameterType="java.lang.String" resultType="java.lang.Integer" >
+		SELECT count(1)
+	    FROM YIMIAO_COMPANY t
+      	<where>
+			<if test="_parameter !=null and _parameter !='' ">
+	            t.company_name = #{_parameter,jdbcType=VARCHAR}
+	        </if>
+		</where>
+    </select>
+    
+    <insert id="insertQy" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompany">
+	 	INSERT INTO Yimiao_company(
+	 		company_id,
+	 		company_name,
+	 		company_type,
+	 		add_user_id,
+	 		add_user_name,
+	 		area_id,
+	 		is_using,
+	 		initialization_state,
+	 		last_year_income,
+	 		zip_code,
+	 		company_type_system
+	 	)
+	 	VALUES (
+		        #{companyId},
+		        #{companyName},
+		        #{companyType},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{areaId},
+	        	1,
+	        	1,
+	        	0,
+	        	0,
+	        	0
+		)
+	 </insert>
+	 
+	 <update id="updateAccountCode">
+	 	update yimiao_company 
+	 	set company_account_code = #{accountCode,jdbcType=VARCHAR}
+	 	where company_id = #{companyId,jdbcType=VARCHAR}
+	 </update>
+</mapper>

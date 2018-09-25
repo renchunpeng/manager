@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdCataProdRelLinDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdCataProdRelLin" id="BaseResultMap">
+        <result property="drugcatalogCode" column="DRUGCATALOG_CODE" javaType="String"/>
+        <result property="prodId" column="PROD_ID" javaType="String"/>
+        <result property="prodIdStoc" column="PROD_ID_STOC" javaType="String"/>
+        <result property="productName" column="PRODUCT_NAME" javaType="String"/>
+        <result property="productSpelName" column="PRODUCT_SPEL_NAME" javaType="String"/>
+        <result property="productWbName" column="PRODUCT_WB_NAME" javaType="String"/>
+        <result property="medicinemodel" column="MEDICINEMODEL" javaType="String"/>
+        <result property="medicinemodelSpel" column="MEDICINEMODEL_SPEL" javaType="String"/>
+        <result property="outlook" column="OUTLOOK" javaType="String"/>
+        <result property="cataSpelName" column="CATA_SPEL_NAME" javaType="String"/>
+        <result property="cataMedicinemodel" column="CATA_MEDICINEMODEL" javaType="String"/>
+        <result property="cataOutlook" column="CATA_OUTLOOK" javaType="String"/>
+        <result property="cataIndexF" column="CATA_INDEX_F" javaType="String"/>
+        <result property="cataIndexS" column="CATA_INDEX_S" javaType="String"/>
+        <result property="classOne" column="CLASS_ONE" javaType="String"/>
+        <result property="classTwo" column="CLASS_TWO" javaType="String"/>
+        <result property="pharOneId" column="PHAR_ONE_ID" javaType="String"/>
+        <result property="pharOne" column="PHAR_ONE" javaType="String"/>
+        <result property="pharTwoId" column="PHAR_TWO_ID" javaType="String"/>
+        <result property="pharTwo" column="PHAR_TWO" javaType="String"/>
+        <result property="pharThreeId" column="PHAR_THREE_ID" javaType="String"/>
+         <result property="pharThree" column="PHAR_THREE" javaType="String"/>
+         <result property="pharFourId" column="PHAR_FOUR_ID" javaType="String"/>
+        <result property="pharFour" column="PHAR_FOUR" javaType="String"/>
+        <result property="pharFiveId" column="PHAR_FIVE_ID" javaType="String"/>
+        <result property="pharFive" column="PHAR_FIVE" javaType="String"/>
+        <result property="pharSixId" column="PHAR_SIX_ID" javaType="String"/>
+        <result property="pharSix" column="PHAR_SIX" javaType="String"/>
+        <result property="productAttr" column="PRODUCT_ATTR" javaType="String"/>
+        <result property="remark" column="REMARK" javaType="String"/>
+        <result property="status" column="STATUS" javaType="String"/>
+        <result property="auditUserName" column="AUDIT_USER_NAME" javaType="String"/>
+        <result property="auditRemark" column="AUDIT_REMARK" javaType="String"/>
+        <result property="auditTime" column="AUDIT_TIME" javaType="Date"/>
+         <result property="isUsing" column="IS_USING" javaType="String"/>
+        <result property="addUserId" column="ADD_USER_ID" javaType="String"/>
+        <result property="addUserName" column="ADD_USER_NAME" javaType="String"/>
+        <result property="addTime" column="ADD_TIME" javaType="Date"/>
+        <result property="lastUpdateUserId" column="LAST_UPDATE_USER_ID" javaType="String"/>
+        <result property="lastUpdateUserName" column="LAST_UPDATE_USER_NAME" javaType="String"/>
+        <result property="lastUpdateTime" column="LAST_UPDATE_TIME" javaType="Date"/>
+        <result property="stdCataProdRelFileId" column="STD_CATA_PROD_REL_FILE_ID" javaType="String"/>
+        <result property="checkResult" column="CHECK_RESULT" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.drugcatalog_code,
+        t.prod_id,
+        t.prod_id_stoc,
+        t.product_name,
+        t.product_spel_name,
+        t.product_wb_name,
+        t.medicinemodel,
+        t.medicinemodel_spel,
+        t.outlook,
+        t.cata_spel_name,
+        t.cata_medicinemodel,
+        t.cata_outlook,
+        t.cata_index_f,
+        t.cata_index_s,
+        t.class_one,
+        t.class_two,
+        t.phar_one_id,
+        t.phar_one,
+        t.phar_two_id,
+        t.phar_two,
+        t.phar_three_id,
+        t.phar_three,
+        t.phar_four_id,
+        t.phar_four,
+        t.phar_five_id,
+        t.phar_five,
+        t.phar_six_id,
+        t.phar_six,
+        t.product_attr,
+        t.remark,
+        t.status,
+        t.audit_user_name,
+        t.audit_remark,
+        t.audit_time,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.std_cata_prod_rel_file_id,
+        t.check_result
+	</sql>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_CATA_PROD_REL_LIN t
+		WHERE t.DRUGCATALOG_CODE = #{drugcatalogCode}
+	</select>
+
+	
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_CATA_PROD_REL_LIN t
+		<where>
+			<if test="null != prodId and '' != prodId ">
+				AND t.PROD_ID = #{prodId}
+		    </if>
+			<if test="null != prodIdStoc and '' != prodIdStoc ">
+				AND t.PROD_ID_STOC = #{prodIdStoc}
+		    </if>
+			<if test="null != productName and '' != productName ">
+				AND t.PRODUCT_NAME  like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+			<if test="null != productSpelName and '' != productSpelName ">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="null != productWbName and '' != productWbName ">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="null != medicinemodel and '' != medicinemodel ">
+				AND t.MEDICINEMODEL  like CONCAT(CONCAT('%',#{medicinemodel}), '%')
+		    </if>
+			<if test="null != medicinemodelSpel and '' != medicinemodelSpel ">
+				AND t.MEDICINEMODEL_SPEL = #{medicinemodelSpel}
+		    </if>
+			<if test="null != outlook and '' != outlook ">
+				AND t.OUTLOOK like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+			<if test="null != cataSpelName and '' != cataSpelName ">
+				AND t.CATA_SPEL_NAME = #{cataSpelName}
+		    </if>
+		    <if test="null != cataMedicinemodel and '' != cataMedicinemodel ">
+				AND t.CATA_MEDICINEMODEL = #{cataMedicinemodel}
+		    </if>
+			<if test="null != cataOutlook and '' != cataOutlook ">
+				AND t.CATA_OUTLOOK = #{cataOutlook}
+		    </if>
+			<if test="null != cataIndexF and '' != cataIndexF ">
+				AND t.CATA_INDEX_F = #{cataIndexF}
+		    </if>
+			<if test="null != cataIndexS and '' != cataIndexS ">
+				AND t.CATA_INDEX_S = #{cataIndexS}
+		    </if>
+			<if test="null != classOne and '' != classOne ">
+				AND t.CLASS_ONE = #{classOne}
+		    </if>
+			<if test="null != classTwo and '' != classTwo ">
+				AND t.CLASS_TWO = #{classTwo}
+		    </if>
+		    <if test="null != pharOneId and '' != pharOneId ">
+				AND t.PHAR_ONE_ID = #{pharOneId}
+		    </if>
+			<if test="null != pharOne and '' != pharOne ">
+				AND t.PHAR_ONE = #{pharOne}
+		    </if>
+		     <if test="null != pharTwoId and '' != pharTwoId ">
+				AND t.PHAR_TWO_ID = #{pharTwoId}
+		    </if>
+			<if test="null != pharTwo and '' != pharTwo ">
+				AND t.PHAR_TWO = #{pharTwo}
+		    </if>
+		     <if test="null != pharThreeId and '' != pharThreeId ">
+				AND t.PHAR_THREE_ID = #{pharThreeId}
+		    </if>
+			<if test="null != pharThree and '' != pharThree ">
+				AND t.PHAR_THREE = #{pharThree}
+		    </if>
+		     <if test="null != pharFourId and '' != pharFourId ">
+				AND t.PHAR_FOUR_ID = #{pharFourId}
+		    </if>
+			<if test="null != pharFour and '' != pharFour ">
+				AND t.PHAR_FOUR = #{pharFour}
+		    </if>
+		     <if test="null != pharFiveId and '' != pharFiveId ">
+				AND t.PHAR_FIVE_ID = #{pharFiveId}
+		    </if>
+			<if test="null != pharFive and '' != pharFive ">
+				AND t.PHAR_FIVE = #{pharFive}
+		    </if>
+		     <if test="null != pharSixId and '' != pharSixId ">
+				AND t.PHAR_SIX_ID = #{pharSixId}
+		    </if>
+		    <if test="null != pharSix and '' != pharSix ">
+				AND t.PHAR_SIX = #{pharSix}
+		    </if>
+			<if test="null != productAttr and '' != productAttr ">
+				AND t.PRODUCT_ATTR = #{productAttr}
+		    </if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="null != status and '' != status ">
+				AND t.STATUS = #{status}
+		    </if>
+			<if test="null != auditUserName and '' != auditUserName ">
+				AND t.AUDIT_USER_NAME = #{auditUserName}
+		    </if>
+			<if test="null != auditRemark and '' != auditRemark ">
+				AND t.AUDIT_REMARK = #{auditRemark}
+		    </if>
+		    <if test="null != auditTime and '' != auditTime ">
+				AND t.AUDIT_TIME = #{auditTime}
+		    </if>
+			<if test="null != isUsing and '' != isUsing ">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="null != addUserId and '' != addUserId ">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+		    <if test="null != addUserName and '' != addUserName ">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="null != addTime and '' != addTime ">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="null != lastUpdateUserId and '' != lastUpdateUserId ">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="null != lastUpdateUserName and '' != lastUpdateUserName ">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="null != lastUpdateTime and '' != lastUpdateTime ">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		    <if test="null != stdCataProdRelFileId and '' != stdCataProdRelFileId ">
+				AND t.STD_CATA_PROD_REL_FILE_ID = #{stdCataProdRelFileId}
+		    </if>
+			<if test="null != checkResult and '' != checkResult ">
+				AND t.CHECK_RESULT = #{checkResult}
+		    </if>
+		    AND t.DRUGCATALOG_CODE =  #{drugcatalogCode}
+		</where>
+	</select>
+	
+	
+	
+	
+	<select id="queryAlls" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_CATA_PROD_REL_LIN t
+		<where>
+			<if test="null != prodId and '' != prodId ">
+				AND t.PROD_ID = #{prodId}
+		    </if>
+			<if test="null != prodIdStoc and '' != prodIdStoc ">
+				AND t.PROD_ID_STOC = #{prodIdStoc}
+		    </if>
+			<if test="null != productName and '' != productName ">
+				AND t.PRODUCT_NAME  like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+			<if test="null != productSpelName and '' != productSpelName ">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="null != productWbName and '' != productWbName ">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="null != medicinemodel and '' != medicinemodel ">
+				AND t.MEDICINEMODEL  like CONCAT(CONCAT('%',#{medicinemodel}), '%')
+		    </if>
+			<if test="null != medicinemodelSpel and '' != medicinemodelSpel ">
+				AND t.MEDICINEMODEL_SPEL = #{medicinemodelSpel}
+		    </if>
+			<if test="null != outlook and '' != outlook ">
+				AND t.OUTLOOK like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+			<if test="null != cataSpelName and '' != cataSpelName ">
+				AND t.CATA_SPEL_NAME = #{cataSpelName}
+		    </if>
+		    <if test="null != cataMedicinemodel and '' != cataMedicinemodel ">
+				AND t.CATA_MEDICINEMODEL = #{cataMedicinemodel}
+		    </if>
+			<if test="null != cataOutlook and '' != cataOutlook ">
+				AND t.CATA_OUTLOOK = #{cataOutlook}
+		    </if>
+			<if test="null != cataIndexF and '' != cataIndexF ">
+				AND t.CATA_INDEX_F = #{cataIndexF}
+		    </if>
+			<if test="null != cataIndexS and '' != cataIndexS ">
+				AND t.CATA_INDEX_S = #{cataIndexS}
+		    </if>
+			<if test="null != classOne and '' != classOne ">
+				AND t.CLASS_ONE = #{classOne}
+		    </if>
+			<if test="null != classTwo and '' != classTwo ">
+				AND t.CLASS_TWO = #{classTwo}
+		    </if>
+		    <if test="null != pharOneId and '' != pharOneId ">
+				AND t.PHAR_ONE_ID = #{pharOneId}
+		    </if>
+			<if test="null != pharOne and '' != pharOne ">
+				AND t.PHAR_ONE = #{pharOne}
+		    </if>
+		     <if test="null != pharTwoId and '' != pharTwoId ">
+				AND t.PHAR_TWO_ID = #{pharTwoId}
+		    </if>
+			<if test="null != pharTwo and '' != pharTwo ">
+				AND t.PHAR_TWO = #{pharTwo}
+		    </if>
+		     <if test="null != pharThreeId and '' != pharThreeId ">
+				AND t.PHAR_THREE_ID = #{pharThreeId}
+		    </if>
+			<if test="null != pharThree and '' != pharThree ">
+				AND t.PHAR_THREE = #{pharThree}
+		    </if>
+		     <if test="null != pharFourId and '' != pharFourId ">
+				AND t.PHAR_FOUR_ID = #{pharFourId}
+		    </if>
+			<if test="null != pharFour and '' != pharFour ">
+				AND t.PHAR_FOUR = #{pharFour}
+		    </if>
+		     <if test="null != pharFiveId and '' != pharFiveId ">
+				AND t.PHAR_FIVE_ID = #{pharFiveId}
+		    </if>
+			<if test="null != pharFive and '' != pharFive ">
+				AND t.PHAR_FIVE = #{pharFive}
+		    </if>
+		     <if test="null != pharSixId and '' != pharSixId ">
+				AND t.PHAR_SIX_ID = #{pharSixId}
+		    </if>
+		    <if test="null != pharSix and '' != pharSix ">
+				AND t.PHAR_SIX = #{pharSix}
+		    </if>
+			<if test="null != productAttr and '' != productAttr ">
+				AND t.PRODUCT_ATTR = #{productAttr}
+		    </if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="null != status and '' != status ">
+				AND t.STATUS = #{status}
+		    </if>
+			<if test="null != auditUserName and '' != auditUserName ">
+				AND t.AUDIT_USER_NAME = #{auditUserName}
+		    </if>
+			<if test="null != auditRemark and '' != auditRemark ">
+				AND t.AUDIT_REMARK = #{auditRemark}
+		    </if>
+		    <if test="null != auditTime and '' != auditTime ">
+				AND t.AUDIT_TIME = #{auditTime}
+		    </if>
+			<if test="null != isUsing and '' != isUsing ">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="null != addUserId and '' != addUserId ">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+		    <if test="null != addUserName and '' != addUserName ">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="null != addTime and '' != addTime ">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="null != lastUpdateUserId and '' != lastUpdateUserId ">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="null != lastUpdateUserName and '' != lastUpdateUserName ">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="null != lastUpdateTime and '' != lastUpdateTime ">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		    <if test="null != stdCataProdRelFileId and '' != stdCataProdRelFileId ">
+				AND t.STD_CATA_PROD_REL_FILE_ID = #{stdCataProdRelFileId}
+		    </if>
+			<if test="null != checkResult and '' != checkResult ">
+				AND t.CHECK_RESULT != #{checkResult}
+		    </if>
+		    AND t.DRUGCATALOG_CODE =  #{drugcatalogCode}
+		</where>
+	</select>
+	
+	
+	<select id="getExportExcelData" parameterType="map" resultType="hashmap">
+		SELECT 
+        t.check_result 校验结果,
+        t.product_name 通用名,
+        t.medicinemodel 剂型,
+        t.outlook 规格,
+        t.cata_spel_name 目录通用名,
+        t.cata_medicinemodel 目录剂型,
+        t.cata_outlook 目录规格,
+        t.cata_index_f 目录序号,
+        t.class_one 目录分类,
+        t.phar_one_id 目录分类一编号,
+        t.phar_one 目录分类一,
+        t.phar_two_id 目录分类二编号,
+        t.phar_two 目录分类二,
+        t.phar_three_id 目录分类三编号,
+        t.phar_three 目录分类三,
+        t.remark 入库备注,
+        case t.is_using when '0' then '禁用' when '1' then '启用' else '' end 是否有效
+	    FROM STD_CATA_PROD_REL_LIN t
+		<where>
+			<if test="null != prodId and '' != prodId ">
+				AND t.PROD_ID = #{prodId}
+		    </if>
+			<if test="null != prodIdStoc and '' != prodIdStoc ">
+				AND t.PROD_ID_STOC = #{prodIdStoc}
+		    </if>
+			<if test="null != productName and '' != productName ">
+				AND t.PRODUCT_NAME  like  CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+			<if test="null != productSpelName and '' != productSpelName ">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="null != productWbName and '' != productWbName ">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="null != medicinemodel and '' != medicinemodel ">
+				AND t.MEDICINEMODEL  like CONCAT(CONCAT('%',#{medicinemodel}), '%')
+		    </if>
+			<if test="null != medicinemodelSpel and '' != medicinemodelSpel ">
+				AND t.MEDICINEMODEL_SPEL = #{medicinemodelSpel}
+		    </if>
+			<if test="null != outlook and '' != outlook ">
+				AND t.OUTLOOK like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+			<if test="null != cataSpelName and '' != cataSpelName ">
+				AND t.CATA_SPEL_NAME = #{cataSpelName}
+		    </if>
+		    <if test="null != cataMedicinemodel and '' != cataMedicinemodel ">
+				AND t.CATA_MEDICINEMODEL = #{cataMedicinemodel}
+		    </if>
+			<if test="null != cataOutlook and '' != cataOutlook ">
+				AND t.CATA_OUTLOOK = #{cataOutlook}
+		    </if>
+			<if test="null != cataIndexF and '' != cataIndexF ">
+				AND t.CATA_INDEX_F = #{cataIndexF}
+		    </if>
+			<if test="null != cataIndexS and '' != cataIndexS ">
+				AND t.CATA_INDEX_S = #{cataIndexS}
+		    </if>
+			<if test="null != classOne and '' != classOne ">
+				AND t.CLASS_ONE = #{classOne}
+		    </if>
+			<if test="null != classTwo and '' != classTwo ">
+				AND t.CLASS_TWO = #{classTwo}
+		    </if>
+		    <if test="null != pharOneId and '' != pharOneId ">
+				AND t.PHAR_ONE_ID = #{pharOneId}
+		    </if>
+			<if test="null != pharOne and '' != pharOne ">
+				AND t.PHAR_ONE = #{pharOne}
+		    </if>
+		     <if test="null != pharTwoId and '' != pharTwoId ">
+				AND t.PHAR_TWO_ID = #{pharTwoId}
+		    </if>
+			<if test="null != pharTwo and '' != pharTwo ">
+				AND t.PHAR_TWO = #{pharTwo}
+		    </if>
+		     <if test="null != pharThreeId and '' != pharThreeId ">
+				AND t.PHAR_THREE_ID = #{pharThreeId}
+		    </if>
+			<if test="null != pharThree and '' != pharThree ">
+				AND t.PHAR_THREE = #{pharThree}
+		    </if>
+		     <if test="null != pharFourId and '' != pharFourId ">
+				AND t.PHAR_FOUR_ID = #{pharFourId}
+		    </if>
+			<if test="null != pharFour and '' != pharFour ">
+				AND t.PHAR_FOUR = #{pharFour}
+		    </if>
+		     <if test="null != pharFiveId and '' != pharFiveId ">
+				AND t.PHAR_FIVE_ID = #{pharFiveId}
+		    </if>
+			<if test="null != pharFive and '' != pharFive ">
+				AND t.PHAR_FIVE = #{pharFive}
+		    </if>
+		     <if test="null != pharSixId and '' != pharSixId ">
+				AND t.PHAR_SIX_ID = #{pharSixId}
+		    </if>
+		    <if test="null != pharSix and '' != pharSix ">
+				AND t.PHAR_SIX = #{pharSix}
+		    </if>
+			<if test="null != productAttr and '' != productAttr ">
+				AND t.PRODUCT_ATTR = #{productAttr}
+		    </if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="null != status and '' != status ">
+				AND t.STATUS = #{status}
+		    </if>
+			<if test="null != auditUserName and '' != auditUserName ">
+				AND t.AUDIT_USER_NAME = #{auditUserName}
+		    </if>
+			<if test="null != auditRemark and '' != auditRemark ">
+				AND t.AUDIT_REMARK = #{auditRemark}
+		    </if>
+		    <if test="null != auditTime and '' != auditTime ">
+				AND t.AUDIT_TIME = #{auditTime}
+		    </if>
+			<if test="null != isUsing and '' != isUsing ">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="null != addUserId and '' != addUserId ">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+		    <if test="null != addUserName and '' != addUserName ">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="null != addTime and '' != addTime ">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="null != lastUpdateUserId and '' != lastUpdateUserId ">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="null != lastUpdateUserName and '' != lastUpdateUserName ">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="null != lastUpdateTime and '' != lastUpdateTime ">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+			AND t.STD_CATA_PROD_REL_FILE_ID = #{stdCataProdRelFileId}
+		    AND t.DRUGCATALOG_CODE =  #{drugcatalogCode}
+		    AND t.CHECK_RESULT != #{checkResult}
+		</where>
+	</select>
+
+ 
+ 	
+	 <insert id="addStdCataProdRelLin"  parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRelLin">
+		INSERT INTO STD_CATA_PROD_REL_LIN(
+	            DRUGCATALOG_CODE ,
+	            PROD_ID ,
+	            PROD_ID_STOC ,
+	            PRODUCT_NAME ,
+	            PRODUCT_SPEL_NAME ,
+	            PRODUCT_WB_NAME ,
+	            MEDICINEMODEL ,
+	            MEDICINEMODEL_SPEL ,
+	            OUTLOOK ,
+	            CATA_SPEL_NAME ,
+	            CATA_MEDICINEMODEL ,
+	            CATA_OUTLOOK ,
+	            CATA_INDEX_F ,
+	            CATA_INDEX_S ,
+	            CLASS_ONE ,
+	            CLASS_TWO ,
+	            PHAR_ONE_ID ,
+	            PHAR_ONE ,
+	            PHAR_TWO ,
+	            PHAR_THREE ,
+	            PHAR_FOUR ,
+	            PHAR_FIVE ,
+	            PHAR_SIX ,
+	            PRODUCT_ATTR ,
+	            REMARK ,
+	            STATUS ,
+	            AUDIT_USER_NAME ,
+	            AUDIT_REMARK ,
+	            AUDIT_TIME ,
+	            IS_USING ,
+	            ADD_USER_ID ,
+	            ADD_USER_NAME ,
+	            ADD_TIME ,
+	            LAST_UPDATE_USER_ID ,
+	            LAST_UPDATE_USER_NAME ,
+	            LAST_UPDATE_TIME ,
+	            PHAR_TWO_ID ,
+	            PHAR_THREE_ID ,
+	            PHAR_FOUR_ID ,
+	            PHAR_FIVE_ID ,
+	            PHAR_SIX_ID ,
+	            STD_CATA_PROD_REL_FILE_ID ,
+	            CHECK_RESULT 
+		)
+		VALUES (
+	        	#{drugcatalogCode},
+	        	#{prodId},
+	        	#{prodIdStoc},
+	        	#{productName},
+	        	#{productSpelName},
+	        	#{productWbName},
+	        	#{medicinemodel},
+	        	#{medicinemodelSpel},
+	        	#{outlook},
+	        	#{cataSpelName},
+	        	#{cataMedicinemodel},
+	        	#{cataOutlook},
+	        	#{cataIndexF},
+	        	#{cataIndexS},
+	        	#{classOne},
+	        	#{classTwo},
+	        	#{pharOneId},
+	        	#{pharOne},
+	        	#{pharTwo},
+	        	#{pharThree},
+	        	#{pharFour},
+	        	#{pharFive},
+	        	#{pharSix},
+	        	#{productAttr},
+	        	#{remark},
+	        	#{status},
+	        	#{auditUserName},
+	        	#{auditRemark},
+	        	#{auditTime},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime},
+	        	#{pharTwoId},
+	        	#{pharThreeId},
+	        	#{pharFourId},
+	        	#{pharFiveId},
+	        	#{pharSixId},
+	        	#{stdCataProdRelFileId},
+	        	#{checkResult}
+		)
+	</insert> 
+	
+	
+<!-- 	 <insert id="addStdCataProdRelLinS" useGeneratedKeys="false" keyProperty="prodId" parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRelLin"> -->
+	<insert id="addStdCataProdRelLinS"  parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRelLin">
+	<!--  	<selectKey resultType="Integer"  keyProperty="prodId" order="BEFORE">
+			select STDPROSEQ.nextval as product_id from dual
+		</selectKey>  -->
+		INSERT INTO STD_CATA_PROD_REL_LIN(
+	            DRUGCATALOG_CODE ,
+	            PROD_ID ,
+	            PROD_ID_STOC ,
+	            PRODUCT_NAME ,
+	            PRODUCT_SPEL_NAME ,
+	            PRODUCT_WB_NAME ,
+	            MEDICINEMODEL ,
+	            MEDICINEMODEL_SPEL ,
+	            OUTLOOK ,
+	            CATA_SPEL_NAME ,
+	            CATA_MEDICINEMODEL ,
+	            CATA_OUTLOOK ,
+	            CATA_INDEX_F ,
+	            CATA_INDEX_S ,
+	            CLASS_ONE ,
+	            CLASS_TWO ,
+	            PHAR_ONE_ID ,
+	            PHAR_ONE ,
+	            PHAR_TWO ,
+	            PHAR_THREE ,
+	            PHAR_FOUR ,
+	            PHAR_FIVE ,
+	            PHAR_SIX ,
+	            PRODUCT_ATTR ,
+	            REMARK ,
+	            STATUS ,
+	            AUDIT_USER_NAME ,
+	            AUDIT_REMARK ,
+	            AUDIT_TIME ,
+	            IS_USING ,
+	            ADD_USER_ID ,
+	            ADD_USER_NAME ,
+	            ADD_TIME ,
+	            LAST_UPDATE_USER_ID ,
+	            LAST_UPDATE_USER_NAME ,
+	            LAST_UPDATE_TIME ,
+	            PHAR_TWO_ID ,
+	            PHAR_THREE_ID ,
+	            PHAR_FOUR_ID ,
+	            PHAR_FIVE_ID ,
+	            PHAR_SIX_ID ,
+	            STD_CATA_PROD_REL_FILE_ID ,
+	            CHECK_RESULT 
+		)
+		VALUES (
+	        	#{drugcatalogCode},
+	        	#{prodId},
+	        	#{prodIdStoc},
+	        	#{productName},
+	        	#{productSpelName},
+	        	#{productWbName},
+	        	#{medicinemodel},
+	        	#{medicinemodelSpel},
+	        	#{outlook},
+	        	#{cataSpelName},
+	        	#{cataMedicinemodel},
+	        	#{cataOutlook},
+	        	#{cataIndexF},
+	        	#{cataIndexS},
+	        	#{classOne},
+	        	#{classTwo},
+	        	#{pharOneId},
+	        	#{pharOne},
+	        	#{pharTwo},
+	        	#{pharThree},
+	        	#{pharFour},
+	        	#{pharFive},
+	        	#{pharSix},
+	        	#{productAttr},
+	        	#{remark},
+	        	#{status},
+	        	#{auditUserName},
+	        	#{auditRemark},
+	        	#{auditTime},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime},
+	        	#{pharTwoId},
+	        	#{pharThreeId},
+	        	#{pharFourId},
+	        	#{pharFiveId},
+	        	#{pharSixId},
+	        	#{stdCataProdRelFileId},
+	        	#{checkResult}
+		)
+	</insert> 
+	
+	
+	<delete id="deleteStdCataProdRelLin" parameterType="java.lang.String">
+		DELETE FROM STD_CATA_PROD_REL_LIN WHERE  drugcatalog_code =  #{drugcatalogCode} and std_cata_prod_rel_file_id = #{stdCataProdRelFileId}
+	</delete>
+	
+	<select id="getStdCataProdRelLinById" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_CATA_PROD_REL_LIN t
+		WHERE t.drugcatalog_code =  #{drugcatalogCode} and t.std_cata_prod_rel_file_id = #{stdCataProdRelFileId} and t.check_result =  #{checkResult}
+	</select>
+	
+</mapper>

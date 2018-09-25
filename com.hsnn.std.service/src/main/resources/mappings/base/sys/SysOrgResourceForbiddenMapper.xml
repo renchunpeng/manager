@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysOrgResourceForbiddenDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysOrgResourceForbidden" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="orgId" column="org_id" javaType="String"/>
+        <result property="resourceId" column="resource_id" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.org_id,
+        t.resource_id,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time
+	</sql>
+		
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM sys_org_resource_forbidden t
+		WHERE t.id =  #{value}
+	</select>
+
+	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.sys.model.SysOrgResourceForbidden">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+			SELECT SYSORGRESOURCEFORBIDDENSEQ.nextval from dual
+        </selectKey>
+		INSERT INTO sys_org_resource_forbidden(
+				id,
+	            org_id ,
+	            resource_id ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time 
+		)
+		VALUES (
+				#{id},
+	        	#{orgId},
+	        	#{resourceId},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE
+		)
+
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysOrgResourceForbidden">
+		UPDATE sys_org_resource_forbidden  
+		<set>
+			org_id = #{orgId},
+			resource_id = #{resourceId},
+			add_user_id = #{addUserId},
+			add_user_name = #{addUserName},
+			add_time = #{addTime},
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.sys.model.SysOrgResourceForbidden">
+		UPDATE sys_org_resource_forbidden  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(orgId)">
+				org_id = #{orgId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(resourceId)">
+				resource_id = #{resourceId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				add_user_id = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				add_user_name = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				add_time = #{addTime},
+			</if>
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_org_resource_forbidden WHERE  id =  #{value}
+	</delete>
+	
+	<!-- 根据orgId 删除数据 -->
+	<delete id="deleteByOrgIdList" parameterType="java.util.List">
+		DELETE FROM sys_org_resource_forbidden WHERE 
+		 <foreach collection="list" item="item" index="index" separator="or">  
+          ( org_id = #{item.orgId} and resource_id = #{item.resourceId})
+         </foreach>
+	</delete>
+	
+	<!-- 根据orgId 删除已选部门权限 -->
+    <delete id="deleteDeptResByOrgId" parameterType="java.lang.String">
+		DELETE b
+		FROM sys_org_resource_forbidden a
+		INNER JOIN sys_role_resource b ON a.resource_id = b.resource_id
+		AND a.org_id = #{value} AND b.belong_org = #{value}
+		AND b.role_id > 19
+	</delete>
+	
+   <!-- 根据orgId 删除所属操作用户已选权限 -->
+   <delete id="deleteUserResByOrgId" parameterType="java.lang.String">
+		DELETE b
+		FROM sys_org_resource_forbidden a
+		INNER JOIN sys_user_resource b ON a.resource_id = b.resource_id
+		AND a.org_id = #{value}
+		AND b.belong_org = #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_org_resource_forbidden t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(resourceId)">
+				AND t.resource_id = #{resourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_org_resource_forbidden (
+        	id,
+            org_id ,
+            resource_id ,
+            add_user_id ,
+            add_user_name ,
+            add_time 
+        )select SYSORGRESOURCEFORBIDDENSEQ.nextval,p.* from(
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select
+        	#{item.orgId},
+        	#{item.resourceId},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	SYSDATE
+        from dual
+        </foreach> ) p
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM sys_org_resource_forbidden t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(resourceId)">
+				AND t.resource_id = #{resourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE sys_org_resource_forbidden  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.orgId)">
+				org_id = #{model.orgId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.resourceId)">
+				resource_id = #{model.resourceId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				add_user_id = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				add_user_name = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				add_time = #{model.addTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.id = #{params.id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orgId)">
+				AND t.org_id = #{params.orgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.resourceId)">
+				AND t.resource_id = #{params.resourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.add_user_id = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.add_user_name = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.add_time = #{params.addTime}
+		    </if>
+		</where>
+	</update>
+	
+	<select id="getOrgList" parameterType="map" resultType="hashmap">
+	   SELECT
+			org_id,
+			user_id,
+			user_name,
+			org_name
+		FROM
+			(
+				SELECT
+			     org.org_id,
+				 b.user_name user_name,
+	             b.user_id user_id,
+				 org.org_name
+			 FROM
+				(
+					SELECT
+						id org_id,
+						'' user_name,
+						hea_bur_name org_name
+					FROM
+						std_manage_org a
+				      WHERE
+							   hea_bur_type != 1
+					UNION ALL
+						SELECT
+							company_id org_id,
+							company_account_code user_name,
+							company_name org_name
+						FROM
+							std_company
+					UNION ALL
+						SELECT
+							hospital_id org_id,
+							user_name,
+							hospital_name org_name
+						FROM
+							std_hospital
+					) org
+					inner join sys_user b ON org.org_id= b.org_id
+					AND b.acct_type = 0
+					AND b.department_id IS NULL
+			) tab
+		 <where>
+		    1 = 1
+		    <if test="@OGNL@isNotEmpty(userName)">
+			  and user_name like '%'|| #{userName}|| '%'
+		    </if>
+		    <if test="@OGNL@isNotEmpty(orgName)">
+		      and org_name like '%'|| #{orgName}|| '%'
+		    </if>
+		</where>   
+	</select>
+	
+	<select id="getRoleResourceList" parameterType="map" resultType="hashmap">
+		select distinct a.resource_id id,a.parent_resource_id pid,a.menu_name menuName,
+		a.resource_url resourceUrl,a.icon icon,a.resource_type type,
+		 CASE  WHEN d.resource_id IS NULL THEN
+			0
+		ELSE
+			1
+		 END checked
+		 from sys_resource a 
+		inner join sys_role_resource c on c.resource_id = a.resource_id
+		LEFT JOIN sys_org_resource_forbidden d ON d.org_id=#{orgId}
+		AND c.resource_id = d.resource_id
+		<where>
+			<if test="departmentId != null and departmentId != ''">
+	            AND c.belong_department_id = #{departmentId}
+	        </if>
+	        <if test="postId != null and postId != ''">
+	            AND c.belong_post_id = #{postId}
+	        </if>
+	        <if test="roleId != null and roleId != ''">
+	            AND c.role_id = #{roleId}
+	            and c.is_using = 1
+	        </if>
+	        and a.is_using = 1 order by a.sort asc
+		</where>
+		
+	</select>
+</mapper>

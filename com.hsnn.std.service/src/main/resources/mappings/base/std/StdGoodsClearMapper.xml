@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdGoodsClearDao">
+    <resultMap type="com.hsnn.medstgmini.base.std.model.StdGoodsClear" id="BaseResultMap">
+        <result property="clearId" column="clear_id" javaType="Integer"/>
+        <result property="goodsId" column="goods_id" javaType="Integer"/>
+        <result property="clearContent" column="clear_content" javaType="String"/>
+        <result property="vbeforeProcess" column="v_before_process" javaType="String"/>
+        <result property="vafterProcess" column="v_after_process" javaType="String"/>
+        <result property="clearExplain" column="clear_explain" javaType="String"/>
+        <result property="sort" column="sort" javaType="Integer"/>
+        <result property="clearPictures" column="clear_pictures" javaType="String"/>
+        <result property="clearPicturesUseful" column="clear_pictures_useful" javaType="String"/>
+        <result property="clearUserId" column="clear_user_id" javaType="String"/>
+        <result property="clearTime" column="clear_time" javaType="Date"/>
+        <result property="clearSequence" column="clear_sequence" javaType="Integer"/>
+        <result property="isOnlineClear" column="is_online_clear" javaType="Integer"/>
+        <result property="clearStatus" column="clear_status" javaType="Integer"/>
+        <result property="onlineClearStatus" column="online_clear_status" javaType="Integer"/>
+        <result property="auditExplain" column="audit_explain" javaType="String"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="clearColumn" column="clear_column" javaType="String"/>
+
+        <association property="stdGoods" javaType="com.hsnn.medstgmini.base.std.model.StdGoods"
+                     resultMap="com.hsnn.medstgmini.base.std.dao.StdGoodsDao.BaseResultMap"/>
+        <association property="stdProduct" javaType="com.hsnn.medstgmini.base.std.model.StdProduct"
+                     resultMap="com.hsnn.medstgmini.base.std.dao.StdProductDao.BaseResultMap"/>
+    </resultMap>
+
+    <sql id="full-columns">
+        t.clear_id,
+        t.goods_id,
+        t.clear_content,
+        t.v_before_process,
+        t.v_after_process,
+        t.clear_explain,
+        t.sort,
+        t.clear_pictures,
+        t.clear_pictures_useful,
+        t.clear_user_id,
+        t.clear_time,
+        t.clear_sequence,
+        t.is_online_clear,
+        t.clear_status,
+        t.online_clear_status,
+        t.audit_explain,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.clear_column
+	</sql>
+
+
+    <select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_goods_clear where clear_id =  #{value}
+	</select>
+
+    <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_goods_clear where clear_id =  #{value}
+	</select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+		SELECT * from std_goods_clear 
+	</select>
+
+
+    <insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdGoodsClear">
+		INSERT INTO std_goods_clear(
+	            goods_id ,
+	            clear_content ,
+	            v_before_process ,
+	            v_after_process ,
+	            clear_explain ,
+	            sort ,
+	            clear_pictures ,
+	            clear_pictures_useful ,
+	            clear_user_id ,
+	            clear_time ,
+	            clear_sequence ,
+	            is_online_clear ,
+	            clear_status ,
+	            online_clear_status ,
+	            audit_explain ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time,
+	            clear_column  
+	    ) 
+		VALUES (
+	        	#{goodsId},
+	        	#{clearContent},
+	        	#{vbeforeProcess},
+	        	#{vafterProcess},
+	        	#{clearExplain},
+	        	#{sort},
+	        	#{clearPictures},
+	        	#{clearPicturesUseful},
+	        	#{clearUserId},
+	        	SYSDATE,
+	        	#{clearSequence},
+	        	#{isOnlineClear},
+	        	#{clearStatus},
+	        	#{onlineClearStatus},
+	        	#{auditExplain},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime},
+	        	#{clearColumn}
+		)
+	</insert>
+
+
+    <insert id="save" useGeneratedKeys="false" keyProperty="clearId"
+            parameterType="com.hsnn.medstgmini.base.std.model.StdGoodsClear">
+        <selectKey resultType="java.lang.Integer" keyProperty="clearId" order="BEFORE">
+            SELECT STDGMPGSPSEQ.nextval from dual
+        </selectKey>
+        INSERT INTO std_goods_clear(
+        goods_id ,
+        clear_content ,
+        v_before_process ,
+        v_after_process ,
+        clear_explain ,
+        sort ,
+        clear_pictures ,
+        clear_pictures_useful ,
+        clear_user_id ,
+        clear_time ,
+        clear_sequence ,
+        is_online_clear ,
+        clear_status ,
+        <if test="@OGNL@isNotEmpty(onlineClearStatus)">
+            online_clear_status ,
+        </if>
+        audit_explain ,
+        add_user_id ,
+        add_user_name ,
+        add_time ,
+        last_update_user_id ,
+        last_update_user_name ,
+        last_update_time,
+        clear_column
+        )
+        VALUES (
+        #{goodsId},
+        #{clearContent},
+        #{vbeforeProcess},
+        #{vafterProcess},
+        #{clearExplain},
+        #{sort},
+        #{clearPictures},
+        #{clearPicturesUseful},
+        #{clearUserId},
+        SYSDATE,
+        #{clearSequence},
+        #{isOnlineClear},
+        #{clearStatus},
+        <if test="@OGNL@isNotEmpty(onlineClearStatus)">
+            #{onlineClearStatus},
+        </if>
+        #{auditExplain},
+        #{addUserId},
+        #{addUserName},
+        #{addTime},
+        #{lastUpdateUserId},
+        #{lastUpdateUserName},
+        #{lastUpdateTime},
+        #{clearColumn}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdGoodsClear">
+        UPDATE std_goods_clear
+        <set>
+            goods_id = #{goodsId},
+            clear_content = #{clearContent},
+            v_before_process = #{vbeforeProcess},
+            v_after_process = #{vafterProcess},
+            clear_explain = #{clearExplain},
+            sort = #{sort},
+            clear_pictures = #{clearPictures},
+            clear_pictures_useful = #{clearPicturesUseful},
+            clear_user_id = #{clearUserId},
+            clear_time = #{clearTime},
+            clear_sequence = #{clearSequence},
+            is_online_clear = #{isOnlineClear},
+            clear_status = #{clearStatus},
+            online_clear_status = #{onlineClearStatus},
+            audit_explain = #{auditExplain},
+            add_user_id = #{addUserId},
+            add_user_name = #{addUserName},
+            add_time = #{addTime},
+            last_update_user_id = #{lastUpdateUserId},
+            last_update_user_name = #{lastUpdateUserName},
+            last_update_time = #{lastUpdateTime},
+            clear_column = #{clearColumn},
+        </set>
+        WHERE clear_id = #{clearId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_goods_clear WHERE  clear_id =  #{value}
+	</delete>
+
+    <select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+        SELECT<include refid="full-columns"/>,g.archive_Number,p.product_name,p.medicinemodel,p.outlook,
+        p.factor
+        FROM std_goods_clear t
+        LEFT JOIN std_goods g ON t.goods_id = g.goods_id
+        LEFT JOIN std_product p on g.product_id = p.product_id
+        <where>
+            <if test="@OGNL@isNotEmpty(clearId)">
+                AND t.clear_id = #{clearId}
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsId)">
+                AND t.goods_id = #{goodsId}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearContent)">
+                AND t.clear_content = #{clearContent}
+            </if>
+            <if test="@OGNL@isNotEmpty(vbeforeProcess)">
+                AND t.v_before_process = #{vbeforeProcess}
+            </if>
+            <if test="@OGNL@isNotEmpty(vafterProcess)">
+                AND t.v_after_process = #{vafterProcess}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearExplain)">
+                AND t.clear_explain = #{clearExplain}
+            </if>
+            <if test="@OGNL@isNotEmpty(sort)">
+                AND t.sort = #{sort}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearPictures)">
+                AND t.clear_pictures = #{clearPictures}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearPicturesUseful)">
+                AND t.clear_pictures_useful = #{clearPicturesUseful}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearUserId)">
+                AND t.clear_user_id = #{clearUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearTime)">
+                AND t.clear_time = #{clearTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(clearSequence)">
+                AND t.clear_sequence = #{clearSequence}
+            </if>
+            <if test="@OGNL@isNotEmpty(isOnlineClear)">
+                AND t.is_online_clear = #{isOnlineClear}
+            </if>
+            <!-- <if test="@OGNL@isNotEmpty(clearStatus)">
+                AND t.clear_status = #{clearStatus}
+            </if> -->
+            <if test="@OGNL@isNotEmpty(clearStatus)">
+                AND t.clear_status IN
+                <foreach collection="clearStatus" item="state" open="(" separator="," close=")">
+                    #{state}
+                </foreach>
+            </if>
+            <if test="@OGNL@isNotEmpty(onlineClearStatus)">
+                AND t.online_clear_status = #{onlineClearStatus}
+            </if>
+            <if test="@OGNL@isNotEmpty(auditExplain)">
+                AND t.audit_explain = #{auditExplain}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserId)">
+                AND t.add_user_id = #{addUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserName)">
+                AND t.add_user_name = #{addUserName}
+            </if>
+            <if test="@OGNL@isNotEmpty(addTime)">
+                AND t.add_time = #{addTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+                AND t.last_update_user_id = #{lastUpdateUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+                AND t.last_update_user_name = #{lastUpdateUserName}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+                AND t.last_update_time = #{lastUpdateTime}
+            </if>
+        </where>
+        <if test="@OGNL@isNotEmpty(orderColumn) ">
+            ORDER BY t.${orderColumn}
+            <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO std_goods_clear (
+        clear_id,
+        goods_id ,
+        clear_content ,
+        v_before_process ,
+        v_after_process ,
+        clear_explain ,
+        sort ,
+        clear_pictures ,
+        clear_pictures_useful ,
+        clear_user_id ,
+        clear_time ,
+        clear_sequence ,
+        is_online_clear ,
+        clear_status ,
+        audit_explain ,
+        add_user_id ,
+        add_user_name ,
+        add_time,
+        clear_column
+        ) select #{item.clearId},p.* from (
+        <foreach collection="list" item="item" index="index" separator="union all">
+            select
+            #{item.goodsId} goods_id,
+            #{item.clearContent} clear_content,
+            #{item.vbeforeProcess} v_before_process,
+            #{item.vafterProcess} v_after_process,
+            #{item.clearExplain} clear_explain,
+            #{item.sort} sort,
+            #{item.clearPictures} clear_pictures,
+            #{item.clearPicturesUseful} clear_pictures_useful,
+            #{item.clearUserId} clear_user_id,
+            SYSDATE clear_time,
+            #{item.clearSequence} clear_sequence,
+            #{item.isOnlineClear} is_online_clear,
+            #{item.clearStatus} clear_status,
+            #{item.auditExplain} audit_explain,
+            #{item.addUserId} add_user_id,
+            #{item.addUserName} add_user_name,
+            SYSDATE add_time,
+            #{item.clearColumn} clear_column
+            from dual
+        </foreach>
+        ) p
+    </insert>
+
+    <!-- 修改澄清状态 -->
+    <update id="updateClearStatus" parameterType="com.hsnn.medstgmini.base.std.model.StdGoodsClear">
+        UPDATE std_goods_clear
+        <set>
+            <if test="@OGNL@isNotEmpty(clearStatus)">
+                clear_status = #{clearStatus},
+            </if>
+            <if test="@OGNL@isNotEmpty(onlineClearStatus)">
+                online_clear_status = #{onlineClearStatus},
+            </if>
+            <if test="@OGNL@isNotEmpty(clearSequence)">
+                clear_sequence = #{clearSequence},
+            </if>
+            last_update_user_id = #{lastUpdateUserId},
+            last_update_user_name = #{lastUpdateUserName},
+            last_update_time = SYSDATE,
+        </set>
+        <where>
+            <if test="@OGNL@isNotEmpty(goodsId)">
+                AND goods_id = #{goodsId}
+            </if>
+            <if test="@OGNL@isNotEmpty(isOnlineClear)">
+                AND is_online_clear = #{isOnlineClear}
+            </if>
+            <if test="@OGNL@isNotEmpty(beforClearStatus)">
+                AND clear_status = ${beforClearStatus}
+            </if>
+           <!-- <if test="@OGNL@isNotEmpty(beforOnlineClearStatus)">
+                AND online_clear_status = ${beforOnlineClearStatus}
+            </if>-->
+        </where>
+    </update>
+
+    <!-- 获取批次数量 -->
+    <select id="getBatchCount" parameterType="int" resultType="int">
+		 select count(1) from (SELECT 1 from std_goods_clear t     
+		 WHERE  t.goods_id = #{value}  and t.clear_sequence is not null  and t.clear_time like to_char(SYSDATE,'yyyy')||'%'  GROUP BY t.clear_sequence )   t       
+	</select>
+
+    <select id="getSequen"  resultType="java.lang.String">
+        select STDGMPGSPSEQ.nextval FROM DUAL
+    </select>
+
+    <select id="goodsClear" parameterType="java.lang.String" statementType="CALLABLE" >
+        call goodsclear(#{goodsId,mode=IN,jdbcType=VARCHAR})
+    </select>
+</mapper>

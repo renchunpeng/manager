@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.yimiao.dao.YimiaoPriceadjplandetailDao">
+	<resultMap type="com.hsnn.medstgmini.yimiao.model.YimiaoPriceadjplandetail" id="BaseResultMap">
+        <result property="priceAdjPalnDetailId" column="PRICE_ADJ_PALN_DETAIL_ID" javaType="String"/>
+        <result property="priceAdjPlanId" column="PRICE_ADJ_PLAN_ID" javaType="String"/>
+        <result property="goodsCode" column="GOODS_CODE" javaType="String"/>
+        <result property="origProPriceLimit" column="ORIG_PRO_PRICE_LIMIT" javaType="BigDecimal"/>
+        <result property="currProPriceLimit" column="CURR_PRO_PRICE_LIMIT" javaType="BigDecimal"/>
+        <result property="origRetailPriceLimit" column="ORIG_RETAIL_PRICE_LIMIT" javaType="BigDecimal"/>
+        <result property="currRetailPriceLlimit" column="CURR_RETAIL_PRICE_LLIMIT" javaType="BigDecimal"/>
+        <result property="addDatetime" column="ADD_DATETIME" javaType="Date"/>
+        <result property="addUser" column="ADD_USER" javaType="String"/>
+        <result property="remarks" column="REMARKS" javaType="String"/>
+
+		<association property="yimiaoProcurecatalog" javaType="com.hsnn.medstgmini.yimiao.model.YimiaoProcurecatalog" resultMap="com.hsnn.medstgmini.yimiao.dao.YimiaoProcurecatalogDao.BaseResultMap"/>
+		<association property="yimiaoPriceadjplan" javaType="com.hsnn.medstgmini.yimiao.model.YimiaoPriceadjplan" resultMap="com.hsnn.medstgmini.yimiao.dao.YimiaoPriceadjplanDao.BaseResultMap"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.PRICE_ADJ_PALN_DETAIL_ID,
+        t.PRICE_ADJ_PLAN_ID,
+        t.GOODS_CODE,
+        t.ORIG_PRO_PRICE_LIMIT,
+        t.CURR_PRO_PRICE_LIMIT,
+        t.ORIG_RETAIL_PRICE_LIMIT,
+        t.CURR_RETAIL_PRICE_LLIMIT,
+        t.ADD_DATETIME,
+        t.ADD_USER,
+        t.REMARKS
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM YIMIAO_PRICEADJPLANDETAIL t
+		WHERE t.PRICE_ADJ_PALN_DETAIL_ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoPriceadjplandetail">
+		INSERT INTO YIMIAO_PRICEADJPLANDETAIL(
+		        PRICE_ADJ_PALN_DETAIL_ID,
+	            PRICE_ADJ_PLAN_ID ,
+	            GOODS_CODE ,
+	            ORIG_PRO_PRICE_LIMIT ,
+	            CURR_PRO_PRICE_LIMIT ,
+	            ORIG_RETAIL_PRICE_LIMIT ,
+	            CURR_RETAIL_PRICE_LLIMIT ,
+	            ADD_DATETIME ,
+	            ADD_USER ,
+	            REMARKS 
+		)
+		VALUES (
+		        REPLACE(UUID(),'-',''),
+	        	#{priceAdjPlanId},
+	        	#{goodsCode},
+	        	#{origProPriceLimit},
+	        	#{currProPriceLimit},
+	        	#{origRetailPriceLimit},
+	        	#{currRetailPriceLlimit},
+	        	#{addDatetime},
+	        	#{addUser},
+	        	#{remarks}
+		)
+
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoPriceadjplandetail">
+		UPDATE YIMIAO_PRICEADJPLANDETAIL  
+		<set>
+			PRICE_ADJ_PLAN_ID = #{priceAdjPlanId},
+			GOODS_CODE = #{goodsCode},
+			ORIG_PRO_PRICE_LIMIT = #{origProPriceLimit},
+			CURR_PRO_PRICE_LIMIT = #{currProPriceLimit},
+			ORIG_RETAIL_PRICE_LIMIT = #{origRetailPriceLimit},
+			CURR_RETAIL_PRICE_LLIMIT = #{currRetailPriceLlimit},
+			ADD_DATETIME = #{addDatetime},
+			ADD_USER = #{addUser},
+			REMARKS = #{remarks},
+        </set>
+		WHERE  PRICE_ADJ_PALN_DETAIL_ID =  #{priceAdjPalnDetailId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoPriceadjplandetail">
+		UPDATE YIMIAO_PRICEADJPLANDETAIL  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(priceAdjPlanId)">
+				PRICE_ADJ_PLAN_ID = #{priceAdjPlanId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(goodsCode)">
+				GOODS_CODE = #{goodsCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(origProPriceLimit)">
+				ORIG_PRO_PRICE_LIMIT = #{origProPriceLimit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(currProPriceLimit)">
+				CURR_PRO_PRICE_LIMIT = #{currProPriceLimit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(origRetailPriceLimit)">
+				ORIG_RETAIL_PRICE_LIMIT = #{origRetailPriceLimit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(currRetailPriceLlimit)">
+				CURR_RETAIL_PRICE_LLIMIT = #{currRetailPriceLlimit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addDatetime)">
+				ADD_DATETIME = #{addDatetime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUser)">
+				ADD_USER = #{addUser},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(remarks)">
+				REMARKS = #{remarks},
+			</if>
+        </set>
+		WHERE  PRICE_ADJ_PALN_DETAIL_ID =  #{priceAdjPalnDetailId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM YIMIAO_PRICEADJPLANDETAIL WHERE  PRICE_ADJ_PALN_DETAIL_ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM YIMIAO_PRICEADJPLANDETAIL t
+		<where>
+			<if test="@OGNL@isNotEmpty(priceAdjPalnDetailId)">
+				AND t.PRICE_ADJ_PALN_DETAIL_ID = #{priceAdjPalnDetailId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanId)">
+				AND t.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsCode)">
+				AND t.GOODS_CODE = #{goodsCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(origProPriceLimit)">
+				AND t.ORIG_PRO_PRICE_LIMIT = #{origProPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(currProPriceLimit)">
+				AND t.CURR_PRO_PRICE_LIMIT = #{currProPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(origRetailPriceLimit)">
+				AND t.ORIG_RETAIL_PRICE_LIMIT = #{origRetailPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(currRetailPriceLlimit)">
+				AND t.CURR_RETAIL_PRICE_LLIMIT = #{currRetailPriceLlimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addDatetime)">
+				AND t.ADD_DATETIME = #{addDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUser)">
+				AND t.ADD_USER = #{addUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remarks)">
+				AND t.REMARKS = #{remarks}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO YIMIAO_PRICEADJPLANDETAIL (
+            PRICE_ADJ_PLAN_ID ,
+            GOODS_CODE ,
+            ORIG_PRO_PRICE_LIMIT ,
+            CURR_PRO_PRICE_LIMIT ,
+            ORIG_RETAIL_PRICE_LIMIT ,
+            CURR_RETAIL_PRICE_LLIMIT ,
+            ADD_DATETIME ,
+            ADD_USER ,
+            REMARKS 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.priceAdjPlanId},
+        	#{item.goodsCode},
+        	#{item.origProPriceLimit},
+        	#{item.currProPriceLimit},
+        	#{item.origRetailPriceLimit},
+        	#{item.currRetailPriceLlimit},
+        	#{item.addDatetime},
+        	#{item.addUser},
+        	#{item.remarks}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM YIMIAO_PRICEADJPLANDETAIL t
+		<where>
+			<if test="@OGNL@isNotEmpty(priceAdjPalnDetailId)">
+				AND t.PRICE_ADJ_PALN_DETAIL_ID = #{priceAdjPalnDetailId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanId)">
+				AND t.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsCode)">
+				AND t.GOODS_CODE = #{goodsCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(origProPriceLimit)">
+				AND t.ORIG_PRO_PRICE_LIMIT = #{origProPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(currProPriceLimit)">
+				AND t.CURR_PRO_PRICE_LIMIT = #{currProPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(origRetailPriceLimit)">
+				AND t.ORIG_RETAIL_PRICE_LIMIT = #{origRetailPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(currRetailPriceLlimit)">
+				AND t.CURR_RETAIL_PRICE_LLIMIT = #{currRetailPriceLlimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addDatetime)">
+				AND t.ADD_DATETIME = #{addDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUser)">
+				AND t.ADD_USER = #{addUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remarks)">
+				AND t.REMARKS = #{remarks}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE YIMIAO_PRICEADJPLANDETAIL  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.priceAdjPlanId)">
+				PRICE_ADJ_PLAN_ID = #{model.priceAdjPlanId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.goodsCode)">
+				GOODS_CODE = #{model.goodsCode},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.origProPriceLimit)">
+				ORIG_PRO_PRICE_LIMIT = #{model.origProPriceLimit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.currProPriceLimit)">
+				CURR_PRO_PRICE_LIMIT = #{model.currProPriceLimit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.origRetailPriceLimit)">
+				ORIG_RETAIL_PRICE_LIMIT = #{model.origRetailPriceLimit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.currRetailPriceLlimit)">
+				CURR_RETAIL_PRICE_LLIMIT = #{model.currRetailPriceLlimit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addDatetime)">
+				ADD_DATETIME = #{model.addDatetime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUser)">
+				ADD_USER = #{model.addUser},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.remarks)">
+				REMARKS = #{model.remarks},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.priceAdjPalnDetailId)">
+				AND t.PRICE_ADJ_PALN_DETAIL_ID = #{params.priceAdjPalnDetailId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.priceAdjPlanId)">
+				AND t.PRICE_ADJ_PLAN_ID = #{params.priceAdjPlanId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.goodsCode)">
+				AND t.GOODS_CODE = #{params.goodsCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.origProPriceLimit)">
+				AND t.ORIG_PRO_PRICE_LIMIT = #{params.origProPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.currProPriceLimit)">
+				AND t.CURR_PRO_PRICE_LIMIT = #{params.currProPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.origRetailPriceLimit)">
+				AND t.ORIG_RETAIL_PRICE_LIMIT = #{params.origRetailPriceLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.currRetailPriceLlimit)">
+				AND t.CURR_RETAIL_PRICE_LLIMIT = #{params.currRetailPriceLlimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addDatetime)">
+				AND t.ADD_DATETIME = #{params.addDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUser)">
+				AND t.ADD_USER = #{params.addUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.remarks)">
+				AND t.REMARKS = #{params.remarks}
+		    </if>
+		</where>
+	</update>
+
+	<select id="getPlanGoods" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,
+		d.procurecatalog_id,d.product_name,d.outlook,d.yimiao_Year,
+		d.unit,d.company_id_sc,d.company_name_sc,d.goods_id,d.bid_price,
+		p.EXECUTE_DATETIME,p.PRICE_ADJ_ACCORD,p.EXECUTE_CAT,p.STATUS
+		FROM yimiao_priceadjplandetail t
+		left join YIMIAO_PROCURECATALOG d
+		on t.GOODS_CODE = d.PROCURECATALOG_ID
+		left join YIMIAO_PRICEADJPLAN p
+		on t.PRICE_ADJ_PLAN_ID = p.PRICE_ADJ_PLAN_ID
+		<where>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanId)">
+				AND t.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+			</if>
+			<if test="@OGNL@isNotEmpty(status)">
+				AND p.STATUS = #{status}
+			</if>
+			<if test="@OGNL@isNotEmpty(startTime)">
+				AND p.EXECUTE_DATETIME &gt; DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+			</if>
+			<if test="@OGNL@isNotEmpty(endTime)">
+				AND p.EXECUTE_DATETIME &lt; DATE_FORMAT(#{endTime},'%Y-%m-%d %H:%i:%S')+1
+			</if>
+
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND (d.product_name like CONCAT(CONCAT('%', #{productName}), '%') or d.product_spel_name like CONCAT(CONCAT('%', #{productName}), '%') or d.product_wb_name like CONCAT(CONCAT('%', #{productName}), '%'))
+			</if>
+
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND d.goods_id = #{goodsId}
+			</if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND (d.company_name_sc like CONCAT(CONCAT('%', #{companyNameSc}), '%') or d.split_company_name like CONCAT(CONCAT('%', #{companyNameSc}), '%'))
+			</if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND d.PROCURECATALOG_ID like CONCAT(CONCAT('%', #{procurecatalogId}), '%')
+			</if>
+		</where>
+	</select>
+</mapper>

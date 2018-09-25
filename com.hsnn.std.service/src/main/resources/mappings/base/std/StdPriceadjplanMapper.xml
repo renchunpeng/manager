@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdPriceadjplanDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdPriceadjplan" id="BaseResultMap">
+        <result property="priceAdjPlanId" column="PRICE_ADJ_PLAN_ID" javaType="String"/>
+        <result property="priceAdjPlanName" column="PRICE_ADJ_PLAN_NAME" javaType="String"/>
+        <result property="priceAdjPlanCat" column="PRICE_ADJ_PLAN_CAT" javaType="String"/>
+        <result property="executeCat" column="EXECUTE_CAT" javaType="Integer"/>
+        <result property="createDatetime" column="CREATE_DATETIME" javaType="Date"/>
+        <result property="createUser" column="CREATE_USER" javaType="String"/>
+        <result property="createOrgId" column="CREATE_ORG_ID" javaType="String"/>
+        <result property="executeDatetime" column="EXECUTE_DATETIME" javaType="Date"/>
+        <result property="priceAdjAccord" column="PRICE_ADJ_ACCORD" javaType="String"/>
+        <result property="remark" column="REMARK" javaType="String"/>
+        <result property="status" column="STATUS" javaType="Integer"/>
+        <result property="updDatetime" column="UPD_DATETIME" javaType="Date"/>
+        <result property="updUser" column="UPD_USER" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.PRICE_ADJ_PLAN_ID,
+        t.PRICE_ADJ_PLAN_NAME,
+        t.PRICE_ADJ_PLAN_CAT,
+        t.EXECUTE_CAT,
+        t.CREATE_DATETIME,
+        t.CREATE_USER,
+        t.CREATE_ORG_ID,
+        t.EXECUTE_DATETIME,
+        t.PRICE_ADJ_ACCORD,
+        t.REMARK,
+        t.STATUS,
+        t.UPD_DATETIME,
+        t.UPD_USER
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_PRICEADJPLAN t
+		WHERE t.PRICE_ADJ_PLAN_ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdPriceadjplan">
+
+		<selectKey resultType="java.lang.String" keyProperty="priceAdjPlanId" order="BEFORE">
+			SELECT STDPRICEADJPLANSEQ.nextval AS PRICE_ADJ_PLAN_ID from dual
+		</selectKey>
+		INSERT INTO STD_PRICEADJPLAN(
+		        PRICE_ADJ_PLAN_ID,
+	            PRICE_ADJ_PLAN_NAME ,
+	            PRICE_ADJ_PLAN_CAT ,
+	            EXECUTE_CAT ,
+	            CREATE_DATETIME ,
+	            CREATE_USER ,
+	            CREATE_ORG_ID ,
+	            EXECUTE_DATETIME ,
+	            PRICE_ADJ_ACCORD ,
+	            REMARK ,
+	            STATUS ,
+	            UPD_DATETIME ,
+	            UPD_USER 
+		)
+		VALUES (
+		        #{priceAdjPlanId},
+	        	#{priceAdjPlanName},
+	        	#{priceAdjPlanCat},
+	        	#{executeCat},
+	        	#{createDatetime},
+	        	#{createUser},
+	        	#{createOrgId},
+	        	#{executeDatetime},
+	        	#{priceAdjAccord},
+	        	#{remark},
+	        	#{status},
+	        	#{updDatetime},
+	        	#{updUser}
+		)
+
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdPriceadjplan">
+		BEGIN
+		--更新调价计划信息
+		UPDATE STD_PRICEADJPLAN
+		<set>
+			EXECUTE_DATETIME = #{executeDatetime},
+			STATUS = #{status},
+		</set>
+		WHERE  PRICE_ADJ_PLAN_ID =  #{priceAdjPlanId};
+		--更新产品中标价
+		UPDATE STD_GOODS_RESULT c
+		SET BID_PRICE=(select b.CURR_PRO_PRICE_LIMIT from STD_PRICEADJPLAN a, STD_PRICEADJPLANDETAIL b
+			where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+			and a.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+			and b.GOODS_CODE = c.goods_id
+			and b.source_id=c.proj_code)
+		where EXISTS (select 1 from STD_PRICEADJPLAN a, STD_PRICEADJPLANDETAIL b
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+		and a.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+		and b.GOODS_CODE = c.goods_id
+		and b.source_id=c.proj_code);
+
+		/*更新商品采购限价*/
+		update DRUGPUR_PROCURECATALOG c
+		set bid_price = (
+		select b.CURR_PRO_PRICE_LIMIT from STD_PRICEADJPLAN a, STD_PRICEADJPLANDETAIL b
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+		and a.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+		and b.GOODS_CODE = c.goods_id
+		and b.source_id=c.source_id),
+		max_purchase_price =(
+		select b.CURR_PRO_PRICE_LIMIT
+		from STD_PRICEADJPLAN a, STD_PRICEADJPLANDETAIL b
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+		and a.PRICE_ADJ_PLAN_ID =  #{priceAdjPlanId}
+		and b.GOODS_CODE = c.goods_id
+		and b.source_id = c.source_id)
+		where (goods_id,source_id) in (select GOODS_CODE,source_id from STD_PRICEADJPLAN a,
+		STD_PRICEADJPLANDETAIL b
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+		and a.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+		and b.GOODS_CODE = c.goods_id
+		and b.source_id=c.source_id
+		);
+		--更新医院常用采购目录采购价
+		update DRUGPUR_HOSP_CATALOG c
+		set PURCHASE_PRICE = (
+		select b.CURR_PRO_PRICE_LIMIT from STD_PRICEADJPLAN a, STD_PRICEADJPLANDETAIL b,
+		DRUGPUR_PROCURECATALOG d
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+		and a.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+		and b.GOODS_CODE = d.goods_id
+		and b.source_id=d.source_id
+		and c.procurecatalog_id=d.procurecatalog_id)
+		where c.procurecatalog_id in (select d.procurecatalog_id from STD_PRICEADJPLAN a,
+		STD_PRICEADJPLANDETAIL b, DRUGPUR_PROCURECATALOG d
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+		and a.PRICE_ADJ_PLAN_ID =#{priceAdjPlanId}
+		and b.GOODS_CODE = d.goods_id
+		and b.source_id=d.source_id);
+		--更新县上未提交订单明细中涉及提交商品的采购价，采购金额
+		update drugpur_orderdetail_recent x
+		set (x.PURCHASE_PRICE,x.purchase_amount) =
+		(select z.curr_pro_price_limit,z.newAmount from
+		(select tb1.order_detail_id,
+		tb2.curr_pro_price_limit,tb1.purchase_count*tb2.curr_pro_price_limit newAmount from
+		(select b.order_detail_id,b.procurecatalog_id,b.PURCHASE_COUNT from drugpur_purchase_order a,drugpur_orderdetail_recent b
+		where a.ORDER_ID = b.ORDER_ID and a.ORDER_STATE = '0' ) tb1,
+		(select d.procurecatalog_id,b.CURR_PRO_PRICE_LIMIT from STD_PRICEADJPLAN a,STD_PRICEADJPLANDETAIL b,
+		DRUGPUR_PROCURECATALOG d
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID and b.GOODS_CODE = d.goods_id
+		and b.source_id=d.source_id
+		and a.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId})tb2
+		where tb1.procurecatalog_id = tb2.procurecatalog_id)z
+		where z.order_detail_id = x.order_detail_id)
+		where x.procurecatalog_id in (select d.procurecatalog_id from STD_PRICEADJPLAN a,
+		STD_PRICEADJPLANDETAIL b, DRUGPUR_PROCURECATALOG d
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+		and a.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+		and b.GOODS_CODE = d.goods_id
+		and b.source_id=d.source_id);
+		--更新基层未提交订单明细中涉及提交商品的采购价，采购金额
+		update base_order_detail x
+		set (x.bid_price,x.purchase_amount) =
+		(select z.curr_pro_price_limit,z.newAmount from
+		(select distinct tb1.procurecatalog_id,
+		tb2.curr_pro_price_limit,tb1.PURCHARSE_NUM*tb2.curr_pro_price_limit newAmount from
+		(select b.procurecatalog_id,b.PURCHARSE_NUM from base_order a,base_order_detail b
+		where a.ORDER_ID = b.ORDER_ID and a.ORDER_STATUS = '0001' ) tb1,
+		(select d.procurecatalog_id,b.CURR_PRO_PRICE_LIMIT from STD_PRICEADJPLAN a,STD_PRICEADJPLANDETAIL b,
+		DRUGPUR_PROCURECATALOG d
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID and b.GOODS_CODE = d.goods_id
+		and b.source_id=d.source_id
+		and a.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId})tb2
+		where tb1.procurecatalog_id = tb2.procurecatalog_id)z
+		where z.procurecatalog_id = x.procurecatalog_id)
+		where x.procurecatalog_id in (select d.procurecatalog_id from STD_PRICEADJPLAN a,
+		STD_PRICEADJPLANDETAIL b, DRUGPUR_PROCURECATALOG d
+		where a.PRICE_ADJ_PLAN_ID = b.PRICE_ADJ_PLAN_ID
+		and a.PRICE_ADJ_PLAN_ID =#{priceAdjPlanId}
+		and b.GOODS_CODE = d.goods_id
+		and b.source_id=d.source_id);
+		--更新县上未提交订单采购总金额
+		update drugpur_purchase_order x
+		set x.order_amount = (select z.newAmount from
+		(select b.order_id,sum(b.purchase_amount) newAmount from drugpur_purchase_order a,drugpur_orderdetail_recent b
+		where a.ORDER_ID = b.ORDER_ID
+		and a.ORDER_STATE = '0'
+		group by b.order_id)z
+		where z.order_id = x.order_id)
+		where EXISTS (select 1 from
+		(select b.order_id,sum(b.purchase_amount) newAmount from drugpur_purchase_order a,drugpur_orderdetail_recent b
+		where a.ORDER_ID = b.ORDER_ID
+		and a.ORDER_STATE = '0'
+		group by b.order_id)z
+		where z.order_id = x.order_id);
+		--更新基层未提交订单采购总金额
+		update base_order x
+		set x.order_amount = (select z.newAmount from
+		(select b.order_id,sum(b.purchase_amount) newAmount from base_order a,base_order_detail b
+		where a.ORDER_ID = b.ORDER_ID
+		and a.ORDER_STATUS = '0001'
+		group by b.order_id)z
+		where z.order_id = x.order_id)
+		where EXISTS (select 1 from
+		(select b.order_id,sum(b.purchase_amount) newAmount from base_order a,base_order_detail b
+		where a.ORDER_ID = b.ORDER_ID
+		and a.ORDER_STATUS = '0001'
+		group by b.order_id)z
+		where z.order_id = x.order_id);
+		END;
+
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.StdPriceadjplan">
+		UPDATE STD_PRICEADJPLAN  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(priceAdjPlanName)">
+				PRICE_ADJ_PLAN_NAME = #{priceAdjPlanName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(priceAdjPlanCat)">
+				PRICE_ADJ_PLAN_CAT = #{priceAdjPlanCat},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(executeCat)">
+				EXECUTE_CAT = #{executeCat},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(createDatetime)">
+				CREATE_DATETIME = #{createDatetime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(createUser)">
+				CREATE_USER = #{createUser},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(createOrgId)">
+				CREATE_ORG_ID = #{createOrgId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(executeDatetime)">
+				EXECUTE_DATETIME = #{executeDatetime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(priceAdjAccord)">
+				PRICE_ADJ_ACCORD = #{priceAdjAccord},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(remark)">
+				REMARK = #{remark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(status)">
+				STATUS = #{status},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(updDatetime)">
+				UPD_DATETIME = #{updDatetime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(updUser)">
+				UPD_USER = #{updUser},
+			</if>
+        </set>
+		WHERE  PRICE_ADJ_PLAN_ID =  #{priceAdjPlanId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM STD_PRICEADJPLAN WHERE  PRICE_ADJ_PLAN_ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_PRICEADJPLAN t
+		<where>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanId)">
+				AND t.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+			</if>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanName)">
+				AND t.PRICE_ADJ_PLAN_NAME like '%'||#{priceAdjPlanName}||'%'
+			</if>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanCat)">
+				AND t.PRICE_ADJ_PLAN_CAT = #{priceAdjPlanCat}
+			</if>
+			<if test="@OGNL@isNotEmpty(executeCat)">
+				AND t.EXECUTE_CAT = #{executeCat}
+			</if>
+			<if test="@OGNL@isNotEmpty(createStartTime)">
+				AND t.CREATE_DATETIME &gt;= to_date(#{createStartTime},'yyyy-MM-dd')
+			</if>
+			<if test="@OGNL@isNotEmpty(createEndTime)">
+				AND t.CREATE_DATETIME &lt;= to_date(#{createEndTime},'yyyy-MM-dd')+1
+			</if>
+			<if test="@OGNL@isNotEmpty(createUser)">
+				AND t.CREATE_USER = #{createUser}
+			</if>
+			<if test="@OGNL@isNotEmpty(createOrgId)">
+				AND t.CREATE_ORG_ID = #{createOrgId}
+			</if>
+			<if test="@OGNL@isNotEmpty(executeDatetime)">
+				AND t.EXECUTE_DATETIME &lt;= to_date(to_char(#{executeDatetime},'yyyy-MM-dd'),'yyyy-MM-dd')
+			</if>
+			<if test="@OGNL@isNotEmpty(executeStartTime)">
+				AND t.EXECUTE_DATETIME &gt;= to_date(#{executeStartTime},'yyyy-MM-dd')
+			</if>
+			<if test="@OGNL@isNotEmpty(executeEndTime)">
+				AND t.EXECUTE_DATETIME &lt;= to_date(#{executeEndTime},'yyyy-MM-dd')+1
+			</if>
+			<if test="@OGNL@isNotEmpty(priceAdjAccord)">
+				AND t.PRICE_ADJ_ACCORD = #{priceAdjAccord}
+			</if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+			</if>
+			<if test="@OGNL@isNotEmpty(status)">
+				AND t.STATUS = #{status}
+			</if>
+			<if test="@OGNL@isNotEmpty(updDatetime)">
+				AND t.UPD_DATETIME = #{updDatetime}
+			</if>
+			<if test="@OGNL@isNotEmpty(updUser)">
+				AND t.UPD_USER = #{updUser}
+			</if>
+		</where>
+		ORDER BY t.CREATE_DATETIME DESC
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO STD_PRICEADJPLAN (
+            PRICE_ADJ_PLAN_NAME ,
+            PRICE_ADJ_PLAN_CAT ,
+            EXECUTE_CAT ,
+            CREATE_DATETIME ,
+            CREATE_USER ,
+            CREATE_ORG_ID ,
+            EXECUTE_DATETIME ,
+            PRICE_ADJ_ACCORD ,
+            REMARK ,
+            STATUS ,
+            UPD_DATETIME ,
+            UPD_USER 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.priceAdjPlanName},
+        	#{item.priceAdjPlanCat},
+        	#{item.executeCat},
+        	#{item.createDatetime},
+        	#{item.createUser},
+        	#{item.createOrgId},
+        	#{item.executeDatetime},
+        	#{item.priceAdjAccord},
+        	#{item.remark},
+        	#{item.status},
+        	#{item.updDatetime},
+        	#{item.updUser}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM STD_PRICEADJPLAN t
+		<where>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanId)">
+				AND t.PRICE_ADJ_PLAN_ID = #{priceAdjPlanId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanName)">
+				AND t.PRICE_ADJ_PLAN_NAME = #{priceAdjPlanName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(priceAdjPlanCat)">
+				AND t.PRICE_ADJ_PLAN_CAT = #{priceAdjPlanCat}
+		    </if>
+			<if test="@OGNL@isNotEmpty(executeCat)">
+				AND t.EXECUTE_CAT = #{executeCat}
+		    </if>
+			<if test="@OGNL@isNotEmpty(createDatetime)">
+				AND t.CREATE_DATETIME = #{createDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(createUser)">
+				AND t.CREATE_USER = #{createUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(createOrgId)">
+				AND t.CREATE_ORG_ID = #{createOrgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(executeDatetime)">
+				AND t.EXECUTE_DATETIME = #{executeDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(priceAdjAccord)">
+				AND t.PRICE_ADJ_ACCORD = #{priceAdjAccord}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(status)">
+				AND t.STATUS = #{status}
+		    </if>
+			<if test="@OGNL@isNotEmpty(updDatetime)">
+				AND t.UPD_DATETIME = #{updDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(updUser)">
+				AND t.UPD_USER = #{updUser}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE STD_PRICEADJPLAN  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.priceAdjPlanName)">
+				PRICE_ADJ_PLAN_NAME = #{model.priceAdjPlanName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.priceAdjPlanCat)">
+				PRICE_ADJ_PLAN_CAT = #{model.priceAdjPlanCat},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.executeCat)">
+				EXECUTE_CAT = #{model.executeCat},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.createDatetime)">
+				CREATE_DATETIME = #{model.createDatetime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.createUser)">
+				CREATE_USER = #{model.createUser},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.createOrgId)">
+				CREATE_ORG_ID = #{model.createOrgId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.executeDatetime)">
+				EXECUTE_DATETIME = #{model.executeDatetime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.priceAdjAccord)">
+				PRICE_ADJ_ACCORD = #{model.priceAdjAccord},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.remark)">
+				REMARK = #{model.remark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.status)">
+				STATUS = #{model.status},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.updDatetime)">
+				UPD_DATETIME = #{model.updDatetime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.updUser)">
+				UPD_USER = #{model.updUser},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.priceAdjPlanId)">
+				AND t.PRICE_ADJ_PLAN_ID = #{params.priceAdjPlanId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.priceAdjPlanName)">
+				AND t.PRICE_ADJ_PLAN_NAME = #{params.priceAdjPlanName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.priceAdjPlanCat)">
+				AND t.PRICE_ADJ_PLAN_CAT = #{params.priceAdjPlanCat}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.executeCat)">
+				AND t.EXECUTE_CAT = #{params.executeCat}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.createDatetime)">
+				AND t.CREATE_DATETIME = #{params.createDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.createUser)">
+				AND t.CREATE_USER = #{params.createUser}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.createOrgId)">
+				AND t.CREATE_ORG_ID = #{params.createOrgId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.executeDatetime)">
+				AND t.EXECUTE_DATETIME = #{params.executeDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.priceAdjAccord)">
+				AND t.PRICE_ADJ_ACCORD = #{params.priceAdjAccord}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.remark)">
+				AND t.REMARK = #{params.remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.status)">
+				AND t.STATUS = #{params.status}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.updDatetime)">
+				AND t.UPD_DATETIME = #{params.updDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.updUser)">
+				AND t.UPD_USER = #{params.updUser}
+		    </if>
+		</where>
+	</update>
+
+	<select id="pricePlanStd"  statementType="CALLABLE">
+		call StdPriceadjplan_zidong()
+	</select>
+
+	<update id="updateStdPriceadjplan" parameterType="com.hsnn.medstgmini.base.std.model.StdPriceadjplan">
+		UPDATE STD_PRICEADJPLAN t
+		<set>
+			t.EXECUTE_DATETIME = #{executeDatetime},
+			t.STATUS = #{status},
+			t.UPD_USER=#{updUser},
+		</set>
+		WHERE  t.PRICE_ADJ_PLAN_ID =  #{priceAdjPlanId}
+	</update>
+	<select id="stdPriceadjplanShoudong" parameterType="java.lang.String"   statementType="CALLABLE">
+		{call StdPriceadjplan_shoudong(#{priceAdjPlanId,mode=IN,jdbcType=VARCHAR})}
+	</select>
+
+</mapper>

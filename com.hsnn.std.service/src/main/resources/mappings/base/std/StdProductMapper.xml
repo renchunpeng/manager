@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdProductDao">
+    <resultMap type="com.hsnn.medstgmini.base.std.model.StdProduct" id="BaseResultMap">
+        <result property="productId" column="product_id" javaType="Integer"/>
+        <result property="productName" column="product_name" javaType="String"/>
+        <result property="productSpelName" column="product_spel_name" javaType="String"/>
+        <result property="productWbName" column="product_wb_name" javaType="String"/>
+        <result property="medicinemodel" column="medicinemodel" javaType="String"/>
+        <result property="medicinemodelSpel" column="medicinemodel_spel" javaType="String"/>
+        <result property="outlook" column="outlook" javaType="String"/>
+        <result property="factor" column="factor" javaType="Integer"/>
+        <result property="status" column="status" javaType="Integer"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="auditRemark" column="audit_remark" javaType="String"/>
+        <result property="levelDay" column="level_day" javaType="String"/>
+        <result property="remark" column="remark" javaType="String"/>
+        <result property="auditUserName" column="audit_user_name" javaType="String"/>
+        <result property="auditTime" column="audit_time" javaType="Date"/>
+        <result property="component" column="component" javaType="String"/>
+        <result property="drugClassification" column="drug_classification" javaType="String"/>
+        <result property="drugCategory" column="drug_category" javaType="String"/>
+        <result property="nproductId" column="nproduct_Id" javaType="String"/>
+    </resultMap>
+
+    <sql id="full-columns">
+        t.product_id,
+        t.product_name,
+        t.product_spel_name,
+        t.product_wb_name,
+        t.medicinemodel,
+        t.medicinemodel_spel,
+        t.outlook,
+        t.factor,
+        t.status,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.audit_remark,
+        t.level_day,
+        t.remark,
+        t.audit_user_name,
+        t.audit_time ,
+        t.component,
+        t.drug_classification,
+        t.drug_category,
+        t.nproduct_Id
+	</sql>
+
+
+    <select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_product where product_id =  #{id}
+	</select>
+
+    <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_product where product_id =  #{id}
+	</select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+		SELECT * from std_product 
+	</select>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="productId"
+            parameterType="com.hsnn.medstgmini.base.std.model.StdProduct">
+
+        <!--<selectKey resultType="java.lang.Integer" keyProperty="productId" order="BEFORE">-->
+            <!--SELECT STDPRODUCTSEQ.nextval from dual-->
+        <!--</selectKey>-->
+
+        INSERT INTO std_product(
+        <!--product_id,-->
+        product_name ,
+        product_spel_name ,
+        product_wb_name ,
+        medicinemodel ,
+        medicinemodel_spel,
+        outlook ,
+        factor ,
+        status ,
+        is_using ,
+        add_user_id ,
+        add_user_name ,
+        add_time,
+        level_day,
+        remark,
+        audit_user_name,
+        audit_time,
+        component,
+        drug_classification,
+        drug_category,
+        nproduct_Id
+        )
+        VALUES (
+       <!-- #{productId},-->
+        #{productName},
+        pinyin(#{productName}),
+        wubima(#{productName}),
+        #{medicinemodel},
+        pinyin(#{medicinemodel}),
+        #{outlook},
+        #{factor},
+        #{status},
+        #{isUsing},
+        #{addUserId},
+        #{addUserName},
+        SYSDATE,
+        #{levelDay},
+        #{remark},
+        #{auditUserName},
+        #{auditTime},
+        #{component},
+        #{drugClassification},
+        #{drugCategory},
+        (select a.ndict_id
+        from std_dict a
+        where a.dictionary_value =#{productName} and a.type='通用名')||
+        (select a.ndict_id
+        from std_dict a
+        where a.dictionary_value = #{medicinemodel} and a.type='剂型')||
+        (select a.ndict_id
+        from std_dict a
+        where a.dictionary_value = #{outlook}and a.type='规格')
+        )
+
+    </insert>
+    <insert id="saveStdProduct" useGeneratedKeys="true" keyProperty="productId" parameterType="com.hsnn.medstgmini.base.std.model.StdProduct">
+	 
+		INSERT INTO std_product(
+				<!--product_id,-->
+	            product_name ,
+	            product_spel_name ,
+	            product_wb_name ,
+	            medicinemodel ,
+	            medicinemodel_spel,
+	            outlook ,
+	            factor ,
+	            status ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time,
+	            level_day,
+        		remark,
+        		audit_user_name,
+        		audit_time,
+        		component,
+		        drug_classification,
+		        drug_category
+		) 
+		VALUES (
+		        #{productId},
+		   	    #{productName},
+	        	pinyin(#{productName}),
+	        	wubima(#{productName}),
+	        	#{medicinemodel},
+	        	pinyin(#{medicinemodel}),
+	        	#{outlook},
+	        	#{factor},
+	        	#{status},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{levelDay},
+	        	#{remark},
+	        	#{auditUserName},
+	        	#{auditTime},
+	        	#{component},
+		        #{drugClassification},
+		        #{drugCategory}
+		)
+	
+	</insert>
+
+    <update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdProduct">
+        update std_product
+        <set>
+            <if test="@OGNL@isNotEmpty(productName)">
+                product_name = #{productName,jdbcType=VARCHAR},
+                product_spel_name = pinyin(#{productName,jdbcType=VARCHAR}),
+                product_wb_name = wubima(#{productName,jdbcType=VARCHAR}),
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodel)">
+                medicinemodel = #{medicinemodel,jdbcType=VARCHAR},
+                medicinemodel_spel = pinyin(#{medicinemodel}),
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                outlook = #{outlook,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(factor)">
+                factor = #{factor,jdbcType=SMALLINT},
+            </if>
+            <if test="@OGNL@isNotEmpty(status)">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="@OGNL@isNotEmpty(isUsing)">
+                is_using = #{isUsing,jdbcType=TINYINT},
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserId)">
+                add_user_id = #{addUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserName)">
+                add_user_name = #{addUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(addTime)">
+                add_time = SYSDATE,
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+                last_update_user_id = #{lastUpdateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+                last_update_user_name = #{lastUpdateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+                last_update_time = SYSDATE,
+            </if>
+            <if test="@OGNL@isNotEmpty(auditRemark)">
+                audit_remark = #{auditRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(auditUserName)">
+                audit_user_name = #{auditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(levelDay)">
+                level_day = #{levelDay,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(remark)">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(auditTime)">
+                audit_time = SYSDATE,
+            </if>
+            <if test="@OGNL@isNotEmpty(component)">
+                component=#{component,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(drugClassification)">
+                drug_classification=#{drugClassification,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(drugCategory)">
+                drug_category=#{drugCategory,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where product_id = #{productId,jdbcType=INTEGER}
+    </update>
+    <delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_product WHERE  product_id =  #{value}
+	</delete>
+
+    <select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="full-columns"/>
+        FROM std_product t
+        <where>
+            <if test="@OGNL@isNotEmpty(productId)">
+                AND t.product_id = #{productId}
+            </if>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND (t.product_name like CONCAT(CONCAT('%',#{productName}), '%') or t.product_spel_name like CONCAT(CONCAT('%',#{productName}), '%')
+                or t.product_wb_name like CONCAT(CONCAT('%',#{productName}), '%'))
+            </if>
+            <if test="@OGNL@isNotEmpty(productSpelName)">
+                AND t.product_spel_name = #{productSpelName}
+            </if>
+            <if test="@OGNL@isNotEmpty(productWbName)">
+                AND t.product_wb_name = #{productWbName}
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodel)">
+                AND t.medicinemodel = #{medicinemodel}
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodelSpel)">
+                AND t.medicinemodel_spel = #{medicinemodelSpel}
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodelOrSpelLike)">
+                AND (t.medicinemodel like CONCAT(CONCAT('%',#{medicinemodelOrSpelLike}), '%')
+                OR t.medicinemodel_spel like CONCAT(CONCAT('%',#{medicinemodelOrSpelLike}), '%'))
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                AND t.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(factor)">
+                AND t.factor = #{factor}
+            </if>
+            <if test="@OGNL@isNotEmpty(status)">
+                AND t.status in
+                <foreach collection="status" item="item" index="index" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="@OGNL@isNotEmpty(statues)">
+                AND t.status = #{statues}
+            </if>
+            <if test="@OGNL@isNotEmpty(isUsing)">
+                AND t.is_using = #{isUsing}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserId)">
+                AND t.add_user_id = #{addUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserName)">
+                AND t.add_user_name = #{addUserName}
+            </if>
+            <if test="@OGNL@isNotEmpty(addTime)">
+                AND t.add_time = #{addTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+                AND t.last_update_user_id = #{lastUpdateUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+                AND t.last_update_user_name = #{lastUpdateUserName}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+                AND t.last_update_time = #{lastUpdateTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(component)">
+                AND t.component like CONCAT(CONCAT('%',#{component}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(drugClassification)">
+                AND t.drug_classification like CONCAT(CONCAT('%',#{drugClassification}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(drugCategory)">
+                AND t.drug_category like  CONCAT(CONCAT('%',#{drugCategory}), '%')
+            </if>
+        </where>
+        order by t.product_id desc
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO std_product (
+        product_name ,
+        product_spel_name ,
+        product_wb_name ,
+        medicinemodel ,
+        medicinemodel_spel,
+        outlook ,
+        factor ,
+        status ,
+        is_using ,
+        add_user_id ,
+        add_user_name ,
+        add_time ,
+        last_update_user_id ,
+        last_update_user_name ,
+        last_update_time ,
+        level_day,
+        remark,
+        audit_user_name,
+        component,
+        drug_classification,
+        drug_category
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.productName},
+            pinyin(#{item.productName}),
+            wubima(#{item.productName}),
+            #{item.medicinemodel},
+            pinyin(#{item.medicinemodel}),
+            #{item.outlook},
+            #{item.factor},
+            #{item.status},
+            #{item.isUsing},
+            #{item.addUserId},
+            #{item.addUserName},
+            #{item.addTime},
+            #{item.lastUpdateUserId},
+            #{item.lastUpdateUserName},
+            SYSDATE,
+            #{levelDay},
+            #{remark},
+            #{auditUserName},
+            #{component},
+            #{drugClassification},
+            #{drugCategory}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdate" parameterType="java.util.List">
+        update std_product
+        <set>
+            <if test="@OGNL@isNotEmpty(sp.status)">
+                status = #{sp.status,jdbcType=TINYINT},
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.isUsing)">
+                is_using = #{sp.isUsing,jdbcType=TINYINT},
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.lastUpdateUserId)">
+                last_update_user_id = #{sp.lastUpdateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.lastUpdateUserName)">
+                last_update_user_name = #{sp.lastUpdateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.lastUpdateTime)">
+                last_update_time = SYSDATE,
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.auditTime)">
+                audit_time = SYSDATE,
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.auditUserName)">
+                audit_user_name = #{sp.auditUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.auditRemark)">
+                audit_remark = #{sp.auditRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.remark)">
+                remark = CONCAT(remark,#{sp.remark}),
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.component)">
+                component=#{sp.component,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.drugClassification)">
+                drug_classification=#{sp.drugClassification,jdbcType=VARCHAR},
+            </if>
+            <if test="@OGNL@isNotEmpty(sp.drugCategory)">
+                drug_category=#{sp.drugCategory,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where product_id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <select id="checkRepeat" parameterType="com.hsnn.medstgmini.base.std.model.StdProduct"
+            resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM std_product t
+        <where>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND t.product_name =#{productName}
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodel)">
+                AND t.medicinemodel = #{medicinemodel}
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                AND t.outlook = #{outlook}
+            </if>
+            <if test="@OGNL@isNotEmpty(component)">
+                AND t.component=#{component}
+            </if>
+            <if test="@OGNL@isNotEmpty(drugClassification)">
+                AND t.drug_classification=#{drugClassification}
+            </if>
+            <if test="@OGNL@isNotEmpty(drugCategory)">
+                AND t.drug_category=#{drugCategory}
+            </if>
+        </where>
+    </select>
+    <!-- 新增功能实现时获取自增的postId -->
+    <select id="returnLastId" resultType="java.lang.Integer">
+        <!-- select STDPRODUCTSEQ.currval  from dual -->
+        SELECT STDPRODUCTSEQ.nextval from dual
+    </select>
+
+    <select id="getStdProductIds" resultMap="BaseResultMap">
+        SELECT * from std_product where product_id in
+        <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="checkRepeatStdCataProdRelLinProd" parameterType="com.hsnn.medstgmini.base.std.model.StdProduct"
+            resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM std_product t
+        <where>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND t.product_name = #{productName}
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodel)">
+                AND t.medicinemodel = #{medicinemodel}
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                AND t.outlook = #{outlook}
+            </if>
+            <if test="@OGNL@isNotEmpty(productId)">
+                AND t.product_id not in (#{productId})
+            </if>
+        </where>
+    </select>
+
+    <insert id="addStdProductProdName" useGeneratedKeys="true" keyProperty="productId"
+            parameterType="com.hsnn.medstgmini.base.std.model.StdProduct">
+        <!--<selectKey resultType="Integer" keyProperty="productId" order="BEFORE">-->
+            <!--select STDPROSEQ.nextval as product_id from dual-->
+        <!--</selectKey>-->
+        INSERT INTO std_product(
+        <!--product_id,-->
+        product_name ,
+        product_spel_name,
+        product_wb_name,
+        medicinemodel ,
+        medicinemodel_spel,
+        outlook ,
+        product_attr,
+        <!-- medicinemodel_remark,
+        essential_big_num,
+        essential_small_num,
+        catalog,
+        catalog_type,
+        catalog_remark,
+        medical_one,
+        medical_two,
+        medical_three,
+        med_insurance_num,
+        med_insurance_type,
+        med_insurance_remark,
+        catalog_self,
+        catalog_self_remark, -->
+        status ,
+        audit_user_name,
+        audit_remark ,
+        audit_time,
+        add_user_id ,
+        add_user_name ,
+        add_time,
+        last_update_user_id,
+        last_update_user_name,
+        last_update_time,
+        remark,
+        is_using
+        )
+        VALUES (
+        <!--#{productId},-->
+        #{productName},
+        #{productSpelName},
+        #{productWbName},
+        #{medicinemodel},
+        #{medicinemodelSpel},
+        #{outlook},
+        #{productAttr},
+        <!-- #{medicinemodelRemark},
+        #{essentialBigNum},
+        #{essentialSmallNum},
+        #{catalog},
+        #{catalogType},
+        #{catalogRemark},
+        #{medicalOne},
+        #{medicalTwo},
+        #{medicalThree},
+        #{medInsuranceNum},
+        #{medInsuranceType},
+        #{medInsuranceRemark},
+        #{catalogSelf},
+        #{catalogSelfRemark}, -->
+        #{status},
+        #{auditUserName},
+        #{auditRemark},
+        SYSDATE,
+        #{addUserId},
+        #{addUserName},
+        SYSDATE,
+        #{lastUpdateUserId},
+        #{lastUpdateUserName},
+        SYSDATE,
+        #{remark},
+        #{isUsing}
+        )
+    </insert>
+
+    <select id="getByNameo" parameterType="com.hsnn.medstgmini.base.std.model.StdProduct" resultMap="BaseResultMap">
+        SELECT
+        <include refid="full-columns"/>
+        FROM std_product t
+        <where>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND t.product_name = #{productName}
+            </if>
+            <if test="@OGNL@isNotEmpty(medicinemodel)">
+                AND t.medicinemodel = #{medicinemodel}
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                AND t.outlook = #{outlook}
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="saveStdPro" useGeneratedKeys="true" keyProperty="productId" parameterType="com.hsnn.medstgmini.base.std.model.StdProduct">
+        INSERT INTO std_product(
+        <!--product_id,-->
+        product_name
+        )
+        VALUES (
+        <!-- STDPRODUCTSEQ.NEXTVAL,-->
+        #{productName}
+        )
+    </insert>
+
+    <select id="getListByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT product_name from std_product where product_name=#{name}
+    </select>
+
+    <select id="getDataList" parameterType="map" resultMap="BaseResultMap">
+        select product_id,product_name from std_product
+        <where>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND product_name like CONCAT(CONCAT('%',#{productName}), '%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

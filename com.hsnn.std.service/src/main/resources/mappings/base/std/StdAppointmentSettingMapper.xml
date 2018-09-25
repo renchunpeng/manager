@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdAppointmentSettingDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdAppointmentSetting" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="appointmentType" column="appointment_type" javaType="String"/>
+        <result property="limitNumberBefore10Morning" column="limit_number_before10__morning" javaType="Integer"/>
+        <result property="limitNumberAfter10Morning" column="limit_number_after10__morning" javaType="Integer"/>
+        <result property="limitNumberBefore15Afternoon" column="limit_number_before15_pm" javaType="Integer"/>
+        <result property="limitNumberAfter15Afternoon" column="limit_number_after15_pm" javaType="Integer"/>
+        <result property="beginTime" column="begin_time" />
+        <result property="endTime" column="end_time"/>
+        <result property="isUsing" column="is_using" javaType="Boolean"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.appointment_type,
+        t.limit_number_before10__morning,
+        t.limit_number_after10__morning,
+        t.limit_number_before15_pm,
+        t.limit_number_after15_pm,
+        t.begin_time,
+        t.end_time,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_appointment_setting where id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_appointment_setting where id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from std_appointment_setting 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdAppointmentSetting">
+		INSERT INTO std_appointment_setting(
+	            appointment_type ,
+	            limit_number_before10__morning ,
+	            limit_number_after10__morning ,
+	            limit_number_before15_pm ,
+	            limit_number_after15_pm ,
+	            begin_time ,
+	            end_time ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time 
+	    ) 
+		VALUES (
+	        	#{appointmentType},
+	        	#{limitNumberBefore10Morning},
+	        	#{limitNumberAfter10Morning},
+	        	#{limitNumberBefore15Afternoon},
+	        	#{limitNumberAfter15Afternoon},
+	        	#{beginTime},
+	        	#{endTime},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.std.model.StdAppointmentSetting">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+			SELECT STDAPPOINTMENTSETTINGSEQ.nextval from dual
+        </selectKey>
+		INSERT INTO std_appointment_setting(
+				id,
+	            appointment_type ,
+	            limit_number_before10__morning ,
+	            limit_number_after10__morning ,
+	            limit_number_before15_pm ,
+	            limit_number_after15_pm ,
+	            begin_time ,
+	            end_time ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time 
+		) 
+		VALUES (
+				#{id},
+	        	#{appointmentType},
+	        	#{limitNumberBefore10Morning},
+	        	#{limitNumberAfter10Morning},
+	        	#{limitNumberBefore15Afternoon},
+	        	#{limitNumberAfter15Afternoon},
+	        	#{beginTime},
+	        	#{endTime},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdAppointmentSetting">
+		UPDATE std_appointment_setting  
+		<set>
+			<if test="@OGNL@isNotEmpty(appointmentType)">
+        	appointment_type = #{appointmentType},
+	        </if>
+	        <if test="@OGNL@isNotEmpty(limitNumberBefore10Morning)">
+        	limit_number_before10__morning = #{limitNumberBefore10Morning},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(limitNumberAfter10Morning)">
+        	limit_number_after10__morning = #{limitNumberAfter10Morning},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(limitNumberBefore15Afternoon)">
+        	limit_number_before15_pm = #{limitNumberBefore15Afternoon},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(limitNumberAfter15Afternoon)">
+        	limit_number_after15_pm = #{limitNumberAfter15Afternoon},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(beginTime)">
+        	begin_time = #{beginTime},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(endTime)">
+        	end_time = #{endTime},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(isUsing)">
+        	is_using = #{isUsing},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+        	last_update_user_id = #{lastUpdateUserId},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+        	last_update_user_name = #{lastUpdateUserName},
+        	</if>
+        	last_update_time = SYSDATE,
+        </set>
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateByIds">
+		UPDATE std_appointment_setting  
+		<set>
+			<if test="@OGNL@isNotEmpty(model.isUsing)">
+        		is_using = #{model.isUsing},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+        		last_update_user_id = #{model.lastUpdateUserId},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+        		last_update_user_name = #{model.lastUpdateUserName},
+        	</if>
+        		last_update_time = SYSDATE,
+        </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(ids)">
+				id in
+            <foreach collection="ids" item="item" separator="," open="(" close=")">
+            	 #{item}
+            </foreach>
+			</if>
+			<if test="@OGNL@isEmpty(ids)">
+				AND 1=2
+			</if>
+		</where>
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_appointment_setting WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_appointment_setting t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentTypeLike)">
+	            AND t.appointment_type like CONCAT(CONCAT('%',#{appointmentType}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(appointmentType)">
+	            AND t.appointment_type = #{appointmentType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(limitNumberBefore10Morning)">
+	            AND t.limit_number_before10__morning = #{limitNumberBefore10Morning}
+	        </if>
+			<if test="@OGNL@isNotEmpty(limitNumberAfter10Morning)">
+	            AND t.limit_number_after10__morning = #{limitNumberAfter10Morning}
+	        </if>
+			<if test="@OGNL@isNotEmpty(limitNumberBefore15Afternoon)">
+	            AND t.limit_number_before15_pm = #{limitNumberBefore15Afternoon}
+	        </if>
+			<if test="@OGNL@isNotEmpty(limitNumberAfter15Afternoon)">
+	            AND t.limit_number_after15_pm = #{limitNumberAfter15Afternoon}
+	        </if>
+			<if test="@OGNL@isNotEmpty(beginTime)">
+	            AND t.begin_time = #{beginTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(endTime)">
+	            AND t.end_time = #{endTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_appointment_setting (
+            appointment_type ,
+            limit_number_before10__morning ,
+            limit_number_after10__morning ,
+            limit_number_before15_pm ,
+            limit_number_after15_pm ,
+            begin_time ,
+            end_time ,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.appointmentType},
+        	#{item.limitNumberBefore10Morning},
+        	#{item.limitNumberAfter10Morning},
+        	#{item.limitNumberBefore15Afternoon},
+        	#{item.limitNumberAfter15Afternoon},
+        	#{item.beginTime},
+        	#{item.endTime},
+        	#{item.isUsing},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	SYSDATE
+        )
+        </foreach>
+	</insert>
+</mapper>

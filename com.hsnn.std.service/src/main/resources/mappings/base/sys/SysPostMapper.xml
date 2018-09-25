@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysPostDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysPost" id="BaseResultMap">
+        <result property="postId" column="post_id" javaType="Integer"/>
+        <result property="postName" column="post_name" javaType="String"/>
+        <result property="departmentId" column="department_id" javaType="Integer"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        
+        <result property="areaName" column="area_name" javaType="String"/>
+        <result property="orgName" column="org_name" javaType="String"/>
+        <result property="groupName" column="group_name" javaType="String"/>
+        <result property="departmentType" column="department_type" javaType="Integer"/>
+        
+         <result property="userId" column="user_id" javaType="String"/> 
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+        <result property="phone" column="phone" javaType="String"/>
+                
+    </resultMap>
+    
+    <sql id="full-columns" >
+        t.post_id,
+        t.post_name,
+        t.department_id,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+    </sql>
+
+    
+    <select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * from sys_post where post_id =  #{value}
+    </select>
+    
+    <select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT * from sys_post where post_id =  #{value,jdbcType=NUMERIC}
+    </select>
+    
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT * from sys_post 
+    </select>
+
+    <insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysPost">
+        INSERT INTO sys_post(
+                post_name ,
+                department_id ,
+                is_using ,
+                add_user_id ,
+                add_user_name ,
+                add_time ,
+                last_update_user_id ,
+                last_update_user_name ,
+                last_update_time 
+        ) 
+        VALUES (
+                #{postName},
+                #{departmentId},
+                #{isUsing},
+                #{addUserId},
+                #{addUserName},
+                #{addTime},
+                #{lastUpdateUserId},
+                #{lastUpdateUserName},
+                #{lastUpdateTime}
+        )
+         <selectKey resultType="java.lang.Integer" keyProperty="postId">
+			SELECT LAST_INSERT_ID() AS post_id
+    	</selectKey>
+    </insert>
+    
+    
+    <insert id="save" useGeneratedKeys="true" keyProperty="postId" parameterType="com.hsnn.medstgmini.base.sys.model.SysPost">
+		<!--<selectKey resultType="java.lang.Integer" keyProperty="postId" order="BEFORE">-->
+			<!--SELECT SYSPOSTSEQ.nextval from dual-->
+        <!--</selectKey>-->
+        INSERT INTO sys_post(
+               <!-- post_id ,-->
+                post_name ,
+                department_id ,
+                is_using ,
+                add_user_id ,
+                add_user_name ,
+                add_time ,
+                last_update_user_id ,
+                last_update_user_name ,
+                last_update_time 
+        ) 
+        VALUES (
+               <!-- #{postId}, -->
+                #{postName},
+                #{departmentId},
+                #{isUsing},
+                #{addUserId},
+                #{addUserName},
+                #{addTime},
+                #{lastUpdateUserId},
+                #{lastUpdateUserName},
+                #{lastUpdateTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysPost">
+        UPDATE sys_post  
+        <set>
+                
+                post_name = #{postName},
+                department_id = #{departmentId},
+                is_using = #{isUsing},
+                add_user_id = #{addUserId},
+                add_user_name = #{addUserName},
+                add_time = #{addTime},
+                last_update_user_id = #{lastUpdateUserId},
+                last_update_user_name = #{lastUpdateUserName},
+                last_update_time = #{lastUpdateTime},
+        </set>
+        WHERE  post_id =  #{postId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM sys_post WHERE  post_id =  #{value}
+    </delete>
+
+    <select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+        SELECT <include refid="full-columns" />
+        FROM sys_post t
+        <where>
+            <if test="postId != null and postId !='' ">
+                AND t.post_id = #{postId}
+            </if>
+            <if test="postName != null and postName != '' ">
+                AND t.post_name = #{postName}
+            </if>
+            <if test="departmentId != null and departmentId != '' ">
+                AND t.department_id = #{departmentId}
+            </if>
+            <if test="isUsing != null and isUsing != '' ">
+                AND t.is_using = #{isUsing}
+            </if>
+            <if test="addUserId != null and addUserId != '' ">
+                AND t.add_user_id = #{addUserId}
+            </if>
+            <if test="addUserName != null and addUserName != '' ">
+                AND t.add_user_name = #{addUserName}
+            </if>
+            <if test="addTime != null and addTime != '' ">
+                AND t.add_time = #{addTime}
+            </if>
+            <if test="lastUpdateUserId != null and lastUpdateUserId != '' ">
+                AND t.last_update_user_id = #{lastUpdateUserId}
+            </if>
+            <if test="lastUpdateUserName != null and lastUpdateUserName != '' ">
+                AND t.last_update_user_name = #{lastUpdateUserName}
+            </if>
+            <if test="lastUpdateTime != null and lastUpdateTime != '' ">
+                AND t.last_update_time = #{lastUpdateTime}
+            </if>
+        </where>
+        <if test="orderColumn != null and orderColumn != '' ">
+        ORDER BY t.${orderColumn} <if test="orderDirection != null and orderDirection != '' ">${orderDirection}</if>
+        </if>
+    </select>
+    
+    <select id="getReviewPostName" parameterType="map" resultMap="BaseResultMap">
+        SELECT <include refid="full-columns" />
+        FROM sys_post t
+        <where>
+            <if test="postId != null and postId !='' ">
+                AND t.post_id = #{postId}
+            </if>
+            <if test="postName != null and postName != '' ">
+                AND t.post_name = #{postName}
+            </if>
+            <if test="departmentId != null and departmentId != '' ">
+                AND t.department_id = #{departmentId}
+            </if>
+            <if test="isUsing != null and isUsing != '' ">
+                AND t.is_using = #{isUsing}
+            </if>
+        </where>
+    </select>
+    
+    <insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_post (
+        	post_id,
+            post_name ,
+            department_id ,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        )  select SYSPOSTSEQ.nextval,p.* from(
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select 
+            #{item.postName},
+            #{item.departmentId},
+            #{item.isUsing},
+            #{item.addUserId},
+            #{item.addUserName},
+            now(),
+            #{item.lastUpdateUserId},
+            #{item.lastUpdateUserName},
+            #{item.lastUpdateTime}
+        from dual
+        </foreach> ) p
+    </insert>
+    
+    <!-- 编辑功能实现 -->
+    <update id="updateSysPost" parameterType="com.hsnn.medstgmini.base.sys.model.SysPost">
+        UPDATE sys_post  
+        <set>
+            <if test="postName != null and postName != '' ">
+                post_name = #{postName},
+            </if>
+            <if test="departmentId != null and departmentId != '' ">
+                department_id = #{departmentId},
+            </if>
+            <if test="isUsing != null and isUsing != '' ">
+                is_using = #{isUsing},
+            </if>
+            <if test="addUserId != null and addUserId != '' ">
+                add_user_id = #{addUserId},
+            </if>
+            <if test="addUserName != null and addUserName != '' ">
+                add_user_name = #{addUserName},
+            </if>
+            <if test="addTime != null and addTime != '' ">
+                add_time = #{addTime},
+            </if>
+            <if test="lastUpdateUserId != null and lastUpdateUserId != '' ">
+                last_update_user_id = #{lastUpdateUserId},
+            </if>
+            <if test="lastUpdateUserName != null and lastUpdateUserName != '' ">
+                last_update_user_name = #{lastUpdateUserName},
+            </if>
+            <if test="lastUpdateTime != null and lastUpdateTime != '' ">
+                last_update_time = #{lastUpdateTime}
+            </if>
+        </set>
+        WHERE  post_id =  #{postId}
+    </update>
+    
+     <!-- 新增功能实现 -->
+    <insert id="saveSysPost" useGeneratedKeys="true" keyProperty="postId" parameterType="com.hsnn.medstgmini.base.sys.model.SysPost">
+        <!--<selectKey resultType="java.lang.Integer" keyProperty="postId" order="BEFORE">-->
+			<!--SELECT SYSPOSTSEQ.nextval from dual-->
+        <!--</selectKey>-->
+        INSERT INTO sys_post(
+              	<!-- post_Id,-->
+                post_name ,
+                department_id ,
+                is_using ,
+                add_user_id ,
+                add_user_name ,
+                add_time ,
+                last_update_user_id ,
+                last_update_user_name ,
+                last_update_time 
+        ) 
+        VALUES (
+               <!-- #{postId},-->
+                #{postName},
+                #{departmentId},
+                #{isUsing},
+                #{addUserId},
+                #{addUserName},
+                #{addTime},
+                #{lastUpdateUserId},
+                #{lastUpdateUserName},
+                #{lastUpdateTime}
+        )
+    </insert>
+    <!-- 新增功能实现时获取自增的postId 
+    <select id="returnLastId" resultType="int">
+            select LAST_INSERT_ID()
+    </select>-->
+    
+    <!-- 岗位列表 -->
+    <select id="queryGangWei" parameterType="map" resultMap="BaseResultMap">
+        SELECT a.post_id, a.post_name, a.department_id, a.is_using, b.area_name, b.org_name, b.group_name
+        FROM sys_post a
+        LEFT JOIN sys_department b on a.department_id = b.department_id
+        <where>
+            <if test="postId != null and postId !='' ">
+                AND a.post_id = #{postId}
+            </if>
+            <if test="postName != null and postName != '' ">
+                AND a.post_name LIKE CONCAT(CONCAT('%', #{postName}), '%')
+            </if>
+            <if test="departmentId != null and departmentId != '' ">
+                AND a.department_id = #{departmentId}
+            </if>
+            <if test="isUsing != null and isUsing != '' ">
+                AND a.is_using = #{isUsing}
+            </if>
+            <if test="areaName != null and areaName != '' ">
+                AND b.area_name = #{areaName}
+            </if>
+            <if test="orgName != null and orgName != '' ">
+                AND b.org_name LIKE CONCAT(CONCAT('%', #{orgName}), '%')
+            </if>
+            <if test="groupName != null and groupName != '' ">
+                AND b.group_name LIKE CONCAT(CONCAT('%', #{groupName}), '%')
+            </if>
+            
+        </where>
+        <if test="orderColumn != null and orderColumn != '' ">
+        ORDER BY t.${orderColumn} <if test="orderDirection != null and orderDirection != '' ">${orderDirection}</if>
+        </if>
+    </select>
+    
+    
+    <!-- 岗位启用 -->
+    <select id="queryGangWeiStart" parameterType="map" resultMap="BaseResultMap">
+        SELECT a.post_id, a.post_name, a.department_id, a.is_using, b.area_name, b.org_name, b.group_name
+        FROM sys_post a
+        LEFT JOIN sys_department b on a.department_id = b.department_id
+        <where>
+            <if test="postId != null and postId !='' ">
+                AND a.post_id = #{postId}
+            </if>
+            <if test="postName != null and postName != '' ">
+                AND a.post_name LIKE CONCAT(CONCAT('%', #{postName}), '%')
+            </if>
+            <if test="departmentId != null and departmentId != '' ">
+                AND a.department_id = #{departmentId}
+            </if>
+            <if test="isUsing != null and isUsing != '' ">
+                AND a.is_using = #{isUsing}
+            </if>
+            <if test="areaName != null and areaName != '' ">
+                AND b.area_name = #{areaName}
+            </if>
+            <if test="orgName != null and orgName != '' ">
+                AND b.org_name = #{orgName}
+            </if>
+            <if test="groupName != null and groupName != '' ">
+                AND b.group_name = #{groupName}
+            </if>
+            
+        </where>
+        <if test="orderColumn != null and orderColumn != '' ">
+        ORDER BY t.${orderColumn} <if test="orderDirection != null and orderDirection != '' ">${orderDirection}</if>
+        </if>
+    </select>
+    
+    
+    <!-- 岗位停用 -->
+    <select id="queryGangWeiStop" parameterType="map" resultMap="BaseResultMap">
+        SELECT a.post_id, a.post_name, a.department_id, a.is_using, b.area_name, b.org_name, b.group_name
+        FROM sys_post a
+        LEFT JOIN sys_department b on a.department_id = b.department_id
+        <where>
+            <if test="postId != null and postId !='' ">
+                AND a.post_id = #{postId}
+            </if>
+            <if test="postName != null and postName != '' ">
+                AND a.post_name LIKE CONCAT(CONCAT('%', #{postName}), '%')
+            </if>
+            <if test="departmentId != null and departmentId != '' ">
+                AND a.department_id = #{departmentId}
+            </if>
+            <if test="isUsing != null and isUsing != '' ">
+                AND a.is_using = #{isUsing}
+            </if>
+            <if test="areaName != null and areaName != '' ">
+                AND b.area_name = #{areaName}
+            </if>
+            <if test="orgName != null and orgName != '' ">
+                AND b.org_name = #{orgName}
+            </if>
+            <if test="groupName != null and groupName != '' ">
+                AND b.group_name = #{groupName}
+            </if>
+             
+            
+        </where>
+        <if test="orderColumn != null and orderColumn != '' ">
+        ORDER BY t.${orderColumn} <if test="orderDirection != null and orderDirection != '' ">${orderDirection}</if>
+        </if>
+    </select>
+    
+    <!-- 启用停用操作 -->
+      <update id="updateSysPostUsing" parameterType="map">
+        UPDATE sys_post set is_using = #{isUsing} WHERE  post_id in (#{postId})
+      </update>
+    
+    <!-- 岗位编辑列表 -->
+    <select id="queryGangWeiEdit" parameterType="map" resultMap="BaseResultMap">
+        SELECT a.post_id, a.post_name, a.department_id, a.is_using, b.area_name, b.org_name, b.group_name
+        FROM sys_post a
+        LEFT JOIN sys_department b on a.department_id = b.department_id
+        <where>
+            <if test="postId != null and postId !='' ">
+                AND a.post_id = #{postId}
+            </if>
+            <if test="postName != null and postName != '' ">
+                AND a.post_name LIKE CONCAT(CONCAT('%', #{postName}), '%')
+            </if>
+            <if test="departmentId != null and departmentId != '' ">
+                AND a.department_id = #{departmentId}
+            </if>
+            <if test="isUsing != null and isUsing != '' ">
+                AND a.is_using = #{isUsing}
+            </if>
+            <if test="areaName != null and areaName != '' ">
+                AND b.area_name = #{areaName}
+            </if>
+            <if test="orgName != null and orgName != '' ">
+                AND b.org_name = #{orgName}
+            </if>
+            <if test="groupName != null and groupName != '' ">
+                AND b.group_name = #{groupName}
+            </if>
+            
+        </where>
+        <if test="orderColumn != null and orderColumn != '' ">
+        ORDER BY t.${orderColumn} <if test="orderDirection != null and orderDirection != '' ">${orderDirection}</if>
+        </if>
+    </select>
+    
+     <!-- 岗位详情页面 -->
+     <select id="querySysPostById" parameterType="java.lang.Integer"  resultMap="BaseResultMap">
+        SELECT a.post_id, a.post_name, a.department_id, a.is_using, b.area_name, b.org_name, b.group_name,a.add_user_name,a.add_time,a.last_update_user_name,a.last_update_time,c.user_id,c.user_name, c.name, c.phone
+        FROM sys_post a
+        LEFT JOIN sys_department b on a.department_id = b.department_id
+        LEFT JOIN sys_user c on a.post_id = c.post_id 
+        WHERE a.post_id  = #{postId}
+    </select>
+      
+       <!-- 岗位启用停用功能 -->
+     <update id="updateSysPostIsUsing" parameterType="com.hsnn.medstgmini.base.sys.model.SysPost">
+        UPDATE sys_post  
+        <set>
+                is_using = #{isUsing}
+        </set>
+        WHERE  post_id =  #{postId}
+    </update>
+    
+   
+    
+  
+    
+    	<select id="findAllPostIdAndName" parameterType="map" resultMap="BaseResultMap">
+		SELECT t.post_id,t.post_name
+	    FROM sys_post t
+		<where>
+			<if test="departmentId != null and departmentId !='' ">
+	            AND t.department_id = #{departmentId} and is_using =1
+	        </if>
+	        
+	    </where>
+	 </select>
+	
+	<select id="getJgPostList" parameterType="map" resultType="hashmap">
+		select a.post_id "postId",a.post_name "postName",a.is_using "isUsing",b.group_name "groupName",
+		b.org_name "orgName",b.area_name "areaName",c.area_name "orgAreaName"
+		from sys_post a 
+		left join sys_department b on b.department_id = a.department_id
+		left join std_manage_org c on c.id = b.org_id
+		<where>
+			<if test="orgName != null and orgName !='' ">
+	            AND (b.org_name like #{orgName} or b.bur_spel_code like #{orgName})
+	        </if>
+	        <if test="departmentType != null and departmentType != ''">
+	              AND b.department_type = #{departmentType}
+	         </if>
+	        and c.area_id like #{areaId}
+	    </where>
+	 </select>
+	 
+	 <select id="getHospPostList" parameterType="map" resultType="hashmap">
+		SELECT t.department_id "departmentId",t.org_name "orgName",t.area_name "areaName",
+		a.hospital_level "level",a.drug_purchase_property "purchase",t.group_name "groupName",
+		t.is_using "dIsUsing",t.remark "remark",b.post_name "postName",b.post_id "postId",b.is_using "isUsing",a.area_name "orgAreaName"
+	    FROM sys_post b  
+	    inner join sys_department t on t.department_id = b.department_id
+	    inner join std_hospital a on a.hospital_id = t.org_id
+		<where>
+			<if test="orgName != null and orgName != ''">
+	            AND (t.org_name like #{orgName} or t.bur_spel_code like #{orgName})
+	        </if>
+	        <if test="level != null and level != ''">
+	            AND a.hospital_level = #{level}
+	        </if>
+	        <if test="purchase != null and purchase != ''">
+	            AND a.drug_purchase_property = #{purchase}
+	        </if>
+	         <if test="departmentType != null and departmentType != ''">
+	            AND t.department_type = #{departmentType}
+	        </if>
+	            AND a.area_id like #{areaId} 
+		</where>
+	</select>
+	
+	<select id="getCompPostList" parameterType="map" resultType="hashmap">
+		SELECT t.department_id "departmentId",t.org_name "orgName",a.address "address",a.area_name "areaName",t.area_name "deptAreaName",
+		a.company_simple_name "simpleName",a.company_type "comType",t.group_name "groupName",
+		b.is_using "isUsing",b.post_name "postName",b.post_id "postId"
+	    FROM sys_post b 
+	    inner join sys_department t on t.department_id = b.department_id
+	    inner join std_company a on a.company_id = t.org_id
+		<where>
+			<if test="orgName != null and orgName != ''">
+	            AND (t.org_name like #{orgName} or t.bur_spel_code like #{orgName} or a.company_simple_name like #{orgName})
+	        </if>
+	        <if test="compType != null and compType != ''">
+	            AND a.company_type = #{compType}
+	        </if>
+	         <if test="areaId != null and areaId != ''">
+	            AND a.area_id like #{areaId}
+	        </if>
+	          and (t.department_type = #{scType} or t.department_type = #{psType} or t.department_type = #{scpsType})
+		</where>
+	</select>
+	
+	<select id="getPostResource" parameterType="map" resultType="hashmap">
+		SELECT distinct a.resource_id "id", a.menu_name "menuName", 
+		a.resource_type "type", a.icon "icon", a.sort "sort", a.resource_url "resourceUrl", 
+		a.parent_resource_id "pid", 
+		case when t."id" is null then 0 else 1 end "checked" 
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id 
+		join sys_role c on c.role_id = b.role_id 
+		left join(
+			SELECT a.resource_id "id"
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id 
+		join sys_role c on c.role_id = b.role_id 
+		where c.belong_department_id = #{departmentId} and c.belong_post_id = #{postId} and a.is_using = 1 
+		) t on t."id" = a.resource_id
+		where c.belong_department_id = #{departmentId} and c.belong_post_id is null and a.is_using = 1 
+	</select>
+	
+	<select id="getPostResourceByDepart" parameterType="map" resultType="hashmap">
+		SELECT a.resource_id "id", a.menu_name "menuName", 
+		a.resource_type "type", a.icon, a.sort, a.resource_url, 
+		a.parent_resource_id "pid", 
+		case when t.id is null then 0 else 1 end checked 
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id 
+		join sys_role c on c.role_id = b.role_id 
+		left join(
+			SELECT a.resource_id id
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id 
+		join sys_role c on c.role_id = b.role_id 
+		where c.belong_department_id = #{departmentId} and c.belong_post_id = #{postId} and a.is_using = 1 
+		) t on t.id = a.resource_id
+		where c.belong_department_id = #{departmentId} and c.belong_post_id = #{postId} and a.is_using = 1 
+	</select>
+	
+	<delete id="deletePostResource" >
+		DELETE FROM sys_role_resource WHERE  role_id  = #{roleId}
+		and resource_id in 
+		<foreach collection="dels" item="item" index="index" separator="," open="(" close=")">
+        #{item}
+        </foreach>
+	</delete>
+	
+	<insert id="addPostResource" parameterType="java.util.List" >
+        INSERT INTO sys_role_resource (
+        	id,
+            role_id ,
+            resource_id ,
+            is_using ,
+            type,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            belong_org ,
+            belong_department_id ,
+            belong_post_id ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) select SYSROLERESOURCESEQ.nextval,p.* from( 
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select
+        	#{item.roleId},
+        	#{item.resourceId},
+        	#{item.isUsing},
+        	#{item.type},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	now(),
+        	#{item.belongOrg} ,
+            #{item.belongDepartmentId} ,
+            #{item.belongPostId} ,
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        from dual
+        </foreach>) p
+	</insert>
+	<select id="getRoleByPostId" parameterType="map" resultType="hashmap">
+		select role_id "roleId" from sys_role where belong_post_id = #{postId}
+	</select>
+	
+	<select id="getPostList" parameterType="map" resultType="hashmap">
+		select a.post_id "postId",a.post_name "postName",a.is_using "isUsing",b.group_name "groupName",
+		b.org_name "orgName",b.area_name "areaName",b.remark "remark",b.department_id "departmentId"
+		from sys_post a
+		inner join sys_department b on b.department_id = a.department_id
+		<where>
+			<if test="postName != null and postName !='' ">
+	            AND a.post_name like CONCAT(CONCAT('%', #{postName}), '%')
+	        </if>
+        	<if test="groupName != null and groupName !='' ">
+	            AND b.group_name like #{groupName} 
+	        </if>
+	        <if test="orgId != null and orgId !='' ">
+	            AND b.org_id = #{orgId} 
+	        </if>
+	        <if test="departmentId != null and departmentId !='' ">
+	            AND a.department_id = #{departmentId} 
+	        </if>
+	    </where>
+	 </select>
+	 
+	 <!-- 岗位新增保存（获取的是部门的权限） -->
+	   <insert id="addPostDepartmentResource" parameterType="java.util.List" >
+        INSERT INTO sys_role_resource (
+        	id,
+            role_id ,
+            resource_id ,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) select SYSROLERESOURCESEQ.nextval,p.* from(
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select
+            #{item.roleId},
+            #{item.resourceId},
+            #{item.isUsing},
+            #{item.addUserId},
+            #{item.addUserName},
+            now(),
+            #{item.lastUpdateUserId},
+            #{item.lastUpdateUserName},
+            #{item.lastUpdateTime}
+        from dual
+        </foreach> ) p
+    </insert>
+	 
+	 <update id="updateByIds">
+		UPDATE sys_post
+		<set>
+			<if test="@OGNL@isNotEmpty(model.isUsing)">
+	            is_using = #{model.isUsing},
+	        </if>
+			<if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+	            last_update_user_id = #{model.lastUpdateUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+	            last_update_user_name = #{model.lastUpdateUserName},
+	        </if>
+	            last_update_time = now()
+        </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(ids)">
+				post_id in 
+	            <foreach collection="ids" item="item" separator="," open="(" close=")">
+	            	 #{item}
+	            </foreach>
+			</if>
+			<if test="@OGNL@isEmpty(ids)">
+				AND 1=2
+			</if>
+		</where>
+	</update>
+	
+	<!-- 获取岗位详情 -->
+	<select id="getPostDetail" parameterType="map" resultType="hashmap">
+		SELECT a.post_name "postName",a.is_using "isUsing",a.add_user_name "addUser",a.add_time "addTime",
+		a.last_update_user_name "lastUserName",a.last_update_time "lastTime",b.group_name "groupName"
+		<if test="@OGNL@isNotEmpty(orgId)">
+		,c.hea_bur_name "orgName",c.org_address "orgAddress",d.area_fullname "areaName" 
+		</if>
+		<if test="@OGNL@isNotEmpty(hosId)">
+		,c.hospital_name "orgName",c.hospital_address "orgAddress",d.area_fullname "areaName"
+		</if>
+		<if test="@OGNL@isNotEmpty(comId)">
+		,c.company_name "orgName",c.address "orgAddress",d.area_fullname "areaName"
+		</if>
+		from sys_post a left join sys_department b on a.department_id = b.department_id 
+		<if test="@OGNL@isNotEmpty(orgId)">
+	    	left join std_manage_org c on b.org_id = c.id 
+			left join std_area d on c.area_id = d.area_id
+	    </if>
+		<if test="@OGNL@isNotEmpty(hosId)">
+	    	left join std_hospital c on b.org_id = c.hospital_id 
+			left join std_area d on c.area_id = d.area_id
+	    </if>
+		<if test="@OGNL@isNotEmpty(comId)">
+			left join std_company c on b.org_id = c.company_id 
+			left join std_area d on c.area_id = d.area_id
+	    </if>
+		where a.post_id = #{postId}
+	 </select>
+	 
+	 <!-- 监管机构岗位查看 -->
+	 <select id="getJGPostListPro" parameterType="map" resultType="hashmap">
+	 	SELECT
+		    post_id,
+			org_name,
+			group_name,
+			department_type,
+			post_name,
+			a.is_using
+		FROM
+			sys_post a
+		INNER JOIN sys_department b ON a.department_id = b.department_id
+		<where>
+			<if test="@OGNL@isNotEmpty(departmentType) ">
+			    and department_type = #{departmentType}
+			</if>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(groupName)">
+				AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND a.is_using = #{isUsing}
+			</if>
+			<if test="@OGNL@isNotEmpty(postName)">
+				AND a.post_name like CONCAT(CONCAT('%', #{postName}), '%')
+			</if>
+		</where>
+	 </select>
+	 
+	  <!-- 查看所管辖的监管机构和医疗机构部门--> 
+	 <select id="getJGPostListCity" parameterType="map" resultType="hashmap">
+	 	SELECT
+			post_id,
+			org_name,
+			group_name,
+			department_type,
+			post_name,
+			is_using
+		FROM
+			(
+				SELECT
+		            a.post_id,
+					org_name,
+					group_name,
+					department_type,
+					post_name,
+					a.is_using
+				FROM sys_post a
+				INNER JOIN sys_department b ON a.department_id = b.department_id
+				<if test="@OGNL@isNotEmpty(departmentType) ">
+				    and b.department_type = #{departmentType}
+				</if>
+				INNER JOIN std_hospital c ON b.org_id = c.hospital_id
+				<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND c.admin_area_id_drug LIKE CONCAT(CONCAT('%', #{adminAreaIdDrug}), '%')
+				</if>
+				UNION ALL
+					SELECT
+		        a.post_id,
+						org_name,
+						group_name,
+						department_type,
+						post_name,
+						a.is_using
+					FROM
+						sys_post a
+					INNER JOIN sys_department b ON a.department_id = b.department_id
+					<if test="@OGNL@isNotEmpty(departmentType) ">
+					    and b.department_type = #{departmentType}
+					</if>
+					INNER JOIN std_manage_org c ON b.org_id = c.id
+					<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				    	AND c.area_id LIKE CONCAT(CONCAT('%', #{adminAreaIdDrug}), '%')
+				    </if>
+		) tab
+		<where>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(groupName)">
+				AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND is_using = #{isUsing}
+			</if>
+			<if test="@OGNL@isNotEmpty(postName)">
+				AND post_name like CONCAT(CONCAT('%', #{postName}), '%')
+			</if>
+		</where>
+ </select>
+	 
+	 
+	 <!-- 监管机构岗位查看    查看所管辖的医疗机构部门  取area_id进行精确匹配   -->
+	 <select id="getJGPostListCounty" parameterType="map" resultType="hashmap">
+	 	SELECT
+		    post_id,
+			org_name,
+			group_name,
+			department_type,
+			post_name,
+			a.is_using
+		FROM
+			sys_post a
+		INNER JOIN sys_department b ON a.department_id = b.department_id
+		<if test="@OGNL@isNotEmpty(departmentType) ">
+		    and b.department_type = #{departmentType}
+		</if>
+		INNER JOIN std_hospital c ON b.org_id = c.hospital_id
+		<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+		   AND c.admin_area_id_drug LIKE CONCAT(CONCAT('%', #{adminAreaIdDrug}), '%')
+		</if>
+		<where>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(groupName)">
+				AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND a.is_using = #{isUsing}
+			</if>
+			<if test="@OGNL@isNotEmpty(postName)">
+				AND a.post_name like CONCAT(CONCAT('%', #{postName}), '%')
+			</if>
+		</where>
+	 </select>
+</mapper>

@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysMessageDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysMessage" id="BaseResultMap">
+        <result property="messageId" column="message_id" javaType="String"/>
+        <result property="fatherId" column="father_id" javaType="String"/>
+        <result property="acctType" column="acct_type" javaType="Integer"/>
+        <result property="orgId" column="org_id" javaType="String"/>
+        <result property="orgName" column="org_name" javaType="String"/>
+        <result property="groupId" column="group_id" javaType="String"/>
+        <result property="sendUser" column="send_user" javaType="String"/>
+        <result property="title" column="title" javaType="String"/>
+        <result property="content" column="content" javaType="String"/>
+        <result property="type" column="type" javaType="Integer"/>
+        <result property="status" column="status" javaType="Integer"/>
+        <result property="deliveryTime" column="delivery_time" javaType="Date"/>
+        <result property="sendDatetime" column="send_datetime" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.message_id,
+        t.father_id,
+        t.acct_type,
+        t.org_id,
+        t.org_name,
+        t.group_id,
+        t.send_user,
+        t.title,
+        t.content,
+        t.type,
+        t.status,
+        t.delivery_time,
+        t.send_datetime,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> 
+		FROM sys_message t
+		WHERE t.message_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM sys_message t
+		WHERE t.message_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> FROM sys_message t
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysMessage">
+		INSERT INTO sys_message(
+				message_id ,
+	            father_id ,
+	            acct_type ,
+	            org_id ,
+	            org_name ,
+	            group_id ,
+	            send_user ,
+	            title ,
+	            content ,
+	            type ,
+	            status ,
+	            delivery_time ,
+	            send_datetime ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+				#{messageId},
+	        	#{fatherId},
+	        	#{acctType},
+	        	#{orgId},
+	        	#{orgName},
+	        	#{groupId},
+	        	#{sendUser},
+	        	#{title},
+	        	#{content},
+	        	#{type},
+	        	#{status},
+	        	#{deliveryTime},
+	        	#{sendDatetime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.sys.model.SysMessage">
+		INSERT INTO sys_message(
+				message_id ,
+	            father_id ,
+	            acct_type ,
+	            org_id ,
+	            org_name ,
+	            group_id ,
+	            send_user ,
+	            title ,
+	            content ,
+	            type ,
+	            status ,
+	            delivery_time ,
+	            send_datetime ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+				#{messageId},
+	        	#{fatherId},
+	        	#{acctType},
+	        	#{orgId},
+	        	#{orgName},
+	        	#{groupId},
+	        	#{sendUser},
+	        	#{title},
+	        	#{content},
+	        	#{type},
+	        	#{status},
+	        	#{deliveryTime},
+	        	#{sendDatetime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysMessage">
+		UPDATE sys_message  
+		<set>
+	        	father_id = #{fatherId},
+	        	acct_type = #{acctType},
+	        	org_id = #{orgId},
+	        	org_name = #{orgName},
+	        	group_id = #{groupId},
+	        	send_user = #{sendUser},
+	        	title = #{title},
+	        	content = #{content},
+	        	type = #{type},
+	        	status = #{status},
+	        	delivery_time = #{deliveryTime},
+	        	send_datetime = #{sendDatetime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = #{lastUpdateTime},
+        </set>
+		WHERE  message_id =  #{messageId}
+	</update>
+
+<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.sys.model.SysMessage">
+		UPDATE sys_message  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(fatherId)">
+				father_id = #{fatherId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(acctType)">
+				acct_type = #{acctType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orgId)">
+				org_id = #{orgId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orgName)">
+				org_name = #{orgName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(groupId)">
+				group_id = #{groupId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(sendUser)">
+				send_user = #{sendUser},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(title)">
+				title = #{title},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(content)">
+				content = #{content},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(type)">
+				type = #{type},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(status)">
+				status = #{status},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(deliveryTime)">
+				delivery_time = #{deliveryTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(sendDatetime)">
+				send_datetime = #{sendDatetime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				last_update_user_id = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				last_update_user_name = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				last_update_time = #{lastUpdateTime},
+			</if>
+        </set>
+		WHERE  message_id =  #{messageId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM sys_message WHERE  message_id =  #{value}
+	</delete>
+   
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_message t
+		<where>
+			<if test="@OGNL@isNotEmpty(messageId)">
+	            AND t.message_id = #{messageId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(fatherId)">
+	            AND t.father_id = #{fatherId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(acctType)">
+	            AND t.acct_type = #{acctType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+	            AND t.org_id = #{orgId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgName)">
+	            AND t.org_name = #{orgName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(groupId)">
+	            AND t.group_id = #{groupId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sendUser)">
+	            AND t.send_user = #{sendUser}
+	        </if>
+			<if test="@OGNL@isNotEmpty(title)">
+	            AND t.title = #{title}
+	        </if>
+			<if test="@OGNL@isNotEmpty(content)">
+	            AND t.content = #{content}
+	        </if>
+			<if test="@OGNL@isNotEmpty(type)">
+	            AND t.type = #{type}
+	        </if>
+			<if test="@OGNL@isNotEmpty(status)">
+	            AND t.status = #{status}
+	        </if>
+			<if test="@OGNL@isNotEmpty(deliveryTime)">
+	            AND t.delivery_time = #{deliveryTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sendDatetime)">
+	            AND t.send_datetime = #{sendDatetime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_message (
+            message_id ,
+            father_id ,
+            acct_type ,
+            org_id ,
+            org_name ,
+            group_id ,
+            send_user ,
+            title ,
+            content ,
+            type ,
+            status ,
+            delivery_time ,
+            send_datetime ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.messageId},
+        	#{item.fatherId},
+        	#{item.acctType},
+        	#{item.orgId},
+        	#{item.orgName},
+        	#{item.groupId},
+        	#{item.sendUser},
+        	#{item.title},
+        	#{item.content},
+        	#{item.type},
+        	#{item.status},
+        	#{item.deliveryTime},
+        	#{item.sendDatetime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+
+	<select id="getNoReadList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,
+		s.ID,
+		s.RECE_USER,
+		s.USER_NAME,
+		s.REC_ORG_ID,
+		s.REC_ORG_NAME,
+		s.READ_DATETIME,
+		s.HAS_READ,
+		s.UPD_USER,
+		s.UPD_DATETIME
+		FROM SYS_MESSAGE t
+		left join SYS_MESSAGE_RECP s
+		on s.MESSAGE_ID =t.MESSAGE_ID
+		<where>
+			s.HAS_READ =0
+			<if test="@OGNL@isNotEmpty(receUser)">
+				AND s.RECE_USER = #{receUser}
+			</if>
+			<if test="@OGNL@isNotEmpty(title)">
+				AND t.TITLE like CONCAT(CONCAT('%', #{title}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(type)">
+				AND t.TYPE = #{type}
+			</if>
+		</where>
+		order by t.LAST_UPDATE_TIME desc
+	</select>
+
+	  <select id="queryReceAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM sys_message t
+		LEFT JOIN sys_message_recp r ON t.message_id = r.message_id
+		<where>
+			<if test="@OGNL@isNotEmpty(messageId)">
+	            AND t.message_id = #{messageId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(fatherId)">
+	            AND t.father_id = #{fatherId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(acctType)">
+	            AND t.acct_type = #{acctType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+	            AND t.org_id = #{orgId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgName)">
+	            AND t.org_name = #{orgName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(groupId)">
+	            AND t.group_id = #{groupId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sendUser)">
+	            AND t.send_user = #{sendUser}
+	        </if>
+			<if test="@OGNL@isNotEmpty(title)">
+	            AND t.title = #{title}
+	        </if>
+			<if test="@OGNL@isNotEmpty(content)">
+	            AND t.content = #{content}
+	        </if>
+			<if test="@OGNL@isNotEmpty(type)">
+	            AND t.type = #{type}
+	        </if>
+			<if test="@OGNL@isNotEmpty(status)">
+	            AND t.status = #{status}
+	        </if>
+			<if test="@OGNL@isNotEmpty(deliveryTime)">
+	            AND t.delivery_time = #{deliveryTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sendDatetime)">
+	            AND t.send_datetime = #{sendDatetime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(receUser)">
+	            AND r.rece_user = #{receUser}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userName)">
+	            AND r.user_name = #{userName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(recOrgId)">
+	            AND r.rec_org_id = #{recOrgId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(recOrgName)">
+	            AND r.rec_org_name = #{recOrgName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(status)">
+	            AND r.status = #{status}
+	        </if>
+			<if test="@OGNL@isNotEmpty(readDatetime)">
+	            AND r.read_datetime = #{readDatetime}
+	        </if>
+		</where>
+	</select>
+</mapper>

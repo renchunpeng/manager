@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdAppointmentDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdAppointment" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="appointmentType" column="appointment_type" javaType="Integer"/>
+        <result property="appointmentArrivalDatetime" column="appointment_arrival_datetime" javaType="Date"/>
+        <result property="appointmentNumber" column="appointment_number" javaType="Integer"/>
+        <result property="appointmentDealTimeinterval" column="appointment_deal_timeinterval" javaType="Integer"/>
+        <result property="appointmentDealRecordNumber" column="appointment_deal_record_number" javaType="Integer"/>
+        <result property="dealTime" column="deal_time" javaType="Date"/>
+        <result property="orgId" column="org_id" javaType="String"/>
+        <result property="appointmentPerson" column="appointment_person" javaType="String"/>
+        <result property="dealPerson" column="deal_person" javaType="String"/>
+        <result property="appointmentStatus" column="appointment_status" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+      	<association property="company" resultMap="com.hsnn.medstgmini.base.std.dao.StdCompanyDao.BaseResultMap" />
+	</resultMap>
+	<sql id="full-columns" >
+        t.id,
+        t.appointment_type,
+        t.appointment_arrival_datetime,
+        t.appointment_number,
+        t.appointment_deal_timeinterval,
+        t.appointment_deal_record_number,
+        t.deal_time,
+        t.org_id,
+        t.appointment_person,
+        t.deal_person,
+        t.appointment_status,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_appointment where id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,comp.company_id,comp.company_name,comp.filing_number 
+		FROM std_appointment t left join std_company comp ON t.org_id=comp.company_id
+		where id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from std_appointment 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdAppointment">
+		INSERT INTO std_appointment(
+	            appointment_type ,
+	            appointment_arrival_datetime ,
+	            appointment_number ,
+	            appointment_deal_timeinterval ,
+	            appointment_deal_record_number ,
+	            deal_time ,
+	            org_id ,
+	            appointment_person ,
+	            deal_person ,
+	            appointment_status ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time  
+	    ) 
+		VALUES (
+	        	#{appointmentType},
+	        	#{appointmentArrivalDatetime},
+	        	#{appointmentNumber},
+	        	#{appointmentDealTimeinterval},
+	        	#{appointmentDealRecordNumber},
+	        	#{dealTime},
+	        	#{orgId},
+	        	#{appointmentPerson},
+	        	#{dealPerson},
+	        	#{appointmentStatus},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.std.model.StdAppointment">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+			SELECT STDAPPOINTMENTSEQ.nextval from dual
+        </selectKey>
+		INSERT INTO std_appointment(
+				id,
+	            appointment_type ,
+	            appointment_arrival_datetime ,
+	            appointment_number ,
+	            appointment_deal_timeinterval ,
+	            appointment_deal_record_number ,
+	            deal_time ,
+	            org_id ,
+	            appointment_person ,
+	            deal_person ,
+	            appointment_status ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time 
+		) 
+		VALUES (
+				#{id},
+	        	#{appointmentType},
+	        	#{appointmentArrivalDatetime},
+	        	#{appointmentNumber},
+	        	#{appointmentDealTimeinterval},
+	        	#{appointmentDealRecordNumber},
+	        	#{dealTime},
+	        	#{orgId},
+	        	#{appointmentPerson},
+	        	#{dealPerson},
+	        	#{appointmentStatus},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdAppointment">
+		UPDATE std_appointment  
+		<set>
+	        	appointment_type = #{appointmentType},
+	        	appointment_arrival_datetime = #{appointmentArrivalDatetime},
+	        	appointment_number = #{appointmentNumber},
+	        	appointment_deal_timeinterval = #{appointmentDealTimeinterval},
+	        	appointment_deal_record_number = #{appointmentDealRecordNumber},
+	        	deal_time = #{dealTime},
+	        	org_id = #{orgId},
+	        	appointment_person = #{appointmentPerson},
+	        	deal_person = #{dealPerson},
+	        	appointment_status = #{appointmentStatus},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = SYSDATE,
+        </set>
+		WHERE  id =  #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_appointment WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,comp.company_id,comp.company_name,comp.filing_number
+	    FROM std_appointment t left join std_company comp ON t.org_id=comp.company_id
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentType)">
+	            AND t.appointment_type = #{appointmentType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentArrivalDatetime)">
+	            AND t.appointment_arrival_datetime = #{appointmentArrivalDatetime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentNumber)">
+	            AND t.appointment_number = #{appointmentNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentDealTimeinterval)">
+	            AND t.appointment_deal_timeinterval = #{appointmentDealTimeinterval}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentDealRecordNumber)">
+	            AND t.appointment_deal_record_number = #{appointmentDealRecordNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(dealTime)">
+	            AND t.deal_time = #{dealTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+	            AND t.org_id = #{orgId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentPerson)">
+	            AND t.appointment_person = #{appointmentPerson}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(appointmentPersonLike)">
+	            AND t.appointment_person like CONCAT(CONCAT('%',#{appointmentPersonLike}), '%')
+	        </if>
+			<if test="@OGNL@isNotEmpty(dealPerson)">
+	            AND t.deal_person = #{dealPerson}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentStatus)">
+	            AND t.appointment_status = #{appointmentStatus}
+	        </if>
+			<if test="@OGNL@isNotEmpty(notAppointmentStatus)">
+	            AND t.appointment_status != #{notAppointmentStatus}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(companyId)">
+	            AND comp.company_id = #{companyId}
+	        </if>
+		</where>
+	</select>
+	
+	<select id="queryGroupByOrgId" parameterType="map" resultType="map">
+		SELECT comp.company_id companyId,comp.company_name companyName,comp.filing_number filingNumber
+	    FROM std_appointment t left join std_company comp ON t.org_id=comp.company_id
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentType)">
+	            AND t.appointment_type = #{appointmentType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentArrivalDatetime)">
+	            AND t.appointment_arrival_datetime = #{appointmentArrivalDatetime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentNumber)">
+	            AND t.appointment_number = #{appointmentNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentDealTimeinterval)">
+	            AND t.appointment_deal_timeinterval = #{appointmentDealTimeinterval}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentDealRecordNumber)">
+	            AND t.appointment_deal_record_number = #{appointmentDealRecordNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(dealTime)">
+	            AND t.deal_time = #{dealTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+	            AND t.org_id = #{orgId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentPerson)">
+	            AND t.appointment_person = #{appointmentPerson}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(appointmentPersonLike)">
+	            AND t.appointment_person like CONCAT(CONCAT('%',#{appointmentPersonLike}), '%')
+	        </if>
+			<if test="@OGNL@isNotEmpty(dealPerson)">
+	            AND t.deal_person = #{dealPerson}
+	        </if>
+			<if test="@OGNL@isNotEmpty(appointmentStatus)">
+	            AND t.appointment_status = #{appointmentStatus}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(companyId)">
+	            AND comp.last_update_time = #{companyId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(companyNameLike)">
+	            AND comp.company_name like CONCAT(CONCAT('%',#{companyNameLike}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(filingNumberLike)">
+	            AND comp.filing_number like CONCAT(CONCAT('%',#{filingNumberLike}), '%')
+	        </if>
+		</where>
+		group by comp.company_id,comp.company_name,comp.filing_number
+	</select>
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_appointment (
+            appointment_type ,
+            appointment_arrival_datetime ,
+            appointment_number ,
+            appointment_deal_timeinterval ,
+            appointment_deal_record_number ,
+            deal_time ,
+            org_id ,
+            appointment_person ,
+            deal_person ,
+            appointment_status ,
+            add_user_id ,
+            add_user_name ,
+            add_time
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.appointmentType},
+        	#{item.appointmentArrivalDatetime},
+        	#{item.appointmentNumber},
+        	#{item.appointmentDealTimeinterval},
+        	#{item.appointmentDealRecordNumber},
+        	#{item.dealTime},
+        	#{item.orgId},
+        	#{item.appointmentPerson},
+        	#{item.dealPerson},
+        	#{item.appointmentStatus},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	SYSDATE
+        )
+        </foreach>
+	</insert>
+	
+	<update id="updateByIds">
+		UPDATE std_appointment
+		<set>
+			<if test="@OGNL@isNotEmpty(model.appointmentStatus)">
+        		appointment_status = #{model.appointmentStatus},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(model.dealTime)">
+	            deal_time = SYSDATE,
+	        </if>
+			<if test="@OGNL@isNotEmpty(model.dealPerson)">
+	            deal_person = #{model.dealPerson},
+	        </if>
+	        <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+	        	last_update_user_id = #{model.lastUpdateUserId},
+	        </if>
+	        <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+	        	last_update_user_name = #{model.lastUpdateUserName},
+	        </if>
+	        	last_update_time = SYSDATE,
+        </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(ids)">
+				id in
+            <foreach collection="ids" item="item" separator="," open="(" close=")">
+            	 #{item}
+            </foreach>
+			</if>
+			<if test="@OGNL@isEmpty(ids)">
+				AND 1=2
+			</if>
+		</where>
+	</update>
+	
+	<update id="updateByParams">
+		UPDATE std_appointment
+		<set>
+			<if test="@OGNL@isNotEmpty(model.appointmentStatus)">
+        		appointment_status = #{model.appointmentStatus},
+        	</if>
+        	<if test="@OGNL@isNotEmpty(model.dealTime)">
+	            deal_time = SYSDATE,
+	        </if>
+			<if test="@OGNL@isNotEmpty(model.dealPerson)">
+	            deal_person = #{model.dealPerson},
+	        </if>
+	        <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+	        	last_update_user_id = #{model.lastUpdateUserId},
+	        </if>
+	        <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+	        	last_update_user_name = #{model.lastUpdateUserName},
+	        </if>
+	        	last_update_time = SYSDATE,
+        </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(param.appointmentType)">
+	            AND appointment_type = #{param.appointmentType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(param.appointmentDealTimeinterval)">
+	            AND appointment_deal_timeinterval = #{param.appointmentDealTimeinterval}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(param.appointmentArrivalDatetime)">
+	            AND appointment_arrival_datetime = #{param.appointmentArrivalDatetime}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(param.endAppointmentArrivalDatetime)">
+	            AND appointment_arrival_datetime &lt;= #{param.endAppointmentArrivalDatetime}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(param.appointmentStatus)">
+	            AND appointment_status = #{param.appointmentStatus}
+	        </if>
+		</where>
+	</update>
+</mapper>

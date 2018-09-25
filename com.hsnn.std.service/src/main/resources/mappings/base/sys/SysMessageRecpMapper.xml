@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysMessageRecpDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysMessageRecp" id="BaseResultMap">
+        <result property="messageId" column="message_id" javaType="String"/>
+        <result property="receUser" column="rece_user" javaType="String"/>
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="recOrgId" column="rec_org_id" javaType="String"/>
+        <result property="recOrgName" column="rec_org_name" javaType="String"/>
+        <result property="status" column="status" javaType="Integer"/>
+        <result property="readDatetime" column="read_datetime" javaType="Date"/>
+        <result property="hasRead" column="has_read" javaType="Integer"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        
+      <!--   <association property="message" resultMap="com.hsnn.medstgmini.base.sys.model.SysMessage.BaseResultMap"
+        	select="com.hsnn.medstgmini.base.sys.model.SysMessage."
+        ></association> -->
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.message_id,
+        t.rece_user,
+        t.user_name,
+        t.rec_org_id,
+        t.rec_org_name,
+        t.status,
+        t.read_datetime,
+        t.has_read,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> 
+		FROM sys_message_recp t
+		WHERE t.message_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM sys_message_recp t
+		WHERE t.message_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> FROM sys_message_recp t
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysMessageRecp">
+		INSERT INTO sys_message_recp(
+		        message_id,
+		        rece_user,
+	            user_name ,
+	            rec_org_id ,
+	            rec_org_name ,
+	            status ,
+	            read_datetime ,
+	            has_read ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+		        #{messageId},
+		        #{receUser},
+	        	#{userName},
+	        	#{recOrgId},
+	        	#{recOrgName},
+	        	#{status},
+	        	#{readDatetime},
+	        	#{hasRead},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="false" keyProperty="messageId" parameterType="com.hsnn.medstgmini.base.sys.model.SysMessageRecp">
+		<selectKey resultType="java.lang.String" keyProperty="messageId" order="BEFORE">
+			SELECT SYSMESSAGERECPSEQ.nextval from dual 
+        </selectKey>
+		INSERT INTO sys_message_recp(
+		        message_id,
+		        rece_user,
+	            user_name ,
+	            rec_org_id ,
+	            rec_org_name ,
+	            status ,
+	            read_datetime ,
+	            has_read ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+		        #{messageId},
+		        #{receUser},
+	        	#{userName},
+	        	#{recOrgId},
+	        	#{recOrgName},
+	        	#{status},
+	        	#{readDatetime},
+	        	#{hasRead},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysMessageRecp">
+		UPDATE sys_message_recp  
+		<set>
+	        	user_name = #{userName},
+	        	rec_org_id = #{recOrgId},
+	        	rec_org_name = #{recOrgName},
+	        	status = #{status},
+	        	read_datetime = #{readDatetime},
+	        	has_read = #{hasRead},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = #{lastUpdateTime},
+        </set>
+		WHERE  message_id =  #{messageId}
+	</update>
+
+<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.sys.model.SysMessageRecp">
+		UPDATE sys_message_recp  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(userName)">
+				user_name = #{userName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(recOrgId)">
+				rec_org_id = #{recOrgId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(recOrgName)">
+				rec_org_name = #{recOrgName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(status)">
+				status = #{status},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(readDatetime)">
+				read_datetime = #{readDatetime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hasRead)">
+				has_read = #{hasRead},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				last_update_user_id = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				last_update_user_name = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				last_update_time = #{lastUpdateTime},
+			</if>
+        </set>
+		WHERE  message_id =  #{messageId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM sys_message_recp WHERE  message_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_message_recp t
+		<where>
+			<if test="@OGNL@isNotEmpty(messageId)">
+	            AND t.message_id = #{messageId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(receUser)">
+	            AND t.rece_user = #{receUser}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userName)">
+	            AND t.user_name = #{userName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(recOrgId)">
+	            AND t.rec_org_id = #{recOrgId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(recOrgName)">
+	            AND t.rec_org_name = #{recOrgName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(status)">
+	            AND t.status = #{status}
+	        </if>
+			<if test="@OGNL@isNotEmpty(readDatetime)">
+	            AND t.read_datetime = #{readDatetime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(hasRead)">
+	            AND t.has_read = #{hasRead}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_message_recp (
+            user_name ,
+            rec_org_id ,
+            rec_org_name ,
+            status ,
+            read_datetime ,
+            has_read ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.userName},
+        	#{item.recOrgId},
+        	#{item.recOrgName},
+        	#{item.status},
+        	#{item.readDatetime},
+        	#{item.hasRead},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+</mapper>

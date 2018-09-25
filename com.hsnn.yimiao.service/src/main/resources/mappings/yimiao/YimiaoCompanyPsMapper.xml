@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.yimiao.dao.YimiaoCompanyPsDao">
+	<resultMap type="com.hsnn.medstgmini.yimiao.model.YimiaoCompanyPs" id="BaseResultMap">
+        <result property="companyNamePs" column="COMPANY_NAME_PS" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.COMPANY_NAME_PS
+	</sql>
+		
+	<select id="getYimiaoCompanyPsList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM YIMIAO_COMPANY_PS t
+		<where>
+			<if test="@OGNL@isNotEmpty(delCompName)">
+				AND t.COMPANY_NAME_PS  like CONCAT('%', #{delCompName}, '%')
+			</if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoCompanyPs">
+		INSERT INTO YIMIAO_COMPANY_PS(
+	            COMPANY_NAME_PS
+		)
+		VALUES (
+	        	#{companyNamePs}
+		)
+	</insert>
+
+	<insert id="saveYimiaoCompanyPs"  parameterType="java.lang.String">
+		INSERT INTO YIMIAO_COMPANY_PS(
+	            COMPANY_NAME_PS
+		)
+		VALUES (
+	        	#{companyNamePs}
+		)
+	</insert>
+
+</mapper>

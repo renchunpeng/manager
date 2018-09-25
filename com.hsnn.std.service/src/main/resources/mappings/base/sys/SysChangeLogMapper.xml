@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysChangeLogDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysChangeLog" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="sysId" column="sys_id" javaType="String"/>
+        <result property="operateType" column="operate_type" javaType="Integer"/>
+        <result property="serializeTable" column="serialize_table" javaType="String"/>
+        <result property="tableCode" column="table_code" javaType="String"/>
+        <result property="serializeObj" column="serialize_obj" javaType="[B"/>
+        <result property="createrId" column="creater_id" javaType="String"/>
+        <result property="createrName" column="creater_name" javaType="String"/>
+        <result property="createrIp" column="creater_ip" javaType="String"/>
+        <result property="mechanismName" column="mechanism_name" javaType="String"/>
+        <result property="departmentName" column="department_name" javaType="String"/>
+        <result property="jobName" column="job_name" javaType="String"/>
+        <result property="createrDatetime" column="creater_datetime" javaType="Date"/>
+        <!-- 拓展字段 -->
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.sys_id,
+        t.operate_type,
+        t.serialize_table,
+        t.table_code,
+        t.serialize_obj,
+        t.creater_id,
+        t.creater_name,
+        t.creater_ip,
+        t.mechanism_name,
+        t.department_name,
+        t.job_name,
+        t.creater_datetime
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> from sys_change_log where id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,sur.user_name, sur.name
+		from sys_change_log t
+	    LEFT JOIN sys_user sur  ON sur.user_id=t.creater_id
+		where id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from sys_change_log 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysChangeLog">
+		INSERT INTO sys_change_log(
+		        id,
+	            sys_id ,
+	            operate_type ,
+	            serialize_table ,
+	            table_code ,
+	            serialize_obj ,
+	            creater_id ,
+	            creater_name ,
+	            creater_ip ,
+	            createrDatetime
+	    ) 
+		VALUES (
+				#{id},
+	        	#{sysId},
+	        	#{operateType},
+	        	#{serializeTable},
+	        	#{tableCode},
+	        	#{serializeObj},
+	        	#{createrId},
+	        	#{createrName},
+	        	#{createrIp},
+	        	SYSDATE
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.sys.model.SysChangeLog">
+		<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+			SELECT SYSCHANGESEQ.nextval from dual
+        </selectKey>
+		INSERT INTO sys_change_log(
+				id,
+	            sys_id ,
+	            operate_type ,
+	            serialize_table ,
+	            table_code ,
+	            serialize_obj ,
+	            creater_id ,
+	            creater_name ,
+	            creater_ip ,
+	            mechanism_name, 
+	            department_name, 
+	            job_name,
+	            creater_datetime 
+		) 
+		VALUES (
+				#{id},
+	        	#{sysId},
+	        	#{operateType},
+	        	#{serializeTable},
+	        	#{tableCode},
+	        	#{serializeObj},
+	        	#{createrId},
+	        	#{createrName},
+	        	#{createrIp},
+	        	#{mechanismName},
+	        	#{departmentName},
+	        	#{jobName},
+	        	SYSDATE
+		)
+	</insert>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_change_log (
+        	id,
+            sys_id ,
+            operate_type ,
+            serialize_table ,
+            serialize_Obj,
+            table_code ,
+            creater_id ,
+            creater_name ,
+            creater_ip ,
+            mechanism_name, 
+            department_name, 
+            job_name,
+            creater_datetime 
+        ) select SYSCHANGESEQ.nextval,p.* from( 
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select 
+        	#{item.sysId},
+        	#{item.operateType},
+        	#{item.serializeTable},
+        	#{item.serializeObj},
+        	#{item.tableCode},
+        	#{item.createrId},
+        	#{item.createrName},
+        	#{item.createrIp},
+        	#{item.mechanismName},
+        	#{item.departmentName},
+        	#{item.jobName},
+        	SYSDATE 
+       	from dual
+        </foreach>
+        ) p
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysChangeLog">
+		UPDATE sys_change_log  
+		<set>
+	        	sys_id = #{sysId},
+	        	operate_type = #{operateType},
+	        	serialize_table = #{serializeTable},
+	        	table_code = #{tableCode},
+	        	serialize_obj = #{serializeObj},
+	        	creater_id = #{createrId},
+	        	creater_name = #{createrName},
+	        	creater_ip = #{createrIp},
+	        	creater_datetime = #{createrDatetime},
+        </set>
+		WHERE  id =  #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_change_log WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />,sur.user_name, sur.name
+	    FROM sys_change_log t, sys_user sur
+		<where>
+			AND sur.user_id=t.creater_id
+			<if test="@OGNL@isNotEmpty(userName)">
+           	 	AND sur.user_name like '%'||#{userName}||'%'
+	        </if>
+	        <if test="@OGNL@isNotEmpty(name)">
+	            AND sur.name like '%'||#{name}||'%'
+	        </if>
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(sysId)">
+	            AND t.sys_id = #{sysId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(operateType)">
+	            AND t.operate_type = #{operateType}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(tableCode)">
+			    AND t.table_code = #{tableCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(serializeTable)">
+	            AND t.serialize_table = #{serializeTable}
+	        </if>
+			<if test="@OGNL@isNotEmpty(createrId)">
+	            AND t.creater_id = #{createrId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(createrName)">
+	            AND t.creater_name = #{createrName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(createrIp)">
+	            AND t.creater_ip = #{createrIp}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(startCreaterDatetime)">
+	        	AND t.creater_datetime &gt;= to_date(#{startCreaterDatetime}||' 00:00:00','yyyy-MM-dd hh24:mi:ss')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(endCreaterDatetime)">
+	        	AND t.creater_datetime &lt;= to_date(#{endCreaterDatetime}||' 23:59:59','yyyy-MM-dd hh24:mi:ss')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(ids)">
+	           AND t.id IN
+              <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+          	 	#{item}
+       		  </foreach>
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn)">
+        ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection)">${orderDirection}</if>
+        </if>
+	</select>
+	
+</mapper>

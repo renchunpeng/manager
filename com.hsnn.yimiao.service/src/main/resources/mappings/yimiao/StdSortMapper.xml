@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.yimiao.dao.StdSortDao">
+	<resultMap type="com.hsnn.medstgmini.yimiao.model.StdSort" id="BaseResultMap">
+        <result property="sortId" column="SORT_ID" javaType="String"/>
+		<result property="productId" column="PRODUCT_ID" javaType="Integer"/>
+		<result property="productName" column="PRODUCT_NAME" javaType="String"/>
+		<result property="outlook" column="OUTLOOK" javaType="String"/>
+        <result property="addUserId" column="ADD_USER_ID" javaType="String"/>
+        <result property="addUserName" column="ADD_USER_NAME" javaType="String"/>
+        <result property="addTime" column="ADD_TIME" javaType="Date"/>
+       
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.SORT_ID,
+        t.PRODUCT_ID,
+        t.PRODUCT_NAME,
+        t.OUTLOOK,
+        t.ADD_USER_ID,
+        t.ADD_USER_NAME,
+        t.ADD_TIME
+	</sql>
+		
+	<select id="get" parameterType="String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_SORT t
+		WHERE t.SORT_ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.yimiao.model.StdSort">
+		INSERT INTO STD_SORT(
+		        SORT_ID,
+				PRODUCT_ID ,
+				PRODUCT_NAME ,
+				OUTLOOK,
+				ADD_USER_ID ,
+	            ADD_USER_NAME ,
+	            ADD_TIME
+		)
+		VALUES (
+	        	SYS_GUID(),
+	        	#{productId},
+	        	#{productName},
+	        	#{outlook},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime}
+		)
+
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.yimiao.model.StdSort">
+		UPDATE STD_SORT  
+		<set>
+			SORT_NAME = #{sortName},
+			BELONG_AREA_ID = #{belongAreaId},
+			BELONG_AREA_NAME = #{belongAreaName},
+			ADD_USER_ID = #{addUserId},
+			ADD_USER_NAME = #{addUserName},
+			ADD_TIME = #{addTime},
+			LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			LAST_UPDATE_TIME = #{lastUpdateTime},
+			OLD_SORT_ID = #{oldSortId},
+			PRODUCT_ID = #{productId},
+			PRODUCT_NAME = #{productName},
+			OUTLOOK = #{outlook},
+        </set>
+		WHERE  SORT_ID =  #{sortId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.yimiao.model.StdSort">
+		UPDATE STD_SORT  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(sortName)">
+				SORT_NAME = #{sortName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(belongAreaId)">
+				BELONG_AREA_ID = #{belongAreaId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(belongAreaName)">
+				BELONG_AREA_NAME = #{belongAreaName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				ADD_USER_ID = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				ADD_USER_NAME = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				ADD_TIME = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				LAST_UPDATE_TIME = #{lastUpdateTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(oldSortId)">
+				OLD_SORT_ID = #{oldSortId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productId)">
+				PRODUCT_ID = #{productId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productName)">
+				PRODUCT_NAME = #{productName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(outlook)">
+				OUTLOOK = #{outlook},
+			</if>
+        </set>
+		WHERE  SORT_ID =  #{sortId}
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM STD_SORT WHERE  SORT_ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_SORT t
+		<where>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME like CONCAT(CONCAT('%', #{productName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK like  CONCAT(CONCAT('%', #{outlook}), '%')
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO STD_SORT (
+            SORT_NAME ,
+            BELONG_AREA_ID ,
+            BELONG_AREA_NAME ,
+            ADD_USER_ID ,
+            ADD_USER_NAME ,
+            ADD_TIME ,
+            LAST_UPDATE_USER_ID ,
+            LAST_UPDATE_USER_NAME ,
+            LAST_UPDATE_TIME ,
+            OLD_SORT_ID ,
+            PRODUCT_ID ,
+            PRODUCT_NAME ,
+            OUTLOOK 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.sortName},
+        	#{item.belongAreaId},
+        	#{item.belongAreaName},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime},
+        	#{item.oldSortId},
+        	#{item.productId},
+        	#{item.productName},
+        	#{item.outlook}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM STD_SORT t
+		<where>
+			<if test="@OGNL@isNotEmpty(sortId)">
+				AND t.SORT_ID = #{sortId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sortName)">
+				AND t.SORT_NAME = #{sortName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongAreaId)">
+				AND t.BELONG_AREA_ID = #{belongAreaId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongAreaName)">
+				AND t.BELONG_AREA_NAME = #{belongAreaName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(oldSortId)">
+				AND t.OLD_SORT_ID = #{oldSortId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productId)">
+				AND t.PRODUCT_ID = #{productId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME = #{productName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK = #{outlook}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE STD_SORT  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.sortName)">
+				SORT_NAME = #{model.sortName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.belongAreaId)">
+				BELONG_AREA_ID = #{model.belongAreaId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.belongAreaName)">
+				BELONG_AREA_NAME = #{model.belongAreaName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				ADD_USER_ID = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				ADD_USER_NAME = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				ADD_TIME = #{model.addTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				LAST_UPDATE_TIME = #{model.lastUpdateTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.oldSortId)">
+				OLD_SORT_ID = #{model.oldSortId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productId)">
+				PRODUCT_ID = #{model.productId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productName)">
+				PRODUCT_NAME = #{model.productName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.outlook)">
+				OUTLOOK = #{model.outlook},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.sortId)">
+				AND t.SORT_ID = #{params.sortId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.sortName)">
+				AND t.SORT_NAME = #{params.sortName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.belongAreaId)">
+				AND t.BELONG_AREA_ID = #{params.belongAreaId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.belongAreaName)">
+				AND t.BELONG_AREA_NAME = #{params.belongAreaName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.ADD_USER_ID = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.ADD_USER_NAME = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.ADD_TIME = #{params.addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{params.lastUpdateTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.oldSortId)">
+				AND t.OLD_SORT_ID = #{params.oldSortId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productId)">
+				AND t.PRODUCT_ID = #{params.productId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productName)">
+				AND t.PRODUCT_NAME = #{params.productName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.outlook)">
+				AND t.OUTLOOK = #{params.outlook}
+		    </if>
+		</where>
+	</update>
+
+	<select id="getListByName" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM STD_SORT t
+		<where>
+		<if test="@OGNL@isNotEmpty(productName)">
+			AND t.PRODUCT_NAME = #{productName}
+		</if>
+		<if test="@OGNL@isNotEmpty(outlook)">
+			AND t.OUTLOOK = #{outlook}
+		</if>
+		</where>
+	</select>
+</mapper>

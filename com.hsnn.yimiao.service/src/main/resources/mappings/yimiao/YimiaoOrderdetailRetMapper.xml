@@ -1,0 +1,4005 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.yimiao.dao.YimiaoOrderdetailRetDao">
+	<resultMap type="com.hsnn.medstgmini.yimiao.model.YimiaoOrderdetailRet" id="BaseResultMap">
+        <result property="orderdetailRetId" column="ORDERDETAIL_RET_ID" javaType="String"/>
+        <result property="orderId" column="ORDER_ID" javaType="String"/>
+		<result property="orderDetailId" column="ORDERDETAIL_ID" javaType="String"/>
+        <result property="procurecatalogId" column="PROCURECATALOG_ID" javaType="Integer"/>
+        <result property="goodsId" column="GOODS_ID" javaType="String"/>
+        <result property="productName" column="PRODUCT_NAME" javaType="String"/>
+        <result property="productSpelName" column="PRODUCT_SPEL_NAME" javaType="String"/>
+        <result property="productWbName" column="PRODUCT_WB_NAME" javaType="String"/>
+        <result property="goodsName" column="GOODS_NAME" javaType="String"/>
+        <result property="medicinemodel" column="MEDICINEMODEL" javaType="String"/>
+        <result property="outlook" column="OUTLOOK" javaType="String"/>
+        <result property="factor" column="FACTOR" javaType="Integer"/>
+        <result property="materialName" column="MATERIAL_NAME" javaType="String"/>
+        <result property="unit" column="UNIT" javaType="String"/>
+        <result property="companyIdSc" column="COMPANY_ID_SC" javaType="String"/>
+        <result property="companyNameSc" column="COMPANY_NAME_SC" javaType="String"/>
+        <result property="splitCompanyName" column="SPLIT_COMPANY_NAME" javaType="String"/>
+        <result property="trustCompanyName" column="TRUST_COMPANY_NAME" javaType="String"/>
+        <result property="companyIdTb" column="COMPANY_ID_TB" javaType="String"/>
+        <result property="companyNameTb" column="COMPANY_NAME_TB" javaType="String"/>
+        <result property="middlePack" column="MIDDLE_PACK" javaType="Integer"/>
+        <result property="maxPack" column="MAX_PACK" javaType="Integer"/>
+        <result property="isBaseDrug" column="IS_BASE_DRUG" javaType="Integer"/>
+        <result property="qualityLevel" column="QUALITY_LEVEL" javaType="String"/>
+        <result property="purchaseType" column="PURCHASE_TYPE" javaType="Integer"/>
+        <result property="sourceId" column="SOURCE_ID" javaType="Integer"/>
+        <result property="sourceName" column="SOURCE_NAME" javaType="String"/>
+        <result property="bidPrice" column="BID_PRICE" javaType="BigDecimal"/>
+        <result property="usingRang" column="USING_RANG" javaType="Integer"/>
+        <result property="hospitalId" column="HOSPITAL_ID" javaType="String"/>
+        <result property="hospitalName" column="HOSPITAL_NAME" javaType="String"/>
+        <result property="hospitalDepartmentId" column="HOSPITAL_DEPARTMENT_ID" javaType="Integer"/>
+        <result property="hospitalDepartmentName" column="HOSPITAL_DEPARTMENT_NAME" javaType="String"/>
+        <result property="adminAreaIdStatisticsDrug" column="ADMIN_AREA_ID_STATISTICS_DRUG" javaType="Integer"/>
+        <result property="adminAreaNameDrug" column="ADMIN_AREA_NAME_DRUG" javaType="String"/>
+        <result property="adminAreaIdDrug" column="ADMIN_AREA_ID_DRUG" javaType="Integer"/>
+        <result property="belongOrgName" column="BELONG_ORG_NAME" javaType="String"/>
+        <result property="orderType" column="ORDER_TYPE" javaType="Integer"/>
+        <result property="orderName" column="ORDER_NAME" javaType="String"/>
+        <result property="submitTime" column="SUBMIT_TIME" javaType="Date"/>
+        <result property="filingId" column="FILING_ID" javaType="Integer"/>
+        <result property="companyIdPs" column="COMPANY_ID_PS" javaType="String"/>
+        <result property="companyNamePs" column="COMPANY_NAME_PS" javaType="String"/>
+        <result property="purchasePrice" column="PURCHASE_PRICE" javaType="BigDecimal"/>
+        <result property="purchaseCount" column="PURCHASE_COUNT" javaType="Integer"/>
+        <result property="purchaseAmount" column="PURCHASE_AMOUNT" javaType="BigDecimal"/>
+        <result property="isRead" column="IS_READ" javaType="Integer"/>
+        <result property="readUserId" column="READ_USER_ID" javaType="String"/>
+        <result property="readUserName" column="READ_USER_NAME" javaType="String"/>
+        <result property="readTime" column="READ_TIME" javaType="Date"/>
+        <result property="confirmUserId" column="CONFIRM_USER_ID" javaType="String"/>
+        <result property="confirmUserName" column="CONFIRM_USER_NAME" javaType="String"/>
+        <result property="confirmTime" column="CONFIRM_TIME" javaType="Date"/>
+        <result property="confirmState" column="CONFIRM_STATE" javaType="Integer"/>
+        <result property="orderdetailState" column="ORDERDETAIL_STATE" javaType="Integer"/>
+        <result property="refuseReason" column="REFUSE_REASON" javaType="String"/>
+        <result property="returnReason" column="RETURN_REASON" javaType="String"/>
+        <result property="detailDistributeAddress" column="DETAIL_DISTRIBUTE_ADDRESS" javaType="String"/>
+        <result property="totalDistributeCount" column="TOTAL_DISTRIBUTE_COUNT" javaType="Integer"/>
+        <result property="totalDistributeAmount" column="TOTAL_DISTRIBUTE_AMOUNT" javaType="BigDecimal"/>
+        <result property="totalWarehouseCount" column="TOTAL_WAREHOUSE_COUNT" javaType="Integer"/>
+        <result property="totalWarehouseAmount" column="TOTAL_WAREHOUSE_AMOUNT" javaType="BigDecimal"/>
+        <result property="totalReturnAmount" column="TOTAL_RETURN_AMOUNT" javaType="BigDecimal"/>
+        <result property="totalReturnCount" column="TOTAL_RETURN_COUNT" javaType="Integer"/>
+        <result property="isUsing" column="IS_USING" javaType="Integer"/>
+        <result property="compRatio" column="COMP_RATIO" javaType="BigDecimal"/>
+        <result property="orderCustomInfo" column="ORDER_CUSTOM_INFO" javaType="String"/>
+        <result property="addUserId" column="ADD_USER_ID" javaType="String"/>
+        <result property="addUserName" column="ADD_USER_NAME" javaType="String"/>
+        <result property="addTime" column="ADD_TIME" javaType="Date"/>
+        <result property="lastUpdateUserId" column="LAST_UPDATE_USER_ID" javaType="String"/>
+        <result property="lastUpdateUserName" column="LAST_UPDATE_USER_NAME" javaType="String"/>
+        <result property="lastUpdateTime" column="LAST_UPDATE_TIME" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.ORDERDETAIL_RET_ID,
+        t.ORDER_ID,
+        t.ORDERDETAIL_ID,
+        t.PROCURECATALOG_ID,
+        t.GOODS_ID,
+        t.PRODUCT_NAME,
+        t.PRODUCT_SPEL_NAME,
+        t.PRODUCT_WB_NAME,
+        t.GOODS_NAME,
+        t.MEDICINEMODEL,
+        t.OUTLOOK,
+        t.FACTOR,
+        t.MATERIAL_NAME,
+        t.UNIT,
+        t.COMPANY_ID_SC,
+        t.COMPANY_NAME_SC,
+        t.SPLIT_COMPANY_NAME,
+        t.TRUST_COMPANY_NAME,
+        t.COMPANY_ID_TB,
+        t.COMPANY_NAME_TB,
+        t.MIDDLE_PACK,
+        t.MAX_PACK,
+        t.IS_BASE_DRUG,
+        t.QUALITY_LEVEL,
+        t.PURCHASE_TYPE,
+        t.SOURCE_ID,
+        t.SOURCE_NAME,
+        t.BID_PRICE,
+        t.USING_RANG,
+        t.HOSPITAL_ID,
+        t.HOSPITAL_NAME,
+        t.HOSPITAL_DEPARTMENT_ID,
+        t.HOSPITAL_DEPARTMENT_NAME,
+        t.ADMIN_AREA_ID_STATISTICS_DRUG,
+        t.ADMIN_AREA_NAME_DRUG,
+        t.ADMIN_AREA_ID_DRUG,
+        t.BELONG_ORG_NAME,
+        t.ORDER_TYPE,
+        t.ORDER_NAME,
+        t.SUBMIT_TIME,
+        t.FILING_ID,
+        t.COMPANY_ID_PS,
+        t.COMPANY_NAME_PS,
+        t.PURCHASE_PRICE,
+        t.PURCHASE_COUNT,
+        t.PURCHASE_AMOUNT,
+        t.IS_READ,
+        t.READ_USER_ID,
+        t.READ_USER_NAME,
+        t.READ_TIME,
+        t.CONFIRM_USER_ID,
+        t.CONFIRM_USER_NAME,
+        t.CONFIRM_TIME,
+        t.CONFIRM_STATE,
+        t.ORDERDETAIL_STATE,
+        t.REFUSE_REASON,
+        t.DETAIL_DISTRIBUTE_ADDRESS,
+        t.TOTAL_DISTRIBUTE_COUNT,
+        t.TOTAL_DISTRIBUTE_AMOUNT,
+        t.TOTAL_WAREHOUSE_COUNT,
+        t.TOTAL_WAREHOUSE_AMOUNT,
+        t.TOTAL_RETURN_AMOUNT,
+        t.TOTAL_RETURN_COUNT,
+        t.IS_USING,
+        t.COMP_RATIO,
+        t.ORDER_CUSTOM_INFO,
+        t.ADD_USER_ID,
+        t.ADD_USER_NAME,
+        t.ADD_TIME,
+        t.LAST_UPDATE_USER_ID,
+        t.LAST_UPDATE_USER_NAME,
+        t.LAST_UPDATE_TIME,
+        t.RETURN_REASON
+	</sql>
+		
+	<update id="updateByOrder" parameterType="java.util.List">
+		UPDATE YIMIAO_ORDERDETAIL_RET  
+		<set>
+			ORDERDETAIL_STATE = 1,
+			SUBMIT_TIME=now()
+		</set>
+		WHERE  ORDER_ID IN (
+		<foreach collection="list" item="item" index="index" separator=" , ">
+			#{item.retOrderId}
+		</foreach>
+		) AND ORDERDETAIL_STATE IS NULL OR ORDERDETAIL_STATE = 3
+	</update>
+		
+		<select id="getByOrder" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM YIMIAO_ORDERDETAIL_RET t
+		WHERE t.ORDER_ID =  #{value}
+	</select>
+		
+		<update id="updateByDetailRetId" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoOrderdetailRet">
+		UPDATE YIMIAO_ORDERDETAIL_RET  
+		
+			<set>
+				<if test="confirmState==1">
+					TOTAL_RETURN_AMOUNT = #{totalReturnAmount},
+					TOTAL_RETURN_COUNT = #{totalReturnCount},
+					COMP_RATIO = #{compRatio},
+					CONFIRM_STATE = #{confirmState},
+					COMPANY_ID_PS = #{companyIdPs},
+					COMPANY_NAME_PS = #{companyNamePs},
+				</if>
+				<if test="confirmState==2">
+					CONFIRM_STATE = #{confirmState},
+					REFUSE_REASON = #{refuseReason},	  	    
+				</if>
+			</set>
+	
+		
+		WHERE  ORDERDETAIL_RET_ID =  #{orderdetailRetId}
+	</update>
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM YIMIAO_ORDERDETAIL_RET t
+		WHERE t.ORDERDETAIL_RET_ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoOrderdetailRet">
+		INSERT INTO YIMIAO_ORDERDETAIL_RET(
+				ORDERDETAIL_RET_ID,
+	            ORDER_ID ,
+	            PROCURECATALOG_ID ,
+	            GOODS_ID ,
+	            PRODUCT_NAME ,
+	            PRODUCT_SPEL_NAME ,
+	            PRODUCT_WB_NAME ,
+	            GOODS_NAME ,
+	            MEDICINEMODEL ,
+	            OUTLOOK ,
+	            FACTOR ,
+	            MATERIAL_NAME ,
+	            UNIT ,
+	            COMPANY_ID_SC ,
+	            COMPANY_NAME_SC ,
+	            SPLIT_COMPANY_NAME ,
+	            TRUST_COMPANY_NAME ,
+	            COMPANY_ID_TB ,
+	            COMPANY_NAME_TB ,
+	            MIDDLE_PACK ,
+	            MAX_PACK ,
+	            IS_BASE_DRUG ,
+	            QUALITY_LEVEL ,
+	            PURCHASE_TYPE ,
+	            SOURCE_ID ,
+	            SOURCE_NAME ,
+	            BID_PRICE ,
+	            USING_RANG ,
+	            HOSPITAL_ID ,
+	            HOSPITAL_NAME ,
+	            HOSPITAL_DEPARTMENT_ID ,
+	            HOSPITAL_DEPARTMENT_NAME ,
+	            ADMIN_AREA_ID_STATISTICS_DRUG ,
+	            ADMIN_AREA_NAME_DRUG ,
+	            ADMIN_AREA_ID_DRUG ,
+	            BELONG_ORG_NAME ,
+	            ORDER_TYPE ,
+	            ORDER_NAME ,
+	            SUBMIT_TIME ,
+	            FILING_ID ,
+	            COMPANY_ID_PS ,
+	            COMPANY_NAME_PS ,
+	            PURCHASE_PRICE ,
+	            PURCHASE_COUNT ,
+	            PURCHASE_AMOUNT ,
+	            IS_READ ,
+	            READ_USER_ID ,
+	            READ_USER_NAME ,
+	            READ_TIME ,
+	            CONFIRM_USER_ID ,
+	            CONFIRM_USER_NAME ,
+	            CONFIRM_TIME ,
+	            CONFIRM_STATE ,
+	            ORDERDETAIL_STATE ,
+	            REFUSE_REASON ,
+	            DETAIL_DISTRIBUTE_ADDRESS ,
+	            TOTAL_DISTRIBUTE_COUNT ,
+	            TOTAL_DISTRIBUTE_AMOUNT ,
+	            TOTAL_WAREHOUSE_COUNT ,
+	            TOTAL_WAREHOUSE_AMOUNT ,
+	            TOTAL_RETURN_AMOUNT ,
+	            TOTAL_RETURN_COUNT ,
+	            IS_USING ,
+	            COMP_RATIO ,
+	            ORDER_CUSTOM_INFO ,
+	            ADD_USER_ID ,
+	            ADD_USER_NAME ,
+	            ADD_TIME ,
+	            LAST_UPDATE_USER_ID ,
+	            LAST_UPDATE_USER_NAME ,
+	            LAST_UPDATE_TIME,
+	            RETURN_REASON
+		)
+		VALUES (
+				#{orderdetailRetId},
+	        	#{orderId},
+	        	#{procurecatalogId},
+	        	#{goodsId},
+	        	#{productName},
+	        	#{productSpelName},
+	        	#{productWbName},
+	        	#{goodsName},
+	        	#{medicinemodel},
+	        	#{outlook},
+	        	#{factor},
+	        	#{materialName},
+	        	#{unit},
+	        	#{companyIdSc},
+	        	#{companyNameSc},
+	        	#{splitCompanyName},
+	        	#{trustCompanyName},
+	        	#{companyIdTb},
+	        	#{companyNameTb},
+	        	#{middlePack},
+	        	#{maxPack},
+	        	#{isBaseDrug},
+	        	#{qualityLevel},
+	        	#{purchaseType},
+	        	#{sourceId},
+	        	#{sourceName},
+	        	#{bidPrice},
+	        	#{usingRang},
+	        	#{hospitalId},
+	        	#{hospitalName},
+	        	#{hospitalDepartmentId},
+	        	#{hospitalDepartmentName},
+	        	#{adminAreaIdStatisticsDrug},
+	        	#{adminAreaNameDrug},
+	        	#{adminAreaIdDrug},
+	        	#{belongOrgName},
+	        	#{orderType},
+	        	#{orderName},
+	        	#{submitTime},
+	        	#{filingId},
+	        	#{companyIdPs},
+	        	#{companyNamePs},
+	        	#{purchasePrice},
+	        	#{purchaseCount},
+	        	#{purchaseAmount},
+	        	#{isRead},
+	        	#{readUserId},
+	        	#{readUserName},
+	        	#{readTime},
+	        	#{confirmUserId},
+	        	#{confirmUserName},
+	        	#{confirmTime},
+	        	#{confirmState},
+	        	#{orderdetailState},
+	        	#{refuseReason},
+	        	#{detailDistributeAddress},
+	        	#{totalDistributeCount},
+	        	#{totalDistributeAmount},
+	        	#{totalWarehouseCount},
+	        	#{totalWarehouseAmount},
+	        	#{totalReturnAmount},
+	        	#{totalReturnCount},
+	        	#{isUsing},
+	        	#{compRatio},
+	        	#{orderCustomInfo},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime},
+	        	#{returnReason}
+		)
+
+	</insert>
+
+	<insert id="saveByMap" parameterType="map">
+		INSERT INTO YIMIAO_ORDERDETAIL_RET(
+		ORDERDETAIL_RET_ID,
+		ORDER_ID ,
+		ORDERDETAIL_ID,
+		PROCURECATALOG_ID ,
+		GOODS_ID ,
+		PRODUCT_NAME ,
+		PRODUCT_SPEL_NAME ,
+		PRODUCT_WB_NAME ,
+		GOODS_NAME ,
+		MEDICINEMODEL ,
+		OUTLOOK ,
+		FACTOR ,
+		MATERIAL_NAME ,
+		UNIT ,
+		COMPANY_ID_SC ,
+		COMPANY_NAME_SC ,
+		SPLIT_COMPANY_NAME ,
+		TRUST_COMPANY_NAME ,
+		COMPANY_ID_TB ,
+		COMPANY_NAME_TB ,
+		MIDDLE_PACK ,
+		MAX_PACK ,
+		IS_BASE_DRUG ,
+		QUALITY_LEVEL ,
+		PURCHASE_TYPE ,
+		SOURCE_ID ,
+		SOURCE_NAME ,
+		BID_PRICE ,
+		USING_RANG ,
+		HOSPITAL_ID ,
+		HOSPITAL_NAME ,
+		HOSPITAL_DEPARTMENT_ID ,
+		HOSPITAL_DEPARTMENT_NAME ,
+		ADMIN_AREA_ID_STATISTICS_DRUG ,
+		ADMIN_AREA_NAME_DRUG ,
+		ADMIN_AREA_ID_DRUG ,
+		BELONG_ORG_NAME ,
+		ORDER_TYPE ,
+		ORDER_NAME ,
+		SUBMIT_TIME ,
+		FILING_ID ,
+		COMPANY_ID_PS ,
+		COMPANY_NAME_PS ,
+		PURCHASE_PRICE ,
+		PURCHASE_COUNT ,
+		PURCHASE_AMOUNT ,
+		IS_READ ,
+		READ_USER_ID ,
+		READ_USER_NAME ,
+		READ_TIME ,
+		CONFIRM_USER_ID ,
+		CONFIRM_USER_NAME ,
+		CONFIRM_TIME ,
+		CONFIRM_STATE ,
+		ORDERDETAIL_STATE ,
+		REFUSE_REASON ,
+		DETAIL_DISTRIBUTE_ADDRESS ,
+		TOTAL_DISTRIBUTE_COUNT ,
+		TOTAL_DISTRIBUTE_AMOUNT ,
+		TOTAL_WAREHOUSE_COUNT ,
+		TOTAL_WAREHOUSE_AMOUNT ,
+		TOTAL_RETURN_AMOUNT ,
+		TOTAL_RETURN_COUNT ,
+		IS_USING ,
+		COMP_RATIO ,
+		ORDER_CUSTOM_INFO ,
+		ADD_USER_ID ,
+		ADD_USER_NAME ,
+		ADD_TIME ,
+		LAST_UPDATE_USER_ID ,
+		LAST_UPDATE_USER_NAME ,
+		LAST_UPDATE_TIME,
+		RETURN_REASON
+		)
+		SELECT
+		UUID() ORDERDETAIL_RET_ID,
+		#{orderId} ORDER_ID ,
+		b.ORDERDETAIL_ID,
+		PROCURECATALOG_ID ,
+		GOODS_ID ,
+		PRODUCT_NAME ,
+		PRODUCT_SPEL_NAME ,
+		PRODUCT_WB_NAME ,
+		GOODS_NAME ,
+		MEDICINEMODEL ,
+		OUTLOOK ,
+		FACTOR ,
+		MATERIAL_NAME ,
+		UNIT ,
+		COMPANY_ID_SC ,
+		COMPANY_NAME_SC ,
+		SPLIT_COMPANY_NAME ,
+		TRUST_COMPANY_NAME ,
+		COMPANY_ID_TB ,
+		COMPANY_NAME_TB ,
+		MIDDLE_PACK ,
+		MAX_PACK ,
+		IS_BASE_DRUG ,
+		QUALITY_LEVEL ,
+		PURCHASE_TYPE ,
+		SOURCE_ID ,
+		SOURCE_NAME ,
+		BID_PRICE ,
+		USING_RANG ,
+		HOSPITAL_ID ,
+		HOSPITAL_NAME ,
+		HOSPITAL_DEPARTMENT_ID ,
+		HOSPITAL_DEPARTMENT_NAME ,
+		ADMIN_AREA_ID_STATISTICS_DRUG ,
+		ADMIN_AREA_NAME_DRUG ,
+		ADMIN_AREA_ID_DRUG ,
+		BELONG_ORG_NAME ,
+		ORDER_TYPE ,
+		#{orderName} ORDER_NAME ,
+		SUBMIT_TIME ,
+		FILING_ID ,
+		COMPANY_ID_PS ,
+		COMPANY_NAME_PS ,
+		PURCHASE_PRICE ,
+		PURCHASE_COUNT ,
+		PURCHASE_AMOUNT ,
+		IS_READ ,
+		READ_USER_ID ,
+		READ_USER_NAME ,
+		READ_TIME ,
+		CONFIRM_USER_ID ,
+		CONFIRM_USER_NAME ,
+		CONFIRM_TIME ,
+		CONFIRM_STATE ,
+		ORDERDETAIL_STATE ,
+		REFUSE_REASON ,
+		DETAIL_DISTRIBUTE_ADDRESS ,
+		TOTAL_DISTRIBUTE_COUNT ,
+		TOTAL_DISTRIBUTE_AMOUNT ,
+		TOTAL_WAREHOUSE_COUNT ,
+		TOTAL_WAREHOUSE_AMOUNT ,
+		b.PURCHASE_PRICE*a.TOTAL_RETURN_COUNT TOTAL_RETURN_AMOUNT ,
+		a.TOTAL_RETURN_COUNT ,
+		IS_USING ,
+		COMP_RATIO ,
+		a.ORDER_CUSTOM_INFO ,
+		#{userId} ADD_USER_ID ,
+		#{name}   ADD_USER_NAME ,
+		now() ADD_TIME ,
+		#{userId}   LAST_UPDATE_USER_ID ,
+		#{name}  LAST_UPDATE_USER_NAME ,
+		now() LAST_UPDATE_TIME,
+		a.RETURN_REASON
+		from (
+		<foreach collection="list" item="val" index="index" separator=" UNION ALL ">
+			select
+			#{val.yimiaoOrderdetailId}  ORDERDETAIL_ID,
+			#{val.returnReason} RETURN_REASON,
+			#{val.lastPurchaseCount} TOTAL_RETURN_COUNT,
+			#{val.remark} ORDER_CUSTOM_INFO
+		</foreach>
+		) a
+		INNER JOIN yimiao_orderdetail b on a.ORDERDETAIL_ID = b.ORDERDETAIL_ID
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoOrderdetailRet">
+		UPDATE YIMIAO_ORDERDETAIL_RET  
+		<set>
+			ORDER_ID = #{orderId},
+			PROCURECATALOG_ID = #{procurecatalogId},
+			GOODS_ID = #{goodsId},
+			PRODUCT_NAME = #{productName},
+			PRODUCT_SPEL_NAME = #{productSpelName},
+			PRODUCT_WB_NAME = #{productWbName},
+			GOODS_NAME = #{goodsName},
+			MEDICINEMODEL = #{medicinemodel},
+			OUTLOOK = #{outlook},
+			FACTOR = #{factor},
+			MATERIAL_NAME = #{materialName},
+			UNIT = #{unit},
+			COMPANY_ID_SC = #{companyIdSc},
+			COMPANY_NAME_SC = #{companyNameSc},
+			SPLIT_COMPANY_NAME = #{splitCompanyName},
+			TRUST_COMPANY_NAME = #{trustCompanyName},
+			COMPANY_ID_TB = #{companyIdTb},
+			COMPANY_NAME_TB = #{companyNameTb},
+			MIDDLE_PACK = #{middlePack},
+			MAX_PACK = #{maxPack},
+			IS_BASE_DRUG = #{isBaseDrug},
+			QUALITY_LEVEL = #{qualityLevel},
+			PURCHASE_TYPE = #{purchaseType},
+			SOURCE_ID = #{sourceId},
+			SOURCE_NAME = #{sourceName},
+			BID_PRICE = #{bidPrice},
+			USING_RANG = #{usingRang},
+			HOSPITAL_ID = #{hospitalId},
+			HOSPITAL_NAME = #{hospitalName},
+			HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId},
+			HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName},
+			ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug},
+			ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug},
+			ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug},
+			BELONG_ORG_NAME = #{belongOrgName},
+			ORDER_TYPE = #{orderType},
+			ORDER_NAME = #{orderName},
+			SUBMIT_TIME = #{submitTime},
+			FILING_ID = #{filingId},
+			COMPANY_ID_PS = #{companyIdPs},
+			COMPANY_NAME_PS = #{companyNamePs},
+			PURCHASE_PRICE = #{purchasePrice},
+			PURCHASE_COUNT = #{purchaseCount},
+			PURCHASE_AMOUNT = #{purchaseAmount},
+			IS_READ = #{isRead},
+			READ_USER_ID = #{readUserId},
+			READ_USER_NAME = #{readUserName},
+			READ_TIME = #{readTime},
+			CONFIRM_USER_ID = #{confirmUserId},
+			CONFIRM_USER_NAME = #{confirmUserName},
+			CONFIRM_TIME = #{confirmTime},
+			CONFIRM_STATE = #{confirmState},
+			ORDERDETAIL_STATE = #{orderdetailState},
+			REFUSE_REASON = #{refuseReason},
+			DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress},
+			TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount},
+			TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount},
+			TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount},
+			TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount},
+			TOTAL_RETURN_AMOUNT = #{totalReturnAmount},
+			TOTAL_RETURN_COUNT = #{totalReturnCount},
+			IS_USING = #{isUsing},
+			COMP_RATIO = #{compRatio},
+			ORDER_CUSTOM_INFO = #{orderCustomInfo},
+			ADD_USER_ID = #{addUserId},
+			ADD_USER_NAME = #{addUserName},
+			ADD_TIME = #{addTime},
+			LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			LAST_UPDATE_TIME = #{lastUpdateTime},
+        </set>
+		WHERE  ORDERDETAIL_RET_ID =  #{orderdetailRetId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoOrderdetailRet">
+		UPDATE YIMIAO_ORDERDETAIL_RET  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(orderId)">
+				ORDER_ID = #{orderId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				PROCURECATALOG_ID = #{procurecatalogId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(goodsId)">
+				GOODS_ID = #{goodsId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productName)">
+				PRODUCT_NAME = #{productName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productSpelName)">
+				PRODUCT_SPEL_NAME = #{productSpelName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(productWbName)">
+				PRODUCT_WB_NAME = #{productWbName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(goodsName)">
+				GOODS_NAME = #{goodsName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(medicinemodel)">
+				MEDICINEMODEL = #{medicinemodel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(outlook)">
+				OUTLOOK = #{outlook},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(factor)">
+				FACTOR = #{factor},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(materialName)">
+				MATERIAL_NAME = #{materialName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(unit)">
+				UNIT = #{unit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyIdSc)">
+				COMPANY_ID_SC = #{companyIdSc},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyNameSc)">
+				COMPANY_NAME_SC = #{companyNameSc},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				SPLIT_COMPANY_NAME = #{splitCompanyName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				TRUST_COMPANY_NAME = #{trustCompanyName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyIdTb)">
+				COMPANY_ID_TB = #{companyIdTb},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyNameTb)">
+				COMPANY_NAME_TB = #{companyNameTb},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(middlePack)">
+				MIDDLE_PACK = #{middlePack},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(maxPack)">
+				MAX_PACK = #{maxPack},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				IS_BASE_DRUG = #{isBaseDrug},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(qualityLevel)">
+				QUALITY_LEVEL = #{qualityLevel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(purchaseType)">
+				PURCHASE_TYPE = #{purchaseType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(sourceId)">
+				SOURCE_ID = #{sourceId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(sourceName)">
+				SOURCE_NAME = #{sourceName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bidPrice)">
+				BID_PRICE = #{bidPrice},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(usingRang)">
+				USING_RANG = #{usingRang},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalId)">
+				HOSPITAL_ID = #{hospitalId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalName)">
+				HOSPITAL_NAME = #{hospitalName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(belongOrgName)">
+				BELONG_ORG_NAME = #{belongOrgName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderType)">
+				ORDER_TYPE = #{orderType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderName)">
+				ORDER_NAME = #{orderName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(submitTime)">
+				SUBMIT_TIME = #{submitTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(filingId)">
+				FILING_ID = #{filingId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyIdPs)">
+				COMPANY_ID_PS = #{companyIdPs},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(companyNamePs)">
+				COMPANY_NAME_PS = #{companyNamePs},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(purchasePrice)">
+				PURCHASE_PRICE = #{purchasePrice},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(purchaseCount)">
+				PURCHASE_COUNT = #{purchaseCount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				PURCHASE_AMOUNT = #{purchaseAmount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isRead)">
+				IS_READ = #{isRead},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(readUserId)">
+				READ_USER_ID = #{readUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(readUserName)">
+				READ_USER_NAME = #{readUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(readTime)">
+				READ_TIME = #{readTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(confirmUserId)">
+				CONFIRM_USER_ID = #{confirmUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(confirmUserName)">
+				CONFIRM_USER_NAME = #{confirmUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(confirmTime)">
+				CONFIRM_TIME = #{confirmTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(confirmState)">
+				CONFIRM_STATE = #{confirmState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderdetailState)">
+				ORDERDETAIL_STATE = #{orderdetailState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(refuseReason)">
+				REFUSE_REASON = #{refuseReason},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				TOTAL_RETURN_AMOUNT = #{totalReturnAmount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				TOTAL_RETURN_COUNT = #{totalReturnCount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isUsing)">
+				IS_USING = #{isUsing},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(compRatio)">
+				COMP_RATIO = #{compRatio},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				ORDER_CUSTOM_INFO = #{orderCustomInfo},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				ADD_USER_ID = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				ADD_USER_NAME = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				ADD_TIME = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				LAST_UPDATE_TIME = #{lastUpdateTime},
+			</if>
+        </set>
+		WHERE  ORDERDETAIL_RET_ID =  #{orderdetailRetId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM YIMIAO_ORDERDETAIL_RET WHERE  ORDERDETAIL_RET_ID =  #{value}
+	</delete>
+
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			<if test="@OGNL@isNotEmpty(orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{orderdetailRetId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID like CONCAT(CONCAT('%',#{goodsId}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(outlook)">
+				AND t.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.product_name like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productWbName)">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME = #{goodsName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL = #{medicinemodel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK like CONCAT(CONCAT('%', #{outlook}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{splitCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{trustCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND t.COMPANY_ID_TB = #{companyIdTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{companyNameTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(middlePack)">
+				AND t.MIDDLE_PACK = #{middlePack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maxPack)">
+				AND t.MAX_PACK = #{maxPack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{isBaseDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualityLevel)">
+				AND t.QUALITY_LEVEL = #{qualityLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseType)">
+				AND t.PURCHASE_TYPE = #{purchaseType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME = #{sourceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(usingRang)">
+				AND t.USING_RANG = #{usingRang}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{belongOrgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingId)">
+				AND t.FILING_ID = #{filingId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyIdPs)">
+				AND t.COMPANY_ID_PS = #{companyIdPs}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+
+		    <if test="ratio == 0">
+				AND (t.COMP_RATIO <![CDATA[<]]> 1 or t.COMP_RATIO is null)
+		    </if>
+		     <if test="ratio == 1">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%') CONCAT(CONCAT('%', #{fcustomername}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchasePrice)">
+				AND t.PURCHASE_PRICE = #{purchasePrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseCount)">
+				AND t.PURCHASE_COUNT = #{purchaseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{purchaseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isRead)">
+				AND t.IS_READ = #{isRead}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserId)">
+				AND t.READ_USER_ID = #{readUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserName)">
+				AND t.READ_USER_NAME = #{readUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readTime)">
+				AND t.READ_TIME = #{readTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{confirmUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{confirmUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmTime)">
+				AND t.CONFIRM_TIME = #{confirmTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(refuseReason)">
+				AND t.REFUSE_REASON = #{refuseReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{totalReturnAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{totalReturnCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compRatio)">
+				AND t.COMP_RATIO = #{compRatio}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{orderCustomInfo}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		     <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO YIMIAO_ORDERDETAIL_RET (
+            ORDER_ID ,
+            PROCURECATALOG_ID ,
+            GOODS_ID ,
+            PRODUCT_NAME ,
+            PRODUCT_SPEL_NAME ,
+            PRODUCT_WB_NAME ,
+            GOODS_NAME ,
+            MEDICINEMODEL ,
+            OUTLOOK ,
+            FACTOR ,
+            MATERIAL_NAME ,
+            UNIT ,
+            COMPANY_ID_SC ,
+            COMPANY_NAME_SC ,
+            SPLIT_COMPANY_NAME ,
+            TRUST_COMPANY_NAME ,
+            COMPANY_ID_TB ,
+            COMPANY_NAME_TB ,
+            MIDDLE_PACK ,
+            MAX_PACK ,
+            IS_BASE_DRUG ,
+            QUALITY_LEVEL ,
+            PURCHASE_TYPE ,
+            SOURCE_ID ,
+            SOURCE_NAME ,
+            BID_PRICE ,
+            USING_RANG ,
+            HOSPITAL_ID ,
+            HOSPITAL_NAME ,
+            HOSPITAL_DEPARTMENT_ID ,
+            HOSPITAL_DEPARTMENT_NAME ,
+            ADMIN_AREA_ID_STATISTICS_DRUG ,
+            ADMIN_AREA_NAME_DRUG ,
+            ADMIN_AREA_ID_DRUG ,
+            BELONG_ORG_NAME ,
+            ORDER_TYPE ,
+            ORDER_NAME ,
+            SUBMIT_TIME ,
+            FILING_ID ,
+            COMPANY_ID_PS ,
+            COMPANY_NAME_PS ,
+            PURCHASE_PRICE ,
+            PURCHASE_COUNT ,
+            PURCHASE_AMOUNT ,
+            IS_READ ,
+            READ_USER_ID ,
+            READ_USER_NAME ,
+            READ_TIME ,
+            CONFIRM_USER_ID ,
+            CONFIRM_USER_NAME ,
+            CONFIRM_TIME ,
+            CONFIRM_STATE ,
+            ORDERDETAIL_STATE ,
+            REFUSE_REASON ,
+            DETAIL_DISTRIBUTE_ADDRESS ,
+            TOTAL_DISTRIBUTE_COUNT ,
+            TOTAL_DISTRIBUTE_AMOUNT ,
+            TOTAL_WAREHOUSE_COUNT ,
+            TOTAL_WAREHOUSE_AMOUNT ,
+            TOTAL_RETURN_AMOUNT ,
+            TOTAL_RETURN_COUNT ,
+            IS_USING ,
+            COMP_RATIO ,
+            ORDER_CUSTOM_INFO ,
+            ADD_USER_ID ,
+            ADD_USER_NAME ,
+            ADD_TIME ,
+            LAST_UPDATE_USER_ID ,
+            LAST_UPDATE_USER_NAME ,
+            LAST_UPDATE_TIME
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.orderId},
+        	#{item.procurecatalogId},
+        	#{item.goodsId},
+        	#{item.productName},
+        	#{item.productSpelName},
+        	#{item.productWbName},
+        	#{item.goodsName},
+        	#{item.medicinemodel},
+        	#{item.outlook},
+        	#{item.factor},
+        	#{item.materialName},
+        	#{item.unit},
+        	#{item.companyIdSc},
+        	#{item.companyNameSc},
+        	#{item.splitCompanyName},
+        	#{item.trustCompanyName},
+        	#{item.companyIdTb},
+        	#{item.companyNameTb},
+        	#{item.middlePack},
+        	#{item.maxPack},
+        	#{item.isBaseDrug},
+        	#{item.qualityLevel},
+        	#{item.purchaseType},
+        	#{item.sourceId},
+        	#{item.sourceName},
+        	#{item.bidPrice},
+        	#{item.usingRang},
+        	#{item.hospitalId},
+        	#{item.hospitalName},
+        	#{item.hospitalDepartmentId},
+        	#{item.hospitalDepartmentName},
+        	#{item.adminAreaIdStatisticsDrug},
+        	#{item.adminAreaNameDrug},
+        	#{item.adminAreaIdDrug},
+        	#{item.belongOrgName},
+        	#{item.orderType},
+        	#{item.orderName},
+        	#{item.submitTime},
+        	#{item.filingId},
+        	#{item.companyIdPs},
+        	#{item.companyNamePs},
+        	#{item.purchasePrice},
+        	#{item.purchaseCount},
+        	#{item.purchaseAmount},
+        	#{item.isRead},
+        	#{item.readUserId},
+        	#{item.readUserName},
+        	#{item.readTime},
+        	#{item.confirmUserId},
+        	#{item.confirmUserName},
+        	#{item.confirmTime},
+        	#{item.confirmState},
+        	#{item.orderdetailState},
+        	#{item.refuseReason},
+        	#{item.detailDistributeAddress},
+        	#{item.totalDistributeCount},
+        	#{item.totalDistributeAmount},
+        	#{item.totalWarehouseCount},
+        	#{item.totalWarehouseAmount},
+        	#{item.totalReturnAmount},
+        	#{item.totalReturnCount},
+        	#{item.isUsing},
+        	#{item.compRatio},
+        	#{item.orderCustomInfo},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			<if test="@OGNL@isNotEmpty(orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{orderdetailRetId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID = #{goodsId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME = #{productName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productWbName)">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME = #{goodsName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL = #{medicinemodel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK = #{outlook}
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdSc)">
+				AND t.COMPANY_ID_SC = #{companyIdSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC = #{companyNameSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{splitCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{trustCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND t.COMPANY_ID_TB = #{companyIdTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{companyNameTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(middlePack)">
+				AND t.MIDDLE_PACK = #{middlePack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maxPack)">
+				AND t.MAX_PACK = #{maxPack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{isBaseDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualityLevel)">
+				AND t.QUALITY_LEVEL = #{qualityLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseType)">
+				AND t.PURCHASE_TYPE = #{purchaseType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME = #{sourceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(usingRang)">
+				AND t.USING_RANG = #{usingRang}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME = #{hospitalName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{belongOrgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingId)">
+				AND t.FILING_ID = #{filingId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdPs)">
+				AND t.COMPANY_ID_PS = #{companyIdPs}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS = #{companyNamePs}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchasePrice)">
+				AND t.PURCHASE_PRICE = #{purchasePrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseCount)">
+				AND t.PURCHASE_COUNT = #{purchaseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{purchaseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isRead)">
+				AND t.IS_READ = #{isRead}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserId)">
+				AND t.READ_USER_ID = #{readUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserName)">
+				AND t.READ_USER_NAME = #{readUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readTime)">
+				AND t.READ_TIME = #{readTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{confirmUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{confirmUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmTime)">
+				AND t.CONFIRM_TIME = #{confirmTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailStateList)">
+				AND t.ORDERDETAIL_STATE in
+				<foreach collection="orderdetailStateList" item="val" index="index" open="(" separator="," close=")">
+					#{val}
+				</foreach>
+			</if>
+			<if test="@OGNL@isNotEmpty(refuseReason)">
+				AND t.REFUSE_REASON = #{refuseReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{totalReturnAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{totalReturnCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compRatio)">
+				AND t.COMP_RATIO = #{compRatio}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{orderCustomInfo}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+
+	<update id="updateByParams" >
+		UPDATE YIMIAO_ORDERDETAIL_RET  t
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.orderId)">
+				ORDER_ID = #{model.orderId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.procurecatalogId)">
+				PROCURECATALOG_ID = #{model.procurecatalogId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.goodsId)">
+				GOODS_ID = #{model.goodsId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productName)">
+				PRODUCT_NAME = #{model.productName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productSpelName)">
+				PRODUCT_SPEL_NAME = #{model.productSpelName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.productWbName)">
+				PRODUCT_WB_NAME = #{model.productWbName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.goodsName)">
+				GOODS_NAME = #{model.goodsName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.medicinemodel)">
+				MEDICINEMODEL = #{model.medicinemodel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.outlook)">
+				OUTLOOK = #{model.outlook},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.factor)">
+				FACTOR = #{model.factor},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.materialName)">
+				MATERIAL_NAME = #{model.materialName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.unit)">
+				UNIT = #{model.unit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyIdSc)">
+				COMPANY_ID_SC = #{model.companyIdSc},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyNameSc)">
+				COMPANY_NAME_SC = #{model.companyNameSc},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.splitCompanyName)">
+				SPLIT_COMPANY_NAME = #{model.splitCompanyName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.trustCompanyName)">
+				TRUST_COMPANY_NAME = #{model.trustCompanyName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyIdTb)">
+				COMPANY_ID_TB = #{model.companyIdTb},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyNameTb)">
+				COMPANY_NAME_TB = #{model.companyNameTb},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.middlePack)">
+				MIDDLE_PACK = #{model.middlePack},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.maxPack)">
+				MAX_PACK = #{model.maxPack},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isBaseDrug)">
+				IS_BASE_DRUG = #{model.isBaseDrug},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.qualityLevel)">
+				QUALITY_LEVEL = #{model.qualityLevel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.purchaseType)">
+				PURCHASE_TYPE = #{model.purchaseType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.sourceId)">
+				SOURCE_ID = #{model.sourceId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.sourceName)">
+				SOURCE_NAME = #{model.sourceName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.bidPrice)">
+				BID_PRICE = #{model.bidPrice},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.usingRang)">
+				USING_RANG = #{model.usingRang},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospitalId)">
+				HOSPITAL_ID = #{model.hospitalId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospitalName)">
+				HOSPITAL_NAME = #{model.hospitalName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospitalDepartmentId)">
+				HOSPITAL_DEPARTMENT_ID = #{model.hospitalDepartmentId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospitalDepartmentName)">
+				HOSPITAL_DEPARTMENT_NAME = #{model.hospitalDepartmentName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.adminAreaIdStatisticsDrug)">
+				ADMIN_AREA_ID_STATISTICS_DRUG = #{model.adminAreaIdStatisticsDrug},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.adminAreaNameDrug)">
+				ADMIN_AREA_NAME_DRUG = #{model.adminAreaNameDrug},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.adminAreaIdDrug)">
+				ADMIN_AREA_ID_DRUG = #{model.adminAreaIdDrug},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.belongOrgName)">
+				BELONG_ORG_NAME = #{model.belongOrgName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderType)">
+				ORDER_TYPE = #{model.orderType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderName)">
+				ORDER_NAME = #{model.orderName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.submitTime)">
+				SUBMIT_TIME = #{model.submitTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.filingId)">
+				FILING_ID = #{model.filingId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyIdPs)">
+				COMPANY_ID_PS = #{model.companyIdPs},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.companyNamePs)">
+				COMPANY_NAME_PS = #{model.companyNamePs},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.purchasePrice)">
+				PURCHASE_PRICE = #{model.purchasePrice},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.purchaseCount)">
+				PURCHASE_COUNT = #{model.purchaseCount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.purchaseAmount)">
+				PURCHASE_AMOUNT = #{model.purchaseAmount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isRead)">
+				IS_READ = #{model.isRead},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.readUserId)">
+				READ_USER_ID = #{model.readUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.readUserName)">
+				READ_USER_NAME = #{model.readUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.readTime)">
+				READ_TIME = #{model.readTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.confirmUserId)">
+				CONFIRM_USER_ID = #{model.confirmUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.confirmUserName)">
+				CONFIRM_USER_NAME = #{model.confirmUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.confirmTime)">
+				CONFIRM_TIME = #{model.confirmTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.confirmState)">
+				CONFIRM_STATE = #{model.confirmState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderdetailState)">
+				ORDERDETAIL_STATE = #{model.orderdetailState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.refuseReason)">
+				REFUSE_REASON = #{model.refuseReason},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.detailDistributeAddress)">
+				DETAIL_DISTRIBUTE_ADDRESS = #{model.detailDistributeAddress},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.totalDistributeCount)">
+				TOTAL_DISTRIBUTE_COUNT = #{model.totalDistributeCount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.totalDistributeAmount)">
+				TOTAL_DISTRIBUTE_AMOUNT = #{model.totalDistributeAmount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.totalWarehouseCount)">
+				TOTAL_WAREHOUSE_COUNT = #{model.totalWarehouseCount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.totalWarehouseAmount)">
+				TOTAL_WAREHOUSE_AMOUNT = #{model.totalWarehouseAmount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.totalReturnAmount)">
+				TOTAL_RETURN_AMOUNT = #{model.totalReturnAmount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.totalReturnCount)">
+				TOTAL_RETURN_COUNT = #{model.totalReturnCount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isUsing)">
+				IS_USING = #{model.isUsing},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.compRatio)">
+				COMP_RATIO = #{model.compRatio},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderCustomInfo)">
+				ORDER_CUSTOM_INFO = #{model.orderCustomInfo},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				ADD_USER_ID = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				ADD_USER_NAME = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				ADD_TIME = #{model.addTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				LAST_UPDATE_TIME = #{model.lastUpdateTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{params.orderdetailRetId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderId)">
+				AND t.ORDER_ID = #{params.orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{params.procurecatalogId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.goodsId)">
+				AND t.GOODS_ID = #{params.goodsId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productName)">
+				AND t.PRODUCT_NAME = #{params.productName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{params.productSpelName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productWbName)">
+				AND t.PRODUCT_WB_NAME = #{params.productWbName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.goodsName)">
+				AND t.GOODS_NAME = #{params.goodsName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.medicinemodel)">
+				AND t.MEDICINEMODEL = #{params.medicinemodel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.outlook)">
+				AND t.OUTLOOK = #{params.outlook}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.factor)">
+				AND t.FACTOR = #{params.factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.materialName)">
+				AND t.MATERIAL_NAME = #{params.materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.unit)">
+				AND t.UNIT = #{params.unit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyIdSc)">
+				AND t.COMPANY_ID_SC = #{params.companyIdSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyNameSc)">
+				AND t.COMPANY_NAME_SC = #{params.companyNameSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{params.splitCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{params.trustCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyIdTb)">
+				AND t.COMPANY_ID_TB = #{params.companyIdTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{params.companyNameTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.middlePack)">
+				AND t.MIDDLE_PACK = #{params.middlePack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.maxPack)">
+				AND t.MAX_PACK = #{params.maxPack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{params.isBaseDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.qualityLevel)">
+				AND t.QUALITY_LEVEL = #{params.qualityLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.purchaseType)">
+				AND t.PURCHASE_TYPE = #{params.purchaseType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.sourceId)">
+				AND t.SOURCE_ID = #{params.sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.sourceName)">
+				AND t.SOURCE_NAME = #{params.sourceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.bidPrice)">
+				AND t.BID_PRICE = #{params.bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.usingRang)">
+				AND t.USING_RANG = #{params.usingRang}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospitalId)">
+				AND t.HOSPITAL_ID = #{params.hospitalId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospitalName)">
+				AND t.HOSPITAL_NAME = #{params.hospitalName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{params.hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{params.hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{params.adminAreaIdStatisticsDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{params.adminAreaNameDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{params.adminAreaIdDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{params.belongOrgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderType)">
+				AND t.ORDER_TYPE = #{params.orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderName)">
+				AND t.ORDER_NAME = #{params.orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.submitTime)">
+				AND t.SUBMIT_TIME = #{params.submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.filingId)">
+				AND t.FILING_ID = #{params.filingId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyIdPs)">
+				AND t.COMPANY_ID_PS = #{params.companyIdPs}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.companyNamePs)">
+				AND t.COMPANY_NAME_PS = #{params.companyNamePs}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.purchasePrice)">
+				AND t.PURCHASE_PRICE = #{params.purchasePrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.purchaseCount)">
+				AND t.PURCHASE_COUNT = #{params.purchaseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{params.purchaseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isRead)">
+				AND t.IS_READ = #{params.isRead}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.readUserId)">
+				AND t.READ_USER_ID = #{params.readUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.readUserName)">
+				AND t.READ_USER_NAME = #{params.readUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.readTime)">
+				AND t.READ_TIME = #{params.readTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{params.confirmUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{params.confirmUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.confirmTime)">
+				AND t.CONFIRM_TIME = #{params.confirmTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.confirmState)">
+				AND t.CONFIRM_STATE = #{params.confirmState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{params.orderdetailState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.refuseReason)">
+				AND t.REFUSE_REASON = #{params.refuseReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{params.detailDistributeAddress}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{params.totalDistributeCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{params.totalDistributeAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{params.totalWarehouseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{params.totalWarehouseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{params.totalReturnAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{params.totalReturnCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isUsing)">
+				AND t.IS_USING = #{params.isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.compRatio)">
+				AND t.COMP_RATIO = #{params.compRatio}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{params.orderCustomInfo}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.ADD_USER_ID = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.ADD_USER_NAME = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.ADD_TIME = #{params.addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{params.lastUpdateTime}
+		    </if>
+		</where>
+	</update>
+
+
+	<select id="getYLOkList" parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" />
+		FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			t.ORDERDETAIL_STATE in (4,5)
+			AND t.HOSPITAL_ID = #{hospitalId}
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.goods_id like CONCAT(CONCAT('%',#{goodsId}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(outlook)">
+				AND t.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME like CONCAT(CONCAT('%',#{orderName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND (t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%') or t.PRODUCT_SPEL_NAME like CONCAT(CONCAT('%',#{productName}), '%'))
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME like CONCAT(CONCAT('%', #{goodsName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+			</if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<select id="getYLAllList" parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" />
+		FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			t.ORDERDETAIL_STATE in (1,2,3)
+			 AND t.HOSPITAL_ID = #{hospitalId}
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.goods_id like CONCAT(CONCAT('%',#{goodsId}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(outlook)">
+				AND t.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME like CONCAT(CONCAT('%',#{orderName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND (t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%') or t.PRODUCT_SPEL_NAME like CONCAT(CONCAT('%',#{productName}), '%'))
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME like CONCAT(CONCAT('%', #{goodsName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<select id="getRetNoFinishList" parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" />
+		 FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND t.COMPANY_ID_TB = #{companyIdTb}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{orderdetailRetId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID = #{goodsId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productWbName)">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME = #{goodsName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL = #{medicinemodel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK = #{outlook}
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyIdSc)">
+				AND t.COMPANY_ID_SC = #{companyIdSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{splitCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{trustCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{companyNameTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(middlePack)">
+				AND t.MIDDLE_PACK = #{middlePack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maxPack)">
+				AND t.MAX_PACK = #{maxPack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{isBaseDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualityLevel)">
+				AND t.QUALITY_LEVEL = #{qualityLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseType)">
+				AND t.PURCHASE_TYPE = #{purchaseType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME = #{sourceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(usingRang)">
+				AND t.USING_RANG = #{usingRang}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{belongOrgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingId)">
+				AND t.FILING_ID = #{filingId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyIdPs)">
+				AND t.COMPANY_ID_PS = #{companyIdPs}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+
+		    <if test="ratio == 0">
+				AND (t.COMP_RATIO <![CDATA[<]]> 1 or t.COMP_RATIO is null)
+		    </if>
+		     <if test="ratio == 1">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchasePrice)">
+				AND t.PURCHASE_PRICE = #{purchasePrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseCount)">
+				AND t.PURCHASE_COUNT = #{purchaseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{purchaseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isRead)">
+				AND t.IS_READ = #{isRead}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserId)">
+				AND t.READ_USER_ID = #{readUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserName)">
+				AND t.READ_USER_NAME = #{readUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readTime)">
+				AND t.READ_TIME = #{readTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{confirmUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{confirmUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmTime)">
+				AND t.CONFIRM_TIME = #{confirmTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailStateList)">
+				AND t.ORDERDETAIL_STATE in
+				<foreach collection="orderdetailStateList" item="val" index="index" open="(" separator="," close=")">
+					#{val}
+				</foreach>
+			</if>
+			<if test="@OGNL@isNotEmpty(refuseReason)">
+				AND t.REFUSE_REASON = #{refuseReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{totalReturnAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{totalReturnCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compRatio)">
+				AND t.COMP_RATIO = #{compRatio}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{orderCustomInfo}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		     <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<select id="getRetFinishList" parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" />
+		FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			t.ORDERDETAIL_STATE in (4,5)
+			<if test="@OGNL@isNotEmpty(orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{orderdetailRetId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID = #{goodsId}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productWbName)">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME = #{goodsName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL = #{medicinemodel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK like CONCAT(CONCAT('%', #{outlook}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyIdSc)">
+				AND t.COMPANY_ID_SC = #{companyIdSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{splitCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{trustCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND t.COMPANY_ID_TB = #{companyIdTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{companyNameTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(middlePack)">
+				AND t.MIDDLE_PACK = #{middlePack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maxPack)">
+				AND t.MAX_PACK = #{maxPack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{isBaseDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualityLevel)">
+				AND t.QUALITY_LEVEL = #{qualityLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseType)">
+				AND t.PURCHASE_TYPE = #{purchaseType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME = #{sourceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(usingRang)">
+				AND t.USING_RANG = #{usingRang}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{belongOrgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingId)">
+				AND t.FILING_ID = #{filingId}
+		    </if>
+
+
+
+		    <if test="@OGNL@isNotEmpty(companyIdPs)">
+				AND t.COMPANY_ID_PS = #{companyIdPs}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+
+		    <if test="ratio == 0">
+				AND (t.COMP_RATIO <![CDATA[<]]> 1 or t.COMP_RATIO is null)
+		    </if>
+		     <if test="ratio == 1">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+
+
+
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchasePrice)">
+				AND t.PURCHASE_PRICE = #{purchasePrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseCount)">
+				AND t.PURCHASE_COUNT = #{purchaseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{purchaseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isRead)">
+				AND t.IS_READ = #{isRead}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserId)">
+				AND t.READ_USER_ID = #{readUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserName)">
+				AND t.READ_USER_NAME = #{readUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readTime)">
+				AND t.READ_TIME = #{readTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{confirmUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{confirmUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmTime)">
+				AND t.CONFIRM_TIME = #{confirmTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(refuseReason)">
+				AND t.REFUSE_REASON = #{refuseReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{totalReturnAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{totalReturnCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compRatio)">
+				AND t.COMP_RATIO = #{compRatio}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{orderCustomInfo}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<select id="getExportExcelData" parameterType="map" resultType="hashmap">
+	select t.ORDERDETAIL_STATE "订单执行状态",
+        t.SUBMIT_TIME "申请单日期",
+        t.ORDER_NAME "申请单名称",
+        t.ORDER_ID "订单编号",
+        t.HOSPITAL_NAME "退货单位",
+        t.goods_id "疫苗编号",
+        t.PRODUCT_NAME "疫苗通用名",
+		t.GOODS_NAME "疫苗名称",
+		concat(case when t.OUTLOOK is null then "" else t.OUTLOOK end,' (',case when t.MEDICINEMODEL is null then "" else t.MEDICINEMODEL end,')') "制剂规格（申报剂型）",
+		concat(case when t.COMPANY_NAME_SC is null then "" else t.COMPANY_NAME_SC end,' (',case when t.COMPANY_NAME_TB is null then "" else t.COMPANY_NAME_TB end,')') "生产企业（投标企业）",
+        t.COMPANY_NAME_PS "配送企业",
+        t.UNIT "最小制剂单位",
+        t.PURCHASE_COUNT "申请退货数量",
+        t.PURCHASE_PRICE "退货单价",
+        t.PURCHASE_AMOUNT "申请退货金额",
+        t.ORDER_CUSTOM_INFO "备注",
+        t.REFUSE_REASON "未退货原因",
+        t.RETURN_REASON "退货原因",
+        t.TOTAL_RETURN_COUNT "已退货数量",
+        t.TOTAL_RETURN_AMOUNT "已退货金额",
+        t.COMP_RATIO*100 "完成率（%）"  from (
+		SELECT * FROM YIMIAO_ORDERDETAIL_RET m
+		<where>
+			m.ORDERDETAIL_STATE IN (4,5) and m.is_using = 1
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND m.HOSPITAL_ID = #{hospitalId}
+			</if>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND m.COMPANY_ID_TB = #{companyIdTb}
+			</if>
+            <if test="@OGNL@isNotEmpty(orderId)">
+                AND m.ORDER_ID = #{orderId}
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsId)">
+                AND m.goods_id like CONCAT(CONCAT('%',#{goodsId}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                AND m.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(orderName)">
+                AND m.ORDER_NAME like CONCAT(CONCAT('%',#{orderName}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND (m.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%') or m.PRODUCT_SPEL_NAME like CONCAT(CONCAT('%',#{productName}), '%'))
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsName)">
+                AND m.GOODS_NAME like CONCAT(CONCAT('%', #{goodsName}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(hospitalName)">
+                AND m.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(companyNameSc)">
+                AND m.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(companyNamePs)">
+                AND m.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(orderdetailState)">
+                AND m.ORDERDETAIL_STATE = #{orderdetailState}
+            </if>
+            <if test="@OGNL@isNotEmpty(startTime)">
+                AND m.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="@OGNL@isNotEmpty(endTime)">
+                AND m.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="@OGNL@isNotEmpty(bufen)">
+                AND m.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+            </if>
+            <if test="@OGNL@isNotEmpty(wancheng)">
+                AND m.COMP_RATIO = 1
+            </if>
+            <if test="@OGNL@isNotEmpty(Psing)">
+                AND m.COMP_RATIO = 0
+            </if>
+		</where>
+		) t
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<!--未完成退货记录  -->
+	<select id="getExportExcelDataNo" parameterType="map" resultType="hashmap">
+		select  t.ORDERDETAIL_STATE "订单执行状态",
+        t.SUBMIT_TIME "订单日期",
+        t.ORDER_NAME "申请单名称",
+        t.goods_id "疫苗编号",
+        t.ORDER_ID "订单编号",
+        t.HOSPITAL_NAME "退货单位",
+        t.PRODUCT_NAME "疫苗通用名",
+		t.GOODS_NAME "疫苗名称",
+		concat(case when t.OUTLOOK is null then "" else t.OUTLOOK end,' (',case when t.MEDICINEMODEL is null then "" else t.MEDICINEMODEL end,')') "制剂规格（申报剂型）",
+		concat(case when t.COMPANY_NAME_SC is null then "" else t.COMPANY_NAME_SC end,' (',case when t.COMPANY_NAME_TB is null then "" else t.COMPANY_NAME_TB end,')') "生产企业（投标企业）",
+        t.COMPANY_NAME_PS "配送企业",
+        t.UNIT "最小制剂单位",
+        t.PURCHASE_COUNT "申请退货数量",
+        t.PURCHASE_PRICE "退货单价",
+        t.PURCHASE_AMOUNT "申请退货金额",
+        t.ORDER_CUSTOM_INFO "备注",
+        t.REFUSE_REASON "未退货原因",
+        t.RETURN_REASON "申请退货原因",
+        t.TOTAL_RETURN_COUNT "已退货数量",
+        t.TOTAL_RETURN_AMOUNT "已退货金额",
+        t.COMP_RATIO*100 "完成率（%）" from (
+		SELECT m.* FROM YIMIAO_ORDERDETAIL_RET m
+		left join std_hospital d on d.hospital_id=m.hospital_id
+		<where>
+			m.ORDERDETAIL_STATE in (1,2,3)
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND m.HOSPITAL_ID = #{hospitalId}
+			</if>
+            <if test="@OGNL@isNotEmpty(orderId)">
+                AND m.ORDER_ID = #{orderId}
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsId)">
+                AND m.goods_id like CONCAT(CONCAT('%',#{goodsId}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(outlook)">
+                AND m.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(orderName)">
+                AND m.ORDER_NAME like CONCAT(CONCAT('%',#{orderName}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(productName)">
+                AND (m.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%') or m.PRODUCT_SPEL_NAME like CONCAT(CONCAT('%',#{productName}), '%'))
+            </if>
+            <if test="@OGNL@isNotEmpty(goodsName)">
+                AND m.GOODS_NAME like CONCAT(CONCAT('%', #{goodsName}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(hospitalName)">
+                AND m.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(companyNameSc)">
+                AND m.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(companyNamePs)">
+                AND m.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(orderdetailState)">
+                AND m.ORDERDETAIL_STATE = #{orderdetailState}
+            </if>
+            <if test="@OGNL@isNotEmpty(startTime)">
+                AND m.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="@OGNL@isNotEmpty(endTime)">
+                AND m.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="@OGNL@isNotEmpty(bufen)">
+                AND m.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+            </if>
+            <if test="@OGNL@isNotEmpty(wancheng)">
+                AND m.COMP_RATIO = 1
+            </if>
+            <if test="@OGNL@isNotEmpty(Psing)">
+                AND m.COMP_RATIO = 0
+            </if>
+		</where>
+
+		) t
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<!--未完成退货记录  -->
+	<select id="getExportExcelDataNoSc" parameterType="map" resultType="hashmap">
+		select  t.ORDERDETAIL_STATE "订单执行状态",
+		t.SUBMIT_TIME "申请单日期",
+		t.ORDER_NAME "申请单名称",
+		t.goods_id "疫苗编号",
+		t.ORDER_ID "订单编号",
+		t.HOSPITAL_NAME "退货单位",
+		t.PRODUCT_NAME "疫苗通用名",
+		t.GOODS_NAME "疫苗名称",
+		concat(case when t.OUTLOOK is null then "" else t.OUTLOOK end,' (',case when t.MEDICINEMODEL is null then "" else t.MEDICINEMODEL end,')') "制剂规格（申报剂型）",
+		concat(case when t.COMPANY_NAME_SC is null then "" else t.COMPANY_NAME_SC end,' (',case when t.COMPANY_NAME_TB is null then "" else t.COMPANY_NAME_TB end,')') "生产企业（投标企业）",
+		t.COMPANY_NAME_PS "配送企业",
+		t.UNIT "最小制剂单位",
+		t.PURCHASE_COUNT "申请退货数量",
+		t.PURCHASE_PRICE "退货单价",
+		t.PURCHASE_AMOUNT "申请退货金额",
+		t.ORDER_CUSTOM_INFO "备注",
+		t.REFUSE_REASON "未退货原因",
+		t.RETURN_REASON "申请退货原因",
+		t.TOTAL_RETURN_COUNT "已退货数量",
+		t.TOTAL_RETURN_AMOUNT "已退货金额",
+		t.COMP_RATIO*100 "完成率（%）" from (
+		SELECT m.* FROM YIMIAO_ORDERDETAIL_RET m
+		left join std_hospital d on d.hospital_id=m.hospital_id
+		<where>
+			m.ORDERDETAIL_STATE in (2)
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND m.COMPANY_ID_TB = #{companyIdTb}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND m.ORDER_ID = #{orderId}
+			</if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND m.goods_id like CONCAT(CONCAT('%',#{goodsId}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND m.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND m.ORDER_NAME like CONCAT(CONCAT('%',#{orderName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND (m.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%') or m.PRODUCT_SPEL_NAME like CONCAT(CONCAT('%',#{productName}), '%'))
+			</if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND m.GOODS_NAME like CONCAT(CONCAT('%', #{goodsName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND m.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND m.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND m.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND m.ORDERDETAIL_STATE = #{orderdetailState}
+			</if>
+			<if test="@OGNL@isNotEmpty(startTime)">
+				AND m.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+			</if>
+			<if test="@OGNL@isNotEmpty(endTime)">
+				AND m.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+			</if>
+			<if test="@OGNL@isNotEmpty(bufen)">
+				AND m.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+			</if>
+			<if test="@OGNL@isNotEmpty(wancheng)">
+				AND m.COMP_RATIO = 1
+			</if>
+			<if test="@OGNL@isNotEmpty(Psing)">
+				AND m.COMP_RATIO = 0
+			</if>
+		</where>
+
+		) t
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<!--退货记录  -->
+	<select id="getExportExcelDataWSJ" parameterType="map" resultType="hashmap">
+		SELECT t.SUBMIT_TIME "申请单日期",
+			t.ORDER_NAME "申请单名称",
+			t.HOSPITAL_NAME "采购单位",
+			t.goods_id "疫苗编号",
+			t.PRODUCT_NAME "疫苗名称",
+			concat(case when t.OUTLOOK is null then "" else t.OUTLOOK end,' (',case when t.MEDICINEMODEL is null then "" else t.MEDICINEMODEL end,')') "制剂规格（申报剂型）",
+			concat(case when t.COMPANY_NAME_SC is null then "" else t.COMPANY_NAME_SC end,' (',case when t.COMPANY_NAME_TB is null then "" else t.COMPANY_NAME_TB end,')') "生产企业（投标企业）",
+			t.COMPANY_NAME_PS "配送企业",
+			t.UNIT "最小制剂单位",
+			t.PURCHASE_PRICE "退货单价",
+        	t.PURCHASE_COUNT "申请退货数量",
+        	t.PURCHASE_AMOUNT "申请退货金额",
+			t.ORDER_CUSTOM_INFO "退货原因",
+			t.ORDERDETAIL_STATE "订单执行状态",
+			t.REFUSE_REASON "未退货原因",
+			t.TOTAL_RETURN_AMOUNT "已退货金额",
+        	t.TOTAL_RETURN_COUNT "已退货数量",
+        	t.COMP_RATIO*100 "完成率（%）"
+	    FROM  YIMIAO_ORDERDETAIL_RET t
+		left join std_hospital d on d.hospital_id=t.hospital_id
+		<where>
+			<if test="@OGNL@isNotEmpty(areaId)">
+     		    AND d.AREA_ID like CONCAT(#{areaId}, '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{orderdetailRetId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID like CONCAT(CONCAT('%',#{goodsId}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(outlook)">
+				AND t.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.product_name like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productWbName)">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME = #{goodsName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL = #{medicinemodel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK like CONCAT(CONCAT('%', #{outlook}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{splitCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{trustCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND t.COMPANY_ID_TB = #{companyIdTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{companyNameTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(middlePack)">
+				AND t.MIDDLE_PACK = #{middlePack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maxPack)">
+				AND t.MAX_PACK = #{maxPack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{isBaseDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualityLevel)">
+				AND t.QUALITY_LEVEL = #{qualityLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseType)">
+				AND t.PURCHASE_TYPE = #{purchaseType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME = #{sourceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(usingRang)">
+				AND t.USING_RANG = #{usingRang}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{belongOrgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingId)">
+				AND t.FILING_ID = #{filingId}
+		    </if>
+
+
+
+		    <if test="@OGNL@isNotEmpty(companyIdPs)">
+				AND t.COMPANY_ID_PS = #{companyIdPs}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+
+		    <if test="ratio == 0">
+				AND (t.COMP_RATIO <![CDATA[<]]> 1 or t.COMP_RATIO is null)
+		    </if>
+		     <if test="ratio == 1">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+
+
+
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchasePrice)">
+				AND t.PURCHASE_PRICE = #{purchasePrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseCount)">
+				AND t.PURCHASE_COUNT = #{purchaseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{purchaseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isRead)">
+				AND t.IS_READ = #{isRead}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserId)">
+				AND t.READ_USER_ID = #{readUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserName)">
+				AND t.READ_USER_NAME = #{readUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readTime)">
+				AND t.READ_TIME = #{readTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{confirmUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{confirmUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmTime)">
+				AND t.CONFIRM_TIME = #{confirmTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(refuseReason)">
+				AND t.REFUSE_REASON = #{refuseReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{totalReturnAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{totalReturnCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compRatio)">
+				AND t.COMP_RATIO = #{compRatio}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{orderCustomInfo}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		     <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<select id="getRetFinishCountList" parameterType="map" resultType="hashmap">
+		select sum(t.TOTAL_RETURN_COUNT) "count1",
+			   sum(t.TOTAL_RETURN_AMOUNT) "amount1",
+			   sum(t.TOTAL_RETURN_AMOUNT) "amount2",
+			   sum(t.TOTAL_RETURN_COUNT) "count2",
+			   avg(t.COMP_RATIO*100) "radio"
+		 FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			t.ORDERDETAIL_STATE in (4,5)
+			<if test="@OGNL@isNotEmpty(orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{orderdetailRetId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID = #{goodsId}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productWbName)">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME = #{goodsName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL = #{medicinemodel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK like CONCAT(CONCAT('%', #{outlook}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyIdSc)">
+				AND t.COMPANY_ID_SC = #{companyIdSc}
+		    </if>
+			<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{splitCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{trustCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND t.COMPANY_ID_TB = #{companyIdTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{companyNameTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(middlePack)">
+				AND t.MIDDLE_PACK = #{middlePack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maxPack)">
+				AND t.MAX_PACK = #{maxPack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{isBaseDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualityLevel)">
+				AND t.QUALITY_LEVEL = #{qualityLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseType)">
+				AND t.PURCHASE_TYPE = #{purchaseType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME = #{sourceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(usingRang)">
+				AND t.USING_RANG = #{usingRang}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{belongOrgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingId)">
+				AND t.FILING_ID = #{filingId}
+		    </if>
+
+
+
+		    <if test="@OGNL@isNotEmpty(companyIdPs)">
+				AND t.COMPANY_ID_PS = #{companyIdPs}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+
+		    <if test="ratio == 0">
+				AND (t.COMP_RATIO <![CDATA[<]]> 1 or t.COMP_RATIO is null)
+		    </if>
+		     <if test="ratio == 1">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+
+
+
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchasePrice)">
+				AND t.PURCHASE_PRICE = #{purchasePrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseCount)">
+				AND t.PURCHASE_COUNT = #{purchaseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{purchaseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isRead)">
+				AND t.IS_READ = #{isRead}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserId)">
+				AND t.READ_USER_ID = #{readUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserName)">
+				AND t.READ_USER_NAME = #{readUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readTime)">
+				AND t.READ_TIME = #{readTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{confirmUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{confirmUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmTime)">
+				AND t.CONFIRM_TIME = #{confirmTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(refuseReason)">
+				AND t.REFUSE_REASON = #{refuseReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{totalReturnAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{totalReturnCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compRatio)">
+				AND t.COMP_RATIO = #{compRatio}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{orderCustomInfo}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+		<select id="findCountList" parameterType="map" resultType="hashmap">
+		SELECT
+			sum(t.TOTAL_RETURN_COUNT) "count1",
+			sum(t.TOTAL_RETURN_AMOUNT) "amount1",
+			sum(case when t.ORDERDETAIL_STATE in (4,5) THEN t.TOTAL_RETURN_AMOUNT ELSE 0 END) "amount2",
+			sum(case when t.ORDERDETAIL_STATE in (4,5) THEN t.TOTAL_RETURN_COUNT ELSE 0 END) "count2",
+			avg(t.COMP_RATIO * 100) "radio"
+	    FROM YIMIAO_ORDERDETAIL_RET t
+		left join std_hospital d on d.hospital_id=t.hospital_id
+		<where>
+			<if test="@OGNL@isNotEmpty(areaId)">
+     		    AND d.AREA_ID like CONCAT(#{areaId}, '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{orderdetailRetId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID like CONCAT(CONCAT('%',#{goodsId}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(outlook)">
+				AND t.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.product_name like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productWbName)">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME = #{goodsName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL = #{medicinemodel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK like CONCAT(CONCAT('%', #{outlook}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{splitCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{trustCompanyName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND t.COMPANY_ID_TB = #{companyIdTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{companyNameTb}
+		    </if>
+			<if test="@OGNL@isNotEmpty(middlePack)">
+				AND t.MIDDLE_PACK = #{middlePack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(maxPack)">
+				AND t.MAX_PACK = #{maxPack}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{isBaseDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(qualityLevel)">
+				AND t.QUALITY_LEVEL = #{qualityLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseType)">
+				AND t.PURCHASE_TYPE = #{purchaseType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME = #{sourceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(usingRang)">
+				AND t.USING_RANG = #{usingRang}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug}
+		    </if>
+			<if test="@OGNL@isNotEmpty(belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{belongOrgName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(filingId)">
+				AND t.FILING_ID = #{filingId}
+		    </if>
+
+
+
+		    <if test="@OGNL@isNotEmpty(companyIdPs)">
+				AND t.COMPANY_ID_PS = #{companyIdPs}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%')
+		    </if>
+
+		    <if test="ratio == 0">
+				AND (t.COMP_RATIO <![CDATA[<]]> 1 or t.COMP_RATIO is null)
+		    </if>
+		     <if test="ratio == 1">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+
+
+
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchasePrice)">
+				AND t.PURCHASE_PRICE = #{purchasePrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseCount)">
+				AND t.PURCHASE_COUNT = #{purchaseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{purchaseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isRead)">
+				AND t.IS_READ = #{isRead}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserId)">
+				AND t.READ_USER_ID = #{readUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readUserName)">
+				AND t.READ_USER_NAME = #{readUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(readTime)">
+				AND t.READ_TIME = #{readTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{confirmUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{confirmUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmTime)">
+				AND t.CONFIRM_TIME = #{confirmTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(refuseReason)">
+				AND t.REFUSE_REASON = #{refuseReason}
+		    </if>
+			<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{totalReturnAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{totalReturnCount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compRatio)">
+				AND t.COMP_RATIO = #{compRatio}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{orderCustomInfo}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		     <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<select id="getYLAllCountList" parameterType="map" resultType="hashmap">
+		select
+		sum(t.TOTAL_RETURN_COUNT) "count1",
+		sum(t.TOTAL_RETURN_AMOUNT) "amount1",
+		sum(case when t.ORDERDETAIL_STATE in (4,5) THEN t.TOTAL_RETURN_AMOUNT ELSE 0 END) "amount2",
+		sum(case when t.ORDERDETAIL_STATE in (4,5) THEN t.TOTAL_RETURN_COUNT ELSE 0 END) "count2",
+		avg(t.COMP_RATIO*100) "radio"
+		FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			t.ORDERDETAIL_STATE in (1,2,3) AND t.HOSPITAL_ID = #{hospitalId}
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.goods_id like CONCAT(CONCAT('%',#{goodsId}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(outlook)">
+				AND t.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME like CONCAT(CONCAT('%',#{orderName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND (t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%') or t.PRODUCT_SPEL_NAME like CONCAT(CONCAT('%',#{productName}), '%'))
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND m.ORDERDETAIL_STATE = #{orderdetailState}
+			</if>
+		    <if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+
+	<select id="getYLOkCountList" parameterType="map" resultType="hashmap">
+		select sum(t.TOTAL_RETURN_COUNT) "count1",
+			   sum(t.TOTAL_RETURN_AMOUNT) "amount1",
+			   sum(t.TOTAL_RETURN_AMOUNT) "count2",
+			   sum(t.TOTAL_RETURN_COUNT) "amount2",
+			   avg(t.COMP_RATIO*100) "radio"
+	     FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			t.ORDERDETAIL_STATE in (4,5)  AND t.HOSPITAL_ID = #{hospitalId}
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.goods_id like CONCAT(CONCAT('%',#{goodsId}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(outlook)">
+				AND t.outlook like CONCAT(CONCAT('%',#{outlook}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME like CONCAT(CONCAT('%',#{orderName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND (t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%') or t.PRODUCT_SPEL_NAME like CONCAT(CONCAT('%',#{productName}), '%'))
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND m.ORDERDETAIL_STATE = #{orderdetailState}
+			</if>
+		    <if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+		    </if>
+		    <if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+		    </if>
+		    <if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+		    </if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+	
+	<select id="getRetNoFinishCountList" parameterType="map" resultType="hashmap">
+		SELECT
+		sum(t.TOTAL_RETURN_COUNT) "count1",
+		sum(t.TOTAL_RETURN_AMOUNT) "amount1",
+		sum(case when t.ORDERDETAIL_STATE in (4,5) THEN t.TOTAL_RETURN_AMOUNT ELSE 0 END) "amount2",
+		sum(case when t.ORDERDETAIL_STATE in (4,5) THEN t.TOTAL_RETURN_COUNT ELSE 0 END) "count2",
+		avg(t.COMP_RATIO * 100) "radio"
+		FROM YIMIAO_ORDERDETAIL_RET t
+		<where>
+			<if test="@OGNL@isNotEmpty(companyIdTb)">
+				AND t.COMPANY_ID_TB = #{companyIdTb}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderdetailRetId)">
+				AND t.ORDERDETAIL_RET_ID = #{orderdetailRetId}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+			</if>
+			<if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+			</if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID = #{goodsId}
+			</if>
+
+			<if test="@OGNL@isNotEmpty(productSpelName)">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+			</if>
+			<if test="@OGNL@isNotEmpty(productWbName)">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+			</if>
+			<if test="@OGNL@isNotEmpty(goodsName)">
+				AND t.GOODS_NAME = #{goodsName}
+			</if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL = #{medicinemodel}
+			</if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK = #{outlook}
+			</if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+			</if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+			</if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+			</if>
+			<if test="@OGNL@isNotEmpty(companyIdSc)">
+				AND t.COMPANY_ID_SC = #{companyIdSc}
+			</if>
+			<if test="@OGNL@isNotEmpty(splitCompanyName)">
+				AND t.SPLIT_COMPANY_NAME = #{splitCompanyName}
+			</if>
+			<if test="@OGNL@isNotEmpty(trustCompanyName)">
+				AND t.TRUST_COMPANY_NAME = #{trustCompanyName}
+			</if>
+			<if test="@OGNL@isNotEmpty(companyNameTb)">
+				AND t.COMPANY_NAME_TB = #{companyNameTb}
+			</if>
+			<if test="@OGNL@isNotEmpty(middlePack)">
+				AND t.MIDDLE_PACK = #{middlePack}
+			</if>
+			<if test="@OGNL@isNotEmpty(maxPack)">
+				AND t.MAX_PACK = #{maxPack}
+			</if>
+			<if test="@OGNL@isNotEmpty(isBaseDrug)">
+				AND t.IS_BASE_DRUG = #{isBaseDrug}
+			</if>
+			<if test="@OGNL@isNotEmpty(qualityLevel)">
+				AND t.QUALITY_LEVEL = #{qualityLevel}
+			</if>
+			<if test="@OGNL@isNotEmpty(purchaseType)">
+				AND t.PURCHASE_TYPE = #{purchaseType}
+			</if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+			</if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME = #{sourceName}
+			</if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+			</if>
+			<if test="@OGNL@isNotEmpty(usingRang)">
+				AND t.USING_RANG = #{usingRang}
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+			</if>
+
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+			</if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				AND t.ADMIN_AREA_ID_STATISTICS_DRUG = #{adminAreaIdStatisticsDrug}
+			</if>
+			<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				AND t.ADMIN_AREA_NAME_DRUG = #{adminAreaNameDrug}
+			</if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND t.ADMIN_AREA_ID_DRUG = #{adminAreaIdDrug}
+			</if>
+			<if test="@OGNL@isNotEmpty(belongOrgName)">
+				AND t.BELONG_ORG_NAME = #{belongOrgName}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+			</if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(filingId)">
+				AND t.FILING_ID = #{filingId}
+			</if>
+			<if test="@OGNL@isNotEmpty(companyIdPs)">
+				AND t.COMPANY_ID_PS = #{companyIdPs}
+			</if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC like CONCAT(CONCAT('%',#{companyNameSc}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME like CONCAT(CONCAT('%',#{hospitalName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME like CONCAT(CONCAT('%',#{productName}), '%')
+			</if>
+
+			<if test="ratio == 0">
+				AND (t.COMP_RATIO <![CDATA[<]]> 1 or t.COMP_RATIO is null)
+			</if>
+			<if test="ratio == 1">
+				AND t.COMP_RATIO = 1
+			</if>
+			<if test="@OGNL@isNotEmpty(startTime)">
+				AND t.SUBMIT_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+			</if>
+			<if test="@OGNL@isNotEmpty(endTime)">
+				AND t.SUBMIT_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+			</if>
+			<if test="@OGNL@isNotEmpty(companyNamePs)">
+				AND t.COMPANY_NAME_PS like CONCAT(CONCAT('%',#{companyNamePs}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(purchasePrice)">
+				AND t.PURCHASE_PRICE = #{purchasePrice}
+			</if>
+			<if test="@OGNL@isNotEmpty(purchaseCount)">
+				AND t.PURCHASE_COUNT = #{purchaseCount}
+			</if>
+			<if test="@OGNL@isNotEmpty(purchaseAmount)">
+				AND t.PURCHASE_AMOUNT = #{purchaseAmount}
+			</if>
+			<if test="@OGNL@isNotEmpty(isRead)">
+				AND t.IS_READ = #{isRead}
+			</if>
+			<if test="@OGNL@isNotEmpty(readUserId)">
+				AND t.READ_USER_ID = #{readUserId}
+			</if>
+			<if test="@OGNL@isNotEmpty(readUserName)">
+				AND t.READ_USER_NAME = #{readUserName}
+			</if>
+			<if test="@OGNL@isNotEmpty(readTime)">
+				AND t.READ_TIME = #{readTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(confirmUserId)">
+				AND t.CONFIRM_USER_ID = #{confirmUserId}
+			</if>
+			<if test="@OGNL@isNotEmpty(confirmUserName)">
+				AND t.CONFIRM_USER_NAME = #{confirmUserName}
+			</if>
+			<if test="@OGNL@isNotEmpty(confirmTime)">
+				AND t.CONFIRM_TIME = #{confirmTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(confirmState)">
+				AND t.CONFIRM_STATE = #{confirmState}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderdetailState)">
+				AND t.ORDERDETAIL_STATE = #{orderdetailState}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderdetailStateList)">
+				AND t.ORDERDETAIL_STATE in
+				<foreach collection="orderdetailStateList" item="val" index="index" open="(" separator="," close=")">
+					#{val}
+				</foreach>
+			</if>
+			<if test="@OGNL@isNotEmpty(refuseReason)">
+				AND t.REFUSE_REASON = #{refuseReason}
+			</if>
+			<if test="@OGNL@isNotEmpty(detailDistributeAddress)">
+				AND t.DETAIL_DISTRIBUTE_ADDRESS = #{detailDistributeAddress}
+			</if>
+			<if test="@OGNL@isNotEmpty(totalDistributeCount)">
+				AND t.TOTAL_DISTRIBUTE_COUNT = #{totalDistributeCount}
+			</if>
+			<if test="@OGNL@isNotEmpty(totalDistributeAmount)">
+				AND t.TOTAL_DISTRIBUTE_AMOUNT = #{totalDistributeAmount}
+			</if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseCount)">
+				AND t.TOTAL_WAREHOUSE_COUNT = #{totalWarehouseCount}
+			</if>
+			<if test="@OGNL@isNotEmpty(totalWarehouseAmount)">
+				AND t.TOTAL_WAREHOUSE_AMOUNT = #{totalWarehouseAmount}
+			</if>
+			<if test="@OGNL@isNotEmpty(totalReturnAmount)">
+				AND t.TOTAL_RETURN_AMOUNT = #{totalReturnAmount}
+			</if>
+			<if test="@OGNL@isNotEmpty(totalReturnCount)">
+				AND t.TOTAL_RETURN_COUNT = #{totalReturnCount}
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = #{isUsing}
+			</if>
+			<if test="@OGNL@isNotEmpty(compRatio)">
+				AND t.COMP_RATIO = #{compRatio}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderCustomInfo)">
+				AND t.ORDER_CUSTOM_INFO = #{orderCustomInfo}
+			</if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+			</if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+			</if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(bufen)">
+				AND t.COMP_RATIO &lt; 1 and t.COMP_RATIO &gt; 0
+			</if>
+			<if test="@OGNL@isNotEmpty(wancheng)">
+				AND t.COMP_RATIO = 1
+			</if>
+			<if test="@OGNL@isNotEmpty(Psing)">
+				AND t.COMP_RATIO = 0
+			</if>
+		</where>
+		order by t.SUBMIT_TIME desc
+	</select>
+	
+	<select id="getOrderdetailRetByOrderId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM YIMIAO_ORDERDETAIL_RET t
+		left join std_hospital d on d.hospital_id=t.hospital_id
+		where order_id = #{orderId}
+    </select>
+
+	<select id="toCheckIsWork" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT count(ID)
+		FROM sys_date
+		where DAY_VALUE = #{dateNowStr} AND IS_WORK_DAY = 1
+	</select>
+
+	<select id="toCheckDate" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT count(ID)
+		FROM sys_date
+		where DAY_VALUE BETWEEN #{0} AND #{1} AND IS_WORK_DAY = 1
+	</select>
+
+	<delete id="deleteByIdList" parameterType="map">
+		DELETE FROM YIMIAO_ORDERDETAIL_RET WHERE  ORDERDETAIL_RET_ID in
+		<foreach collection="list" item="var"  index="index" open="(" separator="," close=")">
+			#{var.orderdetailRetId}
+		</foreach>
+	</delete>
+
+
+	<update id="updateByIdList" parameterType="map">
+		UPDATE YIMIAO_ORDERDETAIL_RET a
+		INNER JOIN (
+		<foreach collection="list" item="val" index="index" separator=" UNION ALL ">
+			select
+			#{val.orderdetailRetId}  ORDERDETAIL_RET_ID,
+			#{val.retCount} TOTAL_RETURN_COUNT
+		</foreach>
+		) b on a.ORDERDETAIL_RET_ID = b.ORDERDETAIL_RET_ID
+		SET a.TOTAL_RETURN_COUNT =  b.TOTAL_RETURN_COUNT,
+		a.TOTAL_RETURN_AMOUNT =a.PURCHASE_PRICE*b.TOTAL_RETURN_COUNT
+	</update>
+
+
+	<update id="updateByRetIdForStatus" parameterType="map">
+		UPDATE YIMIAO_ORDERDETAIL_RET a
+		INNER JOIN (
+		<foreach collection="list" item="val" index="index" separator=" UNION ALL ">
+			select
+			#{val.orderdetailRetId}  ORDERDETAIL_RET_ID,
+			#{val.orderdetailState} ORDERDETAIL_STATE,
+			#{val.refuseReason} RETURN_REASON
+		</foreach>
+		) b on a.ORDERDETAIL_RET_ID = b.ORDERDETAIL_RET_ID
+		SET
+		a.ORDERDETAIL_STATE =  b.ORDERDETAIL_STATE,
+		a.REFUSE_REASON =b.RETURN_REASON
+	</update>
+
+	<update id="updateByOrderCount" parameterType="map">
+		UPDATE yimiao_orderdetail c
+		INNER JOIN (
+		SELECT
+		a.ORDERDETAIL_ID ORDERDETAIL_ID,
+		SUM(a.TOTAL_RETURN_COUNT) TOTAL_RETURN_COUNT
+		FROM(
+		<foreach collection="list" item="val" index="index" separator=" UNION ALL ">
+			select
+			#{val.orderDetailId} ORDERDETAIL_ID,
+			#{val.totalReturnCount} TOTAL_RETURN_COUNT
+		</foreach>
+		) a
+		GROUP BY a.ORDERDETAIL_ID
+		) d on c.ORDERDETAIL_ID = d.ORDERDETAIL_ID
+		SET
+		c.TOTAL_RETURN_COUNT = c.TOTAL_RETURN_COUNT - d.TOTAL_RETURN_COUNT
+	</update>
+
+	<select id="toCheckCount" parameterType="map"  resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM (
+		SELECT
+		e.ORDERDETAIL_RET_ID ORDERDETAIL_RET_ID,
+		e.ORDERDETAIL_ID ORDERDETAIL_ID,
+		sum(e.TOTAL_RETURN_COUNT) TOTAL_RETURN_COUNT
+		FROM yimiao_orderdetail_ret e
+		WHERE ORDERDETAIL_RET_ID IN
+		<foreach collection="list" item="var"  index="index" open="(" separator="," close=")">
+			#{var.orderdetailRetId}
+		</foreach>
+		GROUP BY
+		ORDERDETAIL_ID
+		) d,yimiao_orderdetail a
+		INNER JOIN (
+		SELECT
+		c.ORDERDETAIL_ID ORDERDETAIL_ID,
+		sum(c.TOTAL_RETURN_COUNT) TOTAL_RETURN_COUNT
+		FROM (
+		<foreach collection="list" item="var"  index="index" separator=" UNION ALL ">
+			SELECT
+			#{var.orderDetailId} ORDERDETAIL_ID,#{var.retCount} TOTAL_RETURN_COUNT
+		</foreach>
+		) c
+		GROUP BY ORDERDETAIL_ID
+		) b on a.ORDERDETAIL_ID = b.ORDERDETAIL_ID
+		WHERE
+		b.TOTAL_RETURN_COUNT - d.TOTAL_RETURN_COUNT > a.TOTAL_WAREHOUSE_COUNT - a.TOTAL_RETURN_COUNT
+	</select>
+
+
+	<delete id="deleteByMap" parameterType="map">
+		DELETE FROM YIMIAO_ORDERDETAIL_RET WHERE  ORDER_ID in
+		<foreach collection="retorderIdList" item="var"  index="index" open="(" separator="," close=")">
+			#{var}
+		</foreach>
+	</delete>
+</mapper>

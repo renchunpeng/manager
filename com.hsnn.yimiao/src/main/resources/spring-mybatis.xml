@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+">
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<!--<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>-->
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://58.213.112.90:9991/gzym?autoReconnect=true&amp;allowMultiQueries=true&amp;createDatabaseIfNotExist=true&amp;zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+		<property name="username" value="gzym"/>
+		<property name="password" value="P@ssw0rd"/>
+
+<!--
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/test?autoReconnect=true&amp;allowMultiQueries=true&amp;createDatabaseIfNotExist=true&amp;zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8"/>
+-->
+		<!--<property name="url" value="jdbc:mysql://192.168.1.14:3306/gzym?autoReconnect=true&amp;allowMultiQueries=true&amp;createDatabaseIfNotExist=true&amp;zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8"/>-->
+		<!--<property name="username" value="test"/>-->
+		<!--<property name="username" value="gzym"/>-->
+	<!--	<property name="password" value="123456"/>-->
+         <!--
+        TODO: 设置maxActive为100， maxWait为1000 
+            <property name="maxActive" value="10"/>
+            <property name="maxWait" value="10"/>
+         -->
+        <property name="maxActive" value="10"/>
+        <property name="maxWait" value="10"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="defaultAutoCommit" value="true"/>
+<!-- 
+        <property name="validationQuery" value="${jdbc.validationQuery}"/>
+      -->   
+        <property name="testOnBorrow" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="3600000"></property>
+ 		<property name="minEvictableIdleTimeMillis" value="120000"></property>
+    </bean>
+
+	<!-- myBatis文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+		<property name="mapperLocations" value="classpath*:/mappings/**/*Mapper.xml" />
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=mysql
+							<!--dialect=oracle-->
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+		<!-- <property name="typeAliasesPackage" value="com.hsnn.medstgmini.dao" /> 指定TypeHandler所在的包 -->
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.hsnn.medstgmini.**.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 注解方式配置事物 -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+ 
+	<!-- 拦截器方式配置事物 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="batch*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="create*" propagation="SUPPORTS" />
+
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.hsnn.medstgmini..service..*.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
+	</aop:config>
+
+</beans>

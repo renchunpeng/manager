@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysDatainterfaceConfigDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceConfig" id="BaseResultMap">
+        <result property="interfaceId" column="interface_id" javaType="String"/>
+        <result property="interfaceName" column="interface_name" javaType="String"/>
+        <result property="interfaceUrl" column="interface_url" javaType="String"/>
+        <result property="accessIntervalLimit" column="access_interval_limit" javaType="Integer"/>
+        <result property="inputDataCountLimit" column="input_data_count_limit" javaType="Integer"/>
+        <result property="outputDataCountLimit" column="output_data_count_limit" javaType="Integer"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.interface_id,
+        t.interface_name,
+        t.interface_url,
+        t.access_interval_limit,
+        t.input_data_count_limit,
+        t.output_data_count_limit,
+        t.is_using
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM sys_datainterface_config t
+		WHERE t.interface_id =  #{value}
+	</select>
+
+	<insert id="save" useGeneratedKeys="false" keyProperty="interfaceId" parameterType="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceConfig">
+		<selectKey resultType="java.lang.String" keyProperty="interfaceId" order="BEFORE">
+			SELECT SYSDATAINTERFACECONFIGSEQ.nextval from dual 
+        </selectKey>
+		INSERT INTO sys_datainterface_config(
+				interface_id,
+	            interface_name ,
+	            interface_url ,
+	            access_interval_limit ,
+	            input_data_count_limit ,
+	            output_data_count_limit ,
+	            is_using 
+		)
+		VALUES (
+				#{interfaceId},
+	        	#{interfaceName},
+	        	#{interfaceUrl},
+	        	#{accessIntervalLimit},
+	        	#{inputDataCountLimit},
+	        	#{outputDataCountLimit},
+	        	#{isUsing}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceConfig">
+		UPDATE sys_datainterface_config  
+		<set>
+			interface_name = #{interfaceName},
+			interface_url = #{interfaceUrl},
+			access_interval_limit = #{accessIntervalLimit},
+			input_data_count_limit = #{inputDataCountLimit},
+			output_data_count_limit = #{outputDataCountLimit},
+			is_using = #{isUsing},
+        </set>
+		WHERE  interface_id =  #{interfaceId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.sys.model.SysDatainterfaceConfig">
+		UPDATE sys_datainterface_config  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(interfaceName)">
+				interface_name = #{interfaceName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(interfaceUrl)">
+				interface_url = #{interfaceUrl},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(accessIntervalLimit)">
+				access_interval_limit = #{accessIntervalLimit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(inputDataCountLimit)">
+				input_data_count_limit = #{inputDataCountLimit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(outputDataCountLimit)">
+				output_data_count_limit = #{outputDataCountLimit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isUsing)">
+				is_using = #{isUsing},
+			</if>
+        </set>
+		WHERE  interface_id =  #{interfaceId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM sys_datainterface_config WHERE  interface_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_datainterface_config t
+		<where>
+			<if test="@OGNL@isNotEmpty(interfaceId)">
+				AND t.interface_id = #{interfaceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(interfaceType)">
+	            <if test="interfaceType != 'SC'">
+				   AND t.interface_id like '%'||#{interfaceType}||'%'
+				</if>
+				<if test="interfaceType == 'SC'">
+					AND (t.interface_id like '%C%' or t.interface_id like '%S%')
+				</if>
+			</if>
+			<if test="@OGNL@isNotEmpty(interfaceName)">
+				AND t.interface_name like '%'||#{interfaceName}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(interfaceUrl)">
+				AND t.interface_url = #{interfaceUrl}
+		    </if>
+			<if test="@OGNL@isNotEmpty(accessIntervalLimit)">
+				AND t.access_interval_limit = #{accessIntervalLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(inputDataCountLimit)">
+				AND t.input_data_count_limit = #{inputDataCountLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outputDataCountLimit)">
+				AND t.output_data_count_limit = #{outputDataCountLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.is_using = #{isUsing}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_datainterface_config (
+            interface_name ,
+            interface_url ,
+            access_interval_limit ,
+            input_data_count_limit ,
+            output_data_count_limit ,
+            is_using 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.interfaceName},
+        	#{item.interfaceUrl},
+        	#{item.accessIntervalLimit},
+        	#{item.inputDataCountLimit},
+        	#{item.outputDataCountLimit},
+        	#{item.isUsing}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM sys_datainterface_config t
+		<where>
+			<if test="@OGNL@isNotEmpty(interfaceId)">
+				AND t.interface_id = #{interfaceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(interfaceName)">
+				AND t.interface_name = #{interfaceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(interfaceUrl)">
+				AND t.interface_url = #{interfaceUrl}
+		    </if>
+			<if test="@OGNL@isNotEmpty(accessIntervalLimit)">
+				AND t.access_interval_limit = #{accessIntervalLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(inputDataCountLimit)">
+				AND t.input_data_count_limit = #{inputDataCountLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outputDataCountLimit)">
+				AND t.output_data_count_limit = #{outputDataCountLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.is_using = #{isUsing}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE sys_datainterface_config  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.interfaceName)">
+				interface_name = #{model.interfaceName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.interfaceUrl)">
+				interface_url = #{model.interfaceUrl},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.accessIntervalLimit)">
+				access_interval_limit = #{model.accessIntervalLimit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.inputDataCountLimit)">
+				input_data_count_limit = #{model.inputDataCountLimit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.outputDataCountLimit)">
+				output_data_count_limit = #{model.outputDataCountLimit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isUsing)">
+				is_using = #{model.isUsing},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.interfaceId)">
+				AND t.interface_id = #{params.interfaceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.interfaceName)">
+				AND t.interface_name = #{params.interfaceName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.interfaceUrl)">
+				AND t.interface_url = #{params.interfaceUrl}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.accessIntervalLimit)">
+				AND t.access_interval_limit = #{params.accessIntervalLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.inputDataCountLimit)">
+				AND t.input_data_count_limit = #{params.inputDataCountLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.outputDataCountLimit)">
+				AND t.output_data_count_limit = #{params.outputDataCountLimit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isUsing)">
+				AND t.is_using = #{params.isUsing}
+		    </if>
+		</where>
+	</update>
+</mapper>

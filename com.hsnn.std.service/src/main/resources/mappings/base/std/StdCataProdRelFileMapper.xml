@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdCataProdRelFileDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdCataProdRelFile" id="BaseResultMap">
+        <result property="id" column="ID" javaType="String"/>
+        <result property="fileName" column="FILE_NAME" javaType="String"/>
+        <result property="fileOrginalName" column="FILE_ORGINAL_NAME" javaType="String"/>
+        <result property="status" column="STATUS" javaType="Integer"/>
+        <result property="fileType" column="FILE_TYPE" javaType="Integer"/>
+        <result property="userId" column="USER_ID" javaType="String"/>
+        <result property="uploadDatetime" column="UPLOAD_DATETIME" javaType="Date"/>
+        <result property="filePath" column="FILE_PATH" javaType="String"/>
+        <result property="checkFilePath" column="CHECK_FILE_PATH" javaType="String"/>
+        <result property="updUser" column="UPD_USER" javaType="String"/>
+        <result property="updDatetime" column="UPD_DATETIME" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.file_name,
+        t.file_orginal_name,
+        t.status,
+        t.file_type,
+        t.user_id,
+        t.upload_datetime,
+        t.file_path,
+        t.check_file_path,
+        t.upd_user,
+        t.upd_datetime
+	</sql>
+	
+	 <insert id="save"  parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRelFile">
+		INSERT INTO STD_CATA_PROD_REL_FILE(
+				ID,
+		        FILE_NAME,
+		        FILE_ORGINAL_NAME,
+		        STATUS,
+		        FILE_TYPE,
+		        USER_ID,
+		        UPLOAD_DATETIME,
+		        FILE_PATH,
+		        CHECK_FILE_PATH,
+		        UPD_USER,
+		        UPD_DATETIME
+		)
+		VALUES (
+	        	#{id},
+				#{fileName},
+				#{fileOrginalName},
+				#{status},
+				#{fileType},
+				#{userId},
+				#{uploadDatetime},
+				#{filePath},
+				#{checkFilePath},
+				#{updUser},
+				#{updDatetime}
+		)
+	</insert> 
+	
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_CATA_PROD_REL_FILE t
+		WHERE t.ID = #{stdCataProdRelFileId}
+	</select>
+
+</mapper>

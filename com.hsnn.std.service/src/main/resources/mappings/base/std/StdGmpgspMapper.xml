@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdGmpgspDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdGmpgsp" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="companyId" column="company_id" javaType="String"/>
+        <result property="companyName" column="company_name" javaType="String"/>
+        <result property="certificateNumber" column="certificate_number" javaType="String"/>
+        <result property="address" column="address" javaType="String"/>
+        <result property="commRange" column="comm_range" javaType="String"/>
+        <result property="certificateAttachmentId" column="certificate_attachment_id" javaType="String"/>
+        <result property="validStart" column="valid_start" javaType="Date"/>
+        <result property="validEnd" column="valid_end" javaType="Date"/>
+        <result property="delayedDateEnd" column="delayed_date_end" javaType="Date"/>
+        <result property="type" column="type" javaType="Integer"/>
+        <result property="status" column="status" javaType="Integer"/>
+        <result property="isSingleCertificate" column="is_single_certificate" javaType="Integer"/>
+        <result property="certificateItem" column="certificate_item" javaType="String"/>
+        <result property="auditTime" column="audit_time" javaType="Date"/>
+        <result property="auditor" column="auditor" javaType="String"/>
+        <result property="auditRemark" column="audit_remark" javaType="String"/>
+        <result property="isusing" column="isusing" javaType="Boolean"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.company_id,
+        t.company_name,
+        t.certificate_number,
+        t.address,
+        t.comm_range,
+        t.certificate_attachment_id,
+        t.valid_start,
+        t.valid_end,
+        t.delayed_date_end,
+        t.type,
+        t.status,
+        t.is_single_certificate,
+        t.certificate_item,
+        t.audit_time,
+        t.auditor,
+        t.audit_remark,
+        t.isusing,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_gmpgsp where id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from std_gmpgsp where id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from std_gmpgsp 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdGmpgsp">
+		INSERT INTO std_gmpgsp(
+	            company_id ,
+	            company_name ,
+	            certificate_number ,
+	            address ,
+	            comm_range ,
+	            certificate_attachment_id ,
+	            valid_start ,
+	            valid_end ,
+	            delayed_date_end ,
+	            type ,
+	            status ,
+	            is_single_certificate,
+        		certificate_item,
+	            audit_time ,
+	            auditor ,
+	            audit_remark ,
+	            isusing ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{companyId},
+	        	#{companyName},
+	        	#{certificateNumber},
+	        	#{address},
+	        	#{commRange},
+	        	#{certificateAttachmentId},
+	        	#{validStart},
+	        	#{validEnd},
+	        	#{delayedDateEnd},
+	        	#{type},
+	        	#{status},
+	        	#{isSingleCertificate},
+        		#{certificateItem},
+	        	#{auditTime},
+	        	#{auditor},
+	        	#{auditRemark},
+	        	#{isusing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdGmpgsp"
+	 useGeneratedKeys="false" keyProperty="id">
+	 	<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+			SELECT STDGMPGSPSEQ.nextval from dual
+        </selectKey>
+		INSERT INTO std_gmpgsp(
+				id,
+	            company_id ,
+	            company_name ,
+	            certificate_number ,
+	            address ,
+	            comm_range ,
+	            certificate_attachment_id ,
+	            valid_start ,
+	            valid_end ,
+	            delayed_date_end ,
+	            type ,
+	            status ,
+	            is_single_certificate,
+        		certificate_item,
+	            audit_time ,
+	            auditor ,
+	            audit_remark ,
+	            isusing ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+				#{id},
+	        	#{companyId},
+	        	#{companyName},
+	        	#{certificateNumber},
+	        	#{address},
+	        	#{commRange},
+	        	#{certificateAttachmentId},
+	        	#{validStart},
+	        	#{validEnd},
+	        	#{delayedDateEnd},
+	        	#{type},
+	        	#{status},
+	        	#{isSingleCertificate},
+        		#{certificateItem},
+	        	#{auditTime},
+	        	#{auditor},
+	        	#{auditRemark},
+	        	#{isusing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdGmpgsp">
+		UPDATE std_gmpgsp  
+		<set>
+	        	company_id = #{companyId},
+	        	company_name = #{companyName},
+	        	certificate_number = #{certificateNumber},
+	        	address = #{address},
+	        	comm_range = #{commRange},
+	        	certificate_attachment_id = #{certificateAttachmentId},
+	        	valid_start = #{validStart},
+	        	valid_end = #{validEnd},
+	        	delayed_date_end = #{delayedDateEnd},
+	        	type = #{type},
+	        	status = #{status},
+	        	is_single_certificate =#{isSingleCertificate},
+        		certificate_item =#{certificateItem},
+	        	audit_time = #{auditTime},
+	        	auditor = #{auditor},
+	        	audit_remark = #{auditRemark},
+	        	isusing = #{isusing},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = SYSDATE,
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	<update id="updateStdGmpgsp" parameterType="com.hsnn.medstgmini.base.std.model.StdGmpgsp">
+		UPDATE std_gmpgsp t
+		<set>
+	        <if test="@OGNL@isNotEmpty(companyId)">
+	            t.company_id = #{companyId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            t.company_name = #{companyName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(certificateNumber)">
+	            t.certificate_number = #{certificateNumber},
+	        </if>
+			<if test="@OGNL@isNotEmpty(address)">
+	            t.address = #{address},
+	        </if>
+			<if test="@OGNL@isNotEmpty(commRange)">
+	            t.comm_range = #{commRange},
+	        </if>
+			<if test="@OGNL@isNotEmpty(certificateAttachmentId)">
+	            t.certificate_attachment_id = #{certificateAttachmentId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(validStart)">
+	            t.valid_start = #{validStart},
+	        </if>
+			<if test="@OGNL@isNotEmpty(validEnd)">
+	            t.valid_end = #{validEnd},
+	        </if>
+			<if test="@OGNL@isNotEmpty(delayedDateEnd)">
+	            t.delayed_date_end = #{delayedDateEnd},
+	        </if>
+			<if test="@OGNL@isNotEmpty(type)">
+	            t.type = #{type},
+	        </if>
+			<if test="@OGNL@isNotEmpty(status)">
+	            t.status = #{status},
+	        </if>
+			<if test="@OGNL@isNotEmpty(auditTime)">
+	            t.audit_time = #{auditTime},
+	        </if>
+			<if test="@OGNL@isNotEmpty(auditor)">
+	            t.auditor = #{auditor},
+	        </if>
+			<if test="@OGNL@isNotEmpty(auditRemark)">
+	            t.audit_remark = #{auditRemark},
+	        </if>
+			<if test="@OGNL@isNotEmpty(isusing)">
+	            t.isusing = #{isusing},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            t.add_user_id = #{addUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            t.add_user_name = #{addUserName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            t.add_time = #{addTime},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            t.last_update_user_id = #{lastUpdateUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            t.last_update_user_name = #{lastUpdateUserName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            t.last_update_time = #{lastUpdateTime},
+	        </if>
+	        	t.last_update_time = SYSDATE
+        </set>
+		WHERE  t.id =  #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_gmpgsp WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_gmpgsp t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyId)">
+	            AND t.company_id = #{companyId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(companyName)">
+	            AND t.company_name LIKE '%'||#{companyName}||'%'
+	        </if>
+			<if test="@OGNL@isNotEmpty(certificateNumber)">
+	            AND t.certificate_number = #{certificateNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(address)">
+	            AND t.address = #{address}
+	        </if>
+			<if test="@OGNL@isNotEmpty(commRange)">
+	            AND t.comm_range = #{commRange}
+	        </if>
+			<if test="@OGNL@isNotEmpty(certificateAttachmentId)">
+	            AND t.certificate_attachment_id = #{certificateAttachmentId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(validStart)">
+	            AND t.valid_start = #{validStart}
+	        </if>
+			<if test="@OGNL@isNotEmpty(validEnd)">
+	            AND t.valid_end = #{validEnd}
+	        </if>
+			<if test="@OGNL@isNotEmpty(delayedDateEnd)">
+	            AND t.delayed_date_end = #{delayedDateEnd}
+	        </if>
+			<if test="@OGNL@isNotEmpty(type)">
+	            AND t.type = #{type}
+	        </if>
+			<if test="@OGNL@isNotEmpty(status)">
+	            AND t.status = #{status}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(isSingleCertificate)">
+	            AND t.is_single_certificate = #{isSingleCertificate}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(certificateItem)">
+	            AND t.certificate_item = #{certificateItem}
+	        </if>
+			<if test="@OGNL@isNotEmpty(auditTime)">
+	            AND t.audit_time = #{auditTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(auditor)">
+	            AND t.auditor = #{auditor}
+	        </if>
+			<if test="@OGNL@isNotEmpty(auditRemark)">
+	            AND t.audit_remark = #{auditRemark}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isusing)">
+	            AND t.isusing = #{isusing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn) ">
+        ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_gmpgsp (
+            company_id ,
+            company_name ,
+            certificate_number ,
+            address ,
+            comm_range ,
+            certificate_attachment_id ,
+            valid_start ,
+            valid_end ,
+            delayed_date_end ,
+            type ,
+            status ,
+            is_single_certificate,
+        	certificate_item,
+            audit_time ,
+            auditor ,
+            audit_remark ,
+            isusing ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.companyId},
+        	#{item.companyName},
+        	#{item.certificateNumber},
+        	#{item.address},
+        	#{item.commRange},
+        	#{item.certificateAttachmentId},
+        	#{item.validStart},
+        	#{item.validEnd},
+        	#{item.delayedDateEnd},
+        	#{item.type},
+        	#{item.status},
+        	#{item.isSingleCertificate},
+        	#{item.certificateItem},
+        	#{item.auditTime},
+        	#{item.auditor},
+        	#{item.auditRemark},
+        	#{item.isusing},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	SYSDATE,
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+	
+	<update id="batchUpdate">
+		UPDATE std_gmpgsp
+		<set>
+        	<if test="@OGNL@isNotEmpty(stdGmpgsp.isusing)" >
+	        	isusing = #{stdGmpgsp.isusing, jdbcType=VARCHAR},
+	      	</if>
+        	<if test="@OGNL@isNotEmpty(stdGmpgsp.lastUpdateUserId)" >
+	        	last_update_user_id = #{stdGmpgsp.lastUpdateUserId, jdbcType=VARCHAR},
+	      	</if>
+        	<if test="@OGNL@isNotEmpty(stdGmpgsp.lastUpdateUserName)" >
+	        	last_update_user_name = #{stdGmpgsp.lastUpdateUserName, jdbcType=VARCHAR},
+	      	</if>
+	      	last_update_time = SYSDATE
+        </set>
+		WHERE id IN
+		<foreach collection="ids" item="item" index="index" open="(" separator="," close=")">  
+			#{item}  
+        </foreach>  
+	</update>
+</mapper>

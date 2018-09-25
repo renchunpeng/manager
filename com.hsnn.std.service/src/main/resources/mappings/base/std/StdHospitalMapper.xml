@@ -1,0 +1,1509 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdHospitalDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdHospital" id="BaseResultMap">
+        <result property="hospitalId" column="hospital_id" javaType="String"/>
+        <result property="hospitalName" column="hospital_name" javaType="String"/>
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="hospSpelCode" column="hosp_spel_code" javaType="String"/>
+        <result property="hospShortName" column="hosp_short_name" javaType="String"/>
+        <result property="hospShortSpelCode" column="hosp_short_spel_code" javaType="String"/>
+        <result property="hospitalAddress" column="hospital_address" javaType="String"/>
+        <result property="areaName" column="area_name" javaType="String"/>
+        <result property="areaId" column="area_id" javaType="Integer"/>
+        <result property="contactPerson" column="contact_person" javaType="String"/>
+        <result property="contactTel" column="contact_tel" javaType="String"/>
+        <result property="contactEmail" column="contact_email" javaType="String"/>
+        <result property="contactQq" column="contact_qq" javaType="String"/>
+        <result property="hospitalLevel" column="hospital_level" javaType="String"/>
+        <result property="drugPurchaseProperty" column="drug_purchase_property" javaType="Integer"/>
+        <result property="adminAreaNameDrug" column="admin_area_name_drug" javaType="String"/>
+        <result property="adminAreaIdDrug" column="admin_area_id_drug" javaType="Integer"/>
+        <result property="adminAreaIdStatisticsDrug" column="admin_area_id_statistics_drug" javaType="Integer"/>
+        <result property="adminAreaNameStatisticsDrug" column="admin_area_name_stats_drug" javaType="String"/>
+        <result property="adminAreaIdStatisticsSupplies" column="admin_area_id_stats_supplies" javaType="Integer"/>
+        <result property="adminAreaNameStatisticsSupplies" column="admin_area_name_stats_supplies" javaType="String"/>
+        <result property="adminAreaIdDrug" column="admin_area_id_drug" javaType="Integer"/>
+        <result property="adminAreaNameSupplies" column="admin_area_name_supplies" javaType="String"/>
+        <result property="adminAreaIdSupplies" column="admin_area_id_supplies" javaType="Integer"/>
+        <result property="healthOrganizationCode" column="health_organization_code" javaType="String"/>
+        <result property="organizers" column="organizers" javaType="String"/>
+        <result property="bedNumber" column="bed_number" javaType="Integer"/>
+        <result property="technicalStaff" column="technical_staff" javaType="Integer"/>
+        <result property="legalName" column="legal_name" javaType="String"/>
+        <result property="legalNumber" column="legal_number" javaType="String"/>
+        <result property="legalScanAttachId" column="legal_scan_attach_id" javaType="String"/>
+        <result property="legalCellphone" column="legal_cellphone" javaType="String"/>
+        <result property="legalPhone" column="legal_phone" javaType="String"/>
+        <result property="isDrugDesignated" column="is_drug_designated" javaType="Integer"/>
+ 		<result property="isBillingHospital" column="is_billing_hospital" javaType="Integer"/>        
+ 		<result property="governmentOfficeAffiliationCode" column="government_affiliation_code" javaType="String"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="dealReason" column="deal_reason" javaType="String"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="hospLiceNo" column="hosp_lice_no" javaType="String"/>
+        <result property="hospLiceStartDate" column="hosp_lice_start_date" javaType="Date"/>
+        <result property="hospLiceEndDate" column="hosp_lice_end_date" javaType="Date"/>
+        <result property="enterLiceNo" column="enter_lice_no" javaType="String"/>
+        <result property="enterLiceStartDate" column="enter_lice_start_date" javaType="Date"/>
+        <result property="enterLiceEndDate" column="enter_lice_end_date" javaType="Date"/>
+        <result property="incomPatNum" column="incom_pat_num" javaType="BigDecimal"/>
+        <result property="regCap" column="reg_cap" javaType="BigDecimal"/>
+        <result property="initializationState" column="initialization_state" javaType="Integer"/>
+        <result property="audittRemarks" column="auditt_remarks" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <!-- 增加字段 -->
+        <result property="bankAuditState" column="bank_audit_state" javaType="Integer"/>
+         <result property="bankAuditUserId" column="bank_audit_user_id" javaType="String"/>
+         <result property="bankAuditUserName" column="bank_audit_user_name" javaType="String"/>
+         <result property="bankAuditTime" column="bank_audit_time" javaType="Date"/>        
+         <result property="bankBasicAccount" column="bank_basic_account" javaType="String"/>
+         <result property="bankBasicName" column="bank_basic_name" javaType="String"/>       
+         <result property="bankLoanAccount" column="bank_loan_account" javaType="String"/>
+         <result property="loanName" column="loan_name" javaType="String"/> 
+         <result property="bankName" column="bank_name" javaType="String"/> 
+         <result property="bankSubmitTime" column="bank_submit_time" javaType="Date"/>  
+         <result property="bankAuditSecondState" column="bank_audit_second_state" javaType="Integer"/> 
+         <result property="bankAuditSecondUserId" column="bank_audit_second_user_id" javaType="String"/> 
+         <result property="bankAuditSecondUserName" column="bank_audit_second_user_name" javaType="String"/> 
+         <result property="bankAuditSecondTime" column="bank_audit_second_time" javaType="Date"/> 
+         <result property="organizationCode" column="organization_code" javaType="String"/>
+         <result property="administrativeAreaCode" column="administrative_area_code" javaType="String"/>
+         <result property="economicTypeCode" column="economic_type_code" javaType="String"/>
+         <result property="organizationClassCode" column="organization_class_code" javaType="String"/>
+         <result property="organizationManagementCode" column="organization_management_code" javaType="String"/>
+
+		<result property="diancount" column="diancount" javaType="Integer"/>
+		<result property="caicount" column="caicount" javaType="Integer"/>
+		<result property="ze" column="ze" javaType="BigDecimal"/>
+		<result property="sj" column="sj" javaType="BigDecimal"/>
+		<result property="ky" column="ky" javaType="BigDecimal"/>
+		<result property="dj" column="dj" javaType="BigDecimal"/>
+
+		<result property="orderControl" column="ORDER_CONTROL" javaType="String"/>
+
+        <!-- 拓展字段 -->
+        <result property="paid" column="paid" javaType="BigDecimal"/>
+		<result property="nopaid" column="nopaid" javaType="BigDecimal"/>
+		<result property="areaName" column="area_name" javaType="String"/>
+         <association property="area" javaType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="com.hsnn.medstgmini.base.std.dao.StdAreaDao.BaseResultMap"></association>
+        <association columnPrefix="xz_" property="areaIdName" javaType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="com.hsnn.medstgmini.base.std.dao.StdAreaDao.BaseResultMap"></association>
+        <association columnPrefix="yp_" property="adminAreaIdDrugName" javaType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="com.hsnn.medstgmini.base.std.dao.StdAreaDao.BaseResultMap"></association>
+		<association columnPrefix="hc_" property="adminAreaIdSuppliesName" javaType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="com.hsnn.medstgmini.base.std.dao.StdAreaDao.BaseResultMap"></association>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.hospital_id,
+        t.hospital_name,
+        t.user_name,
+        t.hosp_spel_code,
+        t.hosp_short_name,
+        t.hosp_short_spel_code,
+        t.hospital_address,
+        t.area_name,
+        t.area_id,
+        t.contact_person,
+        t.contact_tel,
+        t.contact_email,
+        t.contact_qq,
+        t.hospital_level,
+        t.drug_purchase_property,
+        t.admin_area_name_drug,
+        t.admin_area_id_drug,
+        t.admin_area_name_stats_drug,
+        t.admin_area_id_statistics_drug,
+        t.admin_area_name_supplies,
+        t.admin_area_id_supplies,
+        t.admin_area_name_stats_supplies,
+        t.admin_area_id_stats_supplies,
+        t.health_organization_code,
+        t.organizers,
+        t.bed_number,
+        t.technical_staff,
+        t.legal_name,
+        t.legal_number,
+        t.legal_scan_attach_id,
+        t.legal_cellphone,
+        t.legal_phone,
+        t.is_drug_designated,
+        t.is_billing_hospital,
+        t.government_affiliation_code,
+        t.is_using,
+        t.deal_reason,
+        t.add_user_id,
+        t.hosp_lice_no,
+        t.hosp_lice_start_date,
+        t.hosp_lice_end_date,
+        t.enter_lice_no,
+        t.enter_lice_start_date,
+        t.enter_lice_end_date,
+        t.incom_pat_num,
+        t.reg_cap,
+        t.initialization_state,
+        t.auditt_remarks,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,       
+        t.bank_basic_account,<!-- 新增字段  -->
+        t.bank_basic_name,
+        t.bank_loan_account,
+        t.loan_name,
+        t.bank_audit_state,
+        t.bank_audit_user_id,
+        t.bank_audit_user_name,
+        t.bank_audit_time,
+        t.bank_name,
+        t.bank_submit_time,
+        t.bank_audit_second_state,
+        t.bank_audit_second_user_id,
+        t.bank_audit_second_user_name,
+        t.bank_audit_second_time,
+        t.organization_code,
+        t.administrative_area_code,
+        t.economic_type_code,
+        t.organization_class_code,
+        t.organization_management_code,
+        t.ORDER_CONTROL
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from std_hospital where hospital_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		,t.area_name as xz_area_name
+		,t.admin_area_name_drug as yp_area_name
+		,t.admin_area_name_supplies as hc_area_name
+		from std_hospital t
+		where hospital_id =  #{value}
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		INSERT INTO std_hospital(
+	            hospital_name ,
+	            hosp_spel_code ,
+	            hosp_short_name ,
+	            hosp_short_spel_code ,
+	            hospital_address ,
+	            area_name ,
+	            area_id ,
+	            contact_person ,
+	            contact_tel ,
+	            contact_email ,
+	            contact_qq ,
+	            hospital_level ,
+	            drug_purchase_property ,
+	            admin_area_name_drug ,
+	            admin_area_id_drug ,
+	            admin_area_name_supplies ,
+	            admin_area_id_supplies ,
+	            health_organization_code ,
+	            organizers ,
+	            bed_number ,
+	            technical_staff ,
+	            legal_name ,
+	            legal_number ,
+	            legal_scan_attach_id ,
+	            legal_cellphone ,
+	            legal_phone ,
+	            is_drug_designated ,
+	            is_billing_hospital,
+	            government_affiliation_code ,
+	            is_using ,
+	            add_user_id ,
+	            hosp_lice_no ,
+	            hosp_lice_start_date ,
+	            hosp_lice_end_date ,
+	            enter_lice_no ,
+	            enter_lice_start_date ,
+	            enter_lice_end_date ,
+	            incom_pat_num ,
+	            reg_cap ,
+	            initialization_state,
+	            auditt_remarks,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time,
+	            organization_code,
+       	 		administrative_area_code,
+                economic_type_code,
+                organization_class_code,
+                organization_management_code 
+	    ) 
+		VALUES (
+	        	#{hospitalName},
+	        	#{hospSpelCode},
+	        	#{hospShortName},
+	        	#{hospShortSpelCode},
+	        	#{hospitalAddress},
+	        	get_full_name(#{areaId}),
+	        	#{areaId},
+	        	#{contactPerson},
+	        	#{contactTel},
+	        	#{contactEmail},
+	        	#{contactQq},
+	        	#{hospitalLevel},
+	        	#{drugPurchaseProperty},
+	        	get_full_name(#{adminAreaIdDrug}),
+	        	#{adminAreaIdDrug},
+	        	get_full_name(#{adminAreaIdSupplies}),
+	        	#{adminAreaIdSupplies},
+	        	#{healthOrganizationCode},
+	        	#{organizers},
+	        	#{bedNumber},
+	        	#{technicalStaff},
+	        	#{legalName},
+	        	#{legalNumber},
+	        	#{legalScanAttachId},
+	        	#{legalCellphone},
+	        	#{legalPhone},
+	        	#{isDrugDesignated},
+	        	#{isBillingHospital},
+	        	#{governmentOfficeAffiliationCode},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{hospLiceNo},
+	        	#{hospLiceStartDate},
+	        	#{hospLiceEndDate},
+	        	#{enterLiceNo},
+	        	#{enterLiceStartDate},
+	        	#{enterLiceEndDate},
+	        	#{incomPatNum},
+	        	#{regCap},
+	        	#{initializationState},
+	        	#{audittRemarks},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE,
+	        	#{organizationCode},
+	        	#{administrativeAreaCode},
+	        	#{economicTypeCode},
+	        	#{organizationClassCode},
+	        	#{organizationManagementCode} 
+		)
+	</insert>
+	
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		INSERT INTO std_hospital(
+				hospital_id,
+	            hospital_name ,
+	            hosp_spel_code ,
+	            hosp_short_name ,
+	            hosp_short_spel_code ,
+	            hospital_address ,
+	            area_name ,
+	            area_id ,
+	            contact_person ,
+	            contact_tel ,
+	            contact_email ,
+	            contact_qq ,
+	            hospital_level ,
+	            drug_purchase_property ,
+	            admin_area_name_drug ,
+	            admin_area_id_drug ,
+	            admin_area_name_supplies ,
+	            admin_area_id_supplies ,
+	            admin_area_name_stats_drug,
+	            admin_area_id_statistics_drug,
+	            admin_area_name_stats_supplies,
+	            admin_area_id_stats_supplies,
+	            health_organization_code ,
+	            organizers ,
+	            bed_number ,
+	            technical_staff ,
+	            legal_name ,
+	            legal_number ,
+	            legal_scan_attach_id ,
+	            legal_cellphone ,
+	            legal_phone ,
+	            is_drug_designated ,
+	            is_billing_hospital,
+	            government_affiliation_code ,
+	            is_using ,
+	            add_user_id ,
+	            hosp_lice_no ,
+	            hosp_lice_start_date ,
+	            hosp_lice_end_date ,
+	            enter_lice_no ,
+	            enter_lice_start_date ,
+	            enter_lice_end_date ,
+	            incom_pat_num ,
+	            reg_cap ,
+	            initialization_state,
+	            auditt_remarks,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time,
+	            bank_basic_account,<!--新增字段  -->
+                bank_basic_name,               
+                bank_loan_account,
+                loan_name,
+                bank_audit_state,
+        		bank_audit_user_id,
+        		bank_audit_user_name,
+        		bank_audit_time,
+	            organization_code,
+       	 		administrative_area_code,
+                economic_type_code,
+                organization_class_code,
+                organization_management_code,
+		        ORDER_CONTROL
+		) 
+		VALUES (
+				#{hospitalId},
+	        	#{hospitalName},
+	        	pinyin(#{hospitalName}),<!-- 医疗机构名称名片 -->
+	        	#{hospShortName},
+	        	pinyin(#{hospShortName}),<!-- 医疗机构简称拼音 -->
+	        	#{hospitalAddress},
+	        	get_full_name(#{areaId}),
+	        	#{areaId},
+	        	#{contactPerson},
+	        	#{contactTel},
+	        	#{contactEmail},
+	        	#{contactQq},
+	        	#{hospitalLevel},
+	        	#{drugPurchaseProperty},
+	        	get_full_name(#{adminAreaIdDrug}),
+	        	#{adminAreaIdDrug},
+	        	get_full_name(#{adminAreaIdSupplies}),
+	        	#{adminAreaIdSupplies},
+	        	get_full_name(#{adminAreaIdStatisticsDrug}),
+	        	#{adminAreaIdStatisticsDrug},
+	        	get_full_name(#{adminAreaIdStatisticsSupplies}),
+	        	#{adminAreaIdStatisticsSupplies},
+	        	#{healthOrganizationCode},
+	        	#{organizers},
+	        	#{bedNumber},
+	        	#{technicalStaff},
+	        	#{legalName},
+	        	#{legalNumber},
+	        	#{legalScanAttachId},
+	        	#{legalCellphone},
+	        	#{legalPhone},
+	        	#{isDrugDesignated},
+	        	#{isBillingHospital},
+	        	#{governmentOfficeAffiliationCode},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{hospLiceNo},
+	        	#{hospLiceStartDate},
+	        	#{hospLiceEndDate},
+	        	#{enterLiceNo},
+	        	#{enterLiceStartDate},
+	        	#{enterLiceEndDate},
+	        	#{incomPatNum},
+	        	#{regCap},
+	        	#{initializationState},
+	        	#{audittRemarks},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE,
+	        	#{bankBasicAccount},<!--新增字段  --> 
+	        	#{bankBasicName},	        	
+	        	#{bankLoanAccount},
+	        	#{loanName},
+	        	#{bankAuditState},
+	        	#{bankAuditUserId},
+	        	#{bankAuditUserName},
+	        	#{bankAuditTime},
+	        	#{organizationCode},
+	        	#{administrativeAreaCode},
+	        	#{economicTypeCode},
+	        	#{organizationClassCode},
+	        	#{organizationManagementCode},
+		        #{orderControl}
+		)
+	</insert>
+
+	<update id="updateByParams">
+		UPDATE std_hospital  
+		<set>
+			<if test="@OGNL@isNotEmpty(model.hospitalId)">
+				hospital_id = #{model.hospitalId},
+			</if>		   
+	            <if test="@OGNL@isNotEmpty(model.bankBasicAccount)">
+				  bank_basic_account=#{model.bankBasicAccount},
+			    </if>
+			    <if test="@OGNL@isNotEmpty(model.bankBasicName)">
+				 bank_basic_name = #{model.bankBasicName},
+			</if>			
+			<if test="@OGNL@isNotEmpty(model.bankLoanAccount)">
+				 bank_loan_account = #{model.bankLoanAccount},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.loanName)">
+				 loan_name = #{model.loanName},
+			</if>	
+        </set>
+        <where>
+        	<if test="@OGNL@isNotEmpty(params.hospitalId)">
+				AND hospital_id = #{params.hospitalId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(params.bankBasicAccount)">
+				AND bank_basic_account = #{params.bankBasicAccount}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(params.bankBasicName)">
+				AND bank_basic_name = #{params.bankBasicName}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(params.bankLoanAccount)">
+				AND bank_loan_account = #{params.bankLoanAccount}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(params.loanName)">
+				AND loan_name = #{params.loanName}
+		    </if>
+        </where>
+		
+	</update>
+	
+	<update id="updateHosp" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital" >
+
+		UPDATE 
+			std_hospital  
+		SET 
+		<if test="bankAuditState==1">
+				  bank_submit_time = SYSDATE,
+			    </if>
+			bank_audit_state = #{bankAuditState},
+			bank_audit_second_state = #{bankAuditSecondState},
+			bank_basic_account=#{bankBasicAccount},
+			bank_basic_name = #{bankBasicName}, 
+			bank_loan_account = #{bankLoanAccount},
+			loan_name = #{loanName},
+			bank_name = #{bankName},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE
+		WHERE
+			hospital_id=#{hospitalId}
+	
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM std_hospital WHERE  hospital_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_hospital t 
+		<where>
+			<if test="@OGNL@isNotEmpty(listType)">
+	           	NOT EXISTS (
+					SELECT cr.hospital_id FROM drugpur_com_listing_relation cr 
+					WHERE cr.list_type = #{listType}
+					AND t.hospital_id = cr.hospital_id
+					and cr.company_id_ps = #{companyIdPs}
+				)
+	        </if>
+			
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+	            AND t.hospital_id = #{hospitalId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(hospitalIds)">
+	           AND t.hospital_id in
+				<foreach collection="hospitalIds" item="item" index="index" separator="," open="(" close=")">
+					#{item}
+				</foreach>
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+	            AND t.hospital_name like CONCAT(CONCAT('%',#{hospitalName}), '%')
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospSpelCode)">
+	            AND t.hosp_spel_code = #{hospSpelCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospShortName)">
+	            AND t.hosp_short_name like CONCAT(CONCAT('%',#{hospShortName}), '%')
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospShortSpelCode)">
+	            AND t.hosp_short_spel_code = #{hospShortSpelCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospitalAddress)">
+	            AND t.hospital_address = #{hospitalAddress}
+	        </if>
+			<if test="@OGNL@isNotEmpty(areaId)">
+	            AND t.admin_area_id_drug like #{areaId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(contactPerson)">
+	            AND t.contact_person = #{contactPerson}
+	        </if>
+			<if test="@OGNL@isNotEmpty(contactTel)">
+	            AND t.contact_tel = #{contactTel}
+	        </if>
+			<if test="@OGNL@isNotEmpty(contactEmail)">
+	            AND t.contact_email = #{contactEmail}
+	        </if>
+			<if test="@OGNL@isNotEmpty(contactQq)">
+	            AND t.contact_qq = #{contactQq}
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospitalLevel)">
+	            AND t.hospital_level = #{hospitalLevel}
+	        </if>
+			<if test="@OGNL@isNotEmpty(drugPurchaseProperty)">
+	            AND t.drug_purchase_property = #{drugPurchaseProperty}
+	        </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+	            AND t.admin_area_id_drug LIKE #{adminAreaIdDrug}
+	        </if>
+			<if test="@OGNL@isNotEmpty(adminAreaIdSupplies)">
+	            AND t.admin_area_id_supplies = #{adminAreaIdSupplies}
+	        </if>
+			<if test="@OGNL@isNotEmpty(healthOrganizationCode)">
+	            AND t.health_organization_code = #{healthOrganizationCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(organizers)">
+	            AND t.organizers = #{organizers}
+	        </if>
+			<if test="@OGNL@isNotEmpty(bedNumber)">
+	            AND t.bed_number = #{bedNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(technicalStaff)">
+	            AND t.technical_staff = #{technicalStaff}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalName)">
+	            AND t.legal_name = #{legalName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalNumber)">
+	            AND t.legal_number = #{legalNumber}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalScanAttachId)">
+	            AND t.legal_scan_attach_id = #{legalScanAttachId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalCellphone)">
+	            AND t.legal_cellphone = #{legalCellphone}
+	        </if>
+			<if test="@OGNL@isNotEmpty(legalPhone)">
+	            AND t.legal_phone = #{legalPhone}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isDrugDesignated)">
+	            AND t.is_drug_designated = #{isDrugDesignated}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(isBillingHospital)">
+	            AND t.is_billing_hospital = #{isBillingHospital}
+	        </if>
+			<if test="@OGNL@isNotEmpty(governmentOfficeAffiliationCode)">
+	            AND t.government_affiliation_code = #{governmentOfficeAffiliationCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospLiceNo)">
+	            AND t.hosp_lice_no = #{hospLiceNo}
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospLiceStartDate)">
+	            AND t.hosp_lice_start_date = #{hospLiceStartDate}
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospLiceEndDate)">
+	            AND t.hosp_lice_end_date = #{hospLiceEndDate}
+	        </if>
+			<if test="@OGNL@isNotEmpty(enterLiceNo)">
+	            AND t.enter_lice_no = #{enterLiceNo}
+	        </if>
+			<if test="@OGNL@isNotEmpty(enterLiceStartDate)">
+	            AND t.enter_lice_start_date = #{enterLiceStartDate}
+	        </if>
+			<if test="@OGNL@isNotEmpty(enterLiceEndDate)">
+	            AND t.enter_lice_end_date = #{enterLiceEndDate}
+	        </if>
+			<if test="@OGNL@isNotEmpty(incomPatNum)">
+	            AND t.incom_pat_num = #{incomPatNum}
+	        </if>
+			<if test="@OGNL@isNotEmpty(regCap)">
+	            AND t.reg_cap = #{regCap}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(initializationState)">
+	            AND t.initialization_state = #{initializationState}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(audittRemarks)">
+	            AND t.auditt_remarks = #{audittRemarks}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(month)">
+	           AND (DATE_FORMAT(t.last_update_time,'%m') = #{month}
+		            or DATE_FORMAT(t.add_time,'%m')=  #{month})
+	        </if>
+	        <if test="@OGNL@isNotEmpty(userName)">
+	            AND t.user_name like  CONCAT(CONCAT('%',#{userName}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(returnAreaId)">
+	            AND t.admin_area_id_drug like CONCAT(CONCAT('%',#{returnAreaId}), '%')
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn) ">
+        ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<select id="queryAllHospitalbyHospitalName" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_hospital t
+		<where>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+	            AND t.hospital_id = #{hospitalId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+	            AND t.hospital_name = #{hospitalName}
+	        </if>
+	    </where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_hospital (
+            hospital_name ,
+            hosp_spel_code ,
+            hosp_short_name ,
+            hosp_short_spel_code ,
+            hospital_address ,
+            area_name ,
+            area_id ,
+            contact_person ,
+            contact_tel ,
+            contact_email ,
+            contact_qq ,
+            hospital_level ,
+            drug_purchase_property ,
+            admin_area_name_drug ,
+            admin_area_id_drug ,
+            admin_area_name_supplies ,
+            admin_area_id_supplies ,
+            health_organization_code ,
+            organizers ,
+            bed_number ,
+            technical_staff ,
+            legal_name ,
+            legal_number ,
+            legal_scan_attach_id ,
+            legal_cellphone ,
+            legal_phone ,
+            is_drug_designated ,
+            is_billing_hospital,
+            government_affiliation_code ,
+            is_using ,
+            add_user_id ,
+            hosp_lice_no ,
+            hosp_lice_start_date ,
+            hosp_lice_end_date ,
+            enter_lice_no ,
+            enter_lice_start_date ,
+            enter_lice_end_date ,
+            incom_pat_num ,
+            reg_cap ,
+            initialization_state,
+            auditt_remarks,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time,
+            organization_code,
+      	 	administrative_area_code,
+            economic_type_code,
+            organization_class_code,
+            organization_management_code  
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.hospitalName},
+        	#{item.hospSpelCode},
+        	#{item.hospShortName},
+        	#{item.hospShortSpelCode},
+        	#{item.hospitalAddress},
+        	get_full_name(#{item.areaId}),
+        	#{item.areaId},
+        	#{item.contactPerson},
+        	#{item.contactTel},
+        	#{item.contactEmail},
+        	#{item.contactQq},
+        	#{item.hospitalLevel},
+        	#{item.drugPurchaseProperty},
+        	get_full_name(#{item.adminAreaIdDrug}),
+        	#{item.adminAreaIdDrug},
+        	get_full_name(#{item.adminAreaIdSupplies}),
+        	#{item.adminAreaIdSupplies},
+        	#{item.healthOrganizationCode},
+        	#{item.organizers},
+        	#{item.bedNumber},
+        	#{item.technicalStaff},
+        	#{item.legalName},
+        	#{item.legalNumber},
+        	#{item.legalScanAttachId},
+        	#{item.legalCellphone},
+        	#{item.legalPhone},
+        	#{item.isDrugDesignated},
+        	#{item.isBillingHospital},
+        	#{item.governmentOfficeAffiliationCode},
+        	#{item.isUsing},
+        	#{item.addUserId},
+        	#{item.hospLiceNo},
+        	#{item.hospLiceStartDate},
+        	#{item.hospLiceEndDate},
+        	#{item.enterLiceNo},
+        	#{item.enterLiceStartDate},
+        	#{item.enterLiceEndDate},
+        	#{item.incomPatNum},
+        	#{item.regCap},
+        	#{item.initializationState},
+        	#{item.audittRemarks},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime},
+        	#{item.organizationCode},
+        	#{item.administrativeAreaCode},
+        	#{item.economicTypeCode},
+        	#{item.organizationClassCode},
+        	#{item.organizationManagementCode} 
+        )
+        </foreach>
+	</insert>
+	
+	<select id="getHospPaymentList" parameterType="map" resultMap="BaseResultMap">
+	SELECT <include refid="full-columns" />
+	FROM std_hospital t	
+	<where>
+	<if test="@OGNL@isNotEmpty(bankAuditStates)">
+	 	 And t.bank_audit_state in
+		<foreach collection="bankAuditStates" item="item" index="index" open="(" separator="," close=")">
+          	 		#{item}
+       	 </foreach>
+      </if>	 
+      <if test="@OGNL@isNotEmpty(bankAuditSecondStates)">
+	 	 And t.bank_audit_second_state in
+		<foreach collection="bankAuditSecondStates" item="item" index="index" open="(" separator="," close=")">
+          	 		#{item}
+       	 </foreach>
+      </if>	 	
+		<if test="@OGNL@isNotEmpty(hospitalName)">
+	          AND t.hospital_name like CONCAT(CONCAT('%',#{hospitalName}), '%')
+	     </if>
+	</where>
+	</select>
+	<update id="auditPass" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital" >
+		UPDATE std_hospital
+		SET 
+			bank_audit_state = #{bankAuditState},
+			bank_audit_user_id = #{bankAuditUserId},
+			bank_audit_user_name = #{bankAuditUserName},
+			bank_audit_time = SYSDATE,
+			bank_audit_second_state = #{bankAuditSecondState},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE
+						
+		WHERE
+			hospital_id=#{hospitalId}
+	</update>
+	
+	<update id="auditNoPass" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital" >
+		UPDATE std_hospital
+		SET 
+			bank_audit_state = #{bankAuditState},
+			bank_audit_user_id = #{bankAuditUserId},
+			bank_audit_user_name = #{bankAuditUserName},
+			bank_audit_time = SYSDATE,
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE			
+		WHERE
+			hospital_id=#{hospitalId}
+	</update>
+	
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		UPDATE std_hospital  
+		<set>
+				<if test="@OGNL@isNotEmpty(hospitalName)">
+	        		hospital_name = #{hospitalName},
+	        	</if>
+				<if test="@OGNL@isNotEmpty(userName)">
+	        		user_name = #{userName},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(hospSpelCode)">
+	        		hosp_spel_code = pinyin(#{hospitalName}),
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(hospShortName)">
+	        		hosp_short_name = #{hospShortName},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(hospShortSpelCode)">
+	        		hosp_short_spel_code = pinyin(#{hospShortName}),
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(hospitalAddress)">
+	        		hospital_address = #{hospitalAddress},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(areaId)">
+	        		area_name = get_full_name(#{areaId}),
+	        		area_id = #{areaId},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(contactPerson)">
+	        		contact_person = #{contactPerson},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(contactTel)">
+	        		contact_tel = #{contactTel},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(contactEmail)">
+	        		contact_email = #{contactEmail},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(contactQq)">
+	        		contact_qq = #{contactQq},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(hospitalLevel)">
+	        		hospital_level = #{hospitalLevel},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(drugPurchaseProperty)">
+	        		drug_purchase_property = #{drugPurchaseProperty},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+	        		admin_area_name_drug = get_full_name(#{adminAreaIdDrug}),
+	        		admin_area_id_drug = #{adminAreaIdDrug},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(adminAreaIdSupplies)">
+	        		admin_area_name_supplies = get_full_name(#{adminAreaIdSupplies}),
+	        		admin_area_id_supplies = #{adminAreaIdSupplies},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(healthOrganizationCode)">
+	        		health_organization_code = #{healthOrganizationCode},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(organizers)">
+	        		organizers = #{organizers},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(bedNumber)">
+	        		bed_number = #{bedNumber},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(technicalStaff)">
+	        		technical_staff = #{technicalStaff},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(legalName)">
+	        		legal_name = #{legalName},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(legalNumber)">
+	        		legal_number = #{legalNumber},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(legalScanAttachId)">
+	        		legal_scan_attach_id = #{legalScanAttachId},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(legalCellphone)">
+	        		legal_cellphone = #{legalCellphone},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(legalPhone)">
+	        		legal_phone = #{legalPhone},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(isDrugDesignated)">
+	        		is_drug_designated = #{isDrugDesignated},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(isBillingHospital)">
+	        		is_billing_hospital = #{isBillingHospital},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(governmentOfficeAffiliationCode)">
+	        		government_affiliation_code = #{governmentOfficeAffiliationCode},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(isUsing)">
+	        		is_using = #{isUsing},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(addUserId)">
+	        		add_user_id = #{addUserId},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(hospLiceNo)">
+	        		hosp_lice_no = #{hospLiceNo},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(hospLiceStartDate)">
+	        		hosp_lice_start_date = #{hospLiceStartDate},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(hospLiceEndDate)">
+	        		hosp_lice_end_date = #{hospLiceEndDate},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(enterLiceNo)">
+	        		enter_lice_no = #{enterLiceNo},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(enterLiceStartDate)">
+	        		enter_lice_start_date = #{enterLiceStartDate},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(enterLiceEndDate)">
+	        		enter_lice_end_date = #{enterLiceEndDate},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(incomPatNum)">
+	        		incom_pat_num = #{incomPatNum},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(regCap)">
+	        		reg_cap = #{regCap},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(initializationState)">
+	        		initialization_state=#{initializationState},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(audittRemarks)">
+	        		auditt_remarks=#{audittRemarks},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(addUserName)">
+	        		add_user_name = #{addUserName},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(addTime)">
+	        		add_time = #{addTime},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	        		last_update_user_id = #{lastUpdateUserId},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	        		last_update_user_name = #{lastUpdateUserName},
+	        	</if>
+	        	<if test="@OGNL@isNotEmpty(orderControl)">
+	        		order_Control = #{orderControl},
+	        	</if>
+	        	last_update_time = SYSDATE,
+        </set>
+		WHERE  hospital_id =  #{hospitalId}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		UPDATE std_hospital  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(hospitalName)">
+				hospital_name = #{hospitalName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(userName)">
+				user_name = #{userName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospSpelCode)">
+				hosp_spel_code = #{hospSpelCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospShortName)">
+				hosp_short_name = #{hospShortName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospShortSpelCode)">
+				hosp_short_spel_code = #{hospShortSpelCode},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalAddress)">
+				hospital_address = #{hospitalAddress},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(areaName)">
+				area_name = #{areaName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(areaId)">
+				area_id = #{areaId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(contactPerson)">
+				contact_person = #{contactPerson},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(contactTel)">
+				contact_tel = #{contactTel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(contactEmail)">
+				contact_email = #{contactEmail},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(contactQq)">
+				contact_qq = #{contactQq},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalLevel)">
+				hospital_level = #{hospitalLevel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(drugPurchaseProperty)">
+				drug_purchase_property = #{drugPurchaseProperty},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaNameStatisticsDrug)">
+				admin_area_name_stats_drug = #{adminAreaNameStatisticsDrug},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsDrug)">
+				admin_area_id_statistics_drug = #{adminAreaIdStatisticsDrug},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaNameDrug)">
+				admin_area_name_drug = #{adminAreaNameDrug},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				admin_area_id_drug = #{adminAreaIdDrug},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaNameStatisticsSupplies)">
+				admin_area_name_stats_supplies = #{adminAreaNameStatisticsSupplies},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaIdStatisticsSupplies)">
+				admin_area_id_stats_supplies = #{adminAreaIdStatisticsSupplies},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaNameSupplies)">
+				admin_area_name_supplies = #{adminAreaNameSupplies},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(adminAreaIdSupplies)">
+				admin_area_id_supplies = #{adminAreaIdSupplies},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(healthOrganizationCode)">
+				health_organization_code = #{healthOrganizationCode},
+			</if>
+	   <!--  	<if test="@OGNL@isNotEmpty(healthOrgSort)">
+				health_org_sort = #{healthOrgSort},
+			</if> -->
+	    	<if test="@OGNL@isNotEmpty(organizers)">
+				organizers = #{organizers},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bedNumber)">
+				bed_number = #{bedNumber},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(technicalStaff)">
+				technical_staff = #{technicalStaff},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalName)">
+				legal_name = #{legalName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalNumber)">
+				legal_number = #{legalNumber},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalScanAttachId)">
+				legal_scan_attach_id = #{legalScanAttachId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalCellphone)">
+				legal_cellphone = #{legalCellphone},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(legalPhone)">
+				legal_phone = #{legalPhone},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isDrugDesignated)">
+				is_drug_designated = #{isDrugDesignated},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isBillingHospital)">
+				is_billing_hospital = #{isBillingHospital},
+			</if>
+	    <!-- 	<if test="@OGNL@isNotEmpty(governmentAffiliationCode)">
+				government_affiliation_code = #{governmentAffiliationCode},
+			</if> -->
+	    	<if test="@OGNL@isNotEmpty(isUsing)">
+				is_using = #{isUsing},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				add_user_id = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospLiceNo)">
+				hosp_lice_no = #{hospLiceNo},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospLiceStartDate)">
+				hosp_lice_start_date = #{hospLiceStartDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospLiceEndDate)">
+				hosp_lice_end_date = #{hospLiceEndDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(enterLiceNo)">
+				enter_lice_no = #{enterLiceNo},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(enterLiceStartDate)">
+				enter_lice_start_date = #{enterLiceStartDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(enterLiceEndDate)">
+				enter_lice_end_date = #{enterLiceEndDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(incomPatNum)">
+				incom_pat_num = #{incomPatNum},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(regCap)">
+				reg_cap = #{regCap},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(initializationState)">
+				initialization_state = #{initializationState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(audittRemarks)">
+				auditt_remarks = #{audittRemarks},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicAccount)">
+				bank_basic_account = #{bankBasicAccount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankBasicName)">
+				bank_basic_name = #{bankBasicName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankSubmitTime)">
+				bank_submit_time = #{bankSubmitTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditSecondState)">
+				bank_audit_second_state = #{bankAuditSecondState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditSecondUserId)">
+				bank_audit_second_user_id = #{bankAuditSecondUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditSecondUserName)">
+				bank_audit_second_user_name = #{bankAuditSecondUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditSecondTime)">
+				bank_audit_second_time = #{bankAuditSecondTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankName)">
+				bank_name = #{bankName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankLoanAccount)">
+				bank_loan_account = #{bankLoanAccount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(loanName)">
+				loan_name = #{loanName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditState)">
+				bank_audit_state = #{bankAuditState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditUserId)">
+				bank_audit_user_id = #{bankAuditUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditUserName)">
+				bank_audit_user_name = #{bankAuditUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(bankAuditTime)">
+				bank_audit_time = #{bankAuditTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				add_user_name = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				add_time = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				last_update_user_id = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				last_update_time = #{lastUpdateTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				last_update_user_name = #{lastUpdateUserName},
+			</if>
+        </set>
+		WHERE  hospital_id =  #{hospitalId}
+	</update>
+	
+	
+	<update id="payInfoSecondAudit" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital" >
+		UPDATE std_hospital
+		SET 
+			bank_audit_second_state = #{bankAuditSecondState},
+			bank_audit_second_user_id = #{bankAuditSecondUserId},
+			bank_audit_second_user_name = #{bankAuditSecondUserName},
+			bank_audit_second_time = SYSDATE,
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE
+						
+		WHERE
+			hospital_id=#{hospitalId}
+	</update>
+	
+	<update id="updateIsUsing" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		update std_hospital
+			set is_using = #{isUsing},
+			last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+            	last_update_time = SYSDATE,
+            	deal_reason = #{dealReason}
+		where 
+			hospital_id=#{hospitalId} and is_using != #{isUsing}
+	</update>
+	
+	<select id="getYySelectList"  parameterType="map" resultMap="BaseResultMap">
+		select t.hospital_id,t.hospital_name,t.hosp_spel_code,t.hosp_short_name,
+        t.hosp_short_spel_code,t.hospital_address,t.area_name,t.area_id,t.contact_person,t.contact_tel,
+        t.contact_email,t.contact_qq,t.hospital_level,t.drug_purchase_property,t.admin_area_name_drug,t.admin_area_id_drug,
+        t.admin_area_name_supplies,t.admin_area_id_supplies,t.health_organization_code,t.organizers,t.bed_number,
+        t.technical_staff,t.legal_name,t.legal_number,t.legal_scan_attach_id,t.legal_cellphone,
+        t.legal_phone,t.is_drug_designated,t.is_billing_hospital,t.government_affiliation_code,
+        t.is_using,t.add_user_id,t.hosp_lice_no,t.hosp_lice_start_date,t.hosp_lice_end_date,
+        t.enter_lice_no,t.enter_lice_start_date,t.enter_lice_end_date,t.incom_pat_num,t.reg_cap,
+        t.initialization_state,t.auditt_remarks,t.add_user_name,t.add_time,t.last_update_user_id,
+        t.last_update_user_name,t.last_update_time,
+        b.father_id
+		 from std_hospital t 
+		 left join std_area b on b.area_id=t.area_id
+		 where not exists (select * from sys_user a where t.hospital_id = a.org_id and a.user_type=#{userType}) 
+		 <if test="@OGNL@isNotEmpty(hospitalName)">
+	            AND (t.hospital_name Like CONCAT(CONCAT('%',#{hospitalName}), '%')
+	            or t.hosp_spel_code Like CONCAT(CONCAT('%',#{hospitalName}), '%')
+	            ) 
+        </if>
+        <if test="@OGNL@isNotEmpty(areaId)">
+	            AND t.area_id like #{areaId}
+	        </if>
+	    <if test="@OGNL@isNotEmpty(hospitalLevel)">
+	            AND t.hospital_level = #{hospitalLevel}
+	        </if>
+        <if test="@OGNL@isNotEmpty(drugPurchaseProperty)">
+            AND t.drug_purchase_property = #{drugPurchaseProperty}
+        </if>
+        	and t.initialization_state not in(0,1,3,5)
+	</select>
+	
+	<select id="getHospInfoByHospId" parameterType="map" resultMap="BaseResultMap">
+	    SELECT <include refid="full-columns" /> 
+	    FROM std_hospital t where t.hospital_id = #{id}
+	</select>
+	
+	<update id="updateHospId"  parameterType="java.lang.String" >
+		update std_hospital set
+	          hospital_id = #{zhuSequence}
+		 where hospital_id = #{id}
+	</update>
+	
+	<select id="getCombinaHosp" parameterType="map" resultMap="BaseResultMap">
+	    SELECT <include refid="full-columns" /> 
+	    FROM std_hospital t
+		<where>
+			t.hospital_id NOT IN (SELECT d.hosp_id FROM drugpur_combine_detail d)
+    		AND t.is_using =1 and t.INITIALIZATION_STATE=2
+    		<if test="@OGNL@isNotEmpty(hospitalName)">
+	            AND t.hospital_name like CONCAT(CONCAT('%',#{hospitalName}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(areaId)">
+				AND t.area_id like CONCAT(areaId, '%')
+			</if>
+	    </where>
+	</select>
+	
+	<select id="getAllList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_hospital t 
+		<where>
+		    <if test="@OGNL@isNotEmpty(hospitalName)">
+				AND (t.hospital_name like CONCAT(CONCAT('%',#{hospitalName}), '%') or t.HOSP_SPEL_CODE like CONCAT(CONCAT('%',#{hospitalName}), '%') or t.HOSP_SHORT_SPEL_CODE like CONCAT(CONCAT('%',#{hospitalName}), '%') )
+		    </if>
+		    <if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.IS_USING = 1
+	    	</if>
+		    <if test="@OGNL@isNotEmpty(orderControl)">
+				AND t.ORDER_CONTROL = #{orderControl}
+	    	</if>
+		</where>
+	</select>
+	
+	
+	<update id="OrderStart" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		UPDATE STD_HOSPITAL t SET t.ORDER_CONTROL=1 WHERE t.HOSPITAL_ID =  #{hospitalId}
+	</update>
+	
+	<update id="OrderDisable" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		UPDATE STD_HOSPITAL t SET t.ORDER_CONTROL=0 WHERE t.HOSPITAL_ID =  #{hospitalId}
+	</update>
+	
+	
+	<update id="OrderALL" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		UPDATE STD_HOSPITAL t SET t.ORDER_CONTROL=1 
+	</update>
+	
+	<update id="DisableALL" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		UPDATE STD_HOSPITAL t SET t.ORDER_CONTROL=0 
+	</update>
+	
+	<update id="updateUserName">
+		update std_hospital set user_name = #{userName}
+		 where hospital_id = #{hospId}
+	</update>
+	
+	<update id="updateHos" parameterType="java.lang.String">
+		update std_hospital set ORDER_CONTROL = #{orderControl}
+	</update>
+
+	<select id="getHosPrice" parameterType="map" resultMap="BaseResultMap">
+		SELECT
+		a.hospital_id hospital_id,
+		a.hospital_name hospital_name,
+		nvl(paid,0) paid,
+		nvl(nopaid,0) nopaid
+		FROM
+		std_hospital a
+		LEFT JOIN (
+		SELECT
+		SUM(t.receive_amount) paid,
+		t.hospital_id
+		FROM
+		base_receive t
+		WHERE
+		t.receive_status = '0004'
+		GROUP BY
+		t.hospital_id
+
+		) b ON a.hospital_id = b.hospital_id
+		LEFT JOIN (
+
+		SELECT sum(b.PURCHASE_AMOUNT) nopaid, b.hospital_id FROM base_order_detail b
+		WHERE b.ORDER_STATUS in('0002','0003','0006','0007','0008','0009')
+		and not exists
+		(
+		select 1 from base_receive x,base_receive_detail c
+		where x.receive_id = c.receive_id
+		and x.receive_status = '0004'
+		and c.order_detail_id = b.order_detail_id
+		)
+		GROUP BY b.hospital_id
+
+		)
+		c ON a.hospital_id = c.hospital_id
+    <where>
+		<if test="@OGNL@isNotEmpty(hospitalName)">
+			AND a.hospital_name like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		</if>
+	</where>
+	</select>
+
+	<select id="getCwByArea" parameterType="map" resultMap="BaseResultMap">
+		select distinct tb1.ADMIN_AREA_NAME_DRUG area_name,tb1.ADMIN_AREA_ID_DRUG,
+		nvl(diancount,0) diancount,nvl(cgcount,0) caicount,nvl(ddzje,0) ze,
+		nvl(sjcgje,0) sj,nvl(ky,0) ky,nvl(dj,0) dj from std_hospital tb1,(
+		select t.admin_area_id_drug,ADMIN_AREA_NAME_DRUG,count(1) diancount from std_hospital t
+		where order_control = 0 group by t.admin_area_id_drug,ADMIN_AREA_NAME_DRUG) tb2,(
+		select ADMIN_AREA_NAME_DRUG,ADMIN_AREA_ID_DRUG,count(distinct a.hospital_id) cgcount from base_order a,std_hospital b
+		where a.hospital_id = b.hospital_id
+		and a.order_status in ('0002','0003')
+		<if test="@OGNL@isNotEmpty(startTime)">
+			AND to_char(t.ADD_TIME,'yyyy-mm-dd') &gt;= #{startTime}
+		</if>
+		<if test="@OGNL@isNotEmpty(endTime)">
+			and	to_char(t.ADD_TIME,'yyyy-mm-dd') &lt;= #{endTime}
+		</if>
+		group by ADMIN_AREA_NAME_DRUG,ADMIN_AREA_ID_DRUG
+		) tb3,(
+		select ADMIN_AREA_NAME_DRUG,ADMIN_AREA_ID_DRUG ,sum(order_amount) ddzje from base_order a,std_hospital b
+		where a.order_status in ('0002','0003')
+		and a.hospital_id = b.hospital_id
+		<if test="@OGNL@isNotEmpty(startTime)">
+			AND to_char(t.ADD_TIME,'yyyy-mm-dd') &gt;= #{startTime}
+		</if>
+		<if test="@OGNL@isNotEmpty(endTime)">
+			and	to_char(t.ADD_TIME,'yyyy-mm-dd') &lt;= #{endTime}
+		</if>
+		group by ADMIN_AREA_NAME_DRUG,ADMIN_AREA_ID_DRUG) tb4,(
+		select ADMIN_AREA_NAME_DRUG,ADMIN_AREA_ID_DRUG,sum(receive_amount) sjcgje from base_receive a,std_hospital b
+		where a.receive_status = '0004'
+		and a.hospital_id = b.hospital_id
+		<if test="@OGNL@isNotEmpty(startTime)">
+			AND to_char(t.ADD_DATE,'yyyy-mm-dd') &gt;= #{startTime}
+		</if>
+		<if test="@OGNL@isNotEmpty(endTime)">
+			and to_char(t.ADD_DATE,'yyyy-mm-dd') &lt;= #{endTime}
+		</if>
+		group by ADMIN_AREA_NAME_DRUG,ADMIN_AREA_ID_DRUG) tb5 ,(
+		select ADMIN_AREA_NAME_DRUG,ADMIN_AREA_ID_DRUG,sum(useable_amount) ky,sum(frozen_amount) dj from base_hospital_account a ,std_hospital b
+		where a.hospital_id = b.hospital_id
+		group by ADMIN_AREA_NAME_DRUG,ADMIN_AREA_ID_DRUG) tb6
+		where tb1.ADMIN_AREA_ID_DRUG = tb2.ADMIN_AREA_ID_DRUG(+)
+		and tb1.ADMIN_AREA_ID_DRUG = tb3.ADMIN_AREA_ID_DRUG(+)
+		and tb1.ADMIN_AREA_ID_DRUG = tb4.ADMIN_AREA_ID_DRUG(+)
+		and tb1.ADMIN_AREA_ID_DRUG = tb5.ADMIN_AREA_ID_DRUG(+)
+		and tb1.ADMIN_AREA_ID_DRUG = tb6.ADMIN_AREA_ID_DRUG(+)
+		and tb1.ADMIN_AREA_ID_DRUG like #{areaId}
+		order by tb1.ADMIN_AREA_ID_DRUG
+	</select>
+
+	<select id="getBaseHosp" parameterType="map" resultMap="BaseResultMap">
+		select hospital_id,hospital_name from std_hospital where DRUG_PURCHASE_PROPERTY=1
+		and hospital_id not in(select hospital_id from base_hospital_account)
+		<if test="@OGNL@isNotEmpty(hospitalName)">
+			and hospital_Name like CONCAT(CONCAT('%',#{hospitalName}), '%')
+		</if>
+	</select>
+	
+	<select id="getHospitalName" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from std_hospital t where t.hospital_name = #{_parameter,jdbcType=VARCHAR}
+	</select>
+
+	<insert id="addJKZX" parameterType="com.hsnn.medstgmini.base.std.model.StdHospital">
+		insert into std_hospital(
+			hospital_id,
+			hospital_name,
+			area_id,
+			area_name,
+			add_user_id,
+			add_user_name,
+			add_time,
+			is_using,
+			INITIALIZATION_STATE,
+			DRUG_PURCHASE_PROPERTY,
+			ADMIN_AREA_ID_STATISTICS_DRUG,
+			ADMIN_AREA_ID_DRUG,
+			ADMIN_AREA_ID_STATS_SUPPLIES,
+			ADMIN_AREA_ID_SUPPLIES,
+			BED_NUMBER,
+			TECHNICAL_STAFF,
+			BANK_AUDIT_SECOND_STATE,
+			BANK_AUDIT_STATE,
+			ORDER_CONTROL   
+		)
+		values(#{hospitalId},
+				#{hospitalName},
+				#{areaId},
+				get_full_name(#{areaId}),
+				#{addUserId},
+				#{addUserName},
+				now(),
+				1,
+				2,
+				1,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				1
+			)
+	</insert>
+	
+	<select id="getYySendSelectList"  parameterType="map" resultMap="BaseResultMap">
+		select t.hospital_id,t.hospital_name,t.hosp_spel_code,t.hosp_short_name,
+        t.hosp_short_spel_code,t.hospital_address,t.area_name,t.area_id,t.contact_person,t.contact_tel,
+        t.contact_email,t.contact_qq,t.hospital_level,t.drug_purchase_property,t.admin_area_name_drug,t.admin_area_id_drug,
+        t.admin_area_name_supplies,t.admin_area_id_supplies,t.health_organization_code,t.organizers,t.bed_number,
+        t.technical_staff,t.legal_name,t.legal_number,t.legal_scan_attach_id,t.legal_cellphone,
+        t.legal_phone,t.is_drug_designated,t.is_billing_hospital,t.government_affiliation_code,
+        t.is_using,t.add_user_id,t.hosp_lice_no,t.hosp_lice_start_date,t.hosp_lice_end_date,
+        t.enter_lice_no,t.enter_lice_start_date,t.enter_lice_end_date,t.incom_pat_num,t.reg_cap,
+        t.initialization_state,t.auditt_remarks,t.add_user_name,t.add_time,t.last_update_user_id,
+        t.last_update_user_name,t.last_update_time,
+        b.father_id,t.user_name
+		from std_hospital t 
+		left join std_area b on b.area_id=t.area_id
+		where exists (select * from sys_user a where t.hospital_id = a.org_id and a.user_type=#{userType}) 
+		<if test="@OGNL@isNotEmpty(hospitalName)">
+	        AND (t.hospital_name Like CONCAT(CONCAT('%',#{hospitalName}), '%')
+	            or t.hosp_spel_code Like CONCAT(CONCAT('%',#{hospitalName}), '%')
+	        ) 
+        </if>
+        <if test="@OGNL@isNotEmpty(areaId)">
+	            AND t.area_id like #{areaId}
+	        </if>
+	    <if test="@OGNL@isNotEmpty(hospitalLevel)">
+	            AND t.hospital_level = #{hospitalLevel}
+	        </if>
+        <if test="@OGNL@isNotEmpty(drugPurchaseProperty)">
+            AND t.drug_purchase_property = #{drugPurchaseProperty}
+        </if>
+        	and t.initialization_state not in(0,1,3,5)
+	</select>
+
+	<select id="getByUserName" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_hospital t where t.user_name = #{id}
+	</select>
+
+	<select id="getHospitalInfo" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM std_hospital t
+	</select>
+</mapper>

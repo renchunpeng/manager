@@ -1,0 +1,1619 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdCataProdRelDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdCataProdRel" id="BaseResultMap">
+        <result property="relId" column="REL_ID" javaType="String"/>
+        <result property="drugcatalogCode" column="DRUGCATALOG_CODE" javaType="String"/>
+        <result property="prodId" column="PROD_ID" javaType="Integer"/>
+        <result property="prodIdStoc" column="PROD_ID_STOC" javaType="String"/>
+        <result property="productName" column="PRODUCT_NAME" javaType="String"/>
+        <result property="productSpelName" column="PRODUCT_SPEL_NAME" javaType="String"/>
+        <result property="productWbName" column="PRODUCT_WB_NAME" javaType="String"/>
+        <result property="medicinemodel" column="MEDICINEMODEL" javaType="String"/>
+        <result property="medicinemodelSpel" column="MEDICINEMODEL_SPEL" javaType="String"/>
+        <result property="outlook" column="OUTLOOK" javaType="String"/>
+        <result property="cataSpelName" column="CATA_SPEL_NAME" javaType="String"/>
+        <result property="cataMedicinemodel" column="CATA_MEDICINEMODEL" javaType="String"/>
+        <result property="cataOutlook" column="CATA_OUTLOOK" javaType="String"/>
+        <result property="cataIndexF" column="CATA_INDEX_F" javaType="String"/>
+        <result property="cataIndexS" column="CATA_INDEX_S" javaType="String"/>
+        <result property="classOne" column="CLASS_ONE" javaType="String"/>
+        <result property="classTwo" column="CLASS_TWO" javaType="String"/>
+        <result property="pharOneId" column="PHAR_ONE_ID" javaType="String"/>
+        <result property="pharOne" column="PHAR_ONE" javaType="String"/>
+        <result property="pharTwoId" column="PHAR_TWO_ID" javaType="String"/>
+        <result property="pharTwo" column="PHAR_TWO" javaType="String"/>
+        <result property="pharThreeId" column="PHAR_THREE_ID" javaType="String"/>
+         <result property="pharThree" column="PHAR_THREE" javaType="String"/>
+         <result property="pharFourId" column="PHAR_FOUR_ID" javaType="String"/>
+        <result property="pharFour" column="PHAR_FOUR" javaType="String"/>
+        <result property="pharFiveId" column="PHAR_FIVE_ID" javaType="String"/>
+        <result property="pharFive" column="PHAR_FIVE" javaType="String"/>
+        <result property="pharSixId" column="PHAR_SIX_ID" javaType="String"/>
+        <result property="pharSix" column="PHAR_SIX" javaType="String"/>
+        <result property="productAttr" column="PRODUCT_ATTR" javaType="String"/>
+        <result property="remark" column="REMARK" javaType="String"/>
+        <result property="status" column="STATUS" javaType="Integer"/>
+        <result property="auditUserName" column="AUDIT_USER_NAME" javaType="String"/>
+        <result property="auditRemark" column="AUDIT_REMARK" javaType="String"/>
+        <result property="auditTime" column="AUDIT_TIME" javaType="Date"/>
+         <result property="isUsing" column="IS_USING" javaType="Integer"/>
+        <result property="addUserId" column="ADD_USER_ID" javaType="String"/>
+        <result property="addUserName" column="ADD_USER_NAME" javaType="String"/>
+        <result property="addTime" column="ADD_TIME" javaType="Date"/>
+        <result property="lastUpdateUserId" column="LAST_UPDATE_USER_ID" javaType="String"/>
+        <result property="lastUpdateUserName" column="LAST_UPDATE_USER_NAME" javaType="String"/>
+        <result property="lastUpdateTime" column="LAST_UPDATE_TIME" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.rel_id,
+        t.drugcatalog_code,
+        t.prod_id,
+        t.prod_id_stoc,
+        t.product_name,
+        t.product_spel_name,
+        t.product_wb_name,
+        t.medicinemodel,
+        t.medicinemodel_spel,
+        t.outlook,
+        t.cata_spel_name,
+        t.cata_medicinemodel,
+        t.cata_outlook,
+        t.cata_index_f,
+        t.cata_index_s,
+        t.class_one,
+        t.class_two,
+        t.phar_one_id,
+        t.phar_one,
+        t.phar_two_id,
+        t.phar_two,
+        t.phar_three_id,
+        t.phar_three,
+        t.phar_four_id,
+        t.phar_four,
+        t.phar_five_id,
+        t.phar_five,
+        t.phar_six_id,
+        t.phar_six,
+        t.product_attr,
+        t.remark,
+        t.status,
+        t.audit_user_name,
+        t.audit_remark,
+        t.audit_time,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+	
+ 	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_CATA_PROD_REL t
+		<where>
+			<if test="null != relId and '' != relId ">
+				AND t.REL_ID = #{relId}
+		    </if>
+			<if test="null != prodId and '' != prodId ">
+				AND t.PROD_ID like '%'||#{prodId}||'%' 
+		    </if>
+			<if test="null != prodIdStoc and '' != prodIdStoc ">
+				AND t.PROD_ID_STOC = #{prodIdStoc}
+		    </if>
+			<if test="null != productName and '' != productName ">
+				AND t.PRODUCT_NAME  like '%'||#{productName}||'%' 
+		    </if>
+			<if test="null != productSpelName and '' != productSpelName ">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+		    </if>
+			<if test="null != productWbName and '' != productWbName ">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+		    </if>
+			<if test="null != medicinemodel and '' != medicinemodel ">
+				AND t.MEDICINEMODEL  like '%'||#{medicinemodel}||'%'
+		    </if>
+			<if test="null != medicinemodelSpel and '' != medicinemodelSpel ">
+				AND t.MEDICINEMODEL_SPEL = #{medicinemodelSpel}
+		    </if>
+			<if test="null != outlook and '' != outlook ">
+				AND t.OUTLOOK like '%'||#{outlook}||'%'
+		    </if>
+			<if test="null != cataSpelName and '' != cataSpelName ">
+				AND t.CATA_SPEL_NAME = #{cataSpelName}
+		    </if>
+		    <if test="null != cataMedicinemodel and '' != cataMedicinemodel ">
+				AND t.CATA_MEDICINEMODEL = #{cataMedicinemodel}
+		    </if>
+			<if test="null != cataOutlook and '' != cataOutlook ">
+				AND t.CATA_OUTLOOK = #{cataOutlook}
+		    </if>
+			<if test="null != cataIndexF and '' != cataIndexF ">
+				AND t.CATA_INDEX_F = #{cataIndexF}
+		    </if>
+			<if test="null != cataIndexS and '' != cataIndexS ">
+				AND t.CATA_INDEX_S = #{cataIndexS}
+		    </if>
+			<if test="null != classOne and '' != classOne ">
+				AND t.CLASS_ONE = #{classOne}
+		    </if>
+			<if test="null != classTwo and '' != classTwo ">
+				AND t.CLASS_TWO = #{classTwo}
+		    </if>
+		    <if test="null != pharOneId and '' != pharOneId ">
+				AND t.PHAR_ONE_ID = #{pharOneId}
+		    </if>
+			<if test="null != pharOne and '' != pharOne ">
+				AND t.PHAR_ONE = #{pharOne}
+		    </if>
+		     <if test="null != pharTwoId and '' != pharTwoId ">
+				AND t.PHAR_TWO_ID = #{pharTwoId}
+		    </if>
+			<if test="null != pharTwo and '' != pharTwo ">
+				AND t.PHAR_TWO = #{pharTwo}
+		    </if>
+		     <if test="null != pharThreeId and '' != pharThreeId ">
+				AND t.PHAR_THREE_ID = #{pharThreeId}
+		    </if>
+			<if test="null != pharThree and '' != pharThree ">
+				AND t.PHAR_THREE = #{pharThree}
+		    </if>
+		     <if test="null != pharFourId and '' != pharFourId ">
+				AND t.PHAR_FOUR_ID = #{pharFourId}
+		    </if>
+			<if test="null != pharFour and '' != pharFour ">
+				AND t.PHAR_FOUR = #{pharFour}
+		    </if>
+		     <if test="null != pharFiveId and '' != pharFiveId ">
+				AND t.PHAR_FIVE_ID = #{pharFiveId}
+		    </if>
+			<if test="null != pharFive and '' != pharFive ">
+				AND t.PHAR_FIVE = #{pharFive}
+		    </if>
+		     <if test="null != pharSixId and '' != pharSixId ">
+				AND t.PHAR_SIX_ID = #{pharSixId}
+		    </if>
+		    <if test="null != pharSix and '' != pharSix ">
+				AND t.PHAR_SIX = #{pharSix}
+		    </if>
+			<if test="null != productAttr and '' != productAttr ">
+				AND t.PRODUCT_ATTR = #{productAttr}
+		    </if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="null != status and '' != status ">
+				AND t.STATUS = #{status}
+		    </if>
+			<if test="null != auditUserName and '' != auditUserName ">
+				AND t.AUDIT_USER_NAME = #{auditUserName}
+		    </if>
+			<if test="null != auditRemark and '' != auditRemark ">
+				AND t.AUDIT_REMARK = #{auditRemark}
+		    </if>
+		    <if test="null != auditTime and '' != auditTime ">
+				AND t.AUDIT_TIME = #{auditTime}
+		    </if>
+			<if test="null != isUsing and '' != isUsing ">
+				AND t.IS_USING = #{isUsing}
+		    </if>
+			<if test="null != addUserId and '' != addUserId ">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+		    <if test="null != addUserName and '' != addUserName ">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="null != addTime and '' != addTime ">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="null != lastUpdateUserId and '' != lastUpdateUserId ">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="null != lastUpdateUserName and '' != lastUpdateUserName ">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="null != lastUpdateTime and '' != lastUpdateTime ">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		    AND t.DRUGCATALOG_CODE =  #{drugcatalogCode}
+		</where>
+	</select>
+		 
+		 
+	 <insert id="save"  parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRel">
+		INSERT INTO STD_CATA_PROD_REL(
+				REL_ID,
+		        DRUGCATALOG_CODE,
+		        PROD_ID,
+		        PROD_ID_STOC,
+		        PRODUCT_NAME,
+		        PRODUCT_SPEL_NAME,
+		        PRODUCT_WB_NAME,
+		        MEDICINEMODEL,
+		        MEDICINEMODEL_SPEL,
+		        OUTLOOK,
+		        CATA_SPEL_NAME,
+		        CATA_MEDICINEMODEL,
+		        CATA_OUTLOOK,
+		        CATA_INDEX_F,
+		        CATA_INDEX_S,
+		        CLASS_ONE,
+		        CLASS_TWO,
+		        PHAR_ONE_ID,
+		        PHAR_ONE,
+		        PHAR_TWO_ID,
+		        PHAR_TWO,
+		        PHAR_THREE_ID,
+		        PHAR_THREE,
+		        PHAR_FOUR_ID,
+		        PHAR_FOUR,
+		        PHAR_FIVE_ID,
+		        PHAR_FIVE,
+		        PHAR_SIX_ID,
+		        PHAR_SIX,
+		        PRODUCT_ATTR,
+		        REMARK,
+		        STATUS,
+		        AUDIT_USER_NAME,
+		        AUDIT_REMARK,
+		        AUDIT_TIME,
+		        IS_USING,
+		        ADD_USER_ID,
+		        ADD_USER_NAME,
+		        ADD_TIME,
+		        LAST_UPDATE_USER_ID,
+		        LAST_UPDATE_USER_NAME,
+		        LAST_UPDATE_TIME
+		)
+		VALUES (
+	        	#{relId},
+				#{drugcatalogCode},
+				#{prodId},
+				#{prodIdStoc},
+				#{productName},
+				#{productSpelName},
+				#{productWbName},
+				#{medicinemodel},
+				#{medicinemodelSpel},
+				#{outlook},
+				#{cataSpelName},
+				#{cataMedicinemodel},
+				#{cataOutlook},
+				#{cataIndexF},
+				#{cataIndexS},
+				#{classOne},
+				#{classTwo},
+				#{pharOneId},
+				#{pharOne},
+				#{pharTwoId},
+				#{pharTwo},
+				#{pharThreeId},
+				#{pharThree},
+				#{pharFourId},
+				#{pharFour},
+				#{pharFiveId},
+				#{pharFive},
+				#{pharSixId},
+				#{pharSix},
+				#{productAttr},
+				#{remark},
+				#{status},
+				#{auditUserName},
+				#{auditRemark},
+				#{auditTime},
+				#{isUsing},
+				#{addUserId},
+				#{addUserName},
+				#{addTime},
+				#{lastUpdateUserId},
+				#{lastUpdateUserName},
+				#{lastUpdateTime}
+		)
+	</insert> 
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_CATA_PROD_REL t
+		WHERE t.REL_ID = #{relId}
+	</select>
+	<select id="getCodeId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM STD_CATA_PROD_REL t
+		WHERE t.DRUGCATALOG_CODE = #{drugcatalogCode}
+	</select>
+	<select id="getByProdId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM STD_CATA_PROD_REL t 
+		<where>
+			<if test="null != prodId and '' != prodId ">
+				t.PROD_ID = #{prodId}
+		    </if>
+		    <if test="null != drugcatalogCode and '' != drugcatalogCode ">
+				 AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+		    </if>
+		</where>
+		 
+
+	</select>
+	
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRel">
+		update STD_CATA_PROD_REL
+		<set>
+			<if test="null != prodId and '' != prodId ">
+				 PROD_ID = #{prodId},
+		    </if>
+			<if test="null != prodIdStoc and '' != prodIdStoc ">
+				 PROD_ID_STOC = #{prodIdStoc},
+		    </if>
+			<if test="null != productName and '' != productName ">
+				 PRODUCT_NAME = #{productName},
+		    </if>
+			<if test="null != productSpelName and '' != productSpelName ">
+				 PRODUCT_SPEL_NAME = #{productSpelName},
+		    </if>
+			<if test="null != productWbName and '' != productWbName ">
+				 PRODUCT_WB_NAME = #{productWbName},
+		    </if>
+			<if test="null != medicinemodel and '' != medicinemodel ">
+				 MEDICINEMODEL = #{medicinemodel},
+		    </if>
+			<if test="null != medicinemodelSpel and '' != medicinemodelSpel ">
+				 MEDICINEMODEL_SPEL = #{medicinemodelSpel},
+		    </if>
+			<if test="null != outlook and '' != outlook ">
+				 OUTLOOK = #{outlook},
+		    </if>
+			<if test="null != cataSpelName and '' != cataSpelName ">
+				 CATA_SPEL_NAME = #{cataSpelName},
+		    </if>
+		    <if test="null != cataMedicinemodel and '' != cataMedicinemodel ">
+				 CATA_MEDICINEMODEL = #{cataMedicinemodel},
+		    </if>
+			<if test="null != cataOutlook and '' != cataOutlook ">
+				 CATA_OUTLOOK = #{cataOutlook},
+		    </if>
+			<if test="null != cataIndexF and '' != cataIndexF ">
+				 CATA_INDEX_F = #{cataIndexF},
+		    </if>
+			<if test="null != cataIndexS and '' != cataIndexS ">
+				 CATA_INDEX_S = #{cataIndexS},
+		    </if>
+			<if test="null != classOne and '' != classOne ">
+				 CLASS_ONE = #{classOne},
+		    </if>
+			<if test="null != classTwo and '' != classTwo ">
+				 CLASS_TWO = #{classTwo},
+		    </if>
+		    <if test="null != pharOneId and '' != pharOneId ">
+				 PHAR_ONE_ID = #{pharOneId},
+		    </if>
+			<if test="null != pharOne and '' != pharOne ">
+				 PHAR_ONE = #{pharOne},
+		    </if>
+		     <if test="null != pharTwoId and '' != pharTwoId ">
+				 PHAR_TWO_ID = #{pharTwoId},
+		    </if>
+			<if test="null != pharTwo and '' != pharTwo ">
+				 PHAR_TWO = #{pharTwo},
+		    </if>
+		     <if test="null != pharThreeId and '' != pharThreeId ">
+				 PHAR_THREE_ID = #{pharThreeId},
+		    </if>
+			<if test="null != pharThree and '' != pharThree ">
+				 PHAR_THREE = #{pharThree},
+		    </if>
+		     <if test="null != pharFourId and '' != pharFourId ">
+				 PHAR_FOUR_ID = #{pharFourId},
+		    </if>
+			<if test="null != pharFour and '' != pharFour ">
+				 PHAR_FOUR = #{pharFour},
+		    </if>
+		     <if test="null != pharFiveId and '' != pharFiveId ">
+				 PHAR_FIVE_ID = #{pharFiveId},
+		    </if>
+			<if test="null != pharFive and '' != pharFive ">
+				 PHAR_FIVE = #{pharFive},
+		    </if>
+		     <if test="null != pharSixId and '' != pharSixId ">
+				 PHAR_SIX_ID = #{pharSixId},
+		    </if>
+		    <if test="null != pharSix and '' != pharSix ">
+				 PHAR_SIX = #{pharSix},
+		    </if>
+			<if test="null != productAttr and '' != productAttr ">
+				 PRODUCT_ATTR = #{productAttr},
+		    </if>
+			<if test="null != remark and '' != remark ">
+				 REMARK = #{remark},
+		    </if>
+			<if test="null != status and '' != status ">
+				 STATUS = #{status},
+		    </if>
+			<if test="null != auditUserName and '' != auditUserName ">
+				 AUDIT_USER_NAME = #{auditUserName},
+		    </if>
+			<if test="null != auditRemark and '' != auditRemark ">
+				 AUDIT_REMARK = #{auditRemark},
+		    </if>
+		    <if test="null != auditTime and '' != auditTime ">
+				 AUDIT_TIME = #{auditTime},
+		    </if>
+			<if test="null != isUsing and '' != isUsing ">
+				 IS_USING = #{isUsing},
+		    </if>
+			<if test="null != addUserId and '' != addUserId ">
+				 ADD_USER_ID = #{addUserId},
+		    </if>
+		    <if test="null != addUserName and '' != addUserName ">
+				 ADD_USER_NAME = #{addUserName},
+		    </if>
+			<if test="null != addTime and '' != addTime ">
+				 ADD_TIME = #{addTime},
+		    </if>
+			<if test="null != lastUpdateUserId and '' != lastUpdateUserId ">
+				 LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+		    </if>
+			<if test="null != lastUpdateUserName and '' != lastUpdateUserName ">
+				 LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+		    </if>
+			<if test="null != lastUpdateTime and '' != lastUpdateTime ">
+				 LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+        </set>
+		where  REL_ID = #{relId}
+	</update>
+
+	<select id="getGoodsList" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM STD_CATA_PROD_REL t
+		<where>
+			<if test="null != relId and '' != relId ">
+				AND t.REL_ID = #{relId}
+			</if>
+			<if test="null != prodId and '' != prodId ">
+				AND t.PROD_ID like '%'||#{prodId}||'%'
+			</if>
+			<if test="null != prodIdStoc and '' != prodIdStoc ">
+				AND t.PROD_ID_STOC = #{prodIdStoc}
+			</if>
+			<if test="null != productName and '' != productName ">
+				AND t.PRODUCT_NAME  like '%'||#{productName}||'%'
+			</if>
+			<if test="null != productSpelName and '' != productSpelName ">
+				AND t.PRODUCT_SPEL_NAME = #{productSpelName}
+			</if>
+			<if test="null != productWbName and '' != productWbName ">
+				AND t.PRODUCT_WB_NAME = #{productWbName}
+			</if>
+			<if test="null != medicinemodel and '' != medicinemodel ">
+				AND t.MEDICINEMODEL  like '%'||#{medicinemodel}||'%'
+			</if>
+			<if test="null != medicinemodelSpel and '' != medicinemodelSpel ">
+				AND t.MEDICINEMODEL_SPEL = #{medicinemodelSpel}
+			</if>
+			<if test="null != outlook and '' != outlook ">
+				AND t.OUTLOOK like '%'||#{outlook}||'%'
+			</if>
+			<if test="null != cataSpelName and '' != cataSpelName ">
+				AND t.CATA_SPEL_NAME = #{cataSpelName}
+			</if>
+			<if test="null != cataMedicinemodel and '' != cataMedicinemodel ">
+				AND t.CATA_MEDICINEMODEL = #{cataMedicinemodel}
+			</if>
+			<if test="null != cataOutlook and '' != cataOutlook ">
+				AND t.CATA_OUTLOOK = #{cataOutlook}
+			</if>
+			<if test="null != cataIndexF and '' != cataIndexF ">
+				AND t.CATA_INDEX_F = #{cataIndexF}
+			</if>
+			<if test="null != cataIndexS and '' != cataIndexS ">
+				AND t.CATA_INDEX_S = #{cataIndexS}
+			</if>
+			<if test="null != classOne and '' != classOne ">
+				AND t.CLASS_ONE = #{classOne}
+			</if>
+			<if test="null != classTwo and '' != classTwo ">
+				AND t.CLASS_TWO = #{classTwo}
+			</if>
+			<if test="null != pharOneId and '' != pharOneId ">
+				AND t.PHAR_ONE_ID = #{pharOneId}
+			</if>
+			<if test="null != pharOne and '' != pharOne ">
+				AND t.PHAR_ONE = #{pharOne}
+			</if>
+			<if test="null != pharTwoId and '' != pharTwoId ">
+				AND t.PHAR_TWO_ID = #{pharTwoId}
+			</if>
+			<if test="null != pharTwo and '' != pharTwo ">
+				AND t.PHAR_TWO = #{pharTwo}
+			</if>
+			<if test="null != pharThreeId and '' != pharThreeId ">
+				AND t.PHAR_THREE_ID = #{pharThreeId}
+			</if>
+			<if test="null != pharThree and '' != pharThree ">
+				AND t.PHAR_THREE = #{pharThree}
+			</if>
+			<if test="null != pharFourId and '' != pharFourId ">
+				AND t.PHAR_FOUR_ID = #{pharFourId}
+			</if>
+			<if test="null != pharFour and '' != pharFour ">
+				AND t.PHAR_FOUR = #{pharFour}
+			</if>
+			<if test="null != pharFiveId and '' != pharFiveId ">
+				AND t.PHAR_FIVE_ID = #{pharFiveId}
+			</if>
+			<if test="null != pharFive and '' != pharFive ">
+				AND t.PHAR_FIVE = #{pharFive}
+			</if>
+			<if test="null != pharSixId and '' != pharSixId ">
+				AND t.PHAR_SIX_ID = #{pharSixId}
+			</if>
+			<if test="null != pharSix and '' != pharSix ">
+				AND t.PHAR_SIX = #{pharSix}
+			</if>
+			<if test="null != productAttr and '' != productAttr ">
+				AND t.PRODUCT_ATTR = #{productAttr}
+			</if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+			</if>
+			<if test="null != status and '' != status ">
+				AND t.STATUS = #{status}
+			</if>
+			<if test="null != auditUserName and '' != auditUserName ">
+				AND t.AUDIT_USER_NAME = #{auditUserName}
+			</if>
+			<if test="null != auditRemark and '' != auditRemark ">
+				AND t.AUDIT_REMARK = #{auditRemark}
+			</if>
+			<if test="null != auditTime and '' != auditTime ">
+				AND t.AUDIT_TIME = #{auditTime}
+			</if>
+			<if test="null != isUsing and '' != isUsing ">
+				AND t.IS_USING = #{isUsing}
+			</if>
+			<if test="null != addUserId and '' != addUserId ">
+				AND t.ADD_USER_ID = #{addUserId}
+			</if>
+			<if test="null != addUserName and '' != addUserName ">
+				AND t.ADD_USER_NAME = #{addUserName}
+			</if>
+			<if test="null != addTime and '' != addTime ">
+				AND t.ADD_TIME = #{addTime}
+			</if>
+			<if test="null != lastUpdateUserId and '' != lastUpdateUserId ">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+			</if>
+			<if test="null != lastUpdateUserName and '' != lastUpdateUserName ">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+			</if>
+			<if test="null != lastUpdateTime and '' != lastUpdateTime ">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+			</if>
+			<if test="null != category and '' != category ">
+				AND t.CATEGORY = #{category}
+			</if>
+			<if test="null != medicalInsuranceNumber and '' != medicalInsuranceNumber ">
+				AND t.MEDICAL_INSURANCE_NUMBER = #{medicalInsuranceNumber}
+			</if>
+			<if test="null != baseDrugNumber and '' != baseDrugNumber ">
+				AND t.BASE_DRUG_NUMBER = #{baseDrugNumber}
+			</if>
+			<if test="null != nonbaseDrugNumber and '' != nonbaseDrugNumber ">
+				AND t.NONBASE_DRUG_NUMBER = #{nonbaseDrugNumber}
+			</if>
+			AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+
+			and t.prod_id
+			not in (
+			select procurecatalog_id from drugpur_comp_apply where
+			proj_code = #{projCode} and comp_id = #{compId}
+			and status = 1
+
+			)
+			and t.is_using=1
+		</where>
+
+
+	</select>
+
+	<select id="queryDrug" resultMap="BaseResultMap" parameterType="map">
+		SELECT MEDICINEMODEL
+		FROM STD_CATA_PROD_REL t
+		WHERE t.DRUGCATALOG_CODE in
+		(select drugcatalog_code from BID_PROJ_DRUGCATALOG t where proj_code=#{projCode})
+		and t.prod_id not in
+		(select procurecatalog_id from drugpur_comp_apply)
+		<if test="@OGNL@isNotEmpty(medicinemodel)">
+			AND t.MEDICINEMODEL LIKE '%'|| #{medicinemodel}||'%'
+		</if>
+		group by MEDICINEMODEL
+	</select>
+
+	<update id="batchUpdate"  parameterType="java.util.List">
+       update std_cata_prod_rel
+	    <set >
+	      <if test="stdCataProdRel.isUsing != null" >
+	        is_using = #{stdCataProdRel.isUsing,jdbcType=TINYINT},
+	      </if>
+	      <if test="stdCataProdRel.lastUpdateUserId != null" >
+	        last_update_user_id = #{stdCataProdRel.lastUpdateUserId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="stdCataProdRel.lastUpdateUserName != null" >
+	        last_update_user_name = #{stdCataProdRel.lastUpdateUserName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="stdCataProdRel.lastUpdateTime != null" >
+	        last_update_time = SYSDATE,
+	      </if>
+	      <if test="stdCataProdRel.auditUserName != null" >
+	        audit_user_name = #{stdCataProdRel.auditUserName,jdbcType=VARCHAR},
+	      </if>
+	    </set>
+         where rel_id in
+          <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">  
+                       #{item}  
+          </foreach>  
+    </update>
+
+	<update id="updateGoodsApp"  parameterType="java.lang.String">
+
+ update STD_GOODS_APP b set b.flow_hadle_status = 7,
+ b.ce_audit_status = 7
+ where  b.drug_product_id=(select  t.prod_id
+          from STD_CATA_PROD_REL t
+         where t.rel_id = #{id}) and   b.proj_code in
+       (select distinct (a.proj_code)
+          from  STD_CATA_PROD_REL t
+          left join  DRUGPUR_COMP_APPLY a
+            on a.drugcatalog_code = t.drugcatalog_code
+           and a.procurecatalog_id = t.prod_id
+         where t.rel_id = #{id})
+	</update>
+	<update id="updateStdCataProdRel"  parameterType="java.lang.String">
+update DRUGPUR_COMP_APPLY a
+   set a.status = 3
+ where (a.drugcatalog_code, a.procurecatalog_id) =
+       (select t.drugcatalog_code, t.prod_id
+          from STD_CATA_PROD_REL t
+         where t.rel_id =#{id})	</update>
+	<delete id="deletePackageSplit"  parameterType="java.lang.String">
+		delete from bid_package_split b
+		   where  b.drug_product_id=(select  t.prod_id
+          from STD_CATA_PROD_REL t
+         where t.rel_id = #{id}) and   b.proj_code in
+       (select distinct (a.proj_code)
+          from  STD_CATA_PROD_REL t
+          left join  DRUGPUR_COMP_APPLY a
+            on a.drugcatalog_code = t.drugcatalog_code
+           and a.procurecatalog_id = t.prod_id
+         where t.rel_id = #{id})
+	</delete>
+
+	 <select id="checkRepeatStdCataProdRelLin" parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRel" resultType="java.lang.Integer">
+		SELECT count(*)
+	    FROM STD_CATA_PROD_REL t
+		<where>
+			<if test="null != productName and '' != productName ">
+				 AND t.PRODUCT_NAME = #{productName}
+		    </if>
+			<if test="null != medicinemodel and '' != medicinemodel ">
+				 AND t.MEDICINEMODEL = #{medicinemodel}
+		    </if>
+			<if test="null != outlook and '' != outlook ">
+				 AND t.OUTLOOK = #{outlook}
+		    </if>
+		    <if test="null != drugcatalogCode and '' != drugcatalogCode ">
+	            AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+	        </if>
+		</where>
+	</select>
+	
+	
+	<insert id="addStdCataProdRelImport"  parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRel">
+		INSERT INTO STD_CATA_PROD_REL(
+				REL_ID,
+		        DRUGCATALOG_CODE,
+		        PROD_ID,
+		        PROD_ID_STOC,
+		        PRODUCT_NAME,
+		        PRODUCT_SPEL_NAME,
+		        PRODUCT_WB_NAME,
+		        MEDICINEMODEL,
+		        MEDICINEMODEL_SPEL,
+		        OUTLOOK,
+		        CATA_SPEL_NAME,
+		        CATA_MEDICINEMODEL,
+		        CATA_OUTLOOK,
+		        CATA_INDEX_F,
+		        CATA_INDEX_S,
+		        CLASS_ONE,
+		        CLASS_TWO,
+		        PHAR_ONE_ID,
+		        PHAR_ONE,
+		        PHAR_TWO_ID,
+		        PHAR_TWO,
+		        PHAR_THREE_ID,
+		        PHAR_THREE,
+		        PHAR_FOUR_ID,
+		        PHAR_FOUR,
+		        PHAR_FIVE_ID,
+		        PHAR_FIVE,
+		        PHAR_SIX_ID,
+		        PHAR_SIX,
+		        PRODUCT_ATTR,
+		        REMARK,
+		        STATUS,
+		        AUDIT_USER_NAME,
+		        AUDIT_REMARK,
+		        AUDIT_TIME,
+		        IS_USING,
+		        ADD_USER_ID,
+		        ADD_USER_NAME,
+		        ADD_TIME,
+		        LAST_UPDATE_USER_ID,
+		        LAST_UPDATE_USER_NAME,
+		        LAST_UPDATE_TIME
+		)
+		VALUES (
+	        	#{relId},
+				#{drugcatalogCode},
+				#{prodId},
+				#{prodIdStoc},
+				#{productName},
+				#{productSpelName},
+				#{productWbName},
+				#{medicinemodel},
+				#{medicinemodelSpel},
+				#{outlook},
+				#{cataSpelName},
+				#{cataMedicinemodel},
+				#{cataOutlook},
+				#{cataIndexF},
+				#{cataIndexS},
+				#{classOne},
+				#{classTwo},
+				#{pharOneId},
+				#{pharOne},
+				#{pharTwoId},
+				#{pharTwo},
+				#{pharThreeId},
+				#{pharThree},
+				#{pharFourId},
+				#{pharFour},
+				#{pharFiveId},
+				#{pharFive},
+				#{pharSixId},
+				#{pharSix},
+				#{productAttr},
+				#{remark},
+				#{status},
+				#{auditUserName},
+				#{auditRemark},
+				#{auditTime},
+				#{isUsing},
+				#{addUserId},
+				#{addUserName},
+				#{addTime},
+				#{lastUpdateUserId},
+				#{lastUpdateUserName},
+				#{lastUpdateTime}
+		)
+	</insert> 
+	
+<!-- 	 		
+	 <select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_CATA_PROD_REL t
+		WHERE t.DRUGCATALOG_CODE =  #{drugcatalogCode}
+	</select>
+	
+ -->
+	
+	
+	<!-- 
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM STD_CATA_PROD_REL WHERE  DRUGCATALOG_CODE =  #{value}
+	</delete>
+-->
+<!-- 	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_CATA_PROD_REL t
+		<where>
+			<if test="null != drugcatalogCode and '' != drugcatalogCode ">
+				AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+		    </if>
+			<if test="null != drugcatalogName and '' != drugcatalogName ">
+				AND t.DRUGCATALOG_NAME = #{drugcatalogName}
+		    </if>
+			<if test="null != drugcatalogCodeSelf and '' != drugcatalogCodeSelf ">
+				AND t.DRUGCATALOG_CODE_SELF = #{drugcatalogCodeSelf}
+		    </if>
+			<if test="null != drugcatalogCodeKind and '' != drugcatalogCodeKind ">
+				AND t.DRUGCATALOG_CODE_KIND = #{drugcatalogCodeKind}
+		    </if>
+			<if test="null != drugcatalogCkRemark and '' != drugcatalogCkRemark ">
+				AND t.DRUGCATALOG_CK_REMARK = #{drugcatalogCkRemark}
+		    </if>
+			<if test="null != version and '' != version ">
+				AND t.VERSION = #{version}
+		    </if>
+			<if test="null != remark and '' != remark ">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="null != type and '' != type ">
+				AND t.TYPE = #{type}
+		    </if>
+			<if test="null != updDatetime and '' != updDatetime ">
+				AND t.UPD_DATETIME = #{updDatetime}
+		    </if>
+			<if test="null != updUser and '' != updUser ">
+				AND t.UPD_USER = #{updUser}
+		    </if>
+		</where>
+	</select>
+	
+	<select id="checkRepeat" parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRel" resultType="java.lang.Integer">
+		SELECT count(*)
+	    FROM STD_CATA_PROD_REL t
+		<where>
+			<if test="null != drugcatalogName and '' != drugcatalogName ">
+	            AND t.DRUGCATALOG_NAME = #{drugcatalogName}
+	        </if>
+	        <if test="null != drugcatalogCode and '' != drugcatalogCode ">
+	            AND t.DRUGCATALOG_CODE not in (#{drugcatalogCode})
+	        </if>
+		</where>
+	</select>
+	
+	
+ 	<insert id="save"  parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRel">
+		INSERT INTO STD_CATA_PROD_REL(
+				DRUGCATALOG_CODE ,
+	            DRUGCATALOG_NAME ,
+	            DRUGCATALOG_CODE_SELF ,
+	            DRUGCATALOG_CODE_KIND ,
+	            DRUGCATALOG_CK_REMARK ,
+	            VERSION ,
+	            REMARK ,
+	            TYPE ,
+	            UPD_DATETIME ,
+	            UPD_USER 
+		)
+		VALUES (
+	        	#{drugcatalogCode},
+	        	#{drugcatalogName},
+	        	#{drugcatalogCodeSelf},
+	        	#{drugcatalogCodeKind},
+	        	#{drugcatalogCkRemark},
+	        	#{version},
+	        	#{remark},
+	        	#{type},
+	        	#{updDatetime},
+	        	#{updUser}
+		)
+	</insert> 
+	
+
+	
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdCataProdRel">
+		update STD_CATA_PROD_REL  
+		<set>
+	    	<if test="null != drugcatalogName and '' != drugcatalogName ">
+				DRUGCATALOG_NAME = #{drugcatalogName},
+			</if>
+	    	<if test="null != drugcatalogCodeSelf and '' != drugcatalogCodeSelf ">
+				DRUGCATALOG_CODE_SELF = #{drugcatalogCodeSelf},
+			</if>
+	    	<if test="null != drugcatalogCodeSelf and '' != drugcatalogCodeSelf ">
+				DRUGCATALOG_CODE_KIND = #{drugcatalogCodeKind},
+			</if>
+	    	<if test="null != drugcatalogCkRemark and '' != drugcatalogCkRemark ">
+				DRUGCATALOG_CK_REMARK = #{drugcatalogCkRemark},
+			</if>
+	    	<if test="null != version and '' != version ">
+				VERSION = #{version},
+			</if>
+	    	<if test="null != remark and '' != remark ">
+				REMARK = #{remark},
+			</if>
+	    	<if test="null != type and '' != type ">
+				TYPE = #{type},
+			</if>
+	    	<if test="null != updDatetime and '' != updDatetime ">
+				UPD_DATETIME = #{updDatetime},
+			</if>
+	    	<if test="null != updUser and '' != updUser ">
+				UPD_USER = #{updUser},
+			</if>
+        </set>
+		where  DRUGCATALOG_CODE =  #{drugcatalogCode}
+	</update>
+	 -->
+<!--	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO STD_CATA_PROD_REL (
+            DRUGCATALOG_NAME ,
+            DRUGCATALOG_CODE_SELF ,
+            DRUGCATALOG_CODE_KIND ,
+            DRUGCATALOG_CK_REMARK ,
+            VERSION ,
+            REMARK ,
+            TYPE ,
+            UPD_DATETIME ,
+            UPD_USER 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.drugcatalogName},
+        	#{item.drugcatalogCodeSelf},
+        	#{item.drugcatalogCodeKind},
+        	#{item.drugcatalogCkRemark},
+        	#{item.version},
+        	#{item.remark},
+        	#{item.type},
+        	#{item.updDatetime},
+        	#{item.updUser}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM STD_CATA_PROD_REL t
+		<where>
+			<if test="@OGNL@isNotEmpty(drugcatalogCode)">
+				AND t.DRUGCATALOG_CODE = #{drugcatalogCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(drugcatalogName)">
+				AND t.DRUGCATALOG_NAME = #{drugcatalogName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(drugcatalogCodeSelf)">
+				AND t.DRUGCATALOG_CODE_SELF = #{drugcatalogCodeSelf}
+		    </if>
+			<if test="@OGNL@isNotEmpty(drugcatalogCodeKind)">
+				AND t.DRUGCATALOG_CODE_KIND = #{drugcatalogCodeKind}
+		    </if>
+			<if test="@OGNL@isNotEmpty(drugcatalogCkRemark)">
+				AND t.DRUGCATALOG_CK_REMARK = #{drugcatalogCkRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(version)">
+				AND t.VERSION = #{version}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.REMARK = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(type)">
+				AND t.TYPE = #{type}
+		    </if>
+			<if test="@OGNL@isNotEmpty(updDatetime)">
+				AND t.UPD_DATETIME = #{updDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(updUser)">
+				AND t.UPD_USER = #{updUser}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE STD_CATA_PROD_REL  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.drugcatalogName)">
+				DRUGCATALOG_NAME = #{model.drugcatalogName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.drugcatalogCodeSelf)">
+				DRUGCATALOG_CODE_SELF = #{model.drugcatalogCodeSelf},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.drugcatalogCodeKind)">
+				DRUGCATALOG_CODE_KIND = #{model.drugcatalogCodeKind},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.drugcatalogCkRemark)">
+				DRUGCATALOG_CK_REMARK = #{model.drugcatalogCkRemark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.version)">
+				VERSION = #{model.version},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.remark)">
+				REMARK = #{model.remark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.type)">
+				TYPE = #{model.type},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.updDatetime)">
+				UPD_DATETIME = #{model.updDatetime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.updUser)">
+				UPD_USER = #{model.updUser},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.drugcatalogCode)">
+				AND t.DRUGCATALOG_CODE = #{params.drugcatalogCode}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.drugcatalogName)">
+				AND t.DRUGCATALOG_NAME = #{params.drugcatalogName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.drugcatalogCodeSelf)">
+				AND t.DRUGCATALOG_CODE_SELF = #{params.drugcatalogCodeSelf}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.drugcatalogCodeKind)">
+				AND t.DRUGCATALOG_CODE_KIND = #{params.drugcatalogCodeKind}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.drugcatalogCkRemark)">
+				AND t.DRUGCATALOG_CK_REMARK = #{params.drugcatalogCkRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.version)">
+				AND t.VERSION = #{params.version}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.remark)">
+				AND t.REMARK = #{params.remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.type)">
+				AND t.TYPE = #{params.type}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.updDatetime)">
+				AND t.UPD_DATETIME = #{params.updDatetime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.updUser)">
+				AND t.UPD_USER = #{params.updUser}
+		    </if>
+		</where>
+	</update>  -->
+		<insert id="batchSave"  parameterType="map">
+			INSERT INTO STD_CATA_PROD_REL
+			(
+				REL_ID,
+		        DRUGCATALOG_CODE,
+		        PROD_ID,
+		        PROD_ID_STOC,
+		        PRODUCT_NAME,
+		        PRODUCT_SPEL_NAME,
+		        PRODUCT_WB_NAME,
+		        MEDICINEMODEL,
+		        MEDICINEMODEL_SPEL,
+		        OUTLOOK,
+		        CATA_SPEL_NAME,
+		        CATA_MEDICINEMODEL,
+		        CATA_OUTLOOK,
+		        CATA_INDEX_F,
+		        CATA_INDEX_S,
+		        CLASS_ONE,
+		        CLASS_TWO,
+		        PHAR_ONE_ID,
+		        PHAR_ONE,
+		        PHAR_TWO_ID,
+		        PHAR_TWO,
+		        PHAR_THREE_ID,
+		        PHAR_THREE,
+		        PHAR_FOUR_ID,
+		        PHAR_FOUR,
+		        PHAR_FIVE_ID,
+		        PHAR_FIVE,
+		        PHAR_SIX_ID,
+		        PHAR_SIX,
+		        PRODUCT_ATTR,
+		        REMARK,
+		        STATUS,
+		        AUDIT_USER_NAME,
+		        AUDIT_REMARK,
+		        AUDIT_TIME,
+		        IS_USING,
+		        ADD_USER_ID,
+		        ADD_USER_NAME,
+		        ADD_TIME,
+		        LAST_UPDATE_USER_ID,
+		        LAST_UPDATE_USER_NAME,
+		        LAST_UPDATE_TIME
+		       )
+	       select  
+			    sys_guid() REL_ID,
+		        #{drugcatalogCodes} DRUGCATALOG_CODE,
+		        t.prod_id,
+		        t.prod_id_stoc,
+		        t.product_name,
+		        t.product_spel_name,
+		        t.product_wb_name,
+		        t.medicinemodel,
+		        t.medicinemodel_spel,
+		        t.outlook,
+		        t.cata_spel_name,
+		        t.cata_medicinemodel,
+		        t.cata_outlook,
+		        t.cata_index_f,
+		        t.cata_index_s,
+		        t.class_one,
+		        t.class_two,
+		        t.phar_one_id,
+		        t.phar_one,
+		        t.phar_two_id,
+		        t.phar_two,
+		        t.phar_three_id,
+		        t.phar_three,
+		        t.phar_four_id,
+		        t.phar_four,
+		        t.phar_five_id,
+		        t.phar_five,
+		        t.phar_six_id,
+		        t.phar_six,
+		        t.product_attr,
+		        t.remark,
+		        t.status,
+		        t.audit_user_name,
+		        t.audit_remark,
+		        t.audit_time,
+		        t.is_using,
+		        t.add_user_id,
+		        t.add_user_name,
+		        sysdate ADD_TIME,
+		        t.last_update_user_id,
+		        t.last_update_user_name,
+		        sysdate	LAST_UPDATE_TIME
+	       		
+		       from STD_CATA_PROD_REL t
+		       <where>
+		       		<if test="null != drugcatalogCode and '' != drugcatalogCode ">
+				 		DRUGCATALOG_CODE = #{drugcatalogCode}
+		    		</if>
+		       </where>
+					
+		</insert>
+
+
+
+		<insert id="saveExcelDate"  parameterType="map">
+		INSERT INTO STD_CATA_PROD_REL(
+				REL_ID,
+		        DRUGCATALOG_CODE,
+		        PROD_ID,
+		        PROD_ID_STOC,
+		        PRODUCT_NAME,
+		        PRODUCT_SPEL_NAME,
+		        PRODUCT_WB_NAME,
+		        MEDICINEMODEL,
+		        MEDICINEMODEL_SPEL,
+		        OUTLOOK,
+		        CATA_SPEL_NAME,
+		        CATA_MEDICINEMODEL,
+		        CATA_OUTLOOK,
+		        CATA_INDEX_F,
+		        CATA_INDEX_S,
+		        CLASS_ONE,
+		        CLASS_TWO,
+		        PHAR_ONE_ID,
+		        PHAR_ONE,
+		        PHAR_TWO_ID,
+		        PHAR_TWO,
+		        PHAR_THREE_ID,
+		        PHAR_THREE,
+		        PHAR_FOUR_ID,
+		        PHAR_FOUR,
+		        PHAR_FIVE_ID,
+		        PHAR_FIVE,
+		        PHAR_SIX_ID,
+		        PHAR_SIX,
+		        PRODUCT_ATTR,
+		        REMARK,
+		        STATUS,
+		        AUDIT_USER_NAME,
+		        AUDIT_REMARK,
+		        AUDIT_TIME,
+		        IS_USING,
+		        ADD_USER_ID,
+		        ADD_USER_NAME,
+		        ADD_TIME,
+		        LAST_UPDATE_USER_ID,
+		        LAST_UPDATE_USER_NAME,
+		        LAST_UPDATE_TIME
+		)
+			select
+			 sys_guid() REL_ID,
+			 #{drugcatalogCode} DRUGCATALOG_CODE,
+			 t.goods_id PROD_ID,
+			 null PROD_ID_STOC,
+			 t.PRODUCT_NAME,
+			 t.PRODUCT_SPEL_NAME,
+			 t.PRODUCT_WB_NAME,
+			 t.MEDICINEMODEL,
+			 null MEDICINEMODEL_SPEL,
+			 t.OUTLOOK,
+			 null CATA_SPEL_NAME,
+			 null CATA_MEDICINEMODEL,
+			 null CATA_OUTLOOK,
+			 null CATA_INDEX_F,
+			 null CATA_INDEX_S,
+			 null CLASS_ONE,
+			 null CLASS_TWO,
+			 null PHAR_ONE_ID,
+			 null PHAR_ONE,
+			 null PHAR_TWO_ID,
+			 null PHAR_TWO,
+			 null PHAR_THREE_ID,
+			 null PHAR_THREE,
+			 null PHAR_FOUR_ID,
+			 null PHAR_FOUR,
+			 null PHAR_FIVE_ID,
+			 null PHAR_FIVE,
+			 null PHAR_SIX_ID,
+			 null PHAR_SIX,
+			 null PRODUCT_ATTR,
+			 null REMARK,
+			 null STATUS,
+			 null AUDIT_USER_NAME,
+			 null AUDIT_REMARK,
+			 null AUDIT_TIME,
+			 1 IS_USING,
+			 null ADD_USER_ID,
+			 null ADD_USER_NAME,
+			 sysdate ADD_TIME,
+			 null LAST_UPDATE_USER_ID,
+			 null LAST_UPDATE_USER_NAME,
+			 sysdate LAST_UPDATE_TIME
+			 from drugpur_orderdetail_recent t
+			 <where>
+			 	<if test="@OGNL@isNotEmpty(order_detail_id)">
+			 		AND  t.order_detail_id in 
+			 		<foreach collection="order_detail_id" item="item" index="index" open="(" separator="," close=")">  
+                       #{item}  
+         			</foreach>  
+			 	</if>
+			 		<if test="@OGNL@isNotEmpty(goods_id)">
+			 		AND  t.goods_id in 
+			 		<foreach collection="goods_id" item="item" index="index" open="(" separator="," close=")">  
+                       #{item}  
+         			</foreach>  
+			 	</if>
+			 	and not exists (
+				 select * from STD_CATA_PROD_REL s where s.prod_id = t.goods_id and s.drugcatalog_code = #{drugcatalogCode}
+				)
+			 </where>
+	</insert>
+
+	<select id="getCatalogDetails" resultType="map" parameterType="map">
+		SELECT PROD_ID DRUG_PRODUCT_ID,PRODUCT_NAME DRUG_PRODUCT_NAME,MEDICINEMODEL DRUG_MEDICINEMODEL,OUTLOOK DRUG_OUTLOOK,
+		CATEGORY CATEGORY,CLASS_ONE CLASS_ONE,CLASS_TWO CLASS_TWO,PHAR_ONE PHAR,
+		MEDICAL_INSURANCE_NUMBER MEDICAL_INSURANCE_NUMBER,BASE_DRUG_NUMBER BASE_DRUG_NUMBER,NONBASE_DRUG_NUMBER NONBASE_DRUG_NUMBER
+		FROM STD_CATA_PROD_REL t
+		where drugcatalog_code=#{drugcatalogCode} and prod_id=${prodId}
+
+	</select>
+	<insert id="saveLog" parameterType="java.lang.String">
+	INSERT INTO STD_GOODS_APP_LOG
+  (LOG_ID,
+   ID,
+   PROJ_CODE,
+   NAME,
+   GOODS_ID,
+   PRODUCT_ID,
+   PRODUCT_NAME,
+   MEDICINEMODEL,
+   OUTLOOK,
+   PRODUCT_NAME_APP,
+   MEDICINEMODEL_APP,
+   OUTLOOK_APP,
+   GOODS_NAME,
+   MATERIAL_NAME,
+   MATERIAL_REMARK,
+   UNIT,
+   MIN_UNIT,
+   APPROVAL_CODE,
+   ACCEPT_CODE,
+   APPROVAL_CODE_BEGINTIME,
+   APPROVAL_CODE_ENDTIME,
+   REGCODE,
+   REGCODE_BEGIN_TIME,
+   REGCODE_END_TIME,
+   SURVEY_REPORT_YEAR,
+   DRUG_STANDARD_CODE,
+   EXECUTE_STANDARD_TYPE,
+   EXECUTE_STANDARD_CODE,
+   TRIAL_STANDARD_ENDTIME,
+   ISSUBMIT_POSITIVE_CERTIFICATE,
+   CHINESE_MEDICINE_LEVELDAY,
+   ELECTRONIC_PACK,
+   MAXIMUM_RETAIL_PRICE,
+   PRICE_BASIS,
+   MIDDLE_PACK,
+   MAX_PACK,
+   COMPANY_ID_SC,
+   COMPANY_NAME_SC,
+   ARCHIVE_NUMBER,
+   IS_SPLIT_COMPANY,
+   SPLIT_COMPANY_ID,
+   SPLIT_COMPANY_NAME,
+   IS_IMPORT_COMPANY,
+   IMPORT_COMPANYID,
+   IMPORT_COMPANY_NAME,
+   IMPORT_END_DATE,
+   IS_TRUST_COMPANY,
+   TRUST_COMPANY_ID,
+   TRUST_COMPANY_NAME,
+   TRUST_END_DATE,
+   SOURCE,
+   FOR_COMP_ENNAME,
+   FOR_COMP_CHNAME,
+   FOR_COMP_CHADDR,
+   FOR_REG_END_TIME,
+   EXE_STD_DATE,
+   EXE_ACCP_CODE,
+   EXE_STD_OTHER,
+   IS_NEW_GMP,
+   HAS_ENT_PERMIT,
+   SUR_DATE,
+   UNIT_SPEC,
+   UNIT_SPEC_REMARK,
+   DRUG_QUAL_TYPE,
+   INPUT_REMARKS,
+   ATTR_SPEC,
+   ATTR_OTHER,
+   DRUG_SPECINFO,
+   PRICE_SOURCE,
+   IS_SIG_PRICE,
+   RETAIL_PRICE_LIMIT,
+   RETAIL_PRICE_SOURCE,
+   RETAIL_PRICE_FILE,
+   GMP_CODE,
+   FOR_REGCODE,
+   APPLY_REMARK,
+   SUPPLEMENTARY,
+   BD_FROM212,
+   LEVEL_ID,
+   VALID_END_TIME,
+   GMP_PERMIT,
+   IS_OWN_EFF,
+   IS_BETTER_TC,
+   TRANS_CONDITION,
+   STATUS,
+   CE_AUDIT_USER,
+   CE_AUDIT_STATUS,
+   CE_AUDIT_TIME,
+   FLOW_ID,
+   FLOW_NAME,
+   FLOW_STATUS,
+   IS_FINAL,
+   REDIR_FLOW_ID,
+   REDIR_FLOW_NAME,
+   ADD_USER_ID,
+   ADD_USER_NAME,
+   ADD_TIME,
+   LAST_UPDATE_USER_ID,
+   LAST_UPDATE_USER_NAME,
+   LAST_UPDATE_TIME,
+   COMP_CODE,
+   COLUMN1,
+   COLUMN2,
+   COLUMN3,
+   COLUMN4,
+   COLUMN5,
+   COLUMN6,
+   COLUMN7,
+   COLUMN8,
+   COLUMN9,
+   COLUMN10,
+   COLUMN11,
+   COLUMN12,
+   COLUMN13,
+   COLUMN14,
+   COLUMN15,
+   COLUMN16,
+   COLUMN17,
+   COLUMN18,
+   COLUMN19,
+   COLUMN20,
+   COLUMN21,
+   COLUMN22,
+   COLUMN23,
+   COLUMN24,
+   COLUMN25,
+   COLUMN26,
+   COLUMN27,
+   COLUMN28,
+   COLUMN29,
+   COLUMN30,
+   COLUMN31,
+   COLUMN32,
+   COLUMN33,
+   COLUMN34,
+   COLUMN35,
+   COLUMN36,
+   COLUMN37,
+   COLUMN38,
+   COLUMN39,
+   COLUMN40,
+   COLUMN41,
+   COLUMN42,
+   COLUMN43,
+   COLUMN44,
+   COLUMN45,
+   COLUMN46,
+   COLUMN47,
+   COLUMN48,
+   COLUMN49,
+   COLUMN50,
+
+
+   BID_CHECK_RESULT,
+   BID_CHECK_REAMRK,
+   PROD_SCORE,
+   PRICE_ENCODE,
+   PRICE_DECODE,
+   TOTAL_SCORE,
+   FACTOR,
+   DRUG_PRODUCT_ID,
+   DRUG_PRODUCT_NAME,
+   DRUG_MEDICINEMODEL,
+   DRUG_OUTLOOK,
+   GROUP_NUMBER,
+   IS_GROUP)
+  SELECT sys_guid(),
+          ID,
+   PROJ_CODE,
+   NAME,
+   GOODS_ID,
+   PRODUCT_ID,
+   PRODUCT_NAME,
+   MEDICINEMODEL,
+   OUTLOOK,
+   PRODUCT_NAME_APP,
+   MEDICINEMODEL_APP,
+   OUTLOOK_APP,
+   GOODS_NAME,
+   MATERIAL_NAME,
+   MATERIAL_REMARK,
+   UNIT,
+   MIN_UNIT,
+   APPROVAL_CODE,
+   ACCEPT_CODE,
+   APPROVAL_CODE_BEGINTIME,
+   APPROVAL_CODE_ENDTIME,
+   REGCODE,
+   REGCODE_BEGIN_TIME,
+   REGCODE_END_TIME,
+   SURVEY_REPORT_YEAR,
+   DRUG_STANDARD_CODE,
+   EXECUTE_STANDARD_TYPE,
+   EXECUTE_STANDARD_CODE,
+   TRIAL_STANDARD_ENDTIME,
+   ISSUBMIT_POSITIVE_CERTIFICATE,
+   CHINESE_MEDICINE_LEVELDAY,
+   ELECTRONIC_PACK,
+   MAXIMUM_RETAIL_PRICE,
+   PRICE_BASIS,
+   MIDDLE_PACK,
+   MAX_PACK,
+   COMPANY_ID_SC,
+   COMPANY_NAME_SC,
+   ARCHIVE_NUMBER,
+   IS_SPLIT_COMPANY,
+   SPLIT_COMPANY_ID,
+   SPLIT_COMPANY_NAME,
+   IS_IMPORT_COMPANY,
+   IMPORT_COMPANYID,
+   IMPORT_COMPANY_NAME,
+   IMPORT_END_DATE,
+   IS_TRUST_COMPANY,
+   TRUST_COMPANY_ID,
+   TRUST_COMPANY_NAME,
+   TRUST_END_DATE,
+   SOURCE,
+   FOR_COMP_ENNAME,
+   FOR_COMP_CHNAME,
+   FOR_COMP_CHADDR,
+   FOR_REG_END_TIME,
+   EXE_STD_DATE,
+   EXE_ACCP_CODE,
+   EXE_STD_OTHER,
+   IS_NEW_GMP,
+   HAS_ENT_PERMIT,
+   SUR_DATE,
+   UNIT_SPEC,
+   UNIT_SPEC_REMARK,
+   DRUG_QUAL_TYPE,
+   INPUT_REMARKS,
+   ATTR_SPEC,
+   ATTR_OTHER,
+   DRUG_SPECINFO,
+   PRICE_SOURCE,
+   IS_SIG_PRICE,
+   RETAIL_PRICE_LIMIT,
+   RETAIL_PRICE_SOURCE,
+   RETAIL_PRICE_FILE,
+   GMP_CODE,
+   FOR_REGCODE,
+   APPLY_REMARK,
+   SUPPLEMENTARY,
+   BD_FROM212,
+   LEVEL_ID,
+   VALID_END_TIME,
+   GMP_PERMIT,
+   IS_OWN_EFF,
+   IS_BETTER_TC,
+   TRANS_CONDITION,
+   STATUS,
+   CE_AUDIT_USER,
+   CE_AUDIT_STATUS,
+   CE_AUDIT_TIME,
+   FLOW_ID,
+   FLOW_NAME,
+   FLOW_STATUS,
+   IS_FINAL,
+   REDIR_FLOW_ID,
+   REDIR_FLOW_NAME,
+   ADD_USER_ID,
+   ADD_USER_NAME,
+   ADD_TIME,
+   LAST_UPDATE_USER_ID,
+   LAST_UPDATE_USER_NAME,
+   LAST_UPDATE_TIME,
+   COMP_CODE,
+   COLUMN1,
+   COLUMN2,
+   COLUMN3,
+   COLUMN4,
+   COLUMN5,
+   COLUMN6,
+   COLUMN7,
+   COLUMN8,
+   COLUMN9,
+   COLUMN10,
+   COLUMN11,
+   COLUMN12,
+   COLUMN13,
+   COLUMN14,
+   COLUMN15,
+   COLUMN16,
+   COLUMN17,
+   COLUMN18,
+   COLUMN19,
+   COLUMN20,
+   COLUMN21,
+   COLUMN22,
+   COLUMN23,
+   COLUMN24,
+   COLUMN25,
+   COLUMN26,
+   COLUMN27,
+   COLUMN28,
+   COLUMN29,
+   COLUMN30,
+   COLUMN31,
+   COLUMN32,
+   COLUMN33,
+   COLUMN34,
+   COLUMN35,
+   COLUMN36,
+   COLUMN37,
+   COLUMN38,
+   COLUMN39,
+   COLUMN40,
+   COLUMN41,
+   COLUMN42,
+   COLUMN43,
+   COLUMN44,
+   COLUMN45,
+   COLUMN46,
+   COLUMN47,
+   COLUMN48,
+   COLUMN49,
+   COLUMN50,
+
+
+   BID_CHECK_RESULT,
+   BID_CHECK_REAMRK,
+   PROD_SCORE,
+   PRICE_ENCODE,
+   PRICE_DECODE,
+   TOTAL_SCORE,
+   FACTOR,
+   DRUG_PRODUCT_ID,
+   DRUG_PRODUCT_NAME,
+   DRUG_MEDICINEMODEL,
+   DRUG_OUTLOOK,
+   GROUP_NUMBER,
+   IS_GROUP
+    FROM STD_GOODS_APP T
+	WHERE  T.GOODS_ID = #{goodsId}
+
+</insert>
+</mapper>

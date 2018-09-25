@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdOaInformationDeliveryDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdOaInformationDelivery" id="BaseResultMap">
+        <result property="id" column="id" javaType="String"/>
+        <result property="informationType" column="information_type" javaType="String"/>
+        <result property="urgencyLevel" column="urgency_level" javaType="Integer"/>
+        <result property="informationTemplate" column="information_template" javaType="Integer"/>
+        <result property="informationDate" column="information_date" javaType="Date"/>
+        <result property="content" column="content" javaType="String"/>
+        <result property="auditRemark" column="audit_remark" javaType="String"/>
+        <result property="status" column="status" javaType="Integer"/>
+        <result property="informationOffice" column="information_office" javaType="String"/>
+        <result property="title" column="title" javaType="String"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.information_type,
+        t.urgency_level,
+        t.information_template,
+        t.information_date,
+        t.content,
+        t.audit_remark,
+        t.status,
+        t.information_office,
+        t.title,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM std_oa_information_delivery t
+		WHERE t.id =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdOaInformationDelivery">
+		INSERT INTO std_oa_information_delivery(
+				id,
+	            information_type ,
+	            urgency_level ,
+	            information_template ,
+	            information_date ,
+	            content ,
+	            audit_remark ,
+	            status ,
+	            information_office ,
+	            title ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		)
+		VALUES (
+				#{id},
+	        	#{informationType},
+	        	#{urgencyLevel},
+	        	#{informationTemplate},
+	        	#{informationDate},
+	        	#{content},
+	        	#{auditRemark},
+	        	#{status},
+	        	#{informationOffice},
+	        	#{title},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdOaInformationDelivery">
+		UPDATE std_oa_information_delivery  
+		<set>
+			information_type = #{informationType},
+			urgency_level = #{urgencyLevel},
+			information_template = #{informationTemplate},
+			information_date = #{informationDate},
+			content = #{content},
+			audit_remark = #{auditRemark},
+			status = #{status},
+			information_office = #{informationOffice},
+			title = #{title},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = SYSDATE,
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.StdOaInformationDelivery">
+		UPDATE std_oa_information_delivery  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(informationType)">
+				information_type = #{informationType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(urgencyLevel)">
+				urgency_level = #{urgencyLevel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(informationTemplate)">
+				information_template = #{informationTemplate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(informationDate)">
+				information_date = #{informationDate},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(content)">
+				content = #{content},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(auditRemark)">
+				audit_remark = #{auditRemark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(status)">
+				status = #{status},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(informationOffice)">
+				information_office = #{informationOffice},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(title)">
+				title = #{title},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				add_user_id = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				add_user_name = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				add_time = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				last_update_user_id = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				last_update_user_name = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				last_update_time = #{lastUpdateTime},
+			</if>
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM std_oa_information_delivery WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_oa_information_delivery t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(informationType)">
+				AND t.information_type = #{informationType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(urgencyLevel)">
+				AND t.urgency_level = #{urgencyLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(informationTemplate)">
+				AND t.information_template = #{informationTemplate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(informationDate)">
+				AND t.information_date = #{informationDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(content)">
+				AND t.content = #{content}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditRemark)">
+				AND t.audit_remark = #{auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(status)">
+				AND t.status = #{status}
+		    </if>
+			<if test="@OGNL@isNotEmpty(informationOffice)">
+				AND t.information_office like CONCAT("%", #{informationOffice},"%")
+		    </if>
+			<if test="@OGNL@isNotEmpty(title)">
+				AND t.title like CONCAT("%", #{title},"%")
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_oa_information_delivery (
+            information_type ,
+            urgency_level ,
+            information_template ,
+            information_date ,
+            content ,
+            audit_remark ,
+            status ,
+            information_office ,
+            title ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.informationType},
+        	#{item.urgencyLevel},
+        	#{item.informationTemplate},
+        	#{item.informationDate},
+        	#{item.content},
+        	#{item.auditRemark},
+        	#{item.status},
+        	#{item.informationOffice},
+        	#{item.title},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM std_oa_information_delivery t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(informationType)">
+				AND t.information_type = #{informationType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(urgencyLevel)">
+				AND t.urgency_level = #{urgencyLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(informationTemplate)">
+				AND t.information_template = #{informationTemplate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(informationDate)">
+				AND t.information_date = #{informationDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(content)">
+				AND t.content = #{content}
+		    </if>
+			<if test="@OGNL@isNotEmpty(auditRemark)">
+				AND t.audit_remark = #{auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(status)">
+				AND t.status = #{status}
+		    </if>
+			<if test="@OGNL@isNotEmpty(informationOffice)">
+				AND t.information_office = #{informationOffice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(title)">
+				AND t.title = #{title}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE std_oa_information_delivery  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.informationType)">
+				information_type = #{model.informationType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.urgencyLevel)">
+				urgency_level = #{model.urgencyLevel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.informationTemplate)">
+				information_template = #{model.informationTemplate},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.informationDate)">
+				information_date = #{model.informationDate},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.content)">
+				content = #{model.content},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.auditRemark)">
+				audit_remark = #{model.auditRemark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.status)">
+				status = #{model.status},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.informationOffice)">
+				information_office = #{model.informationOffice},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.title)">
+				title = #{model.title},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				add_user_id = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				add_user_name = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				add_time = #{model.addTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				last_update_user_id = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				last_update_user_name = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				last_update_time = #{model.lastUpdateTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.id = #{params.id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.informationType)">
+				AND t.information_type = #{params.informationType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.urgencyLevel)">
+				AND t.urgency_level = #{params.urgencyLevel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.informationTemplate)">
+				AND t.information_template = #{params.informationTemplate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.informationDate)">
+				AND t.information_date = #{params.informationDate}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.content)">
+				AND t.content = #{params.content}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.auditRemark)">
+				AND t.audit_remark = #{params.auditRemark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.status)">
+				AND t.status = #{params.status}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.informationOffice)">
+				AND t.information_office = #{params.informationOffice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.title)">
+				AND t.title = #{params.title}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.add_user_id = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.add_user_name = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.add_time = #{params.addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.last_update_user_id = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.last_update_user_name = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.last_update_time = #{params.lastUpdateTime}
+		    </if>
+		</where>
+	</update>
+	
+	
+	<update id="updateStatusById" parameterType="map">
+		UPDATE std_oa_information_delivery  t 
+		set status = #{status},last_update_user_id = #{userId},
+			last_update_user_name = #{userName},last_update_time = SYSDATE 
+		where  t.id = #{id} 
+	</update>
+</mapper>

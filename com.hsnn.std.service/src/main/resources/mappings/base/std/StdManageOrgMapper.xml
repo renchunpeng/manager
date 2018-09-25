@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdManageOrgDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdManageOrg" id="BaseResultMap">
+        <result property="id" column="id" javaType="String"/>
+        <result property="heaBurName" column="hea_bur_name" javaType="String"/>
+        <result property="burSpelCode" column="bur_spel_code" javaType="String"/>
+        <result property="areaName" column="area_name" javaType="String"/>
+        <result property="areaId" column="area_id" javaType="String"/>
+        <result property="heaBurType" column="hea_bur_type" javaType="Integer"/>
+        <result property="orgAddress" column="org_address" javaType="String"/>
+        <result property="contactor" column="contactor" javaType="String"/>
+        <result property="contactorTel" column="contactor_tel" javaType="String"/>
+        <result property="cellphone" column="cellphone" javaType="String"/>
+        <result property="email" column="email" javaType="String"/>
+        <result property="contactQq" column="contact_qq" javaType="String"/>
+        <result property="adminAreaName" column="admin_area_name" javaType="String"/>
+        <result property="adminAreaId" column="admin_area_id" javaType="Integer"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+
+		<!--<result property="initializationState" column="initialization_state" javaType="Integer"/>-->
+		<result property="superviseType" column="supervise_type" javaType="Integer"/>
+
+        <association columnPrefix="ss_" property="stdArea" javaType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="com.hsnn.medstgmini.base.std.dao.StdAreaDao.BaseResultMap"></association>
+        <association columnPrefix="xz_" property="stdAreaXZ" javaType="com.hsnn.medstgmini.base.std.model.StdArea" resultMap="com.hsnn.medstgmini.base.std.dao.StdAreaDao.BaseResultMap"></association>
+		<association property="sysUser" javaType="com.hsnn.medstgmini.base.sys.model.SysUser" resultMap="com.hsnn.medstgmini.base.sys.dao.SysUserDao.BaseResultMap"/>
+	</resultMap>
+
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdArea" id="StdAreaMap">
+		<result property="areaId" column="area_id" javaType="String"/>
+		<result property="areaName" column="area_name" javaType="String"/>
+		<result property="fatherId" column="father_id" javaType="String"/>
+		<result property="areaShortname" column="area_shortname" javaType="String"/>
+		<result property="areaFullname" column="area_fullname" javaType="String"/>
+		<result property="status" column="status" javaType="Integer"/>
+		<result property="updDatetime" column="upd_datetime" javaType="Date"/>
+		<result property="updUser" column="upd_user" javaType="String"/>
+		<result property="sortId" column="sort_id" javaType="Integer"/>
+		<result property="maxDelnumCounty" column="max_delnum_county" javaType="Integer"/>
+		<result property="maxDelnumBase" column="max_delnum_base" javaType="Integer"/>
+	</resultMap>
+
+	<sql id="full-columns" >
+        t.id,
+        t.hea_bur_name,
+        t.bur_spel_code,
+        t.area_name,
+        t.area_id,
+        t.hea_bur_type,
+        t.org_address,
+        t.contactor,
+        t.contactor_tel,
+        t.cellphone,
+        t.email,
+        t.contact_qq,
+        t.admin_area_name,
+        t.admin_area_id,
+        t.is_using,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time,
+        t.initialization_state,
+	    t.supervise_type
+	</sql>
+
+
+	<select id="load" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from std_manage_org where id =  #{value}
+	</select>
+
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		,a.area_name as ss_area_name
+		,b.area_name AS xz_area_name
+	    FROM std_manage_org t
+	    LEFT JOIN std_area a ON t.area_id = a.area_id AND a.status = 1
+	    LEFT JOIN std_area b ON t.admin_area_id = b.area_id AND b.status = 1
+		WHERE id =  #{value}
+	</select>
+	<select id="getStdAreaByOrgId" parameterType="java.lang.String" resultMap="StdAreaMap">
+		select a.* from std_manage_org t
+		inner join std_area a on t.area_id = a.area_id
+		where t.id =  #{id}
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.std.model.StdManageOrg">
+		INSERT INTO std_manage_org(
+	            hea_bur_name ,
+	            bur_spel_code ,
+	            area_name ,
+	            area_id ,
+	            hea_bur_type ,
+	            org_address ,
+	            contactor ,
+	            contactor_tel ,
+	            cellphone ,
+	            email ,
+	            contact_qq ,
+	            admin_area_name ,
+	            admin_area_id ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{heaBurName},
+	        	#{burSpelCode},
+	        	get_full_name(#{areaId}),
+	        	#{areaId},
+	        	#{heaBurType},
+	        	#{orgAddress},
+	        	#{contactor},
+	        	#{contactorTel},
+	        	#{cellphone},
+	        	#{email},
+	        	#{contactQq},
+	        	get_full_name(#{adminAreaId}),
+	        	#{adminAreaId},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.std.model.StdManageOrg">
+		INSERT INTO std_manage_org(
+				id,
+	            hea_bur_name ,
+	            bur_spel_code ,
+	            area_name ,
+	            area_id ,
+	            hea_bur_type ,
+	            org_address ,
+	            contactor ,
+	            contactor_tel ,
+	            cellphone ,
+	            email ,
+	            contact_qq ,
+	            admin_area_name ,
+	            admin_area_id ,
+	            is_using ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time,
+	            initialization_state,
+	            supervise_type
+		) 
+		VALUES (
+				#{id},
+	        	#{heaBurName},
+	        	#{burSpelCode},
+	        	get_full_name(#{areaId}),
+	        	#{areaId},
+	        	#{heaBurType},
+	        	#{orgAddress},
+	        	#{contactor},
+	        	#{contactorTel},
+	        	#{cellphone},
+	        	#{email},
+	        	#{contactQq},
+	        	get_full_name(#{adminAreaId}),
+	        	#{adminAreaId},
+	        	#{isUsing},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime},
+	        	#{initializationState},
+	        	#{superviseType}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdManageOrg">
+		UPDATE std_manage_org  
+		<set>
+	        	hea_bur_name = #{heaBurName},
+	        	bur_spel_code = pinyin(#{heaBurName}),
+	        	area_name = get_full_name(#{areaId}),
+	        	area_id = #{areaId},
+	        	hea_bur_type = #{heaBurType},
+	        	org_address = #{orgAddress},
+	        	contactor = #{contactor},
+	        	contactor_tel = #{contactorTel},
+	        	cellphone = #{cellphone},
+	        	email = #{email},
+	        	contact_qq = #{contactQq},
+	        	admin_area_name = get_full_name(#{adminAreaId}),
+	        	admin_area_id = #{adminAreaId},
+	        	is_using = #{isUsing},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = SYSDATE,
+        </set>
+		WHERE  id =  #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM std_manage_org WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		,a.area_name AS ss_area_name
+		,b.area_name AS xz_area_name
+	    FROM std_manage_org t
+	    LEFT JOIN std_area a ON t.area_id = a.area_id AND a.status = 1
+	    LEFT JOIN std_area b ON t.admin_area_id = b.area_id AND b.status = 1
+		<where>
+			<if test="@OGNL@isNotEmpty(areaName)">
+	            AND a.area_name LIKE '%'||#{areaName}||'%'
+	        </if>
+	        
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(heaBurName)">
+	            AND t.hea_bur_name = #{heaBurName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(burSpelCode)">
+	            AND t.bur_spel_code = #{burSpelCode}
+	        </if>
+			<if test="@OGNL@isNotEmpty(areaId)">
+	            AND t.area_id = #{areaId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(heaBurType)">
+	            AND t.hea_bur_type = #{heaBurType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgAddress)">
+	            AND t.org_address = #{orgAddress}
+	        </if>
+			<if test="@OGNL@isNotEmpty(contactor)">
+	            AND t.contactor = #{contactor}
+	        </if>
+			<if test="@OGNL@isNotEmpty(contactorTel)">
+	            AND t.contactor_tel = #{contactorTel}
+	        </if>
+			<if test="@OGNL@isNotEmpty(cellphone)">
+	            AND t.cellphone = #{cellphone}
+	        </if>
+			<if test="@OGNL@isNotEmpty(email)">
+	            AND t.email = #{email}
+	        </if>
+			<if test="@OGNL@isNotEmpty(contactQq)">
+	            AND t.contact_qq = #{contactQq}
+	        </if>
+			<if test="@OGNL@isNotEmpty(adminAreaId)">
+	            AND t.admin_area_id = #{adminAreaId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn) ">
+        ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_manage_org (
+            hea_bur_name ,
+            bur_spel_code ,
+            area_id ,
+            area_name ,
+            hea_bur_type ,
+            org_address ,
+            contactor ,
+            contactor_tel ,
+            cellphone ,
+            email ,
+            contact_qq ,
+            admin_area_id ,
+            admin_area_name ,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.heaBurName},
+        	#{item.burSpelCode},
+        	#{item.areaId},
+        	get_full_name(#{item.areaId}),
+        	#{item.heaBurType},
+        	#{item.orgAddress},
+        	#{item.contactor},
+        	#{item.contactorTel},
+        	#{item.cellphone},
+        	#{item.email},
+        	#{item.contactQq},
+        	#{item.adminAreaId},
+        	get_full_name(#{item.adminAreaId}),
+        	#{item.isUsing},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	SYSDATE,
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="getJgSelectList"  parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" />
+		FROM std_manage_org t WHERE
+		not  exists (SELECT * FROM sys_user a where a.org_id = t.id and a.user_type=#{userType})
+		<if test="@OGNL@isNotEmpty(heaBurName)">
+	       AND (t.hea_bur_name Like '%'||#{heaBurName}||'%' or t.bur_spel_code Like '%'||#{heaBurName}||'%') 
+        </if>
+		<if test="@OGNL@isNotEmpty(superviseType)">
+			AND t.supervise_type = #{superviseType}
+		</if>
+        <if test="@OGNL@isNotEmpty(heaBurType)">
+            AND t.hea_bur_type = #{heaBurType}
+        </if>
+        and t.is_using  = 1
+	</select>
+	
+	<select id="queryStdManageOrgById" parameterType="map" resultMap="BaseResultMap">
+		SELECT * FROM std_manage_org t where t.id=#{id}
+	</select>
+	
+	<select id="getAreaIdByOrgId" parameterType="java.lang.String" resultType="java.lang.String">
+		select t.area_id from std_manage_org t where t.id = #{orgId}
+	</select>
+	<select id="getManageOrgSelectList"  parameterType="map" resultMap="BaseResultMap">
+
+		select <include refid="full-columns" />
+		FROM std_manage_org T
+		WHERE  T.is_using = 1
+		AND T.supervise_type = #{superviseType}
+		and T.INITIALIZATION_STATE = 1
+
+	</select>
+	
+	<select id="getManageOrgName" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from std_manage_org t where t.hea_bur_name = #{_parameter,jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="addManageOrg" parameterType="com.hsnn.medstgmini.base.std.model.StdManageOrg">
+		insert into std_manage_org (
+			id,
+			hea_bur_name,
+			area_id,
+			area_name,
+			hea_bur_type,
+			admin_area_id,
+			is_using,
+			contactor,
+			cellphone,
+			add_user_id ,
+            add_user_name ,
+            add_time
+		)values(
+			stdmanageorgseq.nextval,
+			#{heaBurName},
+			#{areaId},
+			get_full_name(#{areaId}),
+			#{heaBurType},
+			0,
+			1,
+			#{contactor},
+			#{cellphone},
+			#{addUserId},
+			#{addUserName},
+			SYSDATE
+		)
+	</insert>
+	
+	<select id="getJgSendSelectList"  parameterType="map" resultMap="BaseResultMap">
+		select <include refid="full-columns" />,a.user_name
+		FROM std_manage_org t left join sys_user a on t.id = a.org_id WHERE
+		exists (SELECT * FROM sys_user a where a.org_id = t.id and a.user_type=#{userType})
+		<if test="@OGNL@isNotEmpty(heaBurName)">
+	       AND (t.hea_bur_name Like '%'||#{heaBurName}||'%' or t.bur_spel_code Like '%'||#{heaBurName}||'%') 
+        </if>
+		<if test="@OGNL@isNotEmpty(superviseType)">
+			AND t.supervise_type = #{superviseType}
+		</if>
+        <if test="@OGNL@isNotEmpty(heaBurType)">
+            AND t.hea_bur_type = #{heaBurType}
+        </if>
+        and t.is_using  = 1
+	</select>
+</mapper>

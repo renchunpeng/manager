@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysUserResourceDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysUserResource" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="userId" column="user_id" javaType="String"/>
+        <result property="resourceId" column="resource_id" javaType="Integer"/>
+        
+        <result property="belongOrg" column="belong_org" javaType="String"/>
+        <result property="belongDepartmentId" column="belong_department_id" javaType="Integer"/>
+        <result property="belongPostId" column="belong_post_id" javaType="Integer"/>
+        
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="type" column="type" javaType="Integer"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.user_id,
+        t.resource_id,
+        t.belong_org,
+		t.belong_department_id,
+		t.belong_post_id,
+        t.is_using,
+        t.type,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time,
+        t.last_update_user_id,
+        t.last_update_user_name,
+        t.last_update_time
+	</sql>
+
+	
+	<select id="load" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_user_resource where id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT * from sys_user_resource where id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from sys_user_resource 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysUserResource">
+		INSERT INTO sys_user_resource(
+	            user_id ,
+	            resource_id ,
+	            belong_org,
+				belong_department_id,
+				belong_post_id,
+	            is_using ,
+	            type ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{userId},
+	        	#{resourceId},
+	        	#{belongOrg},
+				#{belongDepartmentId},
+				#{belongPostId},
+	        	#{isUsing},
+	        	#{type},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	now()
+		)
+	</insert>
+	
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.hsnn.medstgmini.base.sys.model.SysUserResource">
+		<!--<selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">-->
+			<!--SELECT SYSUSERRESOURCESEQ.nextval from dual-->
+        <!--</selectKey>-->
+		INSERT INTO sys_user_resource(
+	            user_id ,
+	            resource_id ,
+	            belong_org,
+				belong_department_id,
+				belong_post_id,
+	            is_using ,
+	            type ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+	        	#{userId},
+	        	#{resourceId},
+	        	#{belongOrg},
+				#{belongDepartmentId},
+				#{belongPostId},
+	        	#{isUsing},
+	        	#{type},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	now()
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysUserResource">
+		UPDATE sys_user_resource  
+		<set>
+	        	user_id = #{userId},
+	        	resource_id = #{resourceId},
+	        	belong_org = #{belongOrg},
+				belong_department_id = #{belongDepartmentId},
+				belong_post_id = #{belongPostId},
+	        	is_using = #{isUsing},
+	        	type = #{type},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = #{lastUpdateTime},
+        </set>
+		WHERE  id =  #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM sys_user_resource WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_user_resource t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+	            AND t.id = #{id}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userId)">
+	            AND t.user_id = #{userId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(resourceId)">
+	            AND t.resource_id = #{resourceId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(belongOrg)">
+	            AND t.belong_org = #{belongOrg}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(belongDepartmentId)">
+	            AND t.belong_department_id = #{belongDepartmentId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(belongPostId)">
+	            AND t.belong_post_id = #{belongPostId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(type)">
+	            AND t.type = #{type}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+		<if test="@OGNL@isNotEmpty(orderColumn) ">
+        ORDER BY t.${orderColumn} <if test="@OGNL@isNotEmpty(orderDirection) ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_user_resource (
+        	id,
+            user_id ,
+            resource_id ,
+            belong_org,
+			belong_department_id,
+			belong_post_id,
+            is_using ,
+            type ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) select SYSUSERRESOURCESEQ.nextval,p.* from(
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select 
+        	#{item.userId},
+        	#{item.resourceId},
+        	#{item.belongOrg},
+			#{item.belongDepartmentId},
+			#{item.belongPostId},
+        	#{item.isUsing},
+        	#{item.type},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	now(),
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        from dual
+        </foreach> ) p
+	</insert>
+	
+	<delete id="deleteByParam" parameterType="map">
+		DELETE FROM sys_user_resource 
+		<where>
+	        <if test="@OGNL@isNotEmpty(belongDepartmentId)">
+	            AND belong_department_id = #{belongDepartmentId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(belongPostId)">
+	            AND belong_post_id = #{belongPostId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(belongPostIds)">
+		         AND belong_post_id in 
+	            <foreach collection="belongPostIds" item="item" separator="," open="(" close=")">
+	            	#{item}
+	            </foreach>
+	        </if>
+		</where>
+	</delete>
+	
+	
+	<update id="updateUserResourceByDept" parameterType="com.hsnn.medstgmini.base.sys.model.SysUserResource">
+		UPDATE sys_user_resource  t
+		<set>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            t.is_using = #{isUsing},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            t.last_update_user_id = #{lastUpdateUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            t.last_update_user_name = #{lastUpdateUserName},
+	        </if>
+	           t.last_update_time = now()
+        </set>
+		WHERE  
+		    t.belong_department_id = #{belongDepartmentId} and t.resource_id = #{resourceId}
+	</update>
+	<insert id="addSysUserResource" useGeneratedKeys="true" keyProperty="id" parameterType="com.hsnn.medstgmini.base.sys.model.SysUserResource">
+		<!--<selectKey resultType="Integer"  keyProperty="id" order="BEFORE">-->
+			<!--select SYSUSERRESOURCESEQ.nextval as id from dual-->
+		<!--</selectKey>-->
+		INSERT INTO sys_user_resource(
+	            user_id ,
+	            resource_id ,
+	            belong_org,
+				belong_department_id,
+				belong_post_id,
+	            is_using ,
+	            type ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+		) 
+		VALUES (
+	        	#{userId},
+	        	#{resourceId},
+	        	#{belongOrg},
+				#{belongDepartmentId},
+				#{belongPostId},
+	        	#{isUsing},
+	        	#{type},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	now()
+		)
+	</insert>
+</mapper>

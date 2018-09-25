@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdPriceDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdPrice" id="BaseResultMap">
+        <result property="id" column="ID" javaType="String"/>
+        <result property="goodsId" column="GOODS_ID" javaType="Integer"/>
+        <result property="productName" column="PRODUCT_NAME" javaType="String"/>
+        <result property="medicinemodel" column="MEDICINEMODEL" javaType="String"/>
+        <result property="outlook" column="OUTLOOK" javaType="String"/>
+        <result property="factor" column="FACTOR" javaType="Integer"/>
+        <result property="unit" column="UNIT" javaType="String"/>
+        <result property="materialName" column="MATERIAL_NAME" javaType="String"/>
+ 	    <result property="companyIdSc" column="COMPANY_ID_SC" javaType="String"/>
+        <result property="companyNameSc" column="COMPANY_NAME_SC" javaType="String"/>
+        <result property="sourceId" column="SOURCE_ID" javaType="Integer"/>
+        <result property="sourceName" column="SOURCE_NAME" javaType="String"/>
+        <result property="bidPrice" column="BID_PRICE" javaType="BigDecimal"/>
+        <result property="areaId" column="AREA_ID" javaType="String"/>
+        <result property="hospId" column="HOSP_ID" javaType="String"/>
+        <result property="hospName" column="HOSP_NAME" javaType="String"/>
+        <result property="combineId" column="COMBINE_ID" javaType="String"/>
+        <result property="combineName" column="COMBINE_NAME" javaType="String"/>
+        <result property="addUserId" column="ADD_USER_ID" javaType="String"/>
+        <result property="addUserName" column="ADD_USER_NAME" javaType="String"/>
+        <result property="addTime" column="ADD_TIME" javaType="Date"/>
+        <result property="procurecatalogId" column="PROCURECATALOG_ID" javaType="Integer"/>
+        <result property="varType" column="VAR_TYPE" javaType="Integer"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.ID,
+        t.GOODS_ID,
+        t.PRODUCT_NAME,
+        t.MEDICINEMODEL,
+        t.OUTLOOK,
+        t.FACTOR,
+        t.UNIT,
+        t.MATERIAL_NAME,
+ 	    t.COMPANY_ID_SC,
+        t.COMPANY_NAME_SC,
+        t.SOURCE_ID,
+        t.SOURCE_NAME,
+        t.BID_PRICE,
+        t.AREA_ID,
+        t.HOSP_ID,
+        t.HOSP_NAME,
+        t.COMBINE_ID,
+        t.COMBINE_NAME,
+        t.ADD_USER_ID,
+        t.ADD_USER_NAME,
+        t.ADD_TIME,
+        t.PROCURECATALOG_ID,
+        t.VAR_TYPE
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM STD_PRICE t
+		WHERE t.ID =  #{value}
+	</select>
+
+	<!-- <update id="updateAdjustPlan" parameterType="com.hsnn.medstgmini.base.std.model.StdPrice">
+		UPDATE STD_PRICE  
+		<set>
+			PRICE = #{price},
+			last_update_time = SYSDATE
+        </set>
+		WHERE  goods_id = #{goodsId} and price &gt; #{price}
+	</update> -->
+	
+	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.hsnn.medstgmini.base.std.model.StdPrice">
+		<selectKey resultType="String" keyProperty="id" order="BEFORE">
+			SELECT STDPRICESEQ.nextval AS ID from dual
+        </selectKey>
+		INSERT INTO STD_PRICE(	
+				ID,
+		        GOODS_ID,
+		        PRODUCT_NAME,
+		        MEDICINEMODEL,
+		        OUTLOOK,
+		        FACTOR,
+		        UNIT,
+		        MATERIAL_NAME,
+		 	    COMPANY_ID_SC,
+		        COMPANY_NAME_SC,
+		        SOURCE_ID,
+		        SOURCE_NAME,
+		        BID_PRICE,
+		        AREA_ID,
+		        HOSP_ID,
+		        HOSP_NAME,
+		        COMBINE_ID,
+		        COMBINE_NAME,
+		        ADD_USER_ID,
+		        ADD_USER_NAME,
+		        ADD_TIME,
+		        PROCURECATALOG_ID,
+		        VAR_TYPE 
+		)
+		VALUES (
+				#{id},
+	        	#{goodsId},
+	        	#{productName},
+	        	#{medicinemodel},
+	        	#{outlook},
+	        	#{factor},
+	        	#{unit},
+	        	#{materialName},
+	        	#{companyIdSc},
+	        	#{companyNameSc},
+	        	#{sourceId},
+	        	#{sourceName},
+	        	#{bidPrice},
+	        	#{areaId},
+	        	#{hospId},
+	        	#{hospName},
+	        	#{combineId},
+	        	#{combineName},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE,
+	        	#{procurecatalogId},
+	        	#{varType}
+		)
+		
+	</insert>
+	
+	
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdPrice">
+		UPDATE STD_PRICE  
+		<set>
+		        GOODS_ID=#{goodsId},
+		        PRODUCT_NAME=#{productName},
+		        MEDICINEMODEL=#{medicinemodel},
+		        OUTLOOK=#{outlook},
+		        FACTOR=#{factor},
+		        UNIT=#{unit},
+		        MATERIAL_NAME=#{materialName},
+		 	    COMPANY_ID_SC=#{companyIdSc},
+		        COMPANY_NAME_SC=#{companyNameSc},
+		        SOURCE_ID=#{sourceId},
+		        SOURCE_NAME=#{sourceName},
+		        BID_PRICE=#{bidPrice},
+		        AREA_ID=#{areaId},
+		        HOSP_ID=#{hospId},
+		        HOSP_NAME=#{hospName},
+		        COMBINE_ID=#{combineId},
+		        COMBINE_NAME=#{combineName},
+		        ADD_USER_ID=#{addUserId},
+		        ADD_USER_NAME=#{addUserName},
+		        ADD_TIME=SYSDATE,
+		        PROCURECATALOG_ID=#{procurecatalogId},
+		        VAR_TYPE=#{varType} 
+        </set>
+		WHERE  ID =  #{id}
+	</update>
+	
+	<!-- <update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.StdPrice">
+		UPDATE STD_PRICE  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(goodsId)">
+				GOODS_ID = #{goodsId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(prodName)">
+				PROD_NAME = #{prodName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(medModel)">
+				MED_MODEL = #{medModel},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(outlook)">
+				OUTLOOK = #{outlook},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(factor)">
+				FACTOR = #{factor},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(unit)">
+				UNIT = #{unit},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(materialName)">
+				MATERIAL_NAME = #{materialName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(compProdId)">
+				COMP_PROD_ID = #{compProdId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(compProdName)">
+				COMP_PROD_NAME = #{compProdName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(prodId)">
+				PROD_ID = #{prodId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(prodType)">
+				PROD_TYPE = #{prodType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(prodSource)">
+				PROD_SOURCE = #{prodSource},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(priceStart)">
+				PRICE_START = #{priceStart},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(priceEnd)">
+				PRICE_END = #{priceEnd},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(price)">
+				PRICE = #{price},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(priceType)">
+				PRICE_TYPE = #{priceType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(areaId)">
+				AREA_ID = #{areaId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospId)">
+				HOSP_ID = #{hospId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospName)">
+				HOSP_NAME = #{hospName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(compDistId)">
+				COMP_DIST_ID = #{compDistId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(compDistName)">
+				COMP_DIST_NAME = #{compDistName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(combineId)">
+				COMBINE_ID = #{combineId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(combineName)">
+				COMBINE_NAME = #{combineName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				ADD_USER_ID = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				ADD_USER_NAME = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				ADD_TIME = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				LAST_UPDATE_TIME = #{lastUpdateTime},
+			</if>
+        </set>
+		WHERE  ID =  #{id}
+	</update>
+	 -->
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM STD_PRICE WHERE  ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM STD_PRICE t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.ID = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID = #{goodsId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.PRODUCT_NAME Like '%'||#{productName}||'%' 
+		    </if>
+			<if test="@OGNL@isNotEmpty(medicinemodel)">
+				AND t.MEDICINEMODEL  Like '%'||#{medicinemodel}||'%' 
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK  Like '%'||#{outlook}||'%' 
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME Like '%'||#{materialName}||'%' 
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyIdSc)">
+				AND t.COMPANY_ID_SC Like '%'||#{companyIdSc}||'%' 
+		    </if>
+			<if test="@OGNL@isNotEmpty(companyNameSc)">
+				AND t.COMPANY_NAME_SC Like '%'||#{companyNameSc}||'%' 
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceId)">
+				AND t.SOURCE_ID = #{sourceId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(sourceName)">
+				AND t.SOURCE_NAME Like '%'||#{sourceName}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(bidPrice)">
+				AND t.BID_PRICE = #{bidPrice}
+		    </if>
+			<if test="@OGNL@isNotEmpty(areaId)">
+				AND t.AREA_ID = #{areaId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(hospId)">
+				AND t.HOSP_ID = #{hospId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(hospName)">
+				AND t.HOSP_NAME Like '%'||#{hospName}||'%' 
+		    </if>
+		    <if test="@OGNL@isNotEmpty(combineId)">
+				AND t.COMBINE_ID = #{combineId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(combineName)">
+				AND t.COMBINE_NAME Like '%'||#{combineName}||'%' 
+		    </if>
+		    <if test="@OGNL@isNotEmpty(procurecatalogId)">
+				AND t.PROCURECATALOG_ID = #{procurecatalogId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(varType)">
+				AND t.VAR_TYPE = #{varType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<!-- <insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO STD_PRICE (
+            GOODS_ID ,
+            PROD_NAME ,
+            MED_MODEL ,
+            OUTLOOK ,
+            FACTOR ,
+            UNIT ,
+            MATERIAL_NAME ,
+            COMP_PROD_ID ,
+            COMP_PROD_NAME ,
+            PROD_ID ,
+            PROD_TYPE ,
+            PROD_SOURCE ,
+            PRICE_START ,
+            PRICE_END ,
+            PRICE ,
+            PRICE_TYPE ,
+            AREA_ID ,
+            HOSP_ID ,
+            HOSP_NAME ,
+            COMP_DIST_ID ,
+            COMP_DIST_NAME ,
+            COMBINE_ID ,
+            COMBINE_NAME ,
+            ADD_USER_ID ,
+            ADD_USER_NAME ,
+            ADD_TIME ,
+            LAST_UPDATE_USER_ID ,
+            LAST_UPDATE_USER_NAME ,
+            LAST_UPDATE_TIME 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.goodsId},
+        	#{item.prodName},
+        	#{item.medModel},
+        	#{item.outlook},
+        	#{item.factor},
+        	#{item.unit},
+        	#{item.materialName},
+        	#{item.compProdId},
+        	#{item.compProdName},
+        	#{item.prodId},
+        	#{item.prodType},
+        	#{item.prodSource},
+        	#{item.priceStart},
+        	#{item.priceEnd},
+        	#{item.price},
+        	#{item.priceType},
+        	#{item.areaId},
+        	#{item.hospId},
+        	#{item.hospName},
+        	#{item.compDistId},
+        	#{item.compDistName},
+        	#{item.combineId},
+        	#{item.combineName},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert> -->
+	
+	<!-- <select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM STD_PRICE t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.ID = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(goodsId)">
+				AND t.GOODS_ID = #{goodsId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(prodName)">
+				AND t.PROD_NAME = #{prodName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(medModel)">
+				AND t.MED_MODEL = #{medModel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(outlook)">
+				AND t.OUTLOOK = #{outlook}
+		    </if>
+			<if test="@OGNL@isNotEmpty(factor)">
+				AND t.FACTOR = #{factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(unit)">
+				AND t.UNIT = #{unit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(materialName)">
+				AND t.MATERIAL_NAME = #{materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compProdId)">
+				AND t.COMP_PROD_ID = #{compProdId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compProdName)">
+				AND t.COMP_PROD_NAME = #{compProdName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(prodId)">
+				AND t.PROD_ID = #{prodId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(prodType)">
+				AND t.PROD_TYPE = #{prodType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(prodSource)">
+				AND t.PROD_SOURCE = #{prodSource}
+		    </if>
+			<if test="@OGNL@isNotEmpty(priceStart)">
+				AND t.PRICE_START = #{priceStart}
+		    </if>
+			<if test="@OGNL@isNotEmpty(priceEnd)">
+				AND t.PRICE_END = #{priceEnd}
+		    </if>
+			<if test="@OGNL@isNotEmpty(price)">
+				AND t.PRICE = #{price}
+		    </if>
+			<if test="@OGNL@isNotEmpty(priceType)">
+				AND t.PRICE_TYPE = #{priceType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(areaId)">
+				AND t.AREA_ID = #{areaId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospId)">
+				AND t.HOSP_ID = #{hospId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospName)">
+				AND t.HOSP_NAME = #{hospName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compDistId)">
+				AND t.COMP_DIST_ID = #{compDistId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(compDistName)">
+				AND t.COMP_DIST_NAME = #{compDistName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(combineId)">
+				AND t.COMBINE_ID = #{combineId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(combineName)">
+				AND t.COMBINE_NAME = #{combineName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE STD_PRICE  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.goodsId)">
+				GOODS_ID = #{model.goodsId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.prodName)">
+				PROD_NAME = #{model.prodName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.medModel)">
+				MED_MODEL = #{model.medModel},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.outlook)">
+				OUTLOOK = #{model.outlook},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.factor)">
+				FACTOR = #{model.factor},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.unit)">
+				UNIT = #{model.unit},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.materialName)">
+				MATERIAL_NAME = #{model.materialName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.compProdId)">
+				COMP_PROD_ID = #{model.compProdId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.compProdName)">
+				COMP_PROD_NAME = #{model.compProdName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.prodId)">
+				PROD_ID = #{model.prodId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.prodType)">
+				PROD_TYPE = #{model.prodType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.prodSource)">
+				PROD_SOURCE = #{model.prodSource},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.priceStart)">
+				PRICE_START = #{model.priceStart},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.priceEnd)">
+				PRICE_END = #{model.priceEnd},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.price)">
+				PRICE = #{model.price},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.priceType)">
+				PRICE_TYPE = #{model.priceType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.areaId)">
+				AREA_ID = #{model.areaId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospId)">
+				HOSP_ID = #{model.hospId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospName)">
+				HOSP_NAME = #{model.hospName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.compDistId)">
+				COMP_DIST_ID = #{model.compDistId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.compDistName)">
+				COMP_DIST_NAME = #{model.compDistName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.combineId)">
+				COMBINE_ID = #{model.combineId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.combineName)">
+				COMBINE_NAME = #{model.combineName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				ADD_USER_ID = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				ADD_USER_NAME = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				ADD_TIME = #{model.addTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				LAST_UPDATE_TIME = #{model.lastUpdateTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.ID = #{params.id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.goodsId)">
+				AND t.GOODS_ID = #{params.goodsId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.prodName)">
+				AND t.PROD_NAME = #{params.prodName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.medModel)">
+				AND t.MED_MODEL = #{params.medModel}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.outlook)">
+				AND t.OUTLOOK = #{params.outlook}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.factor)">
+				AND t.FACTOR = #{params.factor}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.unit)">
+				AND t.UNIT = #{params.unit}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.materialName)">
+				AND t.MATERIAL_NAME = #{params.materialName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.compProdId)">
+				AND t.COMP_PROD_ID = #{params.compProdId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.compProdName)">
+				AND t.COMP_PROD_NAME = #{params.compProdName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.prodId)">
+				AND t.PROD_ID = #{params.prodId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.prodType)">
+				AND t.PROD_TYPE = #{params.prodType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.prodSource)">
+				AND t.PROD_SOURCE = #{params.prodSource}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.priceStart)">
+				AND t.PRICE_START = #{params.priceStart}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.priceEnd)">
+				AND t.PRICE_END = #{params.priceEnd}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.price)">
+				AND t.PRICE = #{params.price}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.priceType)">
+				AND t.PRICE_TYPE = #{params.priceType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.areaId)">
+				AND t.AREA_ID = #{params.areaId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospId)">
+				AND t.HOSP_ID = #{params.hospId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospName)">
+				AND t.HOSP_NAME = #{params.hospName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.compDistId)">
+				AND t.COMP_DIST_ID = #{params.compDistId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.compDistName)">
+				AND t.COMP_DIST_NAME = #{params.compDistName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.combineId)">
+				AND t.COMBINE_ID = #{params.combineId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.combineName)">
+				AND t.COMBINE_NAME = #{params.combineName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.ADD_USER_ID = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.ADD_USER_NAME = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.ADD_TIME = #{params.addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{params.lastUpdateTime}
+		    </if>
+		</where>
+	</update> -->
+	<!-- 新增功能实现时获取自增的postId -->
+   <select id="returnLastId" resultType="java.lang.Integer">
+            select STDPRICESEQ.currval from dual
+    </select>
+</mapper>

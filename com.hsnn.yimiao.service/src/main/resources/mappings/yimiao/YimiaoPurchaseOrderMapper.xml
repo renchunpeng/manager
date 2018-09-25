@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.yimiao.dao.YimiaoPurchaseOrderDao">
+	<resultMap type="com.hsnn.medstgmini.yimiao.model.YimiaoPurchaseOrder" id="BaseResultMap">
+        <result property="orderId" column="ORDER_ID" javaType="String"/>
+        <result property="hospitalId" column="HOSPITAL_ID" javaType="String"/>
+        <result property="hospitalName" column="HOSPITAL_NAME" javaType="String"/>
+        <result property="hospitalDepartmentId" column="HOSPITAL_DEPARTMENT_ID" javaType="BigDecimal"/>
+        <result property="hospitalDepartmentName" column="HOSPITAL_DEPARTMENT_NAME" javaType="String"/>
+        <result property="orderType" column="ORDER_TYPE" javaType="BigDecimal"/>
+        <result property="orderName" column="ORDER_NAME" javaType="String"/>
+        <result property="orderAmount" column="ORDER_AMOUNT" javaType="BigDecimal"/>
+        <result property="orderRemarks" column="ORDER_REMARKS" javaType="String"/>
+        <result property="submitTime" column="SUBMIT_TIME" javaType="Date"/>
+        <result property="subminter" column="SUBMINTER" javaType="String"/>
+        <result property="isAutoSubmint" column="IS_AUTO_SUBMINT" javaType="BigDecimal"/>
+        <result property="autoSubmitTime" column="AUTO_SUBMIT_TIME" javaType="Date"/>
+        <result property="orderState" column="ORDER_STATE" javaType="BigDecimal"/>
+        <result property="defaultDistributeAddr" column="DEFAULT_DISTRIBUTE_ADDR" javaType="String"/>
+        <result property="addUserId" column="ADD_USER_ID" javaType="String"/>
+        <result property="addUserName" column="ADD_USER_NAME" javaType="String"/>
+        <result property="addTime" column="ADD_TIME" javaType="Date"/>
+        <result property="lastUpdateUserId" column="LAST_UPDATE_USER_ID" javaType="String"/>
+        <result property="lastUpdateUserName" column="LAST_UPDATE_USER_NAME" javaType="String"/>
+        <result property="lastUpdateTime" column="LAST_UPDATE_TIME" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.ORDER_ID,
+        t.HOSPITAL_ID,
+        t.HOSPITAL_NAME,
+        t.HOSPITAL_DEPARTMENT_ID,
+        t.HOSPITAL_DEPARTMENT_NAME,
+        t.ORDER_TYPE,
+        t.ORDER_NAME,
+        t.ORDER_AMOUNT,
+        t.ORDER_REMARKS,
+        t.SUBMIT_TIME,
+        t.SUBMINTER,
+        t.IS_AUTO_SUBMINT,
+        t.AUTO_SUBMIT_TIME,
+        t.ORDER_STATE,
+        t.DEFAULT_DISTRIBUTE_ADDR,
+        t.ADD_USER_ID,
+        t.ADD_USER_NAME,
+        t.ADD_TIME,
+        t.LAST_UPDATE_USER_ID,
+        t.LAST_UPDATE_USER_NAME,
+        t.LAST_UPDATE_TIME
+	</sql>
+		
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM YIMIAO_PURCHASE_ORDER t
+		WHERE t.ORDER_ID =  #{value}
+	</select>
+
+	<insert id="save" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoPurchaseOrder">
+		INSERT INTO YIMIAO_PURCHASE_ORDER(
+				ORDER_ID,
+	            HOSPITAL_ID ,
+	            HOSPITAL_NAME ,
+	            HOSPITAL_DEPARTMENT_ID ,
+	            HOSPITAL_DEPARTMENT_NAME ,
+	            ORDER_TYPE ,
+	            ORDER_NAME ,
+	            ORDER_AMOUNT ,
+	            ORDER_REMARKS ,
+	            SUBMIT_TIME ,
+	            SUBMINTER ,
+	            IS_AUTO_SUBMINT ,
+	            AUTO_SUBMIT_TIME ,
+	            ORDER_STATE ,
+	            DEFAULT_DISTRIBUTE_ADDR ,
+	            ADD_USER_ID ,
+	            ADD_USER_NAME ,
+	            ADD_TIME ,
+	            LAST_UPDATE_USER_ID ,
+	            LAST_UPDATE_USER_NAME ,
+	            LAST_UPDATE_TIME 
+		)
+		SELECT * from ( SELECT
+				#{orderId} ORDER_ID,
+	        	#{hospitalId} HOSPITAL_ID,
+	        	#{hospitalName} HOSPITAL_NAME,
+	        	#{hospitalDepartmentId} HOSPITAL_DEPARTMENT_ID,
+	        	#{hospitalDepartmentName} HOSPITAL_DEPARTMENT_NAME,
+	        	#{orderType} ORDER_TYPE,
+	        	#{orderName} ORDER_NAME,
+	        	#{orderAmount} ORDER_AMOUNT,
+	        	#{orderRemarks} ORDER_REMARKS,
+	        	#{submitTime} SUBMIT_TIME,
+	        	#{subminter} SUBMINTER,
+	        	#{isAutoSubmint} IS_AUTO_SUBMINT,
+	        	#{autoSubmitTime} AUTO_SUBMIT_TIME,
+	        	#{orderState} ORDER_STATE,
+	        	#{defaultDistributeAddr} DEFAULT_DISTRIBUTE_ADDR,
+	        	#{addUserId} ADD_USER_ID,
+	        	#{addUserName} ADD_USER_NAME,
+	        	now() ADD_TIME,
+	        	#{lastUpdateUserId} LAST_UPDATE_USER_ID,
+	        	#{lastUpdateUserName} LAST_UPDATE_USER_NAME,
+	        	now() LAST_UPDATE_TIME
+			) a
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoPurchaseOrder">
+		UPDATE YIMIAO_PURCHASE_ORDER  
+		<set>
+			HOSPITAL_ID = #{hospitalId},
+			HOSPITAL_NAME = #{hospitalName},
+			HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId},
+			HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName},
+			ORDER_TYPE = #{orderType},
+			ORDER_NAME = #{orderName},
+			ORDER_AMOUNT = #{orderAmount},
+			ORDER_REMARKS = #{orderRemarks},
+			SUBMIT_TIME = #{submitTime},
+			SUBMINTER = #{subminter},
+			IS_AUTO_SUBMINT = #{isAutoSubmint},
+			AUTO_SUBMIT_TIME = #{autoSubmitTime},
+			ORDER_STATE = #{orderState},
+			DEFAULT_DISTRIBUTE_ADDR = #{defaultDistributeAddr},
+			ADD_USER_ID = #{addUserId},
+			ADD_USER_NAME = #{addUserName},
+			ADD_TIME = #{addTime},
+			LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			LAST_UPDATE_TIME = #{lastUpdateTime},
+        </set>
+		WHERE  ORDER_ID =  #{orderId}
+	</update>
+	
+	<update id="updateByOrder" parameterType="java.util.List">
+		UPDATE YIMIAO_PURCHASE_ORDER  
+		<set>
+			ORDER_STATE = 1,
+			SUBMIT_TIME=now()
+        </set>
+		WHERE ORDER_STATE in (0,3) AND ORDER_ID IN (
+		<foreach collection="list" item="item" index="index" separator=" , ">
+			#{item.orderId}
+		</foreach>
+		)
+		AND date_format(ADD_TIME,'%Y-%m')=date_format(now(),'%Y-%m')
+	</update>
+	
+	
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoPurchaseOrder">
+		UPDATE YIMIAO_PURCHASE_ORDER  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(hospitalId)">
+				HOSPITAL_ID = #{hospitalId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalName)">
+				HOSPITAL_NAME = #{hospitalName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderType)">
+				ORDER_TYPE = #{orderType},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderName)">
+				ORDER_NAME = #{orderName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderAmount)">
+				ORDER_AMOUNT = #{orderAmount},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderRemarks)">
+				ORDER_REMARKS = #{orderRemarks},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(submitTime)">
+				SUBMIT_TIME = #{submitTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(subminter)">
+				SUBMINTER = #{subminter},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(isAutoSubmint)">
+				IS_AUTO_SUBMINT = #{isAutoSubmint},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(autoSubmitTime)">
+				AUTO_SUBMIT_TIME = #{autoSubmitTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(orderState)">
+				ORDER_STATE = #{orderState},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(defaultDistributeAddr)">
+				DEFAULT_DISTRIBUTE_ADDR = #{defaultDistributeAddr},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				ADD_USER_ID = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				ADD_USER_NAME = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				ADD_TIME = #{addTime},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{lastUpdateUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{lastUpdateUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				LAST_UPDATE_TIME = #{lastUpdateTime},
+			</if>
+        </set>
+		WHERE  ORDER_ID =  #{orderId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM YIMIAO_PURCHASE_ORDER WHERE  ORDER_ID =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM YIMIAO_PURCHASE_ORDER t
+		<where>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME = #{hospitalName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME like  CONCAT(CONCAT('%', #{orderName}), '%')
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderAmount)">
+				AND t.ORDER_AMOUNT = #{orderAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderRemarks)">
+				AND t.ORDER_REMARKS = #{orderRemarks}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(submitStatus)">
+				AND t.ORDER_STATE = #{submitStatus}
+		    </if>
+			<if test="@OGNL@isNotEmpty(subminter)">
+				AND t.SUBMINTER = #{subminter}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isAutoSubmint)">
+				AND t.IS_AUTO_SUBMINT = #{isAutoSubmint}
+		    </if>
+			<if test="@OGNL@isNotEmpty(autoSubmitTime)">
+				AND t.AUTO_SUBMIT_TIME = #{autoSubmitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderState)">
+				AND t.ORDER_STATE = #{orderState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(defaultDistributeAddr)">
+				AND t.DEFAULT_DISTRIBUTE_ADDR = #{defaultDistributeAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(startTime)">
+				AND t.ADD_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND t.ADD_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		</where>
+		order by t.ADD_TIME desc
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO YIMIAO_PURCHASE_ORDER (
+            HOSPITAL_ID ,
+            HOSPITAL_NAME ,
+            HOSPITAL_DEPARTMENT_ID ,
+            HOSPITAL_DEPARTMENT_NAME ,
+            ORDER_TYPE ,
+            ORDER_NAME ,
+            ORDER_AMOUNT ,
+            ORDER_REMARKS ,
+            SUBMIT_TIME ,
+            SUBMINTER ,
+            IS_AUTO_SUBMINT ,
+            AUTO_SUBMIT_TIME ,
+            ORDER_STATE ,
+            DEFAULT_DISTRIBUTE_ADDR ,
+            ADD_USER_ID ,
+            ADD_USER_NAME ,
+            ADD_TIME ,
+            LAST_UPDATE_USER_ID ,
+            LAST_UPDATE_USER_NAME ,
+            LAST_UPDATE_TIME 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.hospitalId},
+        	#{item.hospitalName},
+        	#{item.hospitalDepartmentId},
+        	#{item.hospitalDepartmentName},
+        	#{item.orderType},
+        	#{item.orderName},
+        	#{item.orderAmount},
+        	#{item.orderRemarks},
+        	#{item.submitTime},
+        	#{item.subminter},
+        	#{item.isAutoSubmint},
+        	#{item.autoSubmitTime},
+        	#{item.orderState},
+        	#{item.defaultDistributeAddr},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM YIMIAO_PURCHASE_ORDER t
+		<where>
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME = #{hospitalName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME = #{orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderAmount)">
+				AND t.ORDER_AMOUNT = #{orderAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderRemarks)">
+				AND t.ORDER_REMARKS = #{orderRemarks}
+		    </if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(subminter)">
+				AND t.SUBMINTER = #{subminter}
+		    </if>
+			<if test="@OGNL@isNotEmpty(isAutoSubmint)">
+				AND t.IS_AUTO_SUBMINT = #{isAutoSubmint}
+		    </if>
+			<if test="@OGNL@isNotEmpty(autoSubmitTime)">
+				AND t.AUTO_SUBMIT_TIME = #{autoSubmitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(orderState)">
+				AND t.ORDER_STATE = #{orderState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(defaultDistributeAddr)">
+				AND t.DEFAULT_DISTRIBUTE_ADDR = #{defaultDistributeAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE YIMIAO_PURCHASE_ORDER  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.hospitalId)">
+				HOSPITAL_ID = #{model.hospitalId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospitalName)">
+				HOSPITAL_NAME = #{model.hospitalName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospitalDepartmentId)">
+				HOSPITAL_DEPARTMENT_ID = #{model.hospitalDepartmentId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.hospitalDepartmentName)">
+				HOSPITAL_DEPARTMENT_NAME = #{model.hospitalDepartmentName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderType)">
+				ORDER_TYPE = #{model.orderType},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderName)">
+				ORDER_NAME = #{model.orderName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderAmount)">
+				ORDER_AMOUNT = #{model.orderAmount},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderRemarks)">
+				ORDER_REMARKS = #{model.orderRemarks},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.submitTime)">
+				SUBMIT_TIME = #{model.submitTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.subminter)">
+				SUBMINTER = #{model.subminter},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.isAutoSubmint)">
+				IS_AUTO_SUBMINT = #{model.isAutoSubmint},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.autoSubmitTime)">
+				AUTO_SUBMIT_TIME = #{model.autoSubmitTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.orderState)">
+				ORDER_STATE = #{model.orderState},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.defaultDistributeAddr)">
+				DEFAULT_DISTRIBUTE_ADDR = #{model.defaultDistributeAddr},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				ADD_USER_ID = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				ADD_USER_NAME = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				ADD_TIME = #{model.addTime},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserId)">
+				LAST_UPDATE_USER_ID = #{model.lastUpdateUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateUserName)">
+				LAST_UPDATE_USER_NAME = #{model.lastUpdateUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.lastUpdateTime)">
+				LAST_UPDATE_TIME = #{model.lastUpdateTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.orderId)">
+				AND t.ORDER_ID = #{params.orderId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospitalId)">
+				AND t.HOSPITAL_ID = #{params.hospitalId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospitalName)">
+				AND t.HOSPITAL_NAME = #{params.hospitalName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{params.hospitalDepartmentId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{params.hospitalDepartmentName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderType)">
+				AND t.ORDER_TYPE = #{params.orderType}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderName)">
+				AND t.ORDER_NAME = #{params.orderName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderAmount)">
+				AND t.ORDER_AMOUNT = #{params.orderAmount}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderRemarks)">
+				AND t.ORDER_REMARKS = #{params.orderRemarks}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.submitTime)">
+				AND t.SUBMIT_TIME = #{params.submitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.subminter)">
+				AND t.SUBMINTER = #{params.subminter}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.isAutoSubmint)">
+				AND t.IS_AUTO_SUBMINT = #{params.isAutoSubmint}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.autoSubmitTime)">
+				AND t.AUTO_SUBMIT_TIME = #{params.autoSubmitTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.orderState)">
+				AND t.ORDER_STATE = #{params.orderState}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.defaultDistributeAddr)">
+				AND t.DEFAULT_DISTRIBUTE_ADDR = #{params.defaultDistributeAddr}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.ADD_USER_ID = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.ADD_USER_NAME = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.ADD_TIME = #{params.addTime}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{params.lastUpdateUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{params.lastUpdateUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{params.lastUpdateTime}
+		    </if>
+		</where>
+	</update>
+
+	<delete id="deletePurOrder" parameterType="list">
+		<!--foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";"-->
+		<foreach collection="list" item="item" index="index" separator=";">
+			delete from YIMIAO_PURCHASE_ORDER where ORDER_ID=#{item.orderId};
+			delete from yimiao_orderdetail where ORDER_ID=#{item.orderId}
+		</foreach>
+	</delete>
+
+	<select id="getSubmitOrder"  parameterType="map"  resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM YIMIAO_PURCHASE_ORDER t
+		<where>
+            t.ORDER_STATE = 1
+            <if test="@OGNL@isNotEmpty(orderId)">
+                AND t.ORDER_ID = #{orderId}
+            </if>
+            <if test="@OGNL@isNotEmpty(hospitalId)">
+                AND t.HOSPITAL_ID = #{hospitalId}
+            </if>
+            <if test="@OGNL@isNotEmpty(hospitalName)">
+                AND t.HOSPITAL_NAME = #{hospitalName}
+            </if>
+            <if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+                AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+            </if>
+            <if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+                AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+            </if>
+            <if test="@OGNL@isNotEmpty(orderType)">
+                AND t.ORDER_TYPE = #{orderType}
+            </if>
+            <if test="@OGNL@isNotEmpty(orderName)">
+                AND t.ORDER_NAME like  CONCAT('%', #{orderName}, '%')
+            </if>
+            <if test="@OGNL@isNotEmpty(orderAmount)">
+                AND t.ORDER_AMOUNT = #{orderAmount}
+            </if>
+            <if test="@OGNL@isNotEmpty(orderRemarks)">
+                AND t.ORDER_REMARKS = #{orderRemarks}
+            </if>
+            <if test="@OGNL@isNotEmpty(submitTime)">
+                AND t.SUBMIT_TIME = #{submitTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(submitStatus) and submitStatus == 10">
+                AND t.SUBMIT_TIME is null
+            </if>
+            <if test="@OGNL@isNotEmpty(submitStatus) and submitStatus == 20">
+                AND t.SUBMIT_TIME is not null
+            </if>
+            <if test="@OGNL@isNotEmpty(subminter)">
+                AND t.SUBMINTER = #{subminter}
+            </if>
+            <if test="@OGNL@isNotEmpty(isAutoSubmint)">
+                AND t.IS_AUTO_SUBMINT = #{isAutoSubmint}
+            </if>
+            <if test="@OGNL@isNotEmpty(autoSubmitTime)">
+                AND t.AUTO_SUBMIT_TIME = #{autoSubmitTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(orderState)">
+                AND t.ORDER_STATE = #{orderState}
+            </if>
+            <if test="@OGNL@isNotEmpty(defaultDistributeAddr)">
+                AND t.DEFAULT_DISTRIBUTE_ADDR = #{defaultDistributeAddr}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserId)">
+                AND t.ADD_USER_ID = #{addUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(addUserName)">
+                AND t.ADD_USER_NAME = #{addUserName}
+            </if>
+            <if test="@OGNL@isNotEmpty(addTime)">
+                AND t.ADD_TIME = #{addTime}
+            </if>
+            <if test="@OGNL@isNotEmpty(startTime)">
+                AND t.ADD_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="@OGNL@isNotEmpty(endTime)">
+                AND t.ADD_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+                AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+                AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+            </if>
+            <if test="@OGNL@isNotEmpty(lastUpdateTime)">
+                AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+            </if>
+		</where>
+		ORDER BY t.ADD_TIME DESC
+	</select>
+
+    <update id="updateOrderStatus">
+        UPDATE YIMIAO_PURCHASE_ORDER
+        <set>
+            ORDER_STATE = #{status},
+            SUBMIT_TIME=now()
+        </set>
+        WHERE ORDER_STATE = 1 and ORDER_ID in
+		<foreach collection="list" item="item" open="(" separator=" , " close=")">
+			#{item.orderId}
+		</foreach>
+
+    </update>
+
+	<update id="updateOrderByOrder" parameterType="com.hsnn.medstgmini.yimiao.model.YimiaoPurchaseOrder">
+		UPDATE YIMIAO_PURCHASE_ORDER
+		<set>
+			ORDER_STATE = #{orderState}
+		</set>
+		WHERE ORDER_ID = #{orderId}
+
+	</update>
+
+	<update id="updateByOrderId" parameterType="map">
+		UPDATE YIMIAO_PURCHASE_ORDER a
+		INNER JOIN (
+		SELECT SUM(PURCHASE_PRICE*PURCHASE_COUNT) ORDER_AMOUNT,ORDER_ID
+		from yimiao_orderdetail where ORDER_ID =#{orderId}
+		) b on a.ORDER_ID = b.ORDER_ID
+		SET a.ORDER_AMOUNT = CASE WHEN b.ORDER_AMOUNT is null THEN 0 ELSE b.ORDER_AMOUNT END
+	</update>
+
+	<select id="getOrderList"  parameterType="map"  resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM YIMIAO_PURCHASE_ORDER t
+		<where>
+			t.ORDER_STATE in (2,3)
+			<if test="@OGNL@isNotEmpty(orderId)">
+				AND t.ORDER_ID = #{orderId}
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalId)">
+				AND t.HOSPITAL_ID = #{hospitalId}
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalName)">
+				AND t.HOSPITAL_NAME = #{hospitalName}
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentId)">
+				AND t.HOSPITAL_DEPARTMENT_ID = #{hospitalDepartmentId}
+			</if>
+			<if test="@OGNL@isNotEmpty(hospitalDepartmentName)">
+				AND t.HOSPITAL_DEPARTMENT_NAME = #{hospitalDepartmentName}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderType)">
+				AND t.ORDER_TYPE = #{orderType}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderName)">
+				AND t.ORDER_NAME like  CONCAT('%', #{orderName}, '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(orderAmount)">
+				AND t.ORDER_AMOUNT = #{orderAmount}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderRemarks)">
+				AND t.ORDER_REMARKS = #{orderRemarks}
+			</if>
+			<if test="@OGNL@isNotEmpty(submitTime)">
+				AND t.SUBMIT_TIME = #{submitTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(submitStatus) and submitStatus == 10">
+				AND t.SUBMIT_TIME is null
+			</if>
+			<if test="@OGNL@isNotEmpty(submitStatus) and submitStatus == 20">
+				AND t.SUBMIT_TIME is not null
+			</if>
+			<if test="@OGNL@isNotEmpty(subminter)">
+				AND t.SUBMINTER = #{subminter}
+			</if>
+			<if test="@OGNL@isNotEmpty(isAutoSubmint)">
+				AND t.IS_AUTO_SUBMINT = #{isAutoSubmint}
+			</if>
+			<if test="@OGNL@isNotEmpty(autoSubmitTime)">
+				AND t.AUTO_SUBMIT_TIME = #{autoSubmitTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(orderState)">
+				AND t.ORDER_STATE = #{orderState}
+			</if>
+			<if test="@OGNL@isNotEmpty(defaultDistributeAddr)">
+				AND t.DEFAULT_DISTRIBUTE_ADDR = #{defaultDistributeAddr}
+			</if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.ADD_USER_ID = #{addUserId}
+			</if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.ADD_USER_NAME = #{addUserName}
+			</if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.ADD_TIME = #{addTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(startTime)">
+				AND t.ADD_TIME &gt;= DATE_FORMAT(#{startTime},'%Y-%m-%d %H:%i:%S')
+			</if>
+			<if test="@OGNL@isNotEmpty(endTime)">
+				AND t.ADD_TIME &lt;= DATE_FORMAT(concat(#{endTime},' 23:59:59'),'%Y-%m-%d %H:%i:%S')
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.LAST_UPDATE_USER_ID = #{lastUpdateUserId}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.LAST_UPDATE_USER_NAME = #{lastUpdateUserName}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.LAST_UPDATE_TIME = #{lastUpdateTime}
+			</if>
+		</where>
+		ORDER BY t.ADD_TIME DESC
+	</select>
+
+	<update id="updateStatusByOrder" parameterType="map">
+		UPDATE YIMIAO_PURCHASE_ORDER a
+        LEFT JOIN (SELECT ORDER_ID,CASE WHEN CONFIRM_STATE IN (6,2) THEN 6 ELSE 5 END STATUS
+        FROM yimiao_orderdetail WHERE ORDER_ID IN
+         ( select DISTINCT ORDER_ID from YIMIAO_ORDERDETAIL where ORDERDETAIL_ID in
+        <foreach collection="list" item="var"  index="index" open="(" separator="," close=")">
+            #{var.orderdetailId}
+        </foreach> )
+        GROUP BY ORDER_ID,STATUS
+        HAVING STATUS = 5 ) b ON a.ORDER_ID = b.ORDER_ID
+        SET a.ORDER_STATE = CASE WHEN b.ORDER_ID is null THEN 5 ELSE 4 END
+        WHERE a.ORDER_STATE IN ( 2, 4 )
+        AND a.ORDER_ID IN ( select DISTINCT ORDER_ID from YIMIAO_ORDERDETAIL where ORDERDETAIL_ID in
+        <foreach collection="list" item="var"  index="index" open="(" separator="," close=")">
+            #{var.orderdetailId}
+        </foreach> )
+
+	</update>
+
+	<select id="checkPurchaseOrder" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT count(*) FROM yimiao_purchase_order t
+		WHERE t.HOSPITAL_ID =#{hospitalId} AND ORDER_STATE IN (0, 3)
+	</select>
+</mapper>

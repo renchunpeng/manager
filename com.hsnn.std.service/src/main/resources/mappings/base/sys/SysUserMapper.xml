@@ -1,0 +1,1735 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.sys.dao.SysUserDao">
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysUser" id="BaseResultMap">
+        <result property="userId" column="user_id" javaType="String"/>
+        <result property="orgId" column="org_id" javaType="String"/>
+        <result property="roleId" column="role_id" javaType="Integer"/>
+        <result property="departmentId" column="department_id" javaType="Integer"/>
+        <result property="postId" column="post_id" javaType="Integer"/>
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="acctType" column="acct_type" javaType="Integer"/>
+        <result property="userPassword" column="user_password" javaType="String"/>
+        <result property="passwordHint" column="password_hint" javaType="String"/>
+        <result property="acctExpired" column="acct_expired" javaType="String"/>
+        <result property="passwordExpired" column="password_expired" javaType="String"/>
+        <result property="isUsing" column="is_using" javaType="Integer"/>
+        <result property="userType" column="user_type" javaType="Integer"/>
+        <result property="email" column="email" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+        <result property="phone" column="phone" javaType="String"/>
+        <result property="locked" column="locked" javaType="Integer"/>
+        <result property="lastLoginTime" column="last_login_time" javaType="Date"/>
+        <result property="loginIp" column="login_ip" javaType="String"/>
+        <result property="resetToken" column="reset_token" javaType="String"/>
+        <result property="resetTime" column="reset_time" javaType="String"/>
+        <result property="CAKey" column="ca_key" javaType="String"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+        <result property="lastUpdateUserId" column="last_update_user_id" javaType="String"/>
+        <result property="lastUpdateUserName" column="last_update_user_name" javaType="String"/>
+        <result property="lastUpdateTime" column="last_update_time" javaType="Date"/>
+        <result property="isBalance" column="is_balance" javaType="Integer"/>
+        <result property="isCaUsing" column="is_ca_using" javaType="Integer"/>
+		<result property="isFirstLogin" column="is_first_login" javaType="Integer"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+		t.user_id "userId",
+         t.org_id "orgId",
+        t.role_id "roleId",
+        t.department_id "departmentId",
+        t.post_id "postId",
+        t.user_name "userName",
+        t.acct_type "acctType",
+        t.user_password "userPassword",
+        t.password_hint "passwordHint",
+        t.acct_expired "acctExpired",
+        t.password_expired "passwordExpired",
+        t.is_using "isUsing",
+        t.user_type "userType",
+        t.email "email",
+        t.name "name",
+        t.phone "phone",
+        t.locked "locked",
+        t.last_login_time "lastLoginTime",
+        t.login_ip "loginIp",
+        t.reset_token "resetToken",
+        t.reset_time "resetTime",
+        t.ca_key "CAKey",
+        t.add_user_id "addUserId",
+        t.add_user_name "addUserName",
+        t.add_time "addTime",
+        t.last_update_user_id "lastUpdateUserId",
+        t.last_update_user_name "lastUpdateUserName",
+        t.last_update_time "lastUpdateTime",
+        t.is_balance "isBalance",
+        t.is_ca_using "isCaUsing"
+	</sql>
+
+	<select id="getSysUserListById" resultMap="BaseResultMap">
+		SELECT * from sys_user where user_id in
+		<foreach collection="ids" item="item" index="index" separator="," open="(" close=")">
+        #{item}
+        </foreach>
+	</select>
+	
+	<select id="getByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from sys_user where user_name =  #{userName}
+	</select>
+	
+	<select id="load" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from sys_user where user_id =  #{value}
+	</select>
+	
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from sys_user where user_id =  #{value}
+	</select>
+	
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT * from sys_user 
+	</select>
+	
+
+	<insert id="persist" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		INSERT INTO sys_user(
+	            org_id ,
+	            role_id ,
+	            department_id ,
+	            post_id ,
+	            user_name ,
+	            acct_type ,
+	            user_password ,
+	            password_hint ,
+	            acct_expired ,
+	            password_expired ,
+	            is_using ,
+	            user_type ,
+	            email ,
+	            name ,
+	            phone ,
+	            locked ,
+	            last_login_time ,
+	            login_ip ,
+	            reset_token ,
+	            reset_time ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time 
+	    ) 
+		VALUES (
+	        	#{orgId},
+	        	#{roleId},
+	        	#{departmentId},
+	        	#{postId},
+	        	#{userName},
+	        	#{acctType},
+	        	#{userPassword},
+	        	#{passwordHint},
+	        	#{acctExpired},
+	        	#{passwordExpired},
+	        	#{isUsing},
+	        	#{userType},
+	        	#{email},
+	        	#{name},
+	        	#{phone},
+	        	#{locked},
+	        	#{lastLoginTime},
+	        	#{loginIp},
+	        	#{resetToken},
+	        	#{resetTime},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	#{addTime},
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	#{lastUpdateTime}
+		)
+	</insert>
+	
+	
+	<insert id="save" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		
+		INSERT INTO sys_user(
+				user_id ,
+				org_id ,
+				role_id ,
+	            department_id ,
+	            post_id ,
+	            user_name ,
+	            acct_type ,
+	            user_password ,
+	            password_hint ,
+	            acct_expired ,
+	            password_expired ,
+	            is_using ,
+	            user_type ,
+	            email ,
+	            name ,
+	            phone ,
+	            locked ,
+	            last_login_time ,
+	            login_ip ,
+	            reset_token ,
+	            reset_time ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time ,
+	            last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time,
+	            is_balance,
+	            is_ca_using
+		) 
+		VALUES (
+				#{userId},
+				#{orgId},
+	        	#{roleId},
+	        	#{departmentId},
+	        	#{postId},
+	        	#{userName},
+	        	#{acctType},
+	        	#{userPassword},
+	        	#{passwordHint},
+	        	#{acctExpired},
+	        	#{passwordExpired},
+	        	#{isUsing},
+	        	#{userType},
+	        	#{email},
+	        	#{name},
+	        	#{phone},
+	        	#{locked},
+	        	#{lastLoginTime},
+	        	#{loginIp},
+	        	#{resetToken},
+	        	#{resetTime},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	now(),
+	        	#{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	now(),
+	        	#{isBalance},
+	        	#{isCaUsing}
+		)
+	</insert>
+
+	<select id="getChooseUserData" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM Sys_User t
+		<where>
+			<if test="roleId != null and roleId != ''">
+				t.ROLE_ID = #{roleId}
+			</if>
+			<if test="name != null and name != ''">
+				and t.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+			AND t.is_using=1 AND t.locked=0
+			AND t.User_id NOT IN (
+			SELECT user_id from Bid_Audit_User Where PROJ_CODE=#{projCode} AND TYPE=#{type}
+			)
+		</where>
+		order by t.user_type asc
+	</select>
+
+	<update id="updateById" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		UPDATE sys_user  
+		<set>
+	        	<if test="@OGNL@isNotEmpty(orgId)">
+	        		org_id = #{orgId},
+	        	</if>
+	        	role_id = #{roleId},
+	        	department_id = #{departmentId},
+	        	post_id = #{postId},
+	        	user_name = #{userName},
+	        	acct_type = #{acctType},
+	        	user_password = #{userPassword},
+	        	password_hint = #{passwordHint},
+	        	acct_expired = #{acctExpired},
+	        	password_expired = #{passwordExpired},
+	        	is_using = #{isUsing},
+	        	user_type = #{userType},
+	        	email = #{email},
+	        	name = #{name},
+	        	phone = #{phone},
+	        	locked = #{locked},
+	        	last_login_time = #{lastLoginTime},
+	        	login_ip = #{loginIp},
+	        	reset_token = #{resetToken},
+	        	reset_time = #{resetTime},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = now(),
+	        	is_balance=#{isBalance},
+	        	is_ca_using = #{isCaUsing},
+        </set>
+		WHERE  user_id =  #{userId}
+	</update>
+	
+	<update id="update" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		UPDATE sys_user  
+		<set>
+	        	<if test="@OGNL@isNotEmpty(orgId)">
+	        		org_id = #{orgId},
+	        	</if>
+	        	role_id = #{roleId},
+	        	department_id = #{departmentId},
+	        	post_id = #{postId},
+	        	user_name = #{userName},
+	        	acct_type = #{acctType},
+	        	user_password = #{userPassword},
+	        	password_hint = #{passwordHint},
+	        	acct_expired = #{acctExpired},
+	        	password_expired = #{passwordExpired},
+	        	is_using = #{isUsing},
+	        	user_type = #{userType},
+	        	email = #{email},
+	        	name = #{name},
+	        	phone = #{phone},
+	        	locked = #{locked},
+	        	last_login_time = #{lastLoginTime},
+	        	login_ip = #{loginIp},
+	        	reset_token = #{resetToken},
+	        	reset_time = #{resetTime},
+	        	add_user_id = #{addUserId},
+	        	add_user_name = #{addUserName},
+	        	add_time = #{addTime},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = now(),
+	        	is_balance=#{isBalance},
+	        	is_ca_using = #{isCaUsing},
+        </set>
+		WHERE  user_id =  #{userId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM sys_user WHERE  user_id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_user t
+		<where>
+			<if test="userId != null and userId != '' ">
+	            AND t.user_id = #{userId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+	            AND t.org_id = #{orgId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+	            AND t.department_id = #{departmentId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userName)">
+	            AND t.user_name = #{userName}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(acctType)">
+	            AND t.acct_type = #{acctType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userPassword)">
+	            AND t.user_password = #{userPassword}
+	        </if>
+			<if test="@OGNL@isNotEmpty(passwordHint)">
+	            AND t.password_hint = #{passwordHint}
+	        </if>
+			<if test="@OGNL@isNotEmpty(acctExpired)">
+	            AND t.acct_expired = #{acctExpired}
+	        </if>
+			<if test="@OGNL@isNotEmpty(passwordExpired)">
+	            AND t.password_expired = #{passwordExpired}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userType)">
+	            AND t.user_type = #{userType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(email)">
+	            AND t.email = #{email}
+	        </if>
+			<if test="name != null and name != '' ">
+	            AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+	        </if>
+			<if test="@OGNL@isNotEmpty(phone)">
+	            AND t.phone = #{phone}
+	        </if>
+			<if test="@OGNL@isNotEmpty(locked)">
+	            AND t.locked = #{locked}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastLoginTime)">
+	            AND t.last_login_time = #{lastLoginTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(loginIp)">
+	            AND t.login_ip = #{loginIp}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+		</where>
+		<if test="orderColumn != null and orderColumn != '' ">
+        ORDER BY t.${orderColumn} <if test="orderDirection != null and orderDirection != '' ">${orderDirection}</if>
+        </if>
+	</select>
+	
+	<select id="queryUserAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_user t
+		<where>
+			<if test="userId != null and userId != '' ">
+	            AND t.user_id = #{userId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+	            AND t.org_id = #{orgId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+	            AND t.department_id = #{departmentId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userName)">
+	            AND t.user_name = #{userName}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(acctType)">
+	            AND t.acct_type = #{acctType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userPassword)">
+	            AND t.user_password = #{userPassword}
+	        </if>
+			<if test="@OGNL@isNotEmpty(passwordHint)">
+	            AND t.password_hint = #{passwordHint}
+	        </if>
+			<if test="@OGNL@isNotEmpty(acctExpired)">
+	            AND t.acct_expired = #{acctExpired}
+	        </if>
+			<if test="@OGNL@isNotEmpty(passwordExpired)">
+	            AND t.password_expired = #{passwordExpired}
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            AND t.is_using = #{isUsing}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userType)">
+	            AND t.user_type = #{userType}
+	        </if>
+			<if test="@OGNL@isNotEmpty(email)">
+	            AND t.email = #{email}
+	        </if>
+			<if test="name != null and name != '' ">
+	            AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+	        </if>
+			<if test="@OGNL@isNotEmpty(phone)">
+	            AND t.phone = #{phone}
+	        </if>
+			<if test="@OGNL@isNotEmpty(locked)">
+	            AND t.locked = #{locked}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastLoginTime)">
+	            AND t.last_login_time = #{lastLoginTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(loginIp)">
+	            AND t.login_ip = #{loginIp}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            AND t.add_user_id = #{addUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            AND t.add_user_name = #{addUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            AND t.add_time = #{addTime}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            AND t.last_update_user_id = #{lastUpdateUserId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            AND t.last_update_user_name = #{lastUpdateUserName}
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+	            AND t.last_update_time = #{lastUpdateTime}
+	        </if>
+	        AND t.name is not null
+		</where>
+	</select>
+	
+	<select id="queryRepeatUserName" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_user t
+		<where>
+			<if test="userId != null and userId != '' ">
+	            AND t.user_id = #{userId}
+	        </if>
+			<if test="@OGNL@isNotEmpty(userName)">
+	            AND t.user_name = #{userName}
+	        </if>
+
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO sys_user (
+        	user_id,
+            org_id ,
+            role_id ,
+            department_id ,
+            post_id ,
+            user_name ,
+            acct_type ,
+            user_password ,
+            password_hint ,
+            acct_expired ,
+            password_expired ,
+            is_using ,
+            user_type,
+            email ,
+            name ,
+            phone ,
+            locked ,
+            last_login_time ,
+            login_ip ,
+            reset_token ,
+            reset_time ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id ,
+            last_update_user_name ,
+            last_update_time 
+        ) select SYSUSERSEQ.nextval,p.* from( 
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select 
+        	#{item.orgId},
+        	#{item.roleId},
+        	#{item.departmentId},
+        	#{item.postId},
+        	#{item.userName},
+        	#{item.acctType},
+        	#{item.userPassword},
+        	#{item.passwordHint},
+        	#{item.acctExpired},
+        	#{item.passwordExpired},
+        	#{item.isUsing},
+        	#{item.userType},
+        	#{item.email},
+        	#{item.name},
+        	#{item.phone},
+        	#{item.locked},
+        	#{item.lastLoginTime},
+        	#{item.loginIp},
+        	#{item.resetToken},
+        	#{item.resetTime},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	#{item.addTime},
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime} 
+        from dual
+        </foreach> ) p
+	</insert>
+
+	<resultMap type="com.hsnn.medstgmini.base.sys.model.SysUserDepartPost" id="BaseDemoResultMap">
+		<result property="orgId" column="org_id" javaType="String"/>
+		<result property="roleId" column="role_id" javaType="Integer"/>
+		<result property="departmentId" column="department_id" javaType="Integer"/>
+		<result property="postId" column="post_id" javaType="Integer"/>
+		 <result property="orgId" column="org_id" javaType="String"/>
+        <result property="orgName" column="org_name" javaType="String"/>
+        <result property="departmentName" column="group_name" javaType="String"/>
+        <result property="departmentIsUsing" column="department_is_using" javaType="Integer"/>
+        <result property="postName" column="post_name" javaType="String"/>
+        <result property="postIsUsing" column="post_is_using" javaType="Integer"/>
+        <result property="userId" column="user_id" javaType="String"/>
+        <result property="userName" column="user_name" javaType="String"/>
+        <result property="name" column="name" javaType="String"/>
+        <result property="userIsUsing" column="user_is_using" javaType="Integer"/>
+        <result property="acctType" column="acct_type" javaType="Integer"/>
+        <result property="isBalance" column="is_balance" javaType="Integer"/>
+        
+	</resultMap>
+	
+	<sql id="demofull-columns" >
+			s.user_id,
+			s.role_id,
+			s.department_id,
+			s.post_id,
+			d.org_id,
+            d.org_name,
+			d.group_name,
+			d.is_using department_is_using,
+			p.post_name,
+			p.is_using post_is_using,
+			s.user_name,
+			s.NAME,
+			s.is_using user_is_using,
+			s.email,
+			s.phone,
+			s.acct_type,
+			s.is_balance
+	</sql>
+
+	<select id="queryAllDataSysUser" parameterType="map" resultMap="BaseDemoResultMap">
+		SELECT <include refid="demofull-columns" />
+	    FROM sys_user s 
+	    left join sys_department d on s.department_id = d.department_id
+	    left join sys_post p on s.post_id = p.post_id
+		<where>
+		   <if test="departmentName != null and departmentName != '' ">
+	            AND d.group_name like CONCAT(CONCAT('%', #{departmentName}), '%')
+	        </if>
+	        <if test="postName != null and postName != '' ">
+	            AND p.post_name like CONCAT(CONCAT('%', #{postName}), '%')
+	        </if>
+			<if test="name != null and name != '' ">
+	            AND s.name like CONCAT(CONCAT('%', #{name}), '%')
+	        </if>
+			<if test="orgName != null and orgName != '' ">
+	            AND (d.org_name like CONCAT(CONCAT('%', #{orgName}), '%') OR d.bur_spel_code like CONCAT(CONCAT('%', #{orgName}), '%'))
+	        </if>
+	        <if test="departmentId != null and departmentId != '' ">
+	            AND d.department_id = #{departmentId}
+	        </if>
+	        <if test="@OGNL@isNotEmpty(orgId)"><!-- 查询本机构下的所有用户 -->
+	            AND s.org_id=#{orgId} 
+	        </if>
+	        <if test="@OGNL@isNotEmpty(userType)">
+                AND s.user_type = #{userType}
+            </if>
+            
+            <if test="@OGNL@isNotEmpty(acctType)">
+	        	AND s.acct_type = #{acctType}
+	        </if>
+	        order by s.add_time desc
+		</where>
+	</select>
+
+	<select id="selectSysUserByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from sys_user where user_name =  #{username}
+	</select>
+	
+	<select id="selectSysUserByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from sys_user where email =  #{email}
+	</select>
+	<select id="selectSysUserByResetToken" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from sys_user where reset_token =  #{resetToken}
+	</select>
+
+	<select id="getUsersData" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM Sys_User t
+		WHERE t.ROLE_ID = #{roleId}
+		<if test="name != null and name != ''">
+			and t.NAME =#{name}
+		</if>
+		AND t.is_using=1 AND t.locked=0
+		order by t.user_type asc
+	</select>
+
+	<update id="updateLoginInfo" parameterType="map">
+		UPDATE sys_user   
+		<set>
+	        	last_login_time = #{lastLoginTime},
+	        	login_ip = #{loginIp} 
+        </set>
+		WHERE  user_id =  #{userId}
+	</update>
+<select id="queryAllDataStartSysUser" parameterType="map" resultMap="BaseDemoResultMap">
+		SELECT <include refid="demofull-columns" />
+	    FROM sys_user s 
+	    left join sys_department d on s.department_id = d.department_id
+	    left join sys_post p on s.post_id = p.post_id
+		<where>
+			AND s.is_using = 1 AND (d.is_using = 1 OR d.is_using is null) AND (p.is_using = 1 OR p.is_using is null) 
+		   <if test="@OGNL@isNotEmpty(orgId)">
+				AND s.org_id = #{orgId}
+		   </if>
+		   <if test="@OGNL@isNotEmpty(departmentId)">
+				AND s.department_id = #{departmentId}
+		   </if>
+		   <if test="departmentName != null and departmentName != '' ">
+	            AND d.group_name like CONCAT(CONCAT('%', #{departmentName}), '%')
+	        </if>
+	        <if test="postName != null and postName != '' ">
+	            AND p.post_name like CONCAT(CONCAT('%', #{postName}), '%')
+	        </if>
+			<if test="name != null and name != '' ">
+	            AND s.name like CONCAT(CONCAT('%', #{name}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(userType)">
+                AND s.user_type = #{userType}
+            </if>
+            
+            <if test="@OGNL@isNotEmpty(acctType)">
+	        	AND s.acct_type = #{acctType}
+	        </if>
+		</where>
+	</select>
+	
+	<select id="queryAllDataStopSysUser" parameterType="map" resultMap="BaseDemoResultMap">
+		SELECT <include refid="demofull-columns" />
+	    FROM sys_user s 
+	    left join sys_department d on s.department_id = d.department_id
+	    left join sys_post p on s.post_id = p.post_id
+		<where>
+			AND s.is_using = 0
+		   <if test="@OGNL@isNotEmpty(orgId)">
+				AND s.org_id = #{orgId}
+		   </if>
+		   <if test="@OGNL@isNotEmpty(departmentId)">
+				AND s.department_id = #{departmentId}
+		   </if>
+		   <if test="departmentName != null and departmentName != '' ">
+	            AND d.group_name like CONCAT(CONCAT('%', #{departmentName}), '%')
+	        </if>
+	        <if test="postName != null and postName != '' ">
+	            AND p.post_name like CONCAT(CONCAT('%', #{postName}), '%')
+	        </if>
+			<if test="name != null and name != '' ">
+	            AND s.name like CONCAT(CONCAT('%', #{name}), '%')
+	        </if>
+	        <if test="@OGNL@isNotEmpty(userType)">
+	            AND s.user_type = #{userType}
+	        </if>
+	        
+            <if test="@OGNL@isNotEmpty(acctType)">
+	        	AND s.acct_type = #{acctType}
+	        </if>
+		</where>
+	</select>
+
+   <update id="updateSysUserIsUsing" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		UPDATE sys_user  
+		<set>
+	        	is_using = #{isUsing}, 
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+            	last_update_time = now()
+        </set>
+		WHERE  user_id =  #{userId}
+	</update>
+	
+	<select id="querySysUserDataById" parameterType="java.lang.String" resultMap="BaseDemoResultMap">
+		SELECT <include refid="demofull-columns" />
+	    FROM sys_user s 
+	    left join sys_department d on s.department_id = d.department_id
+	    left join sys_post p on s.post_id = p.post_id
+		<where>
+		  AND s.user_id = #{userId}
+		</where>
+	</select>
+	
+	<sql id="userInfo-columns">
+	 	a.user_id "userId",
+		a.user_name "userName",
+		a.last_login_time "lastLoginTime",
+		a.login_ip "loginIp",
+		a.is_using "isUsing",
+		b.area_name "areaName",
+	    b.group_name "groupName",
+	    c.post_name "postName",
+	    c.post_id "postId",
+	</sql>
+	<select id="getUserListByHosp" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT <include refid="userInfo-columns" />
+			d.hospital_name "hospitalName",
+			d.hospital_level "hospitalLevel",
+			d.drug_purchase_property "drugPurchaseProperty",
+			d.area_name "orgAreaName",
+			a.is_balance "isBalance"  
+		FROM
+			sys_user a
+		left JOIN sys_department b ON a.department_id = b.department_id
+		left JOIN sys_post c ON a.post_id = c.post_id
+		left JOIN std_hospital d ON b.org_id = d.hospital_id 
+		<where>
+				  d.area_id like CONCAT(#{areaId}, '%')  and a.user_type in (4,7)
+			<if test="hospName != null and hospName != ''">
+	            AND (d.hospital_name like  CONCAT(CONCAT('%', #{hospName}), '%') or d.hosp_spel_code like CONCAT(CONCAT('%', #{hospName}), '%') )
+	        </if>
+	        <if test="drugPurchaseProperty != null and drugPurchaseProperty != ''">
+	            AND d.drug_purchase_property = #{drugPurchaseProperty}
+	        </if>
+	       	<if test="hospitalLevel != null and hospitalLevel != ''">
+	            AND d.hospital_level = #{hospitalLevel}
+	        </if>
+	       	<if test="isBalance != null and isBalance != ''">
+	            AND a.is_balance = #{isBalance}
+	        </if>
+		</where>
+	</select>
+	<select id="findSysUserDataById" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM sys_user t
+		<where>
+	            AND t.user_id = #{userId}
+	    </where>
+	</select>    
+		<select id="getUserListByComp" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT <include refid="userInfo-columns" />
+			d.company_name "companyName",
+			d.company_simple_name "companySimpleName",
+			d.company_type "companyType",
+			d.address,d.area_name "compAreaName"
+		FROM
+			sys_user a
+		JOIN sys_department b ON a.department_id = b.department_id
+		JOIN sys_post c ON a.post_id = c.post_id
+		JOIN std_company d on b.org_id = d.company_id
+		<where> 
+			<if test="companyName != null and companyName != ''">
+				AND d.company_name like CONCAT(CONCAT('%', #{companyName}), '%')
+			</if>
+			<if test="companySimple != null and companySimple != ''">
+				AND ( d.company_simple_name like CONCAT(CONCAT('%', #{companySimple}), '%') or d.company_simple_name_spell like CONCAT(CONCAT('%', #{companySimple}), '%') )
+			</if>
+			<if test="companyType != null and companyType != ''">
+				AND d.company_type = #{companyType}
+			</if>
+			 <if test="areaId != null and areaId != ''">
+	            AND d.area_id like #{areaId}
+	        </if>
+		</where>
+	</select>
+		<select id="getUserListBySupervision" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT <include refid="userInfo-columns" />
+			a.email,
+			a.phone,
+			b.org_name "orgName",d.area_name "orgAreaName"
+		FROM
+			sys_user a
+		left JOIN sys_department b ON a.department_id = b.department_id
+		left JOIN sys_post c ON a.post_id = c.post_id 
+		left join std_manage_org d on a.org_id = d.id
+		<where>
+				AND b.department_type = 6   
+			and d.area_id like #{areaId}
+			<if test="orgName != null and orgName != ''">
+				AND (b.org_name like CONCAT(CONCAT('%', #{orgName}), '%') or b.bur_spel_code like CONCAT(CONCAT('%', #{orgName}), '%') )   
+			</if>
+		</where>
+	</select>
+
+	<update id="updateUserInfoFirstLoginC" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		BEGIN
+			UPDATE sys_user
+			<set>
+				USER_TYPE = #{userType},
+				EMAIL = #{email},
+				USER_PASSWORD = #{userPassword},
+				IS_FIRST_LOGIN = 1,
+				ROLE_ID = #{roleId}
+			</set>
+			WHERE  USER_ID = #{userId};
+			update std_company
+			<set>
+				company_type = #{userType}
+			</set>
+			where COMPANY_ID = #{orgId};
+		END;
+	</update>
+
+	<update id="updateUserInfoFirstLogin" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		UPDATE sys_user
+		<set>
+			EMAIL = #{email},
+			USER_PASSWORD = #{userPassword},
+			IS_FIRST_LOGIN = 1,
+		</set>
+		WHERE  USER_ID = #{userId}
+	</update>
+
+	<update id="updateUserDisabale" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+			UPDATE sys_user  
+			<set>
+		        	is_using = #{isUsing},
+		        	last_update_user_id = #{lastUpdateUserId},
+	        	    last_update_user_name = #{lastUpdateUserName},
+	        	    last_update_time = now()
+	        </set>
+			WHERE  department_id = #{departmentId} 
+			<if test="@OGNL@isNotEmpty(acctType)">
+	              and acct_type = #{acctType}
+	        </if>
+	</update>
+	
+	<update id="updateSysUserPassWordById" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		UPDATE sys_user  
+		<set>
+	        	user_password = #{userPassword},
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+	        	last_update_time = now()
+        </set>
+		WHERE  user_id =  #{userId}
+	</update>
+
+	<update id="updateSysUser" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		UPDATE sys_user
+		<set>
+			<if test="@OGNL@isNotEmpty(departmentId)">
+	            department_id = #{departmentId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(postId)">
+	            post_id = #{postId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(userName)">
+	            user_name = #{userName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(acctType)">
+	            acct_type = #{acctType},
+	        </if>
+			<if test="@OGNL@isNotEmpty(userPassword)">
+	            user_password = #{userPassword},
+	        </if>
+			<if test="@OGNL@isNotEmpty(passwordHint)">
+	            password_hint = #{passwordHint},
+	        </if>
+			<if test="@OGNL@isNotEmpty(acctExpired)">
+	            acct_expired = #{acctExpired},
+	        </if>
+			<if test="@OGNL@isNotEmpty(passwordExpired)">
+	            password_expired = #{passwordExpired},
+	        </if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+	            is_using = #{isUsing},
+	        </if>
+			<if test="@OGNL@isNotEmpty(email)">
+	            email = #{email},
+	        </if>
+			<if test="@OGNL@isNotEmpty(name)">
+	            name = #{name},
+	        </if>
+			<if test="@OGNL@isNotEmpty(phone)">
+	            phone = #{phone},
+	        </if>
+			<if test="@OGNL@isNotEmpty(locked)">
+	            locked = #{locked},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastLoginTime)">
+	            last_login_time = #{lastLoginTime},
+	        </if>
+			<if test="@OGNL@isNotEmpty(loginIp)">
+	            login_ip = #{loginIp},
+	        </if>
+			<if test="@OGNL@isNotEmpty(resetToken)">
+	            reset_token = #{resetToken},
+	        </if>
+			<if test="@OGNL@isNotEmpty(resetTime)">
+	            reset_time = #{resetTime},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+	            add_user_id = #{addUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+	            add_user_name = #{addUserName},
+	        </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+	            add_time = #{addTime},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+	            last_update_user_id = #{lastUpdateUserId},
+	        </if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+	            last_update_user_name = #{lastUpdateUserName},
+	        </if>
+	        <if test="@OGNL@isNotEmpty(isCaUsing)">
+	            is_ca_using = #{isCaUsing},
+	        </if>
+	        
+	            last_update_time = now()
+		</set>
+		WHERE  user_id = #{userId}
+	</update>
+	<select id="getResourceListByUser" parameterType="map" resultType="hashmap">
+		select a.resource_id "id", a.menu_name "menuName", a.resource_type "type", a.icon, a.sort, a.resource_url, a.parent_resource_id "pid",
+		case when a.resource_id is null then 0 else 1 end checked
+		from sys_resource a 
+		<if test="@OGNL@isEmpty(postId)">
+				join sys_user_resource c on a.resource_id = c.resource_id
+			</if>
+		<if test="@OGNL@isNotEmpty(postId)">
+				join sys_role_resource b on a.resource_id = b.resource_id
+			</if>
+		
+		<where>
+		 a.is_using = 1 
+		<if test="@OGNL@isEmpty(postId)">
+			and	 c.user_id = #{userId}
+	         and c.is_using = 1 
+			</if>
+		<if test="@OGNL@isNotEmpty(postId)">
+			and	 b.belong_post_id = #{postId}
+	         and b.is_using = 1
+			</if>
+	       
+	        order by a.sort asc
+		</where>
+	</select>
+	
+	<select id="getUserList" parameterType="map" resultType="hashmap">
+		SELECT a.name,a.user_id "userId",a.user_name "userName",a.is_using "userIsUsing",
+		c.post_name "postName",a.post_id "postId"
+		from sys_user a 
+		left join sys_post c on c.post_id = a.post_id
+		<where>
+			<if test="orgName != null and orgName != ''">
+				and b.org_name like #{orgName}
+			</if>
+			<if test="groupName != null and groupName != ''">
+				and b.group_name like #{groupName}
+			</if>
+			<if test="postName != null and postName != ''">
+				and c.post_name like CONCAT(CONCAT('%', #{postName}), '%')
+			</if>
+			<if test="userName != null and userName != ''">
+				and a.user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND a.org_id = #{orgId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(departmentId)">
+				AND a.department_id = #{departmentId}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(userType)">
+                AND a.user_type = #{userType}
+            </if>
+            <if test="@OGNL@isNotEmpty(acctType)">
+	        	AND a.acct_type = #{acctType}
+	        </if>
+		</where>
+	</select>
+	
+	<select id="getUserResource" parameterType="map" resultType="hashmap">
+SELECT distinct a.resource_id "id", a.menu_name "menuName", a.resource_type "type", a.icon "icon", a.sort "sort", a.resource_url "resourceUrl",
+ a.parent_resource_id "pid",
+		case when c.resource_id is null then case when d.resource_id is null then 0 else 1 end else 1 end "checked"
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id
+		left join sys_role_resource c on  c.resource_id = a.resource_id and c.belong_post_id = #{postId}
+		left join sys_user_resource d on d.resource_id = a.resource_id and d.user_id = #{userId}
+		where b.belong_department_id = #{departmentId} and b.belong_post_id is null  and a.is_using = 1
+	</select>
+	
+		<select id="getUserResourceByDepart" parameterType="map" resultType="hashmap">
+SELECT
+	a.resource_id "id",
+	a.menu_name "menuName",
+	a.resource_type "type",
+	a.icon,
+	a.sort,
+	a.resource_url,
+	a.parent_resource_id "pid",
+	CASE
+WHEN d.user_id IS NULL THEN
+	0
+ELSE
+	1
+END checked
+
+FROM
+	sys_resource a
+JOIN sys_role_resource b ON b.resource_id = a.resource_id
+JOIN sys_role c ON c.role_id = b.role_id
+AND c.belong_department_id = #{departmentId}
+and c.belong_post_id IS NULL
+and b.belong_department_id is NULL
+LEFT JOIN sys_user_resource d ON d.resource_id = a.resource_id
+AND d.user_id =#{userId}
+WHERE a.is_using = 1
+AND b.is_using = 1
+AND c.is_using = 1
+ORDER BY a.sort 
+	</select>
+	
+	<select id="getUserResourceByPost" parameterType="map" resultType="hashmap">
+        SELECT a.resource_id "id", a.menu_name "menuName", a.resource_type "type", a.icon, a.sort, a.resource_url, a.parent_resource_id "pid",
+		case when d.user_id is null then 0 else 1 end checked
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id
+		join sys_role c on c.role_id = b.role_id
+		left join sys_user_resource d on d.resource_id = a.resource_id and d.user_id = #{userId}
+		where c.belong_department_id = #{departmentId} 
+		<!-- 这个地方的postId可能为空 -->
+		<if test="@OGNL@isNotEmpty(postId)">
+			and c.belong_post_id = #{postId} 
+		</if>
+		and a.is_using = 1 order by a.sort asc
+	</select>
+	
+	<select id="getDepartmentUserResource" parameterType="map" resultType="hashmap">
+SELECT distinct a.resource_id "id", a.menu_name "menuName", a.resource_type "type", a.icon, a.sort, a.resource_url, a.parent_resource_id "pid"
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id
+		join sys_role c on c.role_id = b.role_id
+		where c.belong_post_id is null and c.belong_department_id = #{departmentId}  and a.is_using = 1 and b.is_using = 1 and c.is_using = 1
+	</select>
+	
+		<select id="getPostUserResource" parameterType="map" resultType="hashmap">
+
+	SELECT distinct a.resource_id "id", a.menu_name "menuName", a.resource_type "type", a.icon "icon", a.sort "sort", a.resource_url "resourceUrl",
+         a.parent_resource_id "pid",
+	CASE WHEN t.resource_id IS NULL THEN		0	ELSE	1
+	END "checked"
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id
+		join sys_role c on c.role_id = b.role_id
+		and c.belong_post_id is null and c.belong_department_id = #{departmentId}  and a.is_using = 1 and b.is_using = 1 and c.is_using = 1
+	left join 
+	(
+		select a.resource_id 
+		from sys_resource a 
+		join sys_role_resource b on b.resource_id = a.resource_id
+		join sys_role c on c.role_id = b.role_id 
+		and c.belong_org = #{orgId} and c.belong_post_id =#{postId} and c.belong_department_id =#{departmentId} and a.is_using = 1 and b.is_using = 1 and c.is_using = 1
+) t on t.resource_id  = a.resource_id
+	</select>
+	
+	<delete id="deleteUserResource" >
+		DELETE FROM sys_user_resource WHERE  user_id  = #{userId}
+		and resource_id in 
+		<foreach collection="dels" item="item" index="index" separator="," open="(" close=")">
+        #{item}
+        </foreach>
+	</delete>
+	
+	<insert id="addUserResource" parameterType="java.util.List" >
+        INSERT INTO sys_user_resource (
+        	id,
+            user_id ,
+            resource_id ,
+            belong_org,
+            belong_department_id,
+            belong_post_id,
+            is_using ,
+            add_user_id ,
+            add_user_name ,
+            add_time ,
+            last_update_user_id,
+            last_update_user_name ,
+            last_update_time 
+        ) select SYSUSERRESOURCESEQ.nextval,p.* from(
+        <foreach collection="list" item="item" index="index" separator="union all">
+        select 
+        	#{item.userId},
+        	#{item.resourceId},
+        	#{item.belongOrg},
+        	#{item.belongDepartmentId},
+        	#{item.belongPostId},
+        	#{item.isUsing},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	now(),
+        	#{item.lastUpdateUserId},
+        	#{item.lastUpdateUserName},
+        	#{item.lastUpdateTime}
+         from dual
+        </foreach>) p
+	</insert>
+	<select id="getRoleIdByPostId" parameterType="String" resultType="Integer">
+		select a.role_id "roleId"
+		from sys_role a join sys_post b on b.post_id = a.belong_post_id 
+		where a.is_using = 1 and b.is_using = 1 and b.post_id = #{postId}
+	</select>
+	
+	<delete id="deleteResourceByUserId" parameterType="String">
+		delete from sys_user_resource where user_id = #{userId}
+	</delete>
+	
+	<update id="updatePostId" parameterType="map">
+		update sys_user set post_id = #{postId},role_id = (select role_id from sys_role where belong_post_id = #{postId}),last_update_user_id = #{updUserId},last_update_user_name = #{userName},
+		last_update_time = now() where user_id = #{userId}
+	</update>
+	
+	<update id="updatePostIdNull" parameterType="map">
+		update sys_user set post_id = null,role_id = null,last_update_user_id = #{updUserId},last_update_user_name = #{userName},
+		last_update_time = now() where post_id is not null and user_id = #{userId}
+	</update>
+	
+	<!-- 根据登录帐号查询是否机构帐号 -->
+	<select id="getIsOrg" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from sys_user where user_name =  #{value} and acct_type = 0 and department_id is null and user_type != 6
+	</select>
+	
+	<update id="updateHospUserIsUsing" parameterType="map">
+		UPDATE sys_user  
+		<set>
+	        	is_using = #{isUsing}, 
+	        	last_update_user_id = #{lastUpdateUserId},
+	        	last_update_user_name = #{lastUpdateUserName},
+            	last_update_time = now()
+        </set>
+		WHERE  org_id =  #{orgId} and is_using != #{isUsing}
+		 <if test="@OGNL@isNotEmpty(userName)">
+	        	AND user_name = #{userName}
+	        </if>
+	</update>
+
+	<!--根据orgId停止、启用该企业下所有用户-->
+	<update id="updateUserIsUsing" parameterType="map">
+		UPDATE sys_user
+		<set>
+			is_using = #{isUsing},
+			last_update_user_id = #{lastUpdateUserId},
+			last_update_user_name = #{lastUpdateUserName},
+			last_update_time = now()
+		</set>
+		WHERE  org_id =  #{orgId} and is_using != #{isUsing}
+	</update>
+
+	<!-- 监管机构用户查看 -->
+	<select id="getJGUserListPro" parameterType="map" resultType="hashmap">
+		SELECT
+		    user_id,
+			org_name,
+			group_name,
+			department_type,
+			c.post_id,
+			post_name,
+			a.user_name,
+			NAME,
+			last_login_time,
+			a.is_using
+		FROM
+			sys_user a
+		INNER JOIN sys_department b ON a.department_id = b.department_id
+		INNER JOIN sys_post c ON a.post_id = c.post_id
+	    <where>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(groupName)">
+				AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(departmentType)">
+				AND department_type = #{departmentType}
+			</if>
+			<if test="@OGNL@isNotEmpty(postName)">
+				AND post_name like CONCAT(CONCAT('%', #{postName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(userName)">
+				AND user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(startTime)">
+				AND last_login_time <![CDATA[>= ]]>#{startTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND last_login_time <![CDATA[<= ]]>#{endTime}
+		    </if> 
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND a.is_using = #{isUsing}
+			</if>
+		</where>
+	</select>
+	<!-- 查看所管辖的监管机构和医疗机构部门 -->
+	<select id="getJGUserListCity" parameterType="map" resultType="hashmap">
+	    SELECT
+			*
+		FROM
+			(
+			SELECT
+	            user_id,
+				org_name,
+				group_name,
+				department_type,
+				c.post_id,
+				post_name,
+				a.user_name,
+				NAME,
+				last_login_time,
+				a.is_using
+			FROM
+				sys_user a
+			INNER JOIN sys_department b ON a.department_id = b.department_id
+			INNER JOIN sys_post c ON a.post_id = c.post_id
+			INNER JOIN std_hospital d ON a.org_id = d.hospital_id
+			<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+				AND d.admin_area_id_drug LIKE CONCAT(CONCAT('%', #{adminAreaIdDrug}), '%')
+			</if>
+			UNION ALL
+				SELECT
+	                user_id,
+					org_name,
+					group_name,
+					department_type,
+					c.post_id,
+					post_name,
+					a.user_name,
+					NAME,
+					last_login_time,
+					a.is_using
+				FROM
+					sys_user a
+				INNER JOIN sys_department b ON a.department_id = b.department_id
+				INNER JOIN sys_post c ON a.post_id = c.post_id
+				INNER JOIN std_manage_org d ON a.org_id = d.id
+				<if test="@OGNL@isNotEmpty(areaId)">
+			    	AND d.area_id LIKE CONCAT(CONCAT('%', #{areaId}), '%')
+			   </if>
+		) tab
+		<where>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(groupName)">
+				AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(departmentType)">
+				AND department_type = #{departmentType}
+			</if>
+			<if test="@OGNL@isNotEmpty(postName)">
+				AND post_name like CONCAT(CONCAT('%', #{postName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(userName)">
+				AND user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(startTime)">
+				AND last_login_time <![CDATA[>= ]]>#{startTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND last_login_time <![CDATA[<= ]]>#{endTime}
+		    </if> 
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND is_using = #{isUsing}
+			</if>
+		</where>
+	</select>
+	<!-- 监管机构用户查看 查看所管辖的医疗机构部门 取area_id进行精确匹配 -->
+	<select id="getJGUserListCounty" parameterType="map" resultType="hashmap">
+	    SELECT
+		    user_id,
+			org_name,
+			group_name,
+			department_type,
+			c.post_id,
+			post_name,
+			a.user_name,
+			NAME,
+			last_login_time,
+			a.is_using
+		FROM
+			sys_user a
+		INNER JOIN sys_department b ON a.department_id = b.department_id
+		INNER JOIN sys_post c ON a.post_id = c.post_id
+		INNER JOIN std_hospital d ON a.org_id = d.hospital_id
+		<if test="@OGNL@isNotEmpty(adminAreaIdDrug)">
+		    AND d.admin_area_id_drug LIKE CONCAT(CONCAT('%', #{adminAreaIdDrug}), '%')
+	    </if>
+	    <where>
+			<if test="@OGNL@isNotEmpty(orgName)">
+				AND org_name like CONCAT(CONCAT('%', #{orgName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(groupName)">
+				AND group_name like CONCAT(CONCAT('%', #{groupName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(departmentType)">
+				AND department_type = #{departmentType}
+			</if>
+			<if test="@OGNL@isNotEmpty(postName)">
+				AND post_name like CONCAT(CONCAT('%', #{postName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(userName)">
+				AND a.user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND a.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(startTime)">
+				AND last_login_time <![CDATA[>= ]]>#{startTime}
+		    </if>
+		    <if test="@OGNL@isNotEmpty(endTime)">
+				AND last_login_time <![CDATA[<= ]]>#{endTime}
+		    </if> 
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND a.is_using = #{isUsing}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getUserData" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM Sys_User t 
+		WHERE t.ROLE_ID = #{roleId} 
+		<if test="name != null and name != ''">
+			and t.name like CONCAT(CONCAT('%', #{name}), '%')
+		</if>
+		AND t.is_using=1 AND t.locked=0
+		order by t.user_type asc
+	</select>
+	
+	<insert id="addSysUser" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+		INSERT INTO sys_user(
+				user_id ,
+				org_id ,
+				role_id ,
+	            department_id ,
+	            post_id ,
+	            user_name ,
+	            acct_type ,
+	            user_password ,
+	            <!-- password_hint ,
+	            acct_expired ,
+	            password_expired , -->
+	            is_using ,
+	            user_type ,
+	            <!-- email ,
+	            name ,
+	            phone , -->
+	            name,
+	            locked ,
+	            last_login_time ,
+	            login_ip ,
+	            reset_token ,
+	            reset_time ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time,
+	            is_balance,
+	            is_ca_using
+	           <!--  last_update_user_id ,
+	            last_update_user_name ,
+	            last_update_time --> 
+		) 
+		VALUES (
+				#{userId},
+				#{orgId},
+	        	#{roleId},
+	        	#{departmentId},
+	        	#{postId},
+	        	#{userName},
+	        	#{acctType},
+	        	#{userPassword},
+	        	<!-- #{passwordHint},
+	        	#{acctExpired},
+	        	#{passwordExpired}, -->
+	        	#{isUsing},
+	        	#{userType},
+	        	<!-- #{email},
+	        	#{name},
+	        	#{phone}, -->
+	        	#{name},
+	        	#{locked},
+	        	#{lastLoginTime},
+	        	#{loginIp},
+	        	#{resetToken},
+	        	#{resetTime},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	now(),
+	        	#{isBalance},
+	        	#{isCaUsing}
+	        	<!-- #{lastUpdateUserId},
+	        	#{lastUpdateUserName},
+	        	SYSDATE -->
+		)
+	</insert>
+	
+	<update id="updateSysUserRole">
+		update sys_user set role_id = #{roleId} where user_id = #{userId}
+	</update>
+	
+	<select id="getCaUserList" parameterType="map" resultType="hashmap">
+		SELECT <include refid="full-columns" />
+		from sys_user t 
+		<where>
+			org_id is not null and department_id is null and post_id is null
+			<if test="userName != null and userName != ''">
+				and t.user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="isUsing != null and isUsing != ''">
+				and t.is_using =#{isUsing}
+			</if>
+			<if test="isCaUsing != null and isCaUsing != ''">
+				and t.is_ca_using =#{isCaUsing}
+			</if>
+			
+		</where>
+	</select>
+	
+	<select id="getUsercacodeById" parameterType="String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		from sys_user t 
+		<where>
+			<if test="userId != null and userId != ''">
+				and t.user_id =#{userId}
+			</if>
+			
+		</where>
+	</select>
+	
+	<select id="getCompTbUsercacode" parameterType="map" resultType="hashmap">
+		SELECT <include refid="full-columns" />
+		from sys_user t 
+		<where>
+			org_id = #{orgId}
+			<if test="userName != null and userName != ''">
+				and t.user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="isUsing != null and isUsing != ''">
+				and t.is_using =#{isUsing}
+			</if>
+			<if test="isCaUsing != null and isCaUsing != ''">
+				and t.is_ca_using =#{isCaUsing}
+			</if>
+			
+		</where>
+	</select>
+	<select id="getSysUserCAData" parameterType="map" resultMap="BaseResultMap">
+		SELECT t.* from sys_user t
+		<if test="userType == 1">
+			,std_manage_org b
+		</if>
+		<if test="userType == 2">
+			,std_hospital c
+		</if>
+		<if test="userType == 3">
+			,std_company d
+		</if>
+		<where>
+			1=1
+			<if test="isUsing != null and isUsing != ''">
+				and t.is_using =#{isUsing}
+			</if>
+			<if test="isCaUsing == 1">
+				and t.is_ca_using =#{isCaUsing}
+			</if>
+			<if test="isCaUsing == 0">
+				and t.is_ca_using =#{isCaUsing} or t.is_ca_using is null
+			</if>
+			<if test="name != null and name != ''">
+				and t.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+			<if test="userName != null and userName != ''">
+				and t.userName like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="companyType != 0 and companyType != '' and companyType != null">
+				and t.user_type = #{companyType}
+			</if>
+			<if test="userType == 1">
+				and t.org_id = b.id
+				<if test="orgName != nunll and orgName != ''">
+					and b.hea_bur_name like CONCAT(CONCAT('%', #{orgName}), '%')
+				</if>
+			</if>
+			<if test="userType == 2">
+				and t.org_id = c.hospital_id
+				<if test="orgName != nunll and orgName != ''">
+					and c.hospital_name like CONCAT(CONCAT('%', #{orgName}), '%')
+				</if>
+			</if>
+			<if test="userType == 3">
+				and t.org_id = d.company_id
+				<if test="orgName != nunll and orgName != ''">
+					and d.company_name like CONCAT(CONCAT('%', #{orgName}), '%')
+				</if>
+			</if>
+		</where>
+	</select>
+	<update id="updateALLStart" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+	   update sys_user set is_ca_using =#{isCaUsing}
+	</update>
+	
+	<update id="updateALLDisable" parameterType="com.hsnn.medstgmini.base.sys.model.SysUser">
+	   update sys_user set is_ca_using =#{isCaUsing}
+	</update>
+
+	<select id="getSysUserDatas" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM sys_user t
+		<where>
+			and t.role_id in (6,7,8,9,10,11,20)
+			<if test="userId != null and userId != '' ">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+			</if>
+
+			<if test="@OGNL@isNotEmpty(departmentId)">
+				AND t.department_id = #{departmentId}
+			</if>
+			<if test="@OGNL@isNotEmpty(userName)">
+				AND t.user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(acctType)">
+				AND t.acct_type = #{acctType}
+			</if>
+			<if test="@OGNL@isNotEmpty(userPassword)">
+				AND t.user_password = #{userPassword}
+			</if>
+			<if test="@OGNL@isNotEmpty(passwordHint)">
+				AND t.password_hint = #{passwordHint}
+			</if>
+			<if test="@OGNL@isNotEmpty(acctExpired)">
+				AND t.acct_expired = #{acctExpired}
+			</if>
+			<if test="@OGNL@isNotEmpty(passwordExpired)">
+				AND t.password_expired = #{passwordExpired}
+			</if>
+			<if test="@OGNL@isNotEmpty(isUsing)">
+				AND t.is_using = #{isUsing}
+			</if>
+			<if test="@OGNL@isNotEmpty(userType)">
+				AND t.user_type = #{userType}
+			</if>
+			<if test="@OGNL@isNotEmpty(email)">
+				AND t.email = #{email}
+			</if>
+			<if test="name != null and name != '' ">
+				AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(phone)">
+				AND t.phone = #{phone}
+			</if>
+			<if test="@OGNL@isNotEmpty(locked)">
+				AND t.locked = #{locked}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastLoginTime)">
+				AND t.last_login_time = #{lastLoginTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(loginIp)">
+				AND t.login_ip = #{loginIp}
+			</if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+			</if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+			</if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserId)">
+				AND t.last_update_user_id = #{lastUpdateUserId}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateUserName)">
+				AND t.last_update_user_name = #{lastUpdateUserName}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastUpdateTime)">
+				AND t.last_update_time = #{lastUpdateTime}
+			</if>
+		</where>
+		<if test="orderColumn != null and orderColumn != '' ">
+			ORDER BY t.${orderColumn} <if test="orderDirection != null and orderDirection != '' ">${orderDirection}</if>
+		</if>
+	</select>
+
+	<select id="getJcName" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT * from sys_user where org_id = #{id} and role_id in (8,9)
+	</select>
+	
+	<select id="getSearchPwdData" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM sys_user t
+		<where>
+				AND t.is_using = 1
+			<if test="@OGNL@isNotEmpty(userName)">
+				AND t.user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+		</where>
+	</select>
+
+	<select id="getBaseUserList" parameterType="map" resultMap="BaseResultMap">
+		SELECT t.user_id,t.user_name,t.name
+		FROM sys_user t
+		<where>
+			t.role_id = 22 and t.is_using = 1
+			<if test="@OGNL@isNotEmpty(orgId)">
+				AND t.org_id = #{orgId}
+			</if>
+			<if test="@OGNL@isNotEmpty(userName)">
+				AND t.user_name like CONCAT(CONCAT('%', #{userName}), '%')
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND t.name like CONCAT(CONCAT('%', #{name}), '%')
+			</if>
+		</where>
+	</select>
+
+	<select id="getValidateData" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM sys_user t
+		<where>
+			<if test="@OGNL@isNotEmpty(userName)">
+				AND t.user_name  = #{userName}
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND t.name = #{name}
+			</if>
+		</where>
+	</select>
+
+	<select id="getUserBySerialnumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" /> from sys_user t where t.ca_key =  #{serialnumber}
+	</select>
+
+	<select id="getCompanyUserData" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM sys_user t
+		<where>
+              t.USER_TYPE = 1
+            <if test="@OGNL@isNotEmpty(UserID)">
+                AND t.USER_ID = #{UserID}
+            </if>
+            <if test="@OGNL@isNotEmpty(UserName)">
+                AND t.USER_NAME LIKE CONCAT(CONCAT('%', #{UserName}), '%')
+            </if>
+			<if test="@OGNL@isNotEmpty(isEmpty)">
+				AND t.CA_KEY = &apos;&apos;
+			</if>
+            <if test="@OGNL@isNotEmpty(notIsEmpty)">
+                AND t.CA_KEY != &apos;&apos;
+            </if>
+		</where>
+	</select>
+
+    <update id="toBindCAData" parameterType="map">
+        UPDATE sys_user
+        <set>
+            CA_KEY = #{base64Value}
+        </set>
+        <where>
+            USER_ID = #{id}
+            AND NOT EXISTS ( SELECT * FROM (
+            SELECT * FROM sys_user WHERE CA_KEY = #{base64Value}
+            ) a )
+        </where>
+    </update>
+
+    <update id="toEmptyCA" parameterType="map">
+        UPDATE sys_user
+        <set>
+            CA_KEY = &apos;&apos;
+        </set>
+        <where>
+            USER_ID = #{userId}
+        </where>
+    </update>
+
+</mapper>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsnn.medstgmini.base.std.dao.StdProductSynonymDao">
+	<resultMap type="com.hsnn.medstgmini.base.std.model.StdProductSynonym" id="BaseResultMap">
+        <result property="id" column="id" javaType="Integer"/>
+        <result property="productName" column="product_name" javaType="String"/>
+        <result property="synonym" column="synonym" javaType="String"/>
+        <result property="remark" column="remark" javaType="String"/>
+        <result property="addUserId" column="add_user_id" javaType="String"/>
+        <result property="addUserName" column="add_user_name" javaType="String"/>
+        <result property="addTime" column="add_time" javaType="Date"/>
+	</resultMap>
+	
+	<sql id="full-columns" >
+        t.id,
+        t.product_name,
+        t."SYNONYM",
+        t.remark,
+        t.add_user_id,
+        t.add_user_name,
+        t.add_time
+	</sql>
+		
+	<select id="get" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />  
+		FROM std_product_synonym t
+		WHERE t.id =  #{value}
+	</select>
+
+	<insert id="save"  parameterType="com.hsnn.medstgmini.base.std.model.StdProductSynonym">
+		INSERT INTO std_product_synonym(
+				id,
+	            product_name ,
+	            "SYNONYM" ,
+	            remark ,
+	            add_user_id ,
+	            add_user_name ,
+	            add_time 
+		)
+		VALUES (
+				STDPRODUCTSYNONYMSEQ.nextval,
+	        	#{productName},
+	        	#{synonym},
+	        	#{remark},
+	        	#{addUserId},
+	        	#{addUserName},
+	        	SYSDATE
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.base.std.model.StdProductSynonym">
+		UPDATE std_product_synonym  
+		<set>
+			product_name = #{productName},
+			synonym = #{synonym},
+			remark = #{remark},
+			add_user_id = #{addUserId},
+			add_user_name = #{addUserName},
+			add_time = #{addTime},
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.base.std.model.StdProductSynonym">
+		UPDATE std_product_synonym  
+		<set>
+	    	<if test="@OGNL@isNotEmpty(productName)">
+				product_name = #{productName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(synonym)">
+				"SYNONYM" = #{synonym},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(remark)">
+				remark = #{remark},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserId)">
+				add_user_id = #{addUserId},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addUserName)">
+				add_user_name = #{addUserName},
+			</if>
+	    	<if test="@OGNL@isNotEmpty(addTime)">
+				add_time = #{addTime},
+			</if>
+        </set>
+		WHERE  id =  #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE FROM std_product_synonym WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+	    FROM std_product_synonym t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.product_name like '%'||#{productName}||'%'
+		    </if>
+			<if test="@OGNL@isNotEmpty(synonym)">
+				AND t."SYNONYM" = #{synonym}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.remark = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+		</where>
+	</select>
+	
+	<insert id="insertBatch" parameterType="java.util.List" >
+        INSERT INTO std_product_synonym (
+            product_name ,
+            synonym ,
+            remark ,
+            add_user_id ,
+            add_user_name ,
+            add_time 
+        ) VALUES 
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+        	#{item.productName},
+        	#{item.synonym},
+        	#{item.remark},
+        	#{item.addUserId},
+        	#{item.addUserName},
+        	SYSDATE
+        )
+        </foreach>
+	</insert>
+	
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+	    FROM std_product_synonym t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(productName)">
+				AND t.product_name = #{productName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(synonym)">
+				AND t."SYNONYM" = #{synonym}
+		    </if>
+			<if test="@OGNL@isNotEmpty(remark)">
+				AND t.remark = #{remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserId)">
+				AND t.add_user_id = #{addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addUserName)">
+				AND t.add_user_name = #{addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(addTime)">
+				AND t.add_time = #{addTime}
+		    </if>
+		</where>
+	</select>
+	
+	<update id="updateByParams" >
+		UPDATE std_product_synonym  t 
+		<set>
+		    <if test="@OGNL@isNotEmpty(model.productName)">
+				product_name = #{model.productName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.synonym)">
+				"SYNONYM" = #{model.synonym},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.remark)">
+				remark = #{model.remark},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserId)">
+				add_user_id = #{model.addUserId},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addUserName)">
+				add_user_name = #{model.addUserName},
+			</if>
+		    <if test="@OGNL@isNotEmpty(model.addTime)">
+				add_time = #{model.addTime},
+			</if>
+	    </set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.id = #{params.id}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.productName)">
+				AND t.product_name = #{params.productName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.synonym)">
+				AND t."SYNONYM" = #{params.synonym}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.remark)">
+				AND t.remark = #{params.remark}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserId)">
+				AND t.add_user_id = #{params.addUserId}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addUserName)">
+				AND t.add_user_name = #{params.addUserName}
+		    </if>
+			<if test="@OGNL@isNotEmpty(params.addTime)">
+				AND t.add_time = #{params.addTime}
+		    </if>
+		</where>
+	</update>
+</mapper>
