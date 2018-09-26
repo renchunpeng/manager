@@ -1,27 +1,13 @@
 package com.hsnn.medstgmini.webbook.controller;
 
-import com.hsnn.medstgmini.base.std.model.StdArea;
-import com.hsnn.medstgmini.base.std.service.StdAreaManager;
 import com.hsnn.medstgmini.common.controller.GenericController;
-import com.hsnn.medstgmini.common.model.ExcelExportDataInfo;
-import com.hsnn.medstgmini.common.service.DynamicSelectManager;
-import com.hsnn.medstgmini.util.*;
-import com.hsnn.medstgmini.webbook.form.UserBookList;
+import com.hsnn.medstgmini.util.Pagination;
 import com.hsnn.medstgmini.webbook.service.UserBookListManager;
-import com.hsnn.medstgmini.yimiao.service.YimiaoOrderdetailManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
-import java.util.*;
 
 /**
  * @author RenChunPeng
@@ -34,6 +20,7 @@ public class UserBookListController extends GenericController {
     private UserBookListManager userBookListManager;
 
     private static final Logger log = Logger.getLogger(UserBookListController.class);
+//    protected static final String MODEL_PATH="/webbook/userBookList/";
 
     /**
      * 用户书籍列表页面跳转
@@ -41,7 +28,7 @@ public class UserBookListController extends GenericController {
      */
     @RequestMapping("/toUserBookList")
     public String toUserBookList() {
-        return "webbook/userBookList/list";
+        return "/webbook/userBookList/list";
     }
 
     /**
