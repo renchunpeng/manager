@@ -289,7 +289,7 @@
 	<script  src="${ctx}/lib/js/objectclass.js"></script>
 	<script  src="${ctx}/lib/js/netonex.base.src.js"></script>
 	<script  src="${ctx}/lib/js/netonex.singleton.js"></script>
-	<script  src="${ctx}/lib/js/GZCACom.js"></script>
+	<%--<script  src="${ctx}/lib/js/GZCACom.js"></script>--%>
 	
 	<script type="text/javascript">
 	

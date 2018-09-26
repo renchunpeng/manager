@@ -55,7 +55,7 @@ public class LoginController {
 	@Autowired
 	private HttpSession session;
 	
-    private String captchaEnable = "true";
+    private String captchaEnable = "false";
     
     private String systemTitle = "贵州省第二类疫苗集中采购系统";
     
@@ -145,43 +145,43 @@ public class LoginController {
 		}
 		
 
-		String orgId = user.getOrgId();
-		int userType = user.getUserType();
-		if(StringUtils.isBlank(orgId)){
-			throw new NullArgumentException("orgId can not be found !");
-		}
-		if ( UserType.jkzx.getKey().equals(userType)) {// 医疗机构
-			StdHospitals stdHospitals = new StdHospitals();
-			BeanUtils.copyProperties(stdHospitalManager.getById(orgId), stdHospitals);
-			user.setStdHospital(stdHospitals);
-			if(user.getStdHospital() != null) {
-				StdHospitals sh = user.getStdHospital();
-				user.setFatherName(sh.getHospitalName());
-			}
-		} else if (UserType.scqy.getKey().equals(userType)) {// 企业
-			StdCompanys stdCompany = new StdCompanys();
-			BeanUtils.copyProperties(stdCompanyManager.getById(orgId), stdCompany);
-			user.setStdCompany(stdCompany);
-			if(user.getStdCompany() != null) {
-				StdCompanys sc = user.getStdCompany();
-				user.setFatherName(sc.getCompanyName());
-			}
-		} else if (UserType.cgzx.getKey().equals(userType) || UserType.wsj.getKey().equals(userType)) {
-			StdManageOrg smo =  stdManageOrgManager.getById(orgId);
-			if (smo != null) {
-				user.setStdManageOrg(smo);
-				if(user.getStdManageOrg() != null) {
-					StdManageOrg sm = (StdManageOrg)user.getStdManageOrg();
-					user.setFatherName(sm.getHeaBurName());
-				}
-			}
-		}
+//		String orgId = user.getOrgId();
+//		int userType = user.getUserType();
+//		if(StringUtils.isBlank(orgId)){
+//			throw new NullArgumentException("orgId can not be found !");
+//		}
+//		if ( UserType.jkzx.getKey().equals(userType)) {// 医疗机构
+//			StdHospitals stdHospitals = new StdHospitals();
+//			BeanUtils.copyProperties(stdHospitalManager.getById(orgId), stdHospitals);
+//			user.setStdHospital(stdHospitals);
+//			if(user.getStdHospital() != null) {
+//				StdHospitals sh = user.getStdHospital();
+//				user.setFatherName(sh.getHospitalName());
+//			}
+//		} else if (UserType.scqy.getKey().equals(userType)) {// 企业
+//			StdCompanys stdCompany = new StdCompanys();
+//			BeanUtils.copyProperties(stdCompanyManager.getById(orgId), stdCompany);
+//			user.setStdCompany(stdCompany);
+//			if(user.getStdCompany() != null) {
+//				StdCompanys sc = user.getStdCompany();
+//				user.setFatherName(sc.getCompanyName());
+//			}
+//		} else if (UserType.cgzx.getKey().equals(userType) || UserType.wsj.getKey().equals(userType)) {
+//			StdManageOrg smo =  stdManageOrgManager.getById(orgId);
+//			if (smo != null) {
+//				user.setStdManageOrg(smo);
+//				if(user.getStdManageOrg() != null) {
+//					StdManageOrg sm = (StdManageOrg)user.getStdManageOrg();
+//					user.setFatherName(sm.getHeaBurName());
+//				}
+//			}
+//		}
 		
-		if(user.getAcctType() == 1) {//管理帐号
-			if(user.getSysDepartment() != null) {
-				user.setFatherName(user.getSysDepartment().getGroupName());
-			}
-		}
+//		if(user.getAcctType() == 1) {//管理帐号
+//			if(user.getSysDepartment() != null) {
+//				user.setFatherName(user.getSysDepartment().getGroupName());
+//			}
+//		}
 		
 		if(user.getIsUsing()==Status.invalid.getKey()){
 			log.warn(" user status is unenabled ");
@@ -193,16 +193,17 @@ public class LoginController {
 			model.addAttribute("errorMsg", "该用户已被锁定！");
 			return "/login";
 		}
+
 		/**
 		 * 验证用户类型是否为企业
 		 */
-		if(UserType.scqy.getKey().equals(userType)){
-			log.warn(" key for login ");
-			model.addAttribute("errorMsg", "该用户需要CA登录！");
-			request.setAttribute("systemHostUnit", systemHostUnit);
-			request.setAttribute("systemTitle", systemTitle);
-			return "/login";
-		}
+//		if(UserType.scqy.getKey().equals(userType)){
+//			log.warn(" key for login ");
+//			model.addAttribute("errorMsg", "该用户需要CA登录！");
+//			request.setAttribute("systemHostUnit", systemHostUnit);
+//			request.setAttribute("systemTitle", systemTitle);
+//			return "/login";
+//		}
 
 		if (encodedPwd.equals(user.getUserPassword())) {
 			log.info("authentication passed");
