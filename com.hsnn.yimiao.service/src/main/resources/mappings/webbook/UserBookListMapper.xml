@@ -1,10 +1,217 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hsnn.medstgmini.webbook.dao.UserBookListDao">
-		
-	<select id="getList" parameterType="String" resultType="com.hsnn.medstgmini.webbook.model.UserBookList">
-		SELECT *
-		FROM user_book_list
+	<resultMap type="com.hsnn.medstgmini.webbook.model.UserBookList" id="BaseResultMap">
+		<result property="id" column="id" javaType="String"/>
+		<result property="userId" column="user_id" javaType="String"/>
+		<result property="name" column="name" javaType="String"/>
+		<result property="bookUrl" column="book_url" javaType="String"/>
+		<result property="imgUrl" column="img_url" javaType="String"/>
+		<result property="lastPageName" column="last_page_name" javaType="String"/>
+		<result property="bookMark" column="book_mark" javaType="String"/>
+	</resultMap>
+
+	<sql id="full-columns" >
+		t.id,
+		t.user_id,
+		t.name,
+		t.book_url,
+		t.img_url,
+		t.last_page_name,
+		t.book_mark
+	</sql>
+
+	<select id="get" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM user_book_list t
+		WHERE t.id =  #{value}
 	</select>
 
+	<insert id="save" parameterType="com.hsnn.medstgmini.webbook.model.UserBookList">
+		INSERT INTO user_book_list(
+		user_id ,
+		name ,
+		book_url ,
+		img_url ,
+		last_page_name ,
+		book_mark
+		)
+		VALUES (
+		#{userId},
+		#{name},
+		#{bookUrl},
+		#{imgUrl},
+		#{lastPageName},
+		#{bookMark}
+		)
+		<selectKey resultType="java.lang.String" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="com.hsnn.medstgmini.webbook.model.UserBookList">
+		UPDATE user_book_list
+		<set>
+			user_id = #{userId},
+			name = #{name},
+			book_url = #{bookUrl},
+			img_url = #{imgUrl},
+			last_page_name = #{lastPageName},
+			book_mark = #{bookMark},
+		</set>
+		WHERE  id =  #{id}
+	</update>
+
+	<update id="updateBySelective" parameterType="com.hsnn.medstgmini.webbook.model.UserBookList">
+		UPDATE user_book_list
+		<set>
+			<if test="@OGNL@isNotEmpty(userId)">
+				user_id = #{userId},
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				name = #{name},
+			</if>
+			<if test="@OGNL@isNotEmpty(bookUrl)">
+				book_url = #{bookUrl},
+			</if>
+			<if test="@OGNL@isNotEmpty(imgUrl)">
+				img_url = #{imgUrl},
+			</if>
+			<if test="@OGNL@isNotEmpty(lastPageName)">
+				last_page_name = #{lastPageName},
+			</if>
+			<if test="@OGNL@isNotEmpty(bookMark)">
+				book_mark = #{bookMark},
+			</if>
+		</set>
+		WHERE  id =  #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM user_book_list WHERE  id =  #{value}
+	</delete>
+
+	<select id="queryAll" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="full-columns" />
+		FROM user_book_list t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+			</if>
+			<if test="@OGNL@isNotEmpty(userId)">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND t.name = #{name}
+			</if>
+			<if test="@OGNL@isNotEmpty(bookUrl)">
+				AND t.book_url = #{bookUrl}
+			</if>
+			<if test="@OGNL@isNotEmpty(imgUrl)">
+				AND t.img_url = #{imgUrl}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastPageName)">
+				AND t.last_page_name = #{lastPageName}
+			</if>
+			<if test="@OGNL@isNotEmpty(bookMark)">
+				AND t.book_mark = #{bookMark}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insertBatch" parameterType="java.util.List" >
+		INSERT INTO user_book_list (
+		user_id ,
+		name ,
+		book_url ,
+		img_url ,
+		last_page_name ,
+		book_mark
+		) VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.userId},
+			#{item.name},
+			#{item.bookUrl},
+			#{item.imgUrl},
+			#{item.lastPageName},
+			#{item.bookMark}
+			)
+		</foreach>
+	</insert>
+
+	<select id="count" parameterType="map" resultType="int">
+		SELECT count(1)
+		FROM user_book_list t
+		<where>
+			<if test="@OGNL@isNotEmpty(id)">
+				AND t.id = #{id}
+			</if>
+			<if test="@OGNL@isNotEmpty(userId)">
+				AND t.user_id = #{userId}
+			</if>
+			<if test="@OGNL@isNotEmpty(name)">
+				AND t.name = #{name}
+			</if>
+			<if test="@OGNL@isNotEmpty(bookUrl)">
+				AND t.book_url = #{bookUrl}
+			</if>
+			<if test="@OGNL@isNotEmpty(imgUrl)">
+				AND t.img_url = #{imgUrl}
+			</if>
+			<if test="@OGNL@isNotEmpty(lastPageName)">
+				AND t.last_page_name = #{lastPageName}
+			</if>
+			<if test="@OGNL@isNotEmpty(bookMark)">
+				AND t.book_mark = #{bookMark}
+			</if>
+		</where>
+	</select>
+
+	<update id="updateByParams" >
+		UPDATE user_book_list  t
+		<set>
+			<if test="@OGNL@isNotEmpty(model.userId)">
+				user_id = #{model.userId},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.name)">
+				name = #{model.name},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.bookUrl)">
+				book_url = #{model.bookUrl},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.imgUrl)">
+				img_url = #{model.imgUrl},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.lastPageName)">
+				last_page_name = #{model.lastPageName},
+			</if>
+			<if test="@OGNL@isNotEmpty(model.bookMark)">
+				book_mark = #{model.bookMark},
+			</if>
+		</set>
+		<where>
+			<if test="@OGNL@isNotEmpty(params.id)">
+				AND t.id = #{params.id}
+			</if>
+			<if test="@OGNL@isNotEmpty(params.userId)">
+				AND t.user_id = #{params.userId}
+			</if>
+			<if test="@OGNL@isNotEmpty(params.name)">
+				AND t.name = #{params.name}
+			</if>
+			<if test="@OGNL@isNotEmpty(params.bookUrl)">
+				AND t.book_url = #{params.bookUrl}
+			</if>
+			<if test="@OGNL@isNotEmpty(params.imgUrl)">
+				AND t.img_url = #{params.imgUrl}
+			</if>
+			<if test="@OGNL@isNotEmpty(params.lastPageName)">
+				AND t.last_page_name = #{params.lastPageName}
+			</if>
+			<if test="@OGNL@isNotEmpty(params.bookMark)">
+				AND t.book_mark = #{params.bookMark}
+			</if>
+		</where>
+	</update>
 </mapper>
