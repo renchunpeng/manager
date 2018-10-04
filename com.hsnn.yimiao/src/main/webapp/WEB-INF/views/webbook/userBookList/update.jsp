@@ -10,11 +10,8 @@
 </head>
 <body class="skin-blue sidebar-mini fixed skin-blue-light-frame">
 	<section class="content-header">
-		<h1><spring:message code="更新-待修改"/></h1>
 		<ol class="breadcrumb">
 			<li><a href="${ctx }/home.jsp"><i class="fa fa-home"></i><spring:message code="message.lable.first"/></a></li>
-			<li class="active"><a href="#"><spring:message code="管理-待修改"/></a></li>
-			<li class="active"><a href="#"><spring:message code="更新-待修改"/></a></li>
 		</ol>
 	</section>
 	<section class="content">
